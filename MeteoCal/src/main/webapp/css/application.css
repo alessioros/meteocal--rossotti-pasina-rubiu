@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+html{
+  width:auto;
+  height:800px;
+  margin:0px auto 0px auto;
+}
+/* ---------------------- MENU BAR ----------------------*/
+
+#menuBar {
+  background:#8DB9CB;
+  width: auto;
+}
+
+#menuBar ul {
+  margin:0;
+  padding:0;
+  line-height: 1;
+}
+
+#menuBar ul li {
+
+  display: inline-block;
+  padding: 0;
+  margin-right: -4px;
+}
+
+#menuBar ul li a {
+  border-right:1px solid white;
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
+  padding: 15px 25px;
+  font-family: 'Dosis', sans-serif;
+  text-transform:uppercase;
+  font-size: 16px;
+  position: relative;
+  -webkit-transition: color .25s;
+  -moz-transition: color .25s;
+  -ms-transition: color .25s;
+  -o-transition: color .25s;
+  transition: color .25s;
+}
+
+#menuBar ul li:hover a{
+  background:#1B5F73;
+  color:80d9c7;
+}
+
+#menuBar ul li a:hover:before {
+  width: 100%;
+}
+
+#menuBar ul li a:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 0;
+  background-color:white;
+  -webkit-transition: width .25s;
+  -moz-transition: width .25s;
+  -ms-transition: width .25s;
+  -o-transition: width .25s;
+  transition: width .25s;
+}
+
+/* ---------------------- MENU BAR ----------------------*/

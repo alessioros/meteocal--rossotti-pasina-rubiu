@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+html{
+	background-color:white;
+}
+
+.title{
+	font-size:45px;
+	font-family: 'Dosis', sans-serif;
+	top:100px;
+	left:100px;
+	position:absolute;
+}
+
+.calendar{
+	widht:560px;
+	height:280px;
+	top:200px;
+	left:100px;
+	position:absolute;
+	border:1px solid black;
+	text-align:center;
+	border-collapse:collapse;
+}
+
+.calendar,tr,td{
+	border:1px solid black;
+}
+.calendar tr{
+	padding:0;
+	margin:0;
+}
+.calendar td{
+	padding:0;
+	margin:0;
+	height:70px;
+	weight:70px;
+}
