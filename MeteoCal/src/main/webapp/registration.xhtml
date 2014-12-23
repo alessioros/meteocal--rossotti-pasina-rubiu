@@ -2,16 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 xmlns:h="http://xmlns.jcp.org/jsf/html"
-xmlns:p="http://primefaces.org/ui">
-  <head>
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+  <h:head>
     <title>Registration</title>
     <link rel="stylesheet" href="css/registration.css"/>
     <link rel="stylesheet" href="css/application.css"/>
     <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
-  </head>
+  </h:head>
 
-  <body>
+  <h:body>
 
     <div id='menuBar'>
       <ul>
@@ -26,28 +26,28 @@ xmlns:p="http://primefaces.org/ui">
     <div class='form-div'>
       <form class='form'>
         <div class='field'><a id='fieldName'>Name:</a>
-          <input name='name' type='text' class='feedback-input'/>
+          <h:inputText id='name' value="#{registrationBean.user.name}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Surname:</a>
-          <input name='surname' type='text' class='feedback-input'/>
+          <h:inputText id='surname' value="#{registrationBean.user.surname}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Username:</a>
-          <input name='username' type='text' class='feedback-input'/>
+          <h:inputText id='username' value="#{registrationBean.user.username}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Email:</a>
-          <input name='email' type='text' class='feedback-input'/>
+          <h:inputText id='email' value="#{registrationBean.user.email}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Password:</a>
-          <input name='password' type='text' class='feedback-input'/>
+          <h:inputText id='password' value="#{registrationBean.user.password}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'> Confirm Password:</a>
-          <input name='confpassword' type='text' class='feedback-input'/>
+          <h:inputText id='confpassword' value="#{registrationBean.user.cpassword}" class='feedback-input'/>
         </div>
         <div class='submit'>
-          <input type='submit' value='REGISTER' id='button-reg'/>
+          <h:commandButton type='submit' value='REGITER' id='button-reg' action="#{registrationBean.register()}"/>
         </div>
       </form>
     </div>
 
-  </body>
+  </h:body>
 </html>

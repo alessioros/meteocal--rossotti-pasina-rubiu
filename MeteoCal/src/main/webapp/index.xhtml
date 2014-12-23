@@ -2,14 +2,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
-    <head>
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
         <title>MeteoCal Homepage</title>
         <link rel="stylesheet" href="css/homepage.css"/>
         <link rel="stylesheet" href="css/application.css"/>
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
-    </head>
-    <body>
+    </h:head>
+    <h:body>
       <div id='menuBar'>
         <ul>
           <li><a href='index.xhtml'><span>Home</span></a></li>
@@ -28,15 +28,15 @@
       <div id='form-div'>
         <form class='form'>
           <p>
-            <input name='username' type='text' class='feedback-input' placeholder='Username or email' id='username' />
+              <h:inputText class='feedback-input' a:placeholder='Username or email' value="#{loginBean.username}" id='username'/>
           </p>
           <p>
-            <input name='password' type='text'  class='feedback-input' placeholder='Password' id='password' />
+              <h:inputText class='feedback-input' a:placeholder='Password' value="#{loginBean.password}" id='password'/>
           </p>
           <p class='forgot'><a href='#'>Forgot your password?</a></p>
           <div class='submit'>
-            <input type='submit' value='REGISTER' id='button-reg'/>
-            <input type='submit' value='LOG IN' id='button-log' />
+            <h:button outcome='registration' value='REGISTER' id='button-reg'/>
+            <h:commandButton type='submit' value='LOG IN' id='button-log' action="#{loginBean.login()}"/>
           </div>
         </form>
       </div>
@@ -46,5 +46,5 @@
         <a id='city'>New York</a><br/>
         <a id='temperature'>22°C</a>
       </div>
-    </body>
+    </h:body>
 </html>
