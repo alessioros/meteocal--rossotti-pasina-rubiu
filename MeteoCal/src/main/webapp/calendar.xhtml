@@ -1,0 +1,205 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <head>
+        <title>Calendar</title>
+        <link rel="stylesheet" href="css/calendar.css"/>
+        <link rel="stylesheet" href="css/application.css"/>
+        <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
+    </head>
+    <body>
+      <div id='menuBar'>
+        <ul>
+          <li><a href='calendar.xhtml'><span>Home</span></a></li>
+          <li><a href='#'><span>Profile</span></a></li>
+          <li><a href='#'><span>Notifications</span></a></li>
+          <li><a href='#'><span>About</span></a></li>
+        </ul>
+      </div>
+
+      <a class='title'>Calendar:</a>
+      <div class="switch">
+        <input id="public" class="toggle" type="checkbox"/>
+        <label for="public"><a id="publiclabel">Public</a></label>
+      </div>
+      <table class='calendar'>
+        <tr>
+          <td id='monthcont' colspan='8'><a id='month'>October 2014</a></td>
+        </tr>
+        <tr>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">1</a>
+              <a href='#'><div class="empty"></div></a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">2</a>
+              <a href='#'><div class="locked"></div></a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">3</a>
+              <a href='#'><div class="event"></div></a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">4</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">5</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">6</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">7</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">8</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">9</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">10</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">11</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">12</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">13</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">14</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">15</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">16</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">17</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">18</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">19</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">20</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">21</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">22</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">23</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">24</a>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">25</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">26</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">27</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">28</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">29</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">30</a>
+            </div>
+          </td>
+          <td>
+            <div class="mask">
+              <a id="dayNumb">31</a>
+            </div>
+          </td>
+          <td>  </td>
+        </tr>
+      </table>
+      <div class='submit'>
+        <input type='submit' value='CREATE NEW EVENT' id='button-create'/>
+      </div>
+    </body>
+</html>

@@ -1,80 +1,172 @@
 @charset "UTF-8";
 
 html{
-	background-image:url(../img/home_background.jpg);
-	/*background-color:#D7D0D0;*/
+	background-image:url(../img/bg_pattern.png);
 }
 
 .title{
 	font-size:45px;
 	font-family: 'Dosis', sans-serif;
-	top:100px;
-	left:100px;
-	position:absolute;
+	margin-top:40px;
+	margin-left:100px;
+	display:block;
 }
+
+/*------------- TOGGLE ------------- */
+
+.switch{
+	margin-left:100px;
+	margin-top:25px;
+}
+
+.toggle {
+	position: absolute;
+	margin-left: -9999px;
+	visibility: hidden;
+}
+.toggle + label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+}
+
+input.toggle + label {
+	padding: 2px;
+	width: 40px;
+	height: 25px;
+	background-color: #dddddd;
+	border-radius: 25px;
+}
+
+input.toggle + label:before,
+input.toggle + label:after {
+	display: block;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	bottom: 1px;
+	content: "";
+}
+input.toggle + label:before {
+	right: 1px;
+	background-color: #f1f1f1;
+	border-radius: 25px;
+	transition: background 0.4s;
+}
+input.toggle + label:after {
+	width: 25px;
+	background-color: #fff;
+	border-radius: 100%;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	transition: margin 0.4s;
+}
+input.toggle:checked + label:before {
+	background-color: #8ce196;
+}
+input.toggle:checked + label:after {
+	margin-left: 20px;
+}
+
+#publiclabel{
+	font-size:22px;
+	font-family: 'Dosis', sans-serif;
+	display:inline-block;
+	margin-left:55px;
+	line-height:22px;
+}
+/*------------- TOGGLE ------------- */
 .calendar{
 	width:auto;
 	height:auto;
-	top:180px;
-	left:100px;
-	position:absolute;
-	border:1px solid black;
+	margin-top:15px;
+	margin-left:100px;
 	text-align:left;
 	border-collapse:collapse;
+	display:inline-table;
 }
 
-.calendar,tr,td{
-	border:1px solid black;
-}
 .calendar tr{
 	padding:0;
 	margin:0;
 }
 .calendar td{
-	vertical-align:top;
+	border:1px solid black;
+	margin:0;
+	height:90px;
+	width:70px;
+}
+
+.mask {
+	width:70px;
+	height:90px;
+	box-sizing:border-box;
+}
+
+.mask:hover{
+	background-image: -webkit-gradient(radial, center top, 0, center top, 554, color-stop(0, #FFFAFB), color-stop(1, #C8E6EB));
+	background-image: -webkit-radial-gradient(center top, ellipse farthest-corner, #FFFAFB 0%, #C8E6EB 100%);
+	background-image: -moz-radial-gradient(center top, ellipse farthest-corner, #FFFAFB 0%, #C8E6EB 100%);
+	opacity:0.7;
+
+}
+.mask:hover #dayNumb{
+	opacity:0;
+}
+#dayNumb{
 	font-size:20px;
 	color:#f62b46;
 	text-shadow:1px 1px 1px #FFF;
 	font-family: 'Roboto Condensed', sans-serif;
 	padding-top:10px;
 	padding-left:10px;
-	margin:0;
-	height:90px;
-	width:70px;
+	display:block;
 }
 
-.calendar td:hover{
-	background-color:white;
-	opacity:1;
+.empty,.locked,.event{
+	margin-left:auto;
+	margin-right:auto;
+	height:40px;
+	width:40px;
+	background-size:40px 40px;
+	opacity:0;
+	transition: opacity 0.3s ease-in;
 }
 
-#locked{
-	background-image:url(../img/lock.png);
+.empty{
+	background-image:url(../icons/plus.png);
 }
 
-#locked:hover{
-	background-color:red;
-	opacity:1;
+.locked{
+	background-image:url(../icons/lockev.png);
 }
 
-#event{
-	background-image:url(../img/event.png);
+.event{
+	background-image:url(../icons/search.png);
 }
 
-#event:hover{
-	background-color:#28A7C7;
+.mask:hover .empty,.mask:hover .locked,.mask:hover .event{
 	opacity:1;
 }
 
 #monthcont{
+	background-color: #8DB9CB;
+	color:white;
 	width:560px;
 	height:50px;
-	font-size:35px;
+	font-size:30px;
+	padding:0px;
 	text-align:center;
 }
 
 #month{
 	width:300px;
+	height:50px;
+	line-height:50px;
+	display:inline-block;
+	text-shadow:none;
+	font-family: 'Dosis', sans-serif;
 }
 
 #left{
@@ -88,4 +180,32 @@ html{
 	height:50px;
 	background-image:url(../img/right.png);
 	margin-left:50px;
+}
+
+.submit{
+	width: 250px;
+	margin-right:120px;
+	margin-top:15px;
+	text-align:center;
+	float:right;
+}
+
+#button-create{
+	width: 250px;
+	border: #fbfbfb solid 2px;
+	background-color: #8DB9CB;
+	color:white;
+	font-size:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+	font-weight:700;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+#button-create:hover{
+	background-color: white;
+	color: #8DB9CB;
+	border: #8DB9CB solid 2px;
 }
