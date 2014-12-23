@@ -26,25 +26,25 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <div class='form-div'>
       <form class='form'>
         <div class='field'><a id='fieldName'>Name:</a>
-          <h:inputText id='name' value="#{registrationBean.user.name}" class='feedback-input'/>
+          <h:inputText id='name' value="#{registration.user.name}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Surname:</a>
-          <h:inputText id='surname' value="#{registrationBean.user.surname}" class='feedback-input'/>
+          <h:inputText id='surname' value="#{registration.user.surname}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Username:</a>
-          <h:inputText id='username' value="#{registrationBean.user.username}" class='feedback-input'/>
+          <h:inputText id='username' value="#{registration.user.username}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Email:</a>
-          <h:inputText id='email' value="#{registrationBean.user.email}" class='feedback-input'/>
+          <h:inputText id='email' value="#{registration.user.email}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'>Password:</a>
-          <h:inputText id='password' value="#{registrationBean.user.password}" class='feedback-input'/>
+          <h:inputText id='password' value="#{registration.user.password}" class='feedback-input'/>
         </div>
         <div class='field'><a id='fieldName'> Confirm Password:</a>
-          <h:inputText id='confpassword' value="#{registrationBean.user.cpassword}" class='feedback-input'/>
+          <h:inputText id='confpassword' value="#{registration.user.cpassword}" class='feedback-input'/>
         </div>
         <div class='submit'>
-          <h:commandButton type='submit' value='REGITER' id='button-reg' action="#{registrationBean.register()}"/>
+          <h:commandButton type='submit' value='REGISTER' id='button-reg' action="#{Registration.register()}"/>
         </div>
       </form>
     </div>
