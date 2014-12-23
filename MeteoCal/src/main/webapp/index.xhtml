@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      <!xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui">
     <head>
         <title>MeteoCal Homepage</title>
         <link rel="stylesheet" href="css/homepage.css"/>
@@ -28,15 +28,15 @@
       <div id='form-div'>
         <form class='form'>
           <p>
-            <input name='username' type='text' value="#{loginBean.username}" class='feedback-input' placeholder='Username or email' id='username' />
+            <input name='username' type='text' class='feedback-input' placeholder='Username or email' id='username' />
           </p>
           <p>
-            <input name='password' type='text' value="#{loginBean.password}" class='feedback-input' placeholder='Password' id='password' />
+            <input name='password' type='text'  class='feedback-input' placeholder='Password' id='password' />
           </p>
           <p class='forgot'><a href='#'>Forgot your password?</a></p>
           <div class='submit'>
             <input type='submit' value='REGISTER' id='button-reg'/>
-            <input type='submit' action="#{loginBean.login()} value='LOG IN' id='button-log' />
+            <input type='submit' value='LOG IN' id='button-log' />
           </div>
         </form>
       </div>
