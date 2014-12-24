@@ -40,7 +40,7 @@ public class Registration {
 
     public String register() {
         rv.createUser(user);
-        return "index?faces-redirect=true";
+        return "/index.xhtml?faces-redirect=true";
     }
 }
 
