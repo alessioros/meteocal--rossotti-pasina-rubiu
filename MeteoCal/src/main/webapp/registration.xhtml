@@ -27,30 +27,30 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
       <h:form class='form'>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
-            <h:inputText id='name' value="#{Registration.user.name}" class='feedback-input'/>
+            <h:inputText id='name' value="#{registration.user.name}" class='feedback-input'/>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="surname">Surname:</h:outputLabel>
-            <h:inputText id='surname' value="#{Registration.user.surname}" class='feedback-input'/>
+            <h:inputText id='surname' value="#{registration.user.surname}" class='feedback-input'/>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
-            <h:inputText id='username' value="#{Registration.user.username}" class='feedback-input'/>
+            <h:inputText id='username' value="#{registration.user.username}" class='feedback-input'/>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="email">Email:</h:outputLabel>
-          <h:inputText id='email' value="#{Registration.user.email}" class='feedback-input'/>
+          <h:inputText id='email' value="#{registration.user.email}" class='feedback-input'/>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="password">Password:</h:outputLabel>
-            <h:inputText id='password' value="#{Registration.user.password}" class='feedback-input'/>
+            <h:inputText id='password' value="#{registration.user.password}" class='feedback-input'/>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="confpassword">Confirm Password:</h:outputLabel>
             <h:inputText id='confpassword' value="" class='feedback-input'/>
         </div>
         <div class='submit'>
-          <h:commandButton type='submit' value='REGISTER' a:id='button-reg' action="#{Registration.register()}"/>
+          <h:commandButton type='submit' value='REGISTER' a:id='button-reg' action="#{registration.register()}"/>
         </div>
       </h:form>
     </div>

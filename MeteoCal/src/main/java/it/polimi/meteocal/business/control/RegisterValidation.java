@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class RegisterValidation {
+    
     @PersistenceContext
     EntityManager em;
     
