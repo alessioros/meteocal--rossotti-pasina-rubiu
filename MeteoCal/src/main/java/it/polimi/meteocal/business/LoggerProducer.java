@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.polimi.meteocal.business.varie;
+package it.polimi.meteocal.business.beans;
 
 import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
@@ -14,6 +14,7 @@ import javax.enterprise.inject.spi.InjectionPoint;
  * @author teo
  */
 public class LoggerProducer {
+   
     @Produces
     public Logger produceLogger(InjectionPoint injectionPoint) {  
         return Logger.getLogger(injectionPoint.getMember().getDeclaringClass().getName());  
