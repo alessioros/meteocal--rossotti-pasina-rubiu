@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.polimi.meteocal.business.boundary;
+package it.polimi.business.meteocal.boundary;
 
 import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.User;
 import javax.ejb.EJB;
-import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
- * @author miglie
+ * @author alessiorossotti
  */
 @Named
 @RequestScoped
@@ -42,5 +42,8 @@ public class Registration {
         rv.createUser(user);
         return "index?faces-redirect=true";
     }
-
 }
+
+
+
+
