@@ -5,6 +5,7 @@
  */
 package it.polimi.meteocal.business.entity;
 
+import it.polimi.meteocal.business.control.PasswordEncrypter;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -59,7 +60,7 @@ public class User implements Serializable {
     
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 45)
+    @Size(min = 1)
     @Column(name = "Password")
     private String password;
     
@@ -145,7 +146,7 @@ public class User implements Serializable {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = PasswordEncrypter.encryptPassword(password);
     }
 
     public String getName() {
