@@ -1,5 +1,5 @@
 html{
-	background-image: url("#{resource[img/new_york.gif]}");
+	background-image: url("#{resource['img/new_york.jpg']}");
 	background-repeat: no-repeat;
 	background-position: center center;
 }

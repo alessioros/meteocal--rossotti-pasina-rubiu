@@ -1,5 +1,5 @@
 html{
-  background-image:url(../img/bg_pattern.png);
+  background-image:url("#{resource['img/bg_pattern.png']}");
   background-repeat: repeat;
   background-position: center center;
 }
