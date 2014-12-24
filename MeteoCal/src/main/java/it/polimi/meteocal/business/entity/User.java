@@ -40,49 +40,62 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "idUser")
     private Integer idUser;
+    
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "Email")
     private String email;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "Username")
     private String username;
+    
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "Password")
     private String password;
+    
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
+    
     @Size(max = 45)
     @Column(name = "Surname")
     private String surname;
+    
     @Column(name = "Verified")
     private Boolean verified;
+    
     @Column(name = "PublicCalendar")
     private Boolean publicCalendar;
+    
     @Size(max = 26)
     @Column(name = "Groupname")
     private String groupname;
+    
     @JoinTable(name = "calendar", joinColumns = {
         @JoinColumn(name = "idUser", referencedColumnName = "idUser")}, inverseJoinColumns = {
         @JoinColumn(name = "idEvent", referencedColumnName = "idEvent")})
     @ManyToMany
     private Collection<Event> eventCollection;
+    
     @JoinTable(name = "contact", joinColumns = {
         @JoinColumn(name = "idUser", referencedColumnName = "idUser")}, inverseJoinColumns = {
         @JoinColumn(name = "idContact", referencedColumnName = "idUser")})
     @ManyToMany
     private Collection<User> userCollection;
+    
     @ManyToMany(mappedBy = "userCollection")
     private Collection<User> userCollection1;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Collection<Usernotification> usernotificationCollection;
+    
     @OneToMany(mappedBy = "idOrganizer")
     private Collection<Event> eventCollection1;
 
