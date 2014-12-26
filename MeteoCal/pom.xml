@@ -110,7 +110,6 @@
                         <resource>
                            <directory>src/main/resources</directory>
                            <filtering>true</filtering>
-                           <overwrite>true</overwrite>
                         </resource>
                      </resources>              
                   </configuration>            
