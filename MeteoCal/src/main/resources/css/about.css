@@ -5,7 +5,7 @@ html{
 }
 
 .title{
-	margin-top:50px;
+	margin-top:80px;
 	vertical-align:center;
 	text-align:center;
         font-size: 40px;
@@ -14,7 +14,7 @@ html{
 .image{
     margin-right:20px;
     margin-left:10%;
-    margin-top:100px;
+    margin-top:70px;
     display:inline-block;
     border:2px solid white;
 }
@@ -24,6 +24,6 @@ html{
     float:right;
     width:33%;
     margin-right:7%;
-    margin-top:140px;
+    margin-top:110px;
     display:inline-block;
 }

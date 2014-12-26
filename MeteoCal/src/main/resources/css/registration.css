@@ -4,7 +4,7 @@ html{
         font-family: 'Dosis', sans-serif;
 }
 
-.registration{
+.registration,.title{
   height:50px;
   width: 690px;
   margin-top:50px;
@@ -79,7 +79,7 @@ html{
   text-align:center;
 }
 
-#button-reg{
+#button-reg,#buttton-create{
   width: 20%;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;
@@ -93,7 +93,7 @@ html{
   transition: all 0.5s;
 }
 
-#button-reg:hover{
+#button-reg:hover,#button-create:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;

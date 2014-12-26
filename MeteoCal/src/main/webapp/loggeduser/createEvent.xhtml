@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+  <h:head>
+    <title>Create Event</title>
+    <h:outputStylesheet library="css" name="registration.css"  />
+    <h:outputStylesheet library="css" name="application.css"  />
+    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
+  </h:head>
+
+  <h:body>
+
+    <div id='menuBar'>
+      <ul>
+        <li><h:link outcome="calendar" value="Home"/></li>
+        <li><h:link outcome="calendar" value="Profile"/></li>
+        <li><h:link outcome="calendar" value="Notifications"/></li>
+        <li><h:link outcome="about" value="About"/></li>
+      </ul>
+    </div>
+
+    <div class='title'>Create New Event</div>
+
+    <div class='form-div'>
+      <h:form class='form'>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="evname">Event name:</h:outputLabel>
+            <h:inputText id='evname' value="" required="true" class='feedback-input' requiredMessage="Event name is required"/>
+            <br/><div class="error"><h:message for="evname" /></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="description">Description:</h:outputLabel>
+            <h:inputText id='description' value="" required="true" class='feedback-input' requiredMessage="Description is required"/>
+            <br/><div class="error"><h:message a:class="message" for="description" /></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
+            <h:inputText id='username' value="" required="true" class='feedback-input' requiredMessage="Username is required"/>
+            <br/><div class="error"><h:message a:class="message" for="username" /></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="public">Public:</h:outputLabel>
+          <h:inputText id='public' value="" required="true" class='feedback-input' requiredMessage="Public is required"/>
+            <br/><div class="error"><h:message a:class="message" for="public" /></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="outdoor">Outdoor:</h:outputLabel>
+            <h:inputSecret id='outdoor' value="" required="true" class='feedback-input' requiredMessage="Outdoor is required"/>
+            <br/><div class="error"><h:message a:class="message" for="outdoor" /></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="loc">Location:</h:outputLabel>
+            <h:inputSecret id='loc' class='feedback-input' required="true" requiredMessage="Location is required"/>
+            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+        </div>
+        <div class='submit'>
+          <h:commandButton type='submit' value='CREATE' a:id='button-create' action=""/>
+        </div>
+      </h:form>
+    </div>
+
+  </h:body>
+</html>
