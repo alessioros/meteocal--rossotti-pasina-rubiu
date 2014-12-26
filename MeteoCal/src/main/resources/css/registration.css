@@ -57,9 +57,9 @@ html{
   border-radius: 0;
   line-height: 20px;
   width:50%;
+   margin-bottom:5px;
   background-color: #fbfbfb;
   padding: 8px 8px 8px 10px;
-  margin-bottom:5px;
   box-sizing: border-box;
   border: 3px solid #FFF;
 }
