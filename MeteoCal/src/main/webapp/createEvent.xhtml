@@ -28,27 +28,22 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
       <h:form class='form'>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="evname">Event name:</h:outputLabel>
-            <h:inputText id='evname' value="" required="true" class='feedback-input' requiredMessage="Event name is required"/>
+            <h:inputText id='evname' value="#{EventDetails.event.name}" required="true" class='feedback-input' requiredMessage="Event name is required"/>
             <br/><div class="error"><h:message for="evname" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="description">Description:</h:outputLabel>
-            <h:inputText id='description' value="" required="true" class='feedback-input' requiredMessage="Description is required"/>
+            <h:inputText id='description' value="#{EventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
             <br/><div class="error"><h:message a:class="message" for="description" /></div>
         </div>
         <div class='field'>
-            <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
-            <h:inputText id='username' value="" required="true" class='feedback-input' requiredMessage="Username is required"/>
-            <br/><div class="error"><h:message a:class="message" for="username" /></div>
-        </div>
-        <div class='field'>
             <h:outputLabel a:id='fieldName' for="public">Public:</h:outputLabel>
-          <h:inputText id='public' value="" required="true" class='feedback-input' requiredMessage="Public is required"/>
+          <h:inputText id='public' value="#{EventDetails.event.public}" required="true" class='feedback-input' requiredMessage="Public is required"/>
             <br/><div class="error"><h:message a:class="message" for="public" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="outdoor">Outdoor:</h:outputLabel>
-            <h:inputSecret id='outdoor' value="" required="true" class='feedback-input' requiredMessage="Outdoor is required"/>
+            <h:inputSecret id='outdoor' value="#{EventDetails.event.outdoor}" required="true" class='feedback-input' requiredMessage="Outdoor is required"/>
             <br/><div class="error"><h:message a:class="message" for="outdoor" /></div>
         </div>
         <div class='field'>
@@ -57,7 +52,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
             <br/><div class="error"><h:message a:id="message" for="loc"/></div>
         </div>
         <div class='submit'>
-            <h:button outcome='createEvent' value='CREATE' a:id='button-create'/>
+            <h:commandButton type='submit' value='CREATE' a:id='button-create' action="#{EventDetails.create()}"/>
         </div>
       </h:form>
     </div>
