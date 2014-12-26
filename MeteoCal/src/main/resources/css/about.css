@@ -1,0 +1,11 @@
+html{
+	background-image: url("#{resource['css:img/bg_pattern.png']}");
+	background-repeat: repeat;
+        font-family: 'Dosis', sans-serif;
+}
+
+.title{
+	margin-top:50px;
+	vertical-align:center;
+	text-align:center;
+}

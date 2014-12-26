@@ -6,7 +6,7 @@
     <h:head>
         <title>MeteoCal Homepage</title>
         <h:outputStylesheet library="css" name="homepage.css"  />
-        <h:outputStylesheet library="css" name="application.css"  /> 
+        <h:outputStylesheet library="css" name="application.css"  />
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
     </h:head>
     <h:body>
@@ -14,7 +14,7 @@
         <ul>
           <li><h:link outcome="index" value="Home"/></li>
           <li><h:link outcome="registration" value="Register"/></li>
-          <li><h:link outcome="index" value="About"/></li>
+          <li><h:link outcome="about" value="About"/></li>
         </ul>
       </div>
 
@@ -28,10 +28,11 @@
       <div id='form-div'>
         <form class='form'>
           <p>
-              <h:inputSecret class='feedback-input' a:placeholder='Username or Email' required="true" value="#{loginBean.username}" id='username'/>
-          </p>
+              <h:inputSecret class='feedback-input' a:placeholder='Username or Email' required="true" value="#{loginBean.username}" id='username' requiredMessage="Username is required"/>
+            <br/><div class="error"><h:message for="username" /></div>
           <p>
-              <h:inputSecret class='feedback-input' a:placeholder='Password' required="true" value="#{loginBean.password}" id='password'/>
+              <h:inputSecret class='feedback-input' a:placeholder='Password' required="true" value="#{loginBean.password}" id='password' requiredMessage="Password is required"/>
+            <br/><div class="error"><h:message for="password" /></div>
           </p>
           <p class='forgot'><a href='#'>Forgot your password?</a></p>
           <div class='submit'>

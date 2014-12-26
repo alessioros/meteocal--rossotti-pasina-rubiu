@@ -87,6 +87,13 @@ html{
 	color: #3498db;
 }
 
+.error{
+    margin-left:200px;
+    padding-left:10px;
+    width:50%;
+    color: red;
+}
+
 #username{
 	background-image: url("#{resource['css:icons/user.png']}");
 	background-size: 20px 20px;
