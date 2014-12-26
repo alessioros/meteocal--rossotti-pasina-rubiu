@@ -27,27 +27,33 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
       <h:form class='form'>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
-            <h:inputText id='name' value="#{registration.user.name}" class='feedback-input'/>
+            <h:inputText id='name' value="#{registration.user.name}" required="true" class='feedback-input' requiredMessage="First name is required"/>
+            <br/><div class="error"><h:message for="name" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="surname">Surname:</h:outputLabel>
-            <h:inputText id='surname' value="#{registration.user.surname}" class='feedback-input'/>
+            <h:inputText id='surname' value="#{registration.user.surname}" required="true" class='feedback-input' requiredMessage="Last name is required"/>
+            <br/><div class="error"><h:message a:class="message" for="surname" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
-            <h:inputText id='username' value="#{registration.user.username}" class='feedback-input'/>
+            <h:inputText id='username' value="#{registration.user.username}" required="true" class='feedback-input' requiredMessage="Username is required"/>
+            <br/><div class="error"><h:message a:class="message" for="username" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="email">Email:</h:outputLabel>
-          <h:inputText id='email' value="#{registration.user.email}" class='feedback-input'/>
+          <h:inputText id='email' value="#{registration.user.email}" required="true" class='feedback-input' requiredMessage="Email is required"/>
+            <br/><div class="error"><h:message a:class="message" for="email" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="password">Password:</h:outputLabel>
-            <h:inputSecret id='password' value="#{registration.user.password}" class='feedback-input'/>
+            <h:inputSecret id='password' value="#{registration.user.password}" required="true" class='feedback-input' requiredMessage="Password is required"/>
+            <br/><div class="error"><h:message a:class="message" for="password" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="confpassword">Confirm Password:</h:outputLabel>
-            <h:inputSecret id='confpassword' class='feedback-input'/>
+            <h:inputSecret id='confpassword' class='feedback-input' required="true" requiredMessage="Please confirm your password"/>
+            <br/><div class="error"><h:message a:id="message" for="confpassword"/></div>
         </div>
         <div class='submit'>
           <h:commandButton type='submit' value='REGISTER' a:id='button-reg' action="#{registration.register()}"/>

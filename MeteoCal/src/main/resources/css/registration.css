@@ -69,6 +69,16 @@ html{
   color: #3498db;
 }
 
+.error{
+    margin-left:200px;
+    padding-left:30px;
+    height:40px;
+    width:50%;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    color: #9F6000;
+    background-image:url('/javax.faces.resource/icons/error.png.jsf?ln=css');
+}
 .submit{
   width: 100%;
   margin-top:30px;
