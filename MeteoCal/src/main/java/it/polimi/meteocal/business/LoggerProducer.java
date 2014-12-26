@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.polimi.meteocal.business.beans;
+package it.polimi.meteocal.business;
 
 import java.util.logging.Logger;
 import javax.enterprise.inject.Produces;
