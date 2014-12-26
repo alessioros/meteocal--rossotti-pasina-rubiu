@@ -1,5 +1,5 @@
 html{
-	background-image: url("#{resource['css:img/bg_pattern.png']}");
+        background-image: url("#{resource['css:img/bg_pattern.png']}");
 	background-repeat: repeat;
         font-family: 'Dosis', sans-serif;
 }
@@ -8,4 +8,22 @@ html{
 	margin-top:50px;
 	vertical-align:center;
 	text-align:center;
+        font-size: 40px;
+        color:#8DB9CB;
+}
+.image{
+    margin-right:20px;
+    margin-left:10%;
+    margin-top:100px;
+    display:inline-block;
+    border:2px solid white;
+}
+
+.description{
+    font-size:18px;
+    float:right;
+    width:33%;
+    margin-right:7%;
+    margin-top:140px;
+    display:inline-block;
 }
