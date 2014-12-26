@@ -37,7 +37,8 @@
           <p class='forgot'><a href='#'>Forgot your password?</a></p>
           <div class='submit'>
             <h:button outcome='registration' value='REGISTER' id='button-reg'/>
-            <h:commandButton type='submit' value='LOG IN' id='button-log' action="#{loginBean.login()}"/>
+            <h:button outcome='loggeduser/calendar.xhtml' value='LOG IN' id='button-log'/>
+            <!-- <h:commandButton type='submit' value='LOG IN' id='button-log' action="#{loginBean.login()}"/> -->
           </div>
         </form>
       </div>

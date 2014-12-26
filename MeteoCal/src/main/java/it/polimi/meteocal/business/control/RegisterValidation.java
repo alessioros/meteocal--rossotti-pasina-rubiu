@@ -26,6 +26,7 @@ public class RegisterValidation {
     Principal principal;
 
     public void createUser(User user) {
+        user.setGroupname("USERS");
         em.persist(user);
     }
 
