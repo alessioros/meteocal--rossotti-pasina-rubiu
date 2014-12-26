@@ -1,7 +1,6 @@
 html{
-  background-image:url("#{resource['css:img/bg_pattern.png']}");
-  background-repeat: repeat;
-  background-position: center center;
+	background-image: url("#{resource['css:img/bg_pattern.png']}");
+	background-repeat: repeat;
 }
 
 .registration{
@@ -71,13 +70,10 @@ html{
 
 .error{
     margin-left:200px;
-    padding-left:30px;
+    padding-left:10px;
     height:40px;
     width:50%;
-    background-repeat: no-repeat;
-    background-position: 10px center;
-    color: #9F6000;
-    background-image:url('/javax.faces.resource/icons/error.png.jsf?ln=css');
+    color: red;
 }
 .submit{
   width: 100%;
