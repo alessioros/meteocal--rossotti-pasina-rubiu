@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 html{
-	background-image:url(../img/bg_pattern.png);
+	background-image:url("#{resource['css:img/bg_pattern.png']}");
 }
 
 .title{
@@ -135,15 +135,15 @@ input.toggle:checked + label:after {
 }
 
 .empty{
-	background-image:url(../icons/plus.png);
+	background-image:url("#{resource['css:icons/plus.png']}");
 }
 
 .locked{
-	background-image:url(../icons/lockev.png);
+	background-image:url("#{resource['css:icons/lockev.png']}");
 }
 
 .event{
-	background-image:url(../icons/search.png);
+	background-image:url("#{resource['css:icons/event.png']}");
 }
 
 .mask:hover .empty,.mask:hover .locked,.mask:hover .event{

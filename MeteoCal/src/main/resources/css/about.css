@@ -10,6 +10,7 @@ html{
 	text-align:center;
         font-size: 40px;
         color:#8DB9CB;
+        text-shadow: 1px 1px 1px #FFF;
 }
 .image{
     margin-right:20px;
