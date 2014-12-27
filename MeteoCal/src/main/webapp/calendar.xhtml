@@ -14,9 +14,9 @@
     <h:body>
      <div id='menuBar'>
       <ul>
-        <li><h:link outcome="about" value="Home"/></li>
-        <li><h:link outcome="about" value="Profile"/></li>
-        <li><h:link outcome="about" value="Notifications"/></li>
+        <li><h:link outcome="calendar" value="Home"/></li>
+        <li><h:link outcome="profile" value="Profile"/></li>
+        <li><h:link outcome="notifications" value="Notifications"/></li>
         <li><h:link outcome="about" value="About"/></li>
       </ul>
     </div>
@@ -34,7 +34,7 @@
           <td>
             <div class="mask">
               <a id="dayNumb">1</a>
-              <a href='#'><div class="empty"></div></a>
+              <h:link outcome="createEvent"><div class="empty"></div></h:link>
             </div>
           </td>
           <td>

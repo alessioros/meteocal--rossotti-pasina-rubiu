@@ -1,0 +1,16 @@
+/* 
+    Created on : 27-dic-2014, 15.59.59
+    Author     : alessiorossotti
+*/
+
+html{
+	background-image:url("#{resource['css:img/bg_pattern.png']}");
+}
+
+.title{
+	font-size:45px;
+	font-family: 'Dosis', sans-serif;
+	margin-top:40px;
+	margin-left:100px;
+	display:block;
+}
