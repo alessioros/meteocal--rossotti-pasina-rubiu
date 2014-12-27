@@ -15,9 +15,9 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <div id='menuBar'>
       <ul>
-        <li><h:link outcome="calendar" value="Home"/></li>
-        <li><h:link outcome="calendar" value="Profile"/></li>
-        <li><h:link outcome="calendar" value="Notifications"/></li>
+        <li><h:link outcome="index" value="Home"/></li>
+        <li><h:link outcome="index" value="Profile"/></li>
+        <li><h:link outcome="index" value="Notifications"/></li>
         <li><h:link outcome="about" value="About"/></li>
       </ul>
     </div>
@@ -33,18 +33,16 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="description">Description:</h:outputLabel>
-            <h:inputText id='description' value="#{EventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
+            <h:inputTextarea cols="30" rows="10" a:id='description' value="#{EventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
             <br/><div class="error"><h:message a:class="message" for="description" /></div>
         </div>
         <div class='field'>
-            <h:outputLabel a:id='fieldName' for="public">Public:</h:outputLabel>
-          <h:inputText id='public' value="#{EventDetails.event.public}" required="true" class='feedback-input' requiredMessage="Public is required"/>
-            <br/><div class="error"><h:message a:class="message" for="public" /></div>
+            <h:outputLabel a:for="public"><a id="fieldName">Public:</a></h:outputLabel>
+            <h:selectBooleanCheckbox a:id="public" a:class='toogle' value="#{EventDetails.event.public}" />
         </div>
         <div class='field'>
-            <h:outputLabel a:id='fieldName' for="outdoor">Outdoor:</h:outputLabel>
-            <h:inputSecret id='outdoor' value="#{EventDetails.event.outdoor}" required="true" class='feedback-input' requiredMessage="Outdoor is required"/>
-            <br/><div class="error"><h:message a:class="message" for="outdoor" /></div>
+            <h:outputLabel a:for="outdoor"><a id="fieldName">Outdoor:</a></h:outputLabel>
+            <h:selectBooleanCheckbox a:id="outdoor" a:class='toogle' value="#{EventDetails.event.outdoor}"/>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="loc">Location:</h:outputLabel>

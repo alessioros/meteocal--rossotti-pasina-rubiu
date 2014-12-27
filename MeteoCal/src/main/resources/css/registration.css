@@ -79,7 +79,60 @@ html{
   text-align:center;
 }
 
-#button-reg,#buttton-create{
+/*------------- TOGGLE ------------- */
+
+.toggle {
+	position: absolute;
+        margin-left: -9999px;
+	visibility: hidden;
+}
+.toggle + label {
+	display: block;
+	position: relative;
+	cursor: pointer;
+	outline: none;
+	user-select: none;
+}
+
+input.toggle + label {
+	padding: 2px;
+	width: 40px;
+	height: 25px;
+	background-color: #dddddd;
+	border-radius: 25px;
+}
+
+input.toggle + label:before,
+input.toggle + label:after {
+	display: block;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+	bottom: 1px;
+	content: "";
+}
+input.toggle + label:before {
+	right: 1px;
+	background-color: #f1f1f1;
+	border-radius: 25px;
+	transition: background 0.4s;
+}
+input.toggle + label:after {
+	width: 25px;
+	background-color: #fff;
+	border-radius: 100%;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+	transition: margin 0.4s;
+}
+input.toggle:checked + label:before {
+	background-color: #8ce196;
+}
+input.toggle:checked + label:after {
+	margin-left: 20px;
+}
+/*------------- TOGGLE ------------- */
+
+#button-reg,#button-create{
   width: 20%;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;

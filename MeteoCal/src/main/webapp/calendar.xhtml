@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
 
     <h:head>
         <title>Calendar</title>
@@ -23,8 +23,8 @@
 
       <a class='title'>Calendar:</a>
       <div class="switch">
-        <input id="public" class="toggle" type="checkbox"/>
-        <label for="public"><a id="publiclabel">Public</a></label>
+         <h:selectBooleanCheckbox id="public" a:class='toggle' value="#{user.publicCalendar}" /> 
+         <h:outputLabel for="public"><a id='publiclabel'>Public:</a></h:outputLabel>
       </div>
       <table class='calendar'>
         <tr>

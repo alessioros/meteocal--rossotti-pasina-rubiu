@@ -30,15 +30,14 @@
           <p>
               <h:inputText class='feedback-input' a:placeholder='Username or Email' required="true" value="#{loginBean.username}" id='username' requiredMessage="Username is required"/>
             <br/><div class="error"><h:message for="username" /></div>
-          
+
               <h:inputSecret class='feedback-input' a:placeholder='Password' required="true" value="#{loginBean.password}" id='password' requiredMessage="Password is required"/>
             <br/><div class="error"><h:message for="password" /></div>
           </p>
           <p class='forgot'><a href='#'>Forgot your password?</a></p>
           <div class='submit'>
             <h:button outcome='registration' value='REGISTER' id='button-reg'/>
-            <h:button outcome='loggeduser/calendar.xhtml' value='LOG IN' id='button-log'/>
-            <!-- <h:commandButton type='submit' value='LOG IN' id='button-log' action="#{loginBean.login()}"/> -->
+            <h:commandButton type='submit' value='LOG IN' id='button-log' action="#{loginBean.login()}"/>
           </div>
         </form>
       </div>
