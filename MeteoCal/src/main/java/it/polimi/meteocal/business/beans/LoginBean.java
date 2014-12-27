@@ -55,11 +55,11 @@ public class LoginBean {
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         try {
             request.login(this.username, this.password);
-            return "about.xhtml?faces-redirect=true";
+            return "/loggeduser/calendar.xhtml?faces-redirect=true";
         } catch (ServletException e) {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Login Failed","Login Failed"));
             //logger.log(Level.SEVERE,"Login Failed");
-            return "about.xhtml?faces-redirect=true";
+            return "index.xhtml?faces-redirect=true";
         }
     }
     public String logout() {
