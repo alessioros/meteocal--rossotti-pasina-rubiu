@@ -29,8 +29,26 @@ public class LoginBean {
 
     private String username;
     private String password;
+    private String message;
+    private String email;
 
     public LoginBean() {
+    }
+    
+     public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getUsername() {
@@ -68,5 +86,9 @@ public class LoginBean {
         request.getSession().invalidate();
         //logger.log(Level.INFO, "User Logged out");
         return "/index?faces-redirect=true";
+    }
+    
+    public void passwordRecovery(){
+        message="Email sent! , please check your mail";
     }
 }

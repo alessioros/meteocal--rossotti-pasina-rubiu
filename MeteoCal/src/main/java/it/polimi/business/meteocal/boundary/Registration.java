@@ -23,10 +23,18 @@ public class Registration {
     private RegisterValidation rv;
 
     private User user;
+    private String message;
 
     public Registration() {
     }
+     public String getMessage() {
+        return this.message;
+    }
 
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
     public User getUser() {
         if (user == null) {
             user = new User();
@@ -40,7 +48,8 @@ public class Registration {
 
     public String register() {
         rv.createUser(user);
-        return "/index.xhtml?faces-redirect=true";
+        message="Confirmation email sent, please check your email";
+        return "";
     }
 }
 

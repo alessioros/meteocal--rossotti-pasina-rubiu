@@ -75,7 +75,7 @@ html{
 }
 .submit{
   width: 100%;
-  margin-top:30px;
+  margin-top:15px;
   text-align:center;
 }
 
@@ -150,4 +150,10 @@ input.toggle:checked + label:after {
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
+}
+
+.message{
+    text-align:center;
+    margin-top:30px;
+    color: #65be63;
 }
