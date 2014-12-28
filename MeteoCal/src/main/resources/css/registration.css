@@ -41,7 +41,7 @@ html{
   padding-top:20px;
 }
 
-#fieldName{
+#fieldName,#desc{
   width:140px;
   font-size:18px;
   margin-left:60px;
@@ -67,6 +67,12 @@ html{
   color: #3498db;
 }
 
+textarea{
+    width:50%;
+    height:100px;
+    resize: none;
+}
+
 .error{
     margin-left:200px;
     padding-left:10px;
@@ -80,18 +86,21 @@ html{
 }
 
 /*------------- TOGGLE ------------- */
-
+label{
+    margin-left:80px;
+    margin-right:0px;
+}
 .toggle {
 	position: absolute;
         margin-left: -9999px;
 	visibility: hidden;
 }
+
 .toggle + label {
 	display: block;
 	position: relative;
 	cursor: pointer;
 	outline: none;
-	user-select: none;
 }
 
 input.toggle + label {

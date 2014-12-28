@@ -32,17 +32,19 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
             <br/><div class="error"><h:message for="evname" /></div>
         </div>
         <div class='field'>
-            <h:outputLabel a:id='fieldName' for="description">Description:</h:outputLabel>
+            <h:outputLabel a:id='desc' for="description">Description:</h:outputLabel>
             <h:inputTextarea cols="30" rows="10" a:id='description' value="#{EventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
             <br/><div class="error"><h:message a:class="message" for="description" /></div>
         </div>
         <div class='field'>
-            <h:outputLabel a:for="public"><a id="fieldName">Public:</a></h:outputLabel>
-            <h:selectBooleanCheckbox a:id="public" a:class='toogle' value="#{EventDetails.event.public}" />
+            <label id='fieldName'>Public:</label>
+            <h:selectBooleanCheckbox id="public" a:class='toggle' value="#{EventDetails.event.public}"/>
+            <h:outputLabel for="public"></h:outputLabel>
         </div>
         <div class='field'>
-            <h:outputLabel a:for="outdoor"><a id="fieldName">Outdoor:</a></h:outputLabel>
-            <h:selectBooleanCheckbox a:id="outdoor" a:class='toogle' value="#{EventDetails.event.outdoor}"/>
+            <label id='fieldName'>Outdoor:</label>
+            <h:selectBooleanCheckbox id="outdoor" a:class='toggle' value="#{EventDetails.event.outdoor}"/>
+            <h:outputLabel for="outdoor"></h:outputLabel>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="loc">Location:</h:outputLabel>
