@@ -17,13 +17,14 @@
         <li><h:link outcome="calendar" value="Home"/></li>
         <li><h:link outcome="profile" value="Profile"/></li>
         <li><h:link outcome="notifications" value="Notifications"/></li>
-        <li><h:link outcome="about" value="About"/></li>
+        <li><h:link outcome="about_logged" value="About"/></li>
+        <li id='userinfo'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
       </ul>
     </div>
 
       <a class='title'>Calendar:</a>
       <div class="switch">
-         <h:selectBooleanCheckbox id="public" a:class='toggle' value="#{user.publicCalendar}" /> 
+         <h:selectBooleanCheckbox id="public" a:class='toggle' /> 
          <h:outputLabel for="public"><a id='publiclabel'>Public:</a></h:outputLabel>
       </div>
       <table class='calendar'>

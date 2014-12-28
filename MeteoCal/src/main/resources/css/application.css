@@ -67,4 +67,16 @@ html{
   transition: width .25s;
 }
 
+#userinfo{
+    float:right;
+    background:#F66448;  
+}
+
+#userinfo a{
+    border-left:1px solid white;
+}
+#menuBar ul #userinfo:hover a{
+  background:#d4292d;
+  color:white;
+}
 /* ---------------------- MENU BAR ----------------------*/

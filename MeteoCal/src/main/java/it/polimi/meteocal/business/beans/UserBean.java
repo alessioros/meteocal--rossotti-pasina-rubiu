@@ -7,11 +7,15 @@ package it.polimi.meteocal.business.beans;
 
 import it.polimi.meteocal.business.control.RegisterValidation;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
 
 /**
  *
  * @author teo
  */
+@Named
+@RequestScoped
 public class UserBean {
     @EJB
     RegisterValidation rm;
