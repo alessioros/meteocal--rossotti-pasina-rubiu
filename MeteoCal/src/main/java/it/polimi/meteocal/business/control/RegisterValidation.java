@@ -7,8 +7,11 @@ package it.polimi.meteocal.business.control;
 
 import it.polimi.meteocal.business.entity.User;
 import java.security.Principal;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -24,10 +27,24 @@ public class RegisterValidation {
     
     @Inject
     Principal principal;
+    
+    @EJB
+    private SendEmails sm;
 
     public void createUser(User user) {
         user.setGroupname("USERS");
         em.persist(user);
+        
+       try{ 
+           
+           sm.generateAndSendEmail(user.getEmail());
+           
+       }catch(AddressException e){
+            e.printStackTrace();
+       }catch(MessagingException e){
+            e.printStackTrace();
+       }
+       
     }
 
     public void unregister() {
