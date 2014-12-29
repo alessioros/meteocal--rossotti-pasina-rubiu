@@ -44,7 +44,7 @@ html{
     display:inline-block;
 }
 
-#button-change{
+#button-change,#button-add{
   margin-top:50px;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;
@@ -60,12 +60,20 @@ html{
   display:block;
 }
 
-#button-change:hover{
+#button-change:hover,#button-add:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
 }
 
+#button-add{
+    margin-top:10px;
+    padding:5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    float:right;
+    margin-left:20px;
+}
 .addrList{
     float:right;
     margin-right:80px;
@@ -86,4 +94,18 @@ textarea{
     height:240px;
     resize: none;
     font-size:18px;
+}
+
+.feedback-input{
+    margin-top:10px;
+    font-size:18px;
+    width:60%;
+    display:inline-block;
+    height:30px;
+}
+.error{
+    font-size: 18px;
+    padding-left:10px;
+    width:50%;
+    color: red;
 }

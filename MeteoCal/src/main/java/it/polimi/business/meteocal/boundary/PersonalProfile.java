@@ -23,6 +23,7 @@ public class PersonalProfile {
     private ManagePersonalData mpd;
     
     private User user;
+    private String contact;
     
     public void setUser(User user){
         this.user=user;
@@ -36,9 +37,21 @@ public class PersonalProfile {
         return user;
     }
     
+    public void setContact(String contact){
+        this.contact=contact;
+    }
+    
+    public String getContact(){
+    
+        return contact;
+    }
     public void showPersonalData(){
         
         user=mpd.getData();
     }
     
+    public void submitAddUser(){
+        
+       mpd.addUser(contact);
+    }
 }

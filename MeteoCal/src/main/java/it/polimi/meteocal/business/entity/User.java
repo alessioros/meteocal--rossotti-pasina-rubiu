@@ -206,16 +206,7 @@ public class User implements Serializable {
     public void setUserCollection(Collection<User> userCollection) {
         this.userCollection = userCollection;
     }
-
-    @XmlTransient
-    public Collection<User> getUserCollection1() {
-        return userCollection1;
-    }
-
-    public void setUserCollection1(Collection<User> userCollection1) {
-        this.userCollection1 = userCollection1;
-    }
-
+    
     @XmlTransient
     public Collection<Usernotification> getUsernotificationCollection() {
         return usernotificationCollection;
@@ -223,15 +214,6 @@ public class User implements Serializable {
 
     public void setUsernotificationCollection(Collection<Usernotification> usernotificationCollection) {
         this.usernotificationCollection = usernotificationCollection;
-    }
-
-    @XmlTransient
-    public Collection<Event> getEventCollection1() {
-        return eventCollection1;
-    }
-
-    public void setEventCollection1(Collection<Event> eventCollection1) {
-        this.eventCollection1 = eventCollection1;
     }
 
     @Override

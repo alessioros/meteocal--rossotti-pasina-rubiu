@@ -88,7 +88,10 @@ public class ManagePersonalData {
     
     public void changeData(){
     
+    }
     
+    public void addUser(String username){
+            
     }
     
 }
