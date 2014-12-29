@@ -5,12 +5,13 @@
     <artifactId>MeteoCal</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
-    <dependencies>
+    <dependencies>  
+        
         <dependency>
             <groupId>com.googlecode.gmaps4jsf</groupId>
             <artifactId>gmaps4jsf-core</artifactId>
-            <version>1.1.1</version>
-        </dependency>  
+            <version>3.0.0</version>
+        </dependency> 
         
          <dependency>
             <groupId>org.primefaces</groupId>
@@ -92,6 +93,7 @@
             <url>http://gmaps4jsf.googlecode.com/svn/trunk/gmaps4jsf-repo</url>
         </repository>
     </repositories>
+    
     <build>
         <finalName>MeteoCal</finalName>
         <resources>
