@@ -45,7 +45,6 @@ html{
 
 #button-change{
   margin-top:50px;
-  width: 120px;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;
   color:white;
@@ -54,7 +53,6 @@ html{
   font-weight:200;
   margin-left:100px;
   width:auto;
-  text-decoration: none;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
@@ -67,6 +65,9 @@ html{
   border: #8DB9CB solid 2px;
 }
 
+.personal_info a{
+    text-decoration: none;
+}
 .addrList{
     float:right;
     margin-right:80px;
