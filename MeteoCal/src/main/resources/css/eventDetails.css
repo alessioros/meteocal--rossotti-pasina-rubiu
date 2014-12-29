@@ -1,0 +1,11 @@
+.image{
+    height:400px;
+    width:700px;
+    margin-top:50px;
+    margin-left:50px;
+    background-image: url("#{resource['css:img/default_event.jpg']}");
+    background-repeat: no-repeat;
+    background-position: center center;
+    border:1px solid #8DB9CB;
+    border-radius: 5px;
+}
