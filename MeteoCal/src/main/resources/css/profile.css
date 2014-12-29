@@ -9,33 +9,33 @@ html{
         font-family: 'Dosis', sans-serif;
 }
 
-.title{
-	font-size:35px;
-	margin-top:40px;
-	margin-left:70px;
-	display:block;
-}
-
 .personal_info{
-    
-    margin-left:50px;
-    margin-top:20px;
-    background-color:rgba(141,185,203,0.2);
-    padding-left:30px;
-    padding-right:30px;
-    padding-top:10px;
-    padding-bottom:30px;
-    width: 400px;
-    
+    margin-left:80px;
+    margin-top:50px;
+    width: 450px;   
+    display:inline-block;
 }
 
-.personal_info ul{
+.title{
+    font-size:35px;
+    margin-left:50px;
+    display:block;
+    width:380px;
+}
+
+.personal_info ul,.addrList ul{
+    padding:30px;
+    background-color:rgba(141,185,203,0.2);
     list-style: none;
     font-size: 20px;
+    border:1px solid #8DB9CB;
+    border-radius: 5px;
+    display: block;
+    height:300px;
 }
 
 .personal_info ul li{
-    margin-top:20px;
+    margin-bottom:20px;
 }
 
 #fieldName{
@@ -44,23 +44,46 @@ html{
 }
 
 #button-change{
-  margin-top:20px;
-  width: auto;
+  margin-top:50px;
+  width: 120px;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;
   color:white;
-  font-size:20px;
-  padding-top:10px;
-  padding-bottom:10px;
+  font-size:18px;
+  padding:10px;
   font-weight:200;
-  margin-left:140px;
+  margin-left:100px;
+  width:auto;
+  text-decoration: none;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
+  display:block;
 }
 
 #button-change:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
+}
+
+.addrList{
+    float:right;
+    margin-right:80px;
+    margin-top:50px;
+    width: 450px;
+    display:inline-block;
+}
+
+.addrTitle{
+    margin-left:50px;
+    font-size:35px;
+    display:block;
+    width: 380px;
+}
+
+textarea{
+    width: 100%;
+    height:100%;
+    resize: none;
 }

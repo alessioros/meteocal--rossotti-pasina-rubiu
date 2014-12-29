@@ -21,9 +21,9 @@
            <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
          </ul>
        </div>
-       
-       <a class='title'>Personal Info:</a>
+        
        <div class="personal_info">
+           <a class='title'>Personal Info:</a>
            <ul>
                <li>
                     <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
@@ -41,9 +41,21 @@
                     <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
                     <h:outputText id="username" value="#{request.userPrincipal.name}"></h:outputText>
                 </li>
+                <li>
+                    <h:form>
+                        <h:commandLink action="#{loginBean.logout()}"><h:button outcome='changeData' value='CHANGE DATA' a:id='button-create'/></h:commandLink>
+                    </h:form>
+                </li>
            </ul>
-           <h:commandButton type='submit' value='CHANGE DATA' a:id='button-change' action="#{loginBean.logout()}"/>
        </div>
-        
+       
+        <div class="addrList">
+            <a class='addrTitle'>Address List:</a>
+            <ul>
+                <li>
+                    <h:inputTextarea id="addresslist" value="#{request.userPrincipal.name}"></h:inputTextarea>
+                </li>
+            </ul>
+        </div> 
     </h:body>
 </html>
