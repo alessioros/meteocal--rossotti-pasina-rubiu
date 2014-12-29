@@ -5,12 +5,62 @@
 
 html{
 	background-image:url("#{resource['css:img/bg_pattern.png']}");
+        background-repeat: repeat;
+        font-family: 'Dosis', sans-serif;
 }
 
 .title{
-	font-size:45px;
-	font-family: 'Dosis', sans-serif;
+	font-size:35px;
 	margin-top:40px;
-	margin-left:100px;
+	margin-left:70px;
 	display:block;
+}
+
+.personal_info{
+    
+    margin-left:50px;
+    margin-top:20px;
+    background-color:rgba(141,185,203,0.2);
+    padding-left:30px;
+    padding-right:30px;
+    padding-top:10px;
+    padding-bottom:30px;
+    width: 400px;
+    
+}
+
+.personal_info ul{
+    list-style: none;
+    font-size: 20px;
+}
+
+.personal_info ul li{
+    margin-top:20px;
+}
+
+#fieldName{
+    width:120px;
+    display:inline-block;
+}
+
+#button-change{
+  margin-top:20px;
+  width: auto;
+  border: #fbfbfb solid 2px;
+  background-color: #8DB9CB;
+  color:white;
+  font-size:20px;
+  padding-top:10px;
+  padding-bottom:10px;
+  font-weight:200;
+  margin-left:140px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+#button-change:hover{
+  background-color: white;
+  color: #8DB9CB;
+  border: #8DB9CB solid 2px;
 }

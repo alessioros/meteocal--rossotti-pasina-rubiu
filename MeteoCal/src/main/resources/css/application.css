@@ -67,15 +67,15 @@ html{
   transition: width .25s;
 }
 
-#userinfo{
+#logout{
     float:right;
     background:#F66448;  
 }
 
-#userinfo a{
+#logout a{
     border-left:1px solid white;
 }
-#menuBar ul #userinfo:hover a{
+#menuBar ul #logout:hover a{
   background:#d4292d;
   color:white;
 }
