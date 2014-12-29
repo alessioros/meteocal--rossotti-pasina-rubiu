@@ -198,7 +198,7 @@ input.toggle:checked + label:after {
 	font-size:20px;
 	padding-top:10px;
 	padding-bottom:10px;
-	font-weight:700;
+	font-weight:200;
 	-webkit-transition: all 0.5s;
 	-moz-transition: all 0.5s;
 	transition: all 0.5s;

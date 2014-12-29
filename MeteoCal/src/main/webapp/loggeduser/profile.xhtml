@@ -2,10 +2,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
 
     <h:head>
-        <title>Calendar</title>
+        <title>Profile</title>
         <h:outputStylesheet library="css" name="profile.css"  />
         <h:outputStylesheet library="css" name="application.css"  />
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
@@ -18,11 +19,46 @@
            <li><h:link outcome="profile" value="Profile"/></li>
            <li><h:link outcome="notifications" value="Notifications"/></li>
            <li><h:link outcome="about_logged" value="About"/></li>
-           <li id='userinfo'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
+           <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
          </ul>
        </div>
+        <f:metadata>
+            <f:viewAction action="#{personalProfile.showPersonalData()}"/>
+        </f:metadata>
+       <div class="personal_info">
+           <a class='title'>Personal Info:</a>
+           <ul>
+               <li>
+                    <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
+                    <h:outputText id="name" value="#{personalProfile.user.name}"></h:outputText>
+                </li>
+                <li>
+                    <h:outputLabel a:id='fieldName' for="surname">Surname:</h:outputLabel>
+                    <h:outputText id="surname" value="#{personalProfile.user.surname}"></h:outputText>
+                </li>
+               <li>
+                    <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
+                    <h:outputText id="username" value="#{personalProfile.user.username}"></h:outputText>
+                </li>
+                <li>
+                    <h:outputLabel a:id='fieldName' for="email">Email:</h:outputLabel>
+                    <h:outputText id="email" value="#{personalProfile.user.email}"></h:outputText>
+                </li>
+                <li>
+                    <h:form>
+                        <h:button outcome='changeData' value='CHANGE DATA' a:id='button-change'/>
+                    </h:form>
+                </li>
+           </ul>
+       </div>
        
-       <a class='title'>Personal Profile:</a> 
-        
+        <div class="addrList">
+            <a class='addrTitle'>Address List:</a>
+            <ul>
+                <li>
+                    <h:inputTextarea id="addresslist" value=" - #{request.userPrincipal.name}"></h:inputTextarea>
+                </li>
+            </ul>
+        </div> 
     </h:body>
 </html>
