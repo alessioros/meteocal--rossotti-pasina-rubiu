@@ -147,8 +147,8 @@ input.toggle:checked + label:after {
   background-color: #8DB9CB;
   color:white;
   font-size:20px;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding:10px;
+  width:auto;
   font-weight:200;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;

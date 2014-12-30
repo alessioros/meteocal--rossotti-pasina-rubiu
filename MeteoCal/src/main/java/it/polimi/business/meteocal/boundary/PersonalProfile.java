@@ -24,7 +24,7 @@ public class PersonalProfile {
     
     private User user;
     private String contact;
-    private String message="prova";
+    private String message;
     private String confPassword;
     
     public String getConfPassword() {
@@ -73,7 +73,6 @@ public class PersonalProfile {
         
         this.mpd=new ManagePersonalData();
         boolean success=false;
-        this.message="prova";
         
         success=mpd.changeData(user);
         
