@@ -1,9 +1,11 @@
+package it.polimi.meteocal.business.beans;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.polimi.meteocal.business.control;
+
 
 import java.util.Properties;
 import javax.ejb.Stateless;
@@ -20,13 +22,13 @@ import javax.mail.internet.MimeMessage;
  * @author teo
  */
 @Stateless
-public class SendEmails {
+public class SendEmailBean {
     
         static Properties mailServerProperties;
         static Session getMailSession;
         static MimeMessage generateMailMessage;
 
-        public void generateAndSendEmail(String to) throws AddressException, MessagingException {
+        public void generateAndSendEmail(String to,String subject,String emailBody) throws AddressException, MessagingException {
  
         mailServerProperties = System.getProperties();
         mailServerProperties.put("mail.smtp.port", "587");
@@ -36,8 +38,7 @@ public class SendEmails {
         getMailSession = Session.getDefaultInstance(mailServerProperties, null);
         generateMailMessage = new MimeMessage(getMailSession);
         generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-        generateMailMessage.setSubject("Confirm Registration");
-        String emailBody = "Test email " + "<br><br> Regards, <br>MeteoCal Admin";
+        generateMailMessage.setSubject(subject);
         generateMailMessage.setContent(emailBody, "text/html");
 
         Transport transport = getMailSession.getTransport("smtp");
