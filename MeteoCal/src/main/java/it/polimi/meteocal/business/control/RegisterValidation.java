@@ -8,6 +8,7 @@ package it.polimi.meteocal.business.control;
 import it.polimi.meteocal.business.entity.User;
 import it.polimi.meteocal.business.beans.SendEmailBean;
 import java.security.Principal;
+import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -33,12 +34,19 @@ public class RegisterValidation {
     private SendEmailBean sm;
 
     public void createUser(User user) {
+
         user.setGroupname("USERS");
+        user.setVerified(Boolean.FALSE);
+        user.setVerificationkey(UUID.randomUUID().toString());
         em.persist(user);
         
        try{ 
            
-           sm.generateAndSendEmail(user.getEmail(),"Confirm MeteoCal Account","Click on the link to confirm your account");
+           sm.generateAndSendEmail(user.getEmail(),
+                   "Confirm MeteoCal Account",
+                   "Click on the link to confirm your account:"
+                   + "<a href=\"http://localhost:8080/MeteoCal/activation.xhtml?key="+user.getVerificationkey()
+                    +"\">HOPE</a>");
            
        }catch(AddressException e){
             e.printStackTrace();

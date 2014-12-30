@@ -67,10 +67,13 @@ public class User implements Serializable {
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    
+   
     @Size(max = 45)
     @Column(name = "Surname")
     private String surname;
+    
+    @Column(name="Verificationkey")
+    private String verificationkey;
     
     @Column(name = "Verified")
     private Boolean verified;
@@ -172,7 +175,15 @@ public class User implements Serializable {
     public void setVerified(Boolean verified) {
         this.verified = verified;
     }
+    
+    public String getVerificationkey() {
+        return verificationkey;
+    }
 
+    public void setVerificationkey(String verificationkey) {
+        this.verificationkey = verificationkey;
+    }
+    
     public Boolean getPublicCalendar() {
         return publicCalendar;
     }
