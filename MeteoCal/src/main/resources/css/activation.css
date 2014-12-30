@@ -25,9 +25,8 @@ html{
 
 
 .message{
-    margin-top:80px;
-	vertical-align:center;
-	text-align:center;
+        margin-top:150px;
+        text-align:center;
         font-size: 25px;
         color:#8DB9CB;
         text-shadow: 1px 1px 1px #FFF;
