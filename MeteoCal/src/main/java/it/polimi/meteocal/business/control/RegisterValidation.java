@@ -44,9 +44,10 @@ public class RegisterValidation {
            
            sm.generateAndSendEmail(user.getEmail(),
                    "Confirm MeteoCal Account",
-                   "Click on the link to confirm your account:"
+                   "Welcome to MeteoCal "+user.getName()+
+                    ",<br>Click on the link to confirm your account:"
                    + "<a href=\"http://localhost:8080/MeteoCal/activation.xhtml?key="+user.getVerificationkey()
-                    +"\">HOPE</a>");
+                    +"\">Confirm</a>");
            
        }catch(AddressException e){
             e.printStackTrace();
