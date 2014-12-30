@@ -24,6 +24,24 @@ public class PersonalProfile {
     
     private User user;
     private String contact;
+    private String message="prova";
+    private String confPassword;
+    
+    public String getConfPassword() {
+        return this.confPassword;
+    }
+
+    public void setConfPassword(String confPassword) {
+        this.confPassword = confPassword;
+    }
+    
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
     public void setUser(User user){
         this.user=user;
@@ -47,7 +65,27 @@ public class PersonalProfile {
     }
     public void showPersonalData(){
         
+        this.mpd=new ManagePersonalData();
         user=mpd.getData();
+    }
+    
+    public String submitChangeData(){
+        
+        this.mpd=new ManagePersonalData();
+        boolean success=false;
+        this.message="prova";
+        
+        if(success){
+            this.message="Data succesfully updated!";
+        }
+        else{
+            this.message="Something wrong!";
+        }
+        
+        success=mpd.changeData(user);
+        
+        return "";
+        
     }
     
     public void submitAddUser(){

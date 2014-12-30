@@ -4,7 +4,7 @@ html{
         font-family: 'Dosis', sans-serif;
 }
 
-.registration,.title{
+.registration,.title,.changeData{
   height:50px;
   width: 690px;
   margin-top:50px;
@@ -141,7 +141,7 @@ input.toggle:checked + label:after {
 }
 /*------------- TOGGLE ------------- */
 
-#button-reg,#button-create{
+#button-reg,#button-create,#button-change{
   width: 20%;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;
@@ -155,7 +155,7 @@ input.toggle:checked + label:after {
   transition: all 0.5s;
 }
 
-#button-reg:hover,#button-create:hover{
+#button-reg:hover,#button-create:hover,#button-change:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
