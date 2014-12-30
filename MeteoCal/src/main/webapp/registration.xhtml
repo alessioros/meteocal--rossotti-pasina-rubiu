@@ -52,7 +52,7 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="confpassword">Confirm Password:</h:outputLabel>
-            <h:inputSecret id='confpassword' class='feedback-input' required="true" requiredMessage="Please confirm your password"/>
+            <h:inputSecret id='confpassword' value="#{registration.confpassword}" class='feedback-input' required="true" requiredMessage="Please confirm your password"/>
             <br/><div class="error"><h:message for="confpassword"/></div>
         </div>
         <div class='message'>
