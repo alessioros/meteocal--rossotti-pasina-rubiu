@@ -75,7 +75,7 @@ public class Registration {
         } else if (confpassword.length() < 6) {
             message = "Password should be at least 6 characters";
         } else {
-            // rv.createUser(user);
+            rv.createUser(user);
             message = "Confirmation email sent, please check your email";
         }
     }
