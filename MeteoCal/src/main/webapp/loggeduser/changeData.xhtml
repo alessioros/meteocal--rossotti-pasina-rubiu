@@ -21,5 +21,42 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         <li><h:link outcome="about_logged" value="About"/></li>
       </ul>
     </div>
+      
+    <div class='changeData'>Insert data you want to change:</div>
+
+    <div class='form-div'>
+      <h:form>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
+            <h:inputText id='name' value="#{personalProfile.user.name}" class='feedback-input' />
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="surname">Surname:</h:outputLabel>
+            <h:inputText id='surname' value="#{personalProfile.user.surname}" class='feedback-input' />
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
+            <h:inputText id='username' value="#{personalProfile.user.username}" class='feedback-input' />
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="email">Email:</h:outputLabel>
+            <h:inputText id='email' value="#{personalProfile.user.email}" class='feedback-input' />
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="password">Password:</h:outputLabel>
+            <h:inputSecret id='password' value="#{personalProfile.user.password}" class='feedback-input' />
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="confpassword">Confirm Password:</h:outputLabel>
+            <h:inputSecret id='confpassword' value="#{personalProfile.confPassword}" class='feedback-input'/>
+        </div>
+        <div class='message'>
+            <h:outputText value="#{personalProfile.message}"></h:outputText>
+        </div>
+        <div class='submit'>
+          <h:commandButton type='submit' value='Change Data' a:id='button-change' action="#{personalProfile.submitChangeData()}"/>
+        </div>
+      </h:form>
+    </div>
     </h:body>
 </html>

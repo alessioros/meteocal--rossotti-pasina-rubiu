@@ -58,6 +58,13 @@
                 <li>
                     <h:inputTextarea id="addresslist" value=" - #{request.userPrincipal.name}"></h:inputTextarea>
                 </li>
+                <li>
+                    <h:form>
+                        <h:inputText id='contact' value="#{personalProfile.contact}" required="true" class='feedback-input' requiredMessage="Insert a valid username"/>
+                        <h:commandButton type='submit' value='ADD' a:id='button-add' action="#{personalProfile.submitAddUser()}"/>
+                        <br/><div class="error"><h:message for="contact"/></div>   
+                    </h:form>     
+                </li>
             </ul>
         </div> 
     </h:body>

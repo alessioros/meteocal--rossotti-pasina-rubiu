@@ -86,9 +86,76 @@ public class ManagePersonalData {
         return this.user;
     }
     
-    public void changeData(){
+    public boolean changeData(User updated){
+        
+        principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+        String username = principal.getName();
+        updated.setUsername(username);
+        String field="";
+        boolean success=false;
+        
+        return success;
+        /*
+        PreparedStatement ps = null;
+        Connection con = null;
+        int result;
+        
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocal", "root", "root");
+            
+            field=updated.getName();
+            if(!"".equals(field)){
+                String sql = "insert into user (Name) values ('"+field+"') where username='"+username+"'";
+                ps= con.prepareStatement(sql); 
+                result= ps.executeUpdate();  
+            }
+            
+            field=updated.getSurname();
+            if(!"".equals(field)){
+                String sql = "insert into user (Surname) values ('"+field+"') where username='"+username+"'";
+                ps= con.prepareStatement(sql); 
+            result= ps.executeUpdate();  
+            }
+            
+            field=updated.getPassword();
+            if(!"".equals(field)){
+                String sql = "insert into user (Password) values ('"+field+"') where username='"+username+"'";
+                ps= con.prepareStatement(sql); 
+            result= ps.executeUpdate(); 
+            }
+            
+            field=updated.getUsername();
+            if(!"".equals(field)){
+                String sql = "insert into user (Username) values ('"+field+"') where username='"+username+"'";
+                ps= con.prepareStatement(sql); 
+                result= ps.executeUpdate(); 
+            }
+            success=true;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        finally
+        {
+            try
+            {
+                con.close();
+                ps.close();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
+        
+        return success;*/
+    }
     
-    
+    public void addUser(String username){
+            
     }
     
 }

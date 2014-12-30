@@ -27,7 +27,8 @@ public class Registration {
 
     public Registration() {
     }
-     public String getMessage() {
+    
+    public String getMessage() {
         return this.message;
     }
 
