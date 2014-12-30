@@ -1,6 +1,7 @@
 package it.polimi.meteocal.business.control;
 
 import it.polimi.meteocal.business.entity.Event;
+import it.polimi.meteocal.business.entity.Location;
 import java.security.Principal;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,7 +17,8 @@ public class ManageEvent {
     @Inject
     Principal principal;
 
-    public void createEvent(Event event) {
+    public void createEvent(Event event,Location loc) {
+        em.persist(loc);
         em.persist(event);
     }
     

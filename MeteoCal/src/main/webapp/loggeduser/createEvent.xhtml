@@ -28,31 +28,51 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
       <h:form>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="evname">Event name:</h:outputLabel>
-            <h:inputText id='evname' value="#{EventDetails.event.name}" required="true" class='feedback-input' requiredMessage="Event name is required"/>
+            <h:inputText id='evname' value="#{eventDetails.event.name}" required="true" class='feedback-input' requiredMessage="Event name is required"/>
             <br/><div class="error"><h:message for="evname" /></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='desc' for="description">Description:</h:outputLabel>
-            <h:inputTextarea cols="30" rows="10" a:id='description' value="#{EventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
+            <h:inputTextarea cols="30" rows="10" a:id='description' value="#{eventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
             <br/><div class="error"><h:message a:class="message" for="description" /></div>
         </div>
         <div class='field'>
             <label id='fieldName'>Public:</label>
-            <h:selectBooleanCheckbox id="public" a:class='toggle' value="#{EventDetails.event.public}"/>
+            <h:selectBooleanCheckbox id="public" a:class='toggle' value="#{eventDetails.event.public1}"/>
             <h:outputLabel for="public"></h:outputLabel>
         </div>
         <div class='field'>
             <label id='fieldName'>Outdoor:</label>
-            <h:selectBooleanCheckbox id="outdoor" a:class='toggle' value="#{EventDetails.event.outdoor}"/>
+            <h:selectBooleanCheckbox id="outdoor" a:class='toggle' value="#{eventDetails.event.outDoor}"/>
             <h:outputLabel for="outdoor"></h:outputLabel>
         </div>
         <div class='field'>
-            <h:outputLabel a:id='fieldName' for="loc">Location:</h:outputLabel>
-            <h:inputSecret id='loc' class='feedback-input' required="true" requiredMessage="Location is required"/>
+            <h:outputLabel a:id='fieldName' for="lat">Latitude:</h:outputLabel>
+            <h:inputText id='lat' class='feedback-input' value="#{eventDetails.loc.latitude}" required="true" requiredMessage="Latitude is required"/>
+            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="lon">Longitude:</h:outputLabel>
+            <h:inputText id='lon' class='feedback-input' value="#{eventDetails.loc.longitude}" required="true" requiredMessage="Longitude is required"/>
+            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="state">State:</h:outputLabel>
+            <h:inputText id='state' class='feedback-input' value="#{eventDetails.loc.state}" required="true" requiredMessage="State is required"/>
+            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="city">City:</h:outputLabel>
+            <h:inputText id='city' class='feedback-input' value="#{eventDetails.loc.city}" required="true" requiredMessage="City is required"/>
+            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+        </div>
+        <div class='field'>
+            <h:outputLabel a:id='fieldName' for="addr">Address:</h:outputLabel>
+            <h:inputText id='addr' class='feedback-input' value="#{eventDetails.loc.address}" required="true" requiredMessage="Address is required"/>
             <br/><div class="error"><h:message a:id="message" for="loc"/></div>
         </div>
         <div class='submit'>
-            <h:commandButton type='submit' value='CREATE' a:id='button-create' action="#{EventDetails.create()}"/>
+            <h:commandButton type='submit' value='CREATE' a:id='button-create' action="#{eventDetails.create()}"/>
         </div>
       </h:form>
     </div>
