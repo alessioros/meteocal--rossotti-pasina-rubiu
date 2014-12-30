@@ -94,8 +94,6 @@ public class ManagePersonalData {
         String field="";
         boolean success=false;
         
-        return success;
-        /*
         PreparedStatement ps = null;
         Connection con = null;
         int result;
@@ -107,28 +105,28 @@ public class ManagePersonalData {
             
             field=updated.getName();
             if(!"".equals(field)){
-                String sql = "insert into user (Name) values ('"+field+"') where username='"+username+"'";
+                String sql = "update user set Name='"+field+"' where username='"+username+"'";
                 ps= con.prepareStatement(sql); 
                 result= ps.executeUpdate();  
             }
             
             field=updated.getSurname();
             if(!"".equals(field)){
-                String sql = "insert into user (Surname) values ('"+field+"') where username='"+username+"'";
+                String sql = "update user set Surname='"+field+"' where username='"+username+"'";
                 ps= con.prepareStatement(sql); 
             result= ps.executeUpdate();  
             }
             
             field=updated.getPassword();
             if(!"".equals(field)){
-                String sql = "insert into user (Password) values ('"+field+"') where username='"+username+"'";
+                String sql = "update user set Password='"+field+"' where username='"+username+"'";
                 ps= con.prepareStatement(sql); 
             result= ps.executeUpdate(); 
             }
             
             field=updated.getUsername();
             if(!"".equals(field)){
-                String sql = "insert into user (Username) values ('"+field+"') where username='"+username+"'";
+                String sql = "update user set Username='"+field+"' where username='"+username+"'";
                 ps= con.prepareStatement(sql); 
                 result= ps.executeUpdate(); 
             }
@@ -151,7 +149,7 @@ public class ManagePersonalData {
             }
         }
         
-        return success;*/
+        return success;
     }
     
     public void addUser(String username){

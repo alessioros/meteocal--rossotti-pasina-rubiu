@@ -75,14 +75,14 @@ public class PersonalProfile {
         boolean success=false;
         this.message="prova";
         
+        success=mpd.changeData(user);
+        
         if(success){
             this.message="Data succesfully updated!";
         }
         else{
             this.message="Something wrong!";
         }
-        
-        success=mpd.changeData(user);
         
         return "";
         
