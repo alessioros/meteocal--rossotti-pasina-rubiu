@@ -153,33 +153,53 @@ input.toggle:checked + label:after {
 #monthcont{
 	background-color: #8DB9CB;
 	color:white;
-	width:420px;
+	width:560px;
 	height:50px;
 	font-size:30px;
 	padding:0px;
-	text-align:center;
+        line-height:50px;
+}
+
+#prev{
+        background-image: url("#{resource['css:icons/prev.png']}");
+	background-size: 40px 40px;
+	background-position: 17px 5px;
+	background-repeat: no-repeat;
+        border-right:0px;
+        height:50px;
+        width:73px;
+        background-color: #8DB9CB;
+        display:block;
+        float:left;
 }
 
 #month{
-	width:300px;
-	height:50px;
-	line-height:50px;
-	display:inline-block;
+	width:200px;
+        margin-left:117px;
+        margin-right:117px;
+	display:block;
 	text-shadow:none;
 	font-family: 'Dosis', sans-serif;
+        float:left;
 }
 
-#left{
-	width:50px;
-	height:50px;
-	background-image:url(../img/left.png);
-	margin-right:50px;
+
+#next{
+        background-image: url("#{resource['css:icons/next.png']}");
+        background-size: 40px 40px;
+	background-position: 17px 5px;
+	background-repeat: no-repeat;
+        border-left:0px;  
+        height:50px;
+        width:73px;
+        background-color: #8DB9CB;
+        display:block;
+        float:left;
 }
-#right{
-	width:50px;
-	height:50px;
-	background-image:url(../img/right.png);
-	margin-left:50px;
+
+
+#monthcont br{
+        clear:left;
 }
 
 .submit{

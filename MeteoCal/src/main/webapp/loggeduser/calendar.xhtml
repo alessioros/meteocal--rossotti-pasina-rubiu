@@ -29,9 +29,12 @@
       </div>
       <table class='calendar'>
         <tr>
-            <td><h:form><a><h:commandLink action="#{calendar.prev()}" value="&lt;&lt;"/></a></h:form></td>
-            <td id='monthcont' colspan='6'><a id='month'>#{calendar.monthStr} #{calendar.year}</a></td>
-            <td><h:form><a><h:commandLink action="#{calendar.next()}" value="&gt;&gt;"/></a></h:form></td>
+            <td id='monthcont' colspan='8'>
+                <h:form><h:commandLink action="#{calendar.prev()}" a:id="prev"/></h:form>
+                <a id='month'>#{calendar.monthStr} #{calendar.year}</a>
+                <h:form><h:commandLink action="#{calendar.next()}" a:id="next"/></h:form>
+                <br/>
+            </td>
         </tr>
         <tr>
           <td>
