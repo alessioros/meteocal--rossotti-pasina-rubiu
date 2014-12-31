@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import it.polimi.meteocal.business.control.ManageCalendar;
 import it.polimi.meteocal.business.entity.User;
 import it.polimi.meteocal.business.entity.Event;
+import java.util.Locale;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
@@ -36,25 +37,25 @@ public class Calendar {
         return date;
     }   
     public String getDayNum(){
-        return new SimpleDateFormat("d").format(this.getDate());
+        return new SimpleDateFormat("d",Locale.US).format(this.getDate());
     } 
     public String getDayStr(){
-        return new SimpleDateFormat("E").format(this.getDate());
+        return new SimpleDateFormat("E",Locale.US).format(this.getDate());
     }
     public String getMonthStr(){
-        return new SimpleDateFormat("MMMM").format(this.getDate());
+        return new SimpleDateFormat("MMMM",Locale.US).format(this.getDate());
     }
     public String getMonthNum(){
-        return new SimpleDateFormat("M").format(this.getDate());
+        return new SimpleDateFormat("M",Locale.US).format(this.getDate());
     }
     public String getYear(){
-        return new SimpleDateFormat("y").format(this.getDate());
+        return new SimpleDateFormat("y",Locale.US).format(this.getDate());
     }
     public String getHour(){
-        return new SimpleDateFormat("H").format(this.getDate());
+        return new SimpleDateFormat("H",Locale.US).format(this.getDate());
     }
     public String getMinute(){
-        return new SimpleDateFormat("m").format(this.getDate());
+        return new SimpleDateFormat("m",Locale.US).format(this.getDate());
     }
     public void next(){
         
