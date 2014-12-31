@@ -54,7 +54,7 @@ public class ManagePersonalData {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocal", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
             String sql = "select * from user where username='"+username+"'";
             ps= con.prepareStatement(sql); 
             rs= ps.executeQuery(); 
@@ -101,7 +101,7 @@ public class ManagePersonalData {
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocal", "root", "root");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
             
             field=updated.getName();
             if(!"".equals(field)){
