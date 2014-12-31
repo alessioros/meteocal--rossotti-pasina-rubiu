@@ -29,11 +29,9 @@
       </div>
       <table class='calendar'>
         <tr>
-            <td><h:form><h:commandLink action="#{calendar.prev()}" value="<<"/></h:form></td>
-            
-            <a href="http://www.html.it" target="_blank"><img src="logo.gif"/></a>
+            <td><h:form><a><h:commandLink action="#{calendar.prev()}" value="&lt;&lt;"/></a></h:form></td>
             <td id='monthcont' colspan='6'><a id='month'>#{calendar.monthStr} #{calendar.year}</a></td>
-            <td><h:form><h:commandLink action="#{calendar.next()}" value=">>"/></h:form></td>
+            <td><h:form><a><h:commandLink action="#{calendar.next()}" value="&gt;&gt;"/></a></h:form></td>
         </tr>
         <tr>
           <td>

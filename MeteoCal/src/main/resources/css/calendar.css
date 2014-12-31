@@ -153,7 +153,7 @@ input.toggle:checked + label:after {
 #monthcont{
 	background-color: #8DB9CB;
 	color:white;
-	width:560px;
+	width:420px;
 	height:50px;
 	font-size:30px;
 	padding:0px;
