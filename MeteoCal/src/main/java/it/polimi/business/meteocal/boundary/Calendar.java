@@ -29,6 +29,7 @@ public class Calendar {
     private User user;
     private static Date date;
     
+    
     public Date getDate() {
         if(date == null)
             date=new Date();
@@ -56,9 +57,12 @@ public class Calendar {
         return new SimpleDateFormat("m").format(this.getDate());
     }
     public void next(){
-        date.setMonth(this.getDate().getMonth()+1);
+        
+            date.setDate(1);
+            date.setMonth(this.getDate().getMonth()+1);
     }
     public void prev(){
+        date.setDate(1);
         date.setMonth(this.getDate().getMonth()-1);
     }
     

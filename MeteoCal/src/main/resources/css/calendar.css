@@ -94,13 +94,13 @@ input.toggle:checked + label:after {
 .calendar td{
 	border:1px solid black;
 	margin:0;
-	height:90px;
-	width:70px;
+	height:80px;
+	width:80px;
 }
 
 .mask {
-	width:70px;
-	height:90px;
+	width:80px;
+	height:80px;
 	box-sizing:border-box;
 }
 
@@ -150,6 +150,18 @@ input.toggle:checked + label:after {
 	opacity:1;
 }
 
+#daycont{
+	background-color: #8DB9CB;
+	color:white;
+	width:80px;
+	height:30px;
+	font-size:20px;
+	padding:0px;
+        line-height:30px;
+        text-align:center;
+        font-family: 'Dosis', sans-serif;
+}
+
 #monthcont{
 	background-color: #8DB9CB;
 	color:white;
@@ -167,22 +179,21 @@ input.toggle:checked + label:after {
 	background-repeat: no-repeat;
         border-right:0px;
         height:50px;
-        width:73px;
+        width:80px;
         background-color: #8DB9CB;
         display:block;
         float:left;
 }
 
 #month{
-	width:200px;
-        margin-left:117px;
-        margin-right:117px;
+	width:420px;
+        margin-left:auto;
+        margin-right:auto;
 	display:block;
 	text-shadow:none;
 	font-family: 'Dosis', sans-serif;
         float:left;
 }
-
 
 #next{
         background-image: url("#{resource['css:icons/next.png']}");
@@ -191,12 +202,11 @@ input.toggle:checked + label:after {
 	background-repeat: no-repeat;
         border-left:0px;  
         height:50px;
-        width:73px;
+        width:80px;
         background-color: #8DB9CB;
         display:block;
         float:left;
 }
-
 
 #monthcont br{
         clear:left;
