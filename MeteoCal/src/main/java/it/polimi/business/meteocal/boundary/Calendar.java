@@ -29,11 +29,13 @@ public class Calendar {
     
     private User user;
     private static Date date;
-    
+    private boolean set =false;
     
     public Date getDate() {
-        if(date == null)
+        if(date == null){
             date=new Date();
+            date.setDate(1);
+        }
         return date;
     }   
     public String getDayNum(){
@@ -58,15 +60,29 @@ public class Calendar {
         return new SimpleDateFormat("m",Locale.US).format(this.getDate());
     }
     public void next(){
-        
             date.setDate(1);
             date.setMonth(this.getDate().getMonth()+1);
+            set = false;
     }
     public void prev(){
         date.setDate(1);
         date.setMonth(this.getDate().getMonth()-1);
+        set = false;
     }
-    
+     public String prova(int pos){
+         String result="";
+         if(!set)
+                if(date.getDay()==pos%7){
+                     result=this.getDayNum();
+                     Date tmp = (Date)date.clone();
+                     tmp.setDate(tmp.getDate()+1);
+                     if(date.getMonth()==tmp.getMonth())
+                         date.setDate(date.getDate()+1); 
+                     else
+                          set=true;
+                }                
+         return result;
+     }
     
     public void setUser(User user){
         this.user=user;
