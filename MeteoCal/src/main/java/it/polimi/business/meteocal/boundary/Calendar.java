@@ -81,16 +81,16 @@ public class Calendar {
                      tmp.setDate(tmp.getDate()+1);
                      if(date.getMonth()==tmp.getMonth())
                          date.setDate(date.getDate()+1); 
-                     else
-                          set=true;
+                     else{
+                         date.setDate(1);
+                         set=true;
+                     }
                 }                
          return result;
-     }
-    
+     }   
     public void setUser(User user){
         this.user=user;
-    }
-    
+    }    
     public User getUser(){
     
         if(this.user==null){
