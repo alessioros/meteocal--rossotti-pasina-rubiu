@@ -21,14 +21,14 @@
         <div class='resetPassword'>Reset your password:</div>
         <h:form>
           <div class='form'>
-            <h:outputLabel a:id='fieldName' for="email">Password:</h:outputLabel>
-            <h:inputText class='feedback-input forgot-input' required="true" value="#{loginBean.password}" id='email' requiredMessage="Enter a Password"/>
-            <br/><div class="error"><h:message for="email" /></div>
-            <h:outputLabel a:id='fieldName' for="email">Password:</h:outputLabel>
-            <h:inputText class='feedback-input forgot-input' required="true" value="#{loginBean.confpassword}" id='email' requiredMessage="Confirm your Password"/>
-            <br/><div class="error"><h:message for="email" /></div>
+            <h:outputLabel a:id='fieldName' for="pass">Password:</h:outputLabel>
+            <h:inputText class='feedback-input forgot-input' required="true" value="#{loginBean.password}" id='pass' requiredMessage="Enter a Password"/>
+            <br/><div class="error"><h:message for="pass" /></div>
+            <h:outputLabel a:id='fieldName' for="confpass">Confirm password:</h:outputLabel>
+            <h:inputText class='feedback-input forgot-input' required="true" value="#{loginBean.confpassword}" id='confpass' requiredMessage="Confirm your Password"/>
+            <br/><div class="error"><h:message for="confpass" /></div>
             <h:outputText class='message' value="#{loginBean.message}"></h:outputText>
-            <h:commandButton type='submit' value='RESET' a:id='button-reset' action="#{loginBean.resetPassword()}"/>
+            <h:commandButton type='submit' value='RESET' a:id='button-reset' action="#{loginBean.passwordReset()}"/>
           </div>
         </h:form>
     </h:body>

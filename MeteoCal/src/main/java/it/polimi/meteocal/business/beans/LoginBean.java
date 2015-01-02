@@ -76,6 +76,14 @@ public class LoginBean {
     public void setPassword(String password) {
         this.password = password;
     }
+    
+    public String getConfpassword() {
+        return this.confpassword;
+    }
+
+    public void setConfpassword(String confpassword) {
+        this.confpassword = confpassword;
+    }
 
     public String login() {
         
