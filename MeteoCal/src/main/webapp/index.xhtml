@@ -33,7 +33,11 @@
           </div>
           <div id='password'>
             <h:inputSecret class='feedback-input' a:placeholder='Password' required="true" value="#{loginBean.password}" id='password' requiredMessage="Password is required"/>
-            <br/><div class="error"><h:message for="password" /></div>
+            <br/>
+            <div class="error">
+                <h:message for="password" />
+                <h:outputText value="#{loginBean.message}"></h:outputText>
+            </div>
           </div>
           <p class='forgot'><h:link outcome="forgot" value="Forgot your password?"/></p>
           <div class='submit'>
