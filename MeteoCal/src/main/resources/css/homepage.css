@@ -78,9 +78,9 @@ html{
         font-weight:200;
 	font-size: 18px;
 	border-radius: 0;
-	line-height: 20px;
+	line-height: 22px;
 	background-color: #fbfbfb;
-	padding: 8px 8px 8px 40px;
+	padding: 5px 5px 5px 35px;
 	margin-top: 15px;
 	width:100%;
 	box-sizing: border-box;
@@ -93,6 +93,19 @@ forgot-input{
 
 .feedback-input:focus{
 	color: #3498db;
+}
+
+::-webkit-input-placeholder { 
+        font-size:16px; 
+}
+::-moz-placeholder { 
+        font-size:16px;
+}
+:-ms-input-placeholder { 
+        font-size:16px; 
+}
+input:-moz-placeholder { 
+        font-size:16px; 
 }
 
 .error{
@@ -108,14 +121,14 @@ forgot-input{
 #username .feedback-input{
 	background-image: url("#{resource['css:icons/user.png']}");
 	background-size: 20px 20px;
-	background-position: 10px 8px;
+	background-position: 5px 5px;
 	background-repeat: no-repeat;
 }
 
 #password .feedback-input{
 	background-image: url("#{resource['css:icons/password.png']}");
 	background-size: 20px 20px;
-	background-position: 10px 10px;
+	background-position: 5px 5px;
 	background-repeat: no-repeat;
 }
 

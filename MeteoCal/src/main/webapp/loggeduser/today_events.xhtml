@@ -12,14 +12,60 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
     </h:head>
     <h:body>
-     <div id='menuBar'>
-      <ul>
-        <li><h:link outcome="calendar" value="Home"/></li>
-        <li><h:link outcome="profile" value="Profile"/></li>
-        <li><h:link outcome="notifications" value="Notifications"/></li>
-        <li><h:link outcome="about_logged" value="About"/></li>
-        <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
-      </ul>
-    </div>
+        <div id='menuBar'>
+         <ul>
+           <li><h:link outcome="calendar" value="Home"/></li>
+           <li><h:link outcome="profile" value="Profile"/></li>
+           <li><h:link outcome="notifications" value="Notifications"/></li>
+           <li><h:link outcome="about_logged" value="About"/></li>
+           <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
+         </ul>
+        </div>
+
+        <div class="title">
+           Todays Events:
+        </div>
+        <div class="events">
+            <div class="evSingle">
+                <div class="evImage"></div>
+                <div class="evDesc">
+                    <h:link class="evTitle" outcome="eventDetails" value="Ajax Party:"/>
+                    lorem ipsum, quia dolor sit, amet, consectetur, adipisci v'elit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                </div>
+                <div class="evInfo">
+                    <a id="time">24:00pm - 5.00am</a><br/>
+                    <a id="loc">Amsterdam Arena, Amsterdam</a>
+                </div>
+            </div>
+            <hr/>
+            <div class="evSingle">
+                <div class="evImage"></div>
+                <div class="evDesc">
+                    <h:link class="evTitle" outcome="eventDetails" value="Ajax Party:"/>
+                    lorem ipsum, quia dolor sit, amet, consectetur, adipisci v'elit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                </div>
+                <div class="evInfo">
+                    <a id="time">24:00pm - 5.00am</a><br/>
+                    <a id="loc">Amsterdam Arena, Amsterdam</a>
+                </div>
+            </div>
+            <hr/>
+            <div class="evSingle">
+                <div class="evImage"></div>
+                <div class="evDesc">
+                    <h:link class="evTitle" outcome="eventDetails" value="Ajax Party:"/>
+                    lorem ipsum, quia dolor sit, amet, consectetur, adipisci v'elit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+                    Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
+                </div>
+                <div class="evInfo">
+                    <a id="time">24:00pm - 5.00am</a><br/>
+                    <a id="loc">Amsterdam Arena, Amsterdam</a>
+                </div>
+            </div>
+            <hr/>
+        </div>
+        
     </h:body>
 </html>
