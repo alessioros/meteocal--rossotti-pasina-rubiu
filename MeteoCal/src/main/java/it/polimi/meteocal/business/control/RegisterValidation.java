@@ -5,9 +5,10 @@
  */
 package it.polimi.meteocal.business.control;
 
-import it.polimi.meteocal.business.entity.User;
 import it.polimi.meteocal.business.beans.SendEmailBean;
+import it.polimi.meteocal.business.entity.User;
 import java.security.Principal;
+import java.util.List;
 import java.util.UUID;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
@@ -16,6 +17,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+
+
 
 /**
  *
@@ -62,7 +66,10 @@ public class RegisterValidation {
     }
     
      public User getLoggedUser() {
-        return em.find(User.class, principal.getName());
+         Query query = em.createQuery("SELECT u FROM User u WHERE u.username=:USERNAME");
+        query.setParameter("USERNAME", principal.getName());
+        List<User> user = query.getResultList();
+        return user.get(0);
     }
     
 }
