@@ -38,6 +38,9 @@ public class Calendar {
         }
         return date;
     }   
+    public void today(){
+        date=new Date();
+    }
     public String getDayNum(){
         return new SimpleDateFormat("d",Locale.US).format(this.getDate());
     } 
@@ -69,7 +72,7 @@ public class Calendar {
         date.setMonth(this.getDate().getMonth()-1);
         set = false;
     }
-     public String prova(int pos){
+    public String configure(int pos){
          String result="";
          if(!set)
                 if(date.getDay()==pos%7){
