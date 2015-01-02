@@ -7,7 +7,6 @@ package it.polimi.meteocal.business.beans;
 
 import it.polimi.meteocal.business.control.CheckFields;
 import it.polimi.meteocal.business.control.PasswordEncrypter;
-import static it.polimi.meteocal.business.entity.Usernotification_.user;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;

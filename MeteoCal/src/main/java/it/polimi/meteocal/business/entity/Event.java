@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -40,6 +41,7 @@ public class Event implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
+    @GeneratedValue
     @Column(name = "idEvent")
     private Integer idEvent;
     @Size(max = 45)
