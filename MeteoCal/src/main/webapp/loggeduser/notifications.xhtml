@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
 
     <h:head>
         <title>Notifications</title>
@@ -12,6 +13,14 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
     </h:head>
     <h:body>
+        <h:dataTable value="#{manageNotification.notifications}" var="notification">
+            
+            <h:column>
+                <f:facet name="header">Notifications</f:facet>
+                #{notification.description}
+            </h:column>
+          
+        </h:dataTable>
         <div id='menuBar'>
          <ul>
            <li><h:link outcome="calendar" value="Home"/></li>
