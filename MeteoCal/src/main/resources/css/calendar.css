@@ -111,19 +111,58 @@ input.toggle:checked + label:after {
 	opacity:0.7;
 
 }
-.mask:hover #dayNumb{
+
+.mask:hover #dayNumbHoly{
 	opacity:0;
 }
-#dayNumb{
+
+#dayNumbHoly{
 	font-size:20px;
-	color:#f62b46;
+	color :#ff0000;
+        //color:#f62b46;
 	text-shadow:1px 1px 1px #FFF;
 	font-family: 'Roboto Condensed', sans-serif;
 	padding-top:10px;
 	padding-left:10px;
 	display:block;
 }
+.mask:hover #dayNumbHoly{
+	opacity:0;
+}
 
+#dayNumbOldHoly{
+	font-size:20px;
+	color:#ff8370;
+	text-shadow:1px 1px 1px #FFF;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-top:10px;
+	padding-left:10px;
+	display:block;
+}
+.mask:hover #dayNumbWeek{
+	opacity:0;
+}
+#dayNumbWeek{
+	font-size:20px;
+	color:#000000;
+	text-shadow:1px 1px 1px #FFF;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-top:10px;
+	padding-left:10px;
+	display:block;
+}
+.mask:hover #dayNumbOld{
+	opacity:0;
+}
+#dayNumbOld{
+	font-size:20px;
+	color:#b6b4b4;
+	text-shadow:1px 1px 1px #FFF;
+	font-family: 'Roboto Condensed', sans-serif;
+	padding-top:10px;
+	padding-left:10px;
+	display:block;
+}
 .empty,.locked,.event{
 	margin-left:auto;
 	margin-right:auto;
