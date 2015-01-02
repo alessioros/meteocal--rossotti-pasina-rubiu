@@ -8,13 +8,10 @@ package it.polimi.meteocal.business.control;
 import it.polimi.meteocal.business.entity.Notification;
 import it.polimi.meteocal.business.entity.User;
 import it.polimi.meteocal.business.entity.Usernotification;
-import java.security.Principal;
 import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,8 +29,8 @@ public class ManageNotification {
     private EntityManager em;
 
     @EJB
-    private RegisterValidation rv;   
-
+    private RegisterValidation rv;
+       
     private User user;
 
     public User getUser() {
