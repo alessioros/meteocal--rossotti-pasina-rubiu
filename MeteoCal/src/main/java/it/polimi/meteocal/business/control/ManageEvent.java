@@ -16,7 +16,7 @@ public class ManageEvent {
     
     @Inject
     Principal principal;
-
+    
     public void createEvent(Event event,Location loc) {
         em.persist(loc);
         em.persist(event);

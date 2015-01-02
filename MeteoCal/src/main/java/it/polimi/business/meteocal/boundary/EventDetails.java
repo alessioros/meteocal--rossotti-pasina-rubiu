@@ -16,6 +16,15 @@ public class EventDetails {
 
     private Event event;
     private Location loc;
+    private String message;
+    
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
     
     public Location getLoc() {
         if (loc == null) {
@@ -41,6 +50,8 @@ public class EventDetails {
 
     public String create() {
         me.createEvent(event,loc);
+        
+        message="Event Created!";
         return "/calendar.xhtml?faces-redirect=true";
     }
     

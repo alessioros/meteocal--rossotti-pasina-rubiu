@@ -33,8 +33,8 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         </div>
         <div class='field'>
             <h:outputLabel a:id='desc' for="description">Description:</h:outputLabel>
-            <h:inputTextarea cols="30" rows="10" a:id='description' value="#{eventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
-            <br/><div class="error"><h:message a:class="message" for="description" /></div>
+            <h:inputTextarea a:id='description' value="#{eventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
+            <br/><div class="error"><h:message for="description" /></div>
         </div>
         <div class='field'>
             <label id='fieldName'>Public:</label>
@@ -49,28 +49,31 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="lat">Latitude:</h:outputLabel>
             <h:inputText id='lat' class='feedback-input' value="#{eventDetails.loc.latitude}" required="true" requiredMessage="Latitude is required"/>
-            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+            <br/><div class="error"><h:message for="lat"/></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="lon">Longitude:</h:outputLabel>
             <h:inputText id='lon' class='feedback-input' value="#{eventDetails.loc.longitude}" required="true" requiredMessage="Longitude is required"/>
-            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+            <br/><div class="error"><h:message for="lon"/></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="state">State:</h:outputLabel>
             <h:inputText id='state' class='feedback-input' value="#{eventDetails.loc.state}" required="true" requiredMessage="State is required"/>
-            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+            <br/><div class="error"><h:message for="state"/></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="city">City:</h:outputLabel>
             <h:inputText id='city' class='feedback-input' value="#{eventDetails.loc.city}" required="true" requiredMessage="City is required"/>
-            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+            <br/><div class="error"><h:message for="city"/></div>
         </div>
         <div class='field'>
             <h:outputLabel a:id='fieldName' for="addr">Address:</h:outputLabel>
             <h:inputText id='addr' class='feedback-input' value="#{eventDetails.loc.address}" required="true" requiredMessage="Address is required"/>
-            <br/><div class="error"><h:message a:id="message" for="loc"/></div>
+            <br/><div class="error"><h:message for="addr"/></div>
         </div>
+          <div class="resmessage">
+              <h:outputText value="#{eventDetails.message}"></h:outputText>
+          </div>
         <div class='submit'>
             <h:commandButton type='submit' value='CREATE' a:id='button-create' action="#{eventDetails.create()}"/>
         </div>
