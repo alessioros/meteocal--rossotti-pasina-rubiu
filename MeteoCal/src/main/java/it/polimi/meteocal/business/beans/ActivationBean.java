@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
@@ -72,6 +73,7 @@ public class ActivationBean {
             
         } catch(Exception e){
             e.printStackTrace();
+            try{utx.rollback();}catch(IllegalStateException | SecurityException | SystemException exception){}
         }
     }
 }

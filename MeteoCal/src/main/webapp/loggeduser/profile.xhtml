@@ -27,8 +27,6 @@
         </f:metadata>
        <div class="personal_info">
            <a class='title'>Personal Info:</a>
-           <h:dataTable value="#{personalProfile.user}" var="user">
-           </h:dataTable>
            <ul>
                <li>
                     <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
@@ -58,7 +56,11 @@
             <a class='addrTitle'>Address List:</a>
             <ul>
                 <li>
-                    <h:inputTextarea id="addresslist" value=" - #{request.userPrincipal.name}"></h:inputTextarea>
+                    <h:inputTextarea id="addresslist" value=" - #{request.userPrincipal.name}">
+                    <h:dataTable value="#{personalProfile.contacts}" var="contact">
+                        #{contact.username}
+                    </h:dataTable>
+                    </h:inputTextarea>
                 </li>
                 <li>
                     <h:form>

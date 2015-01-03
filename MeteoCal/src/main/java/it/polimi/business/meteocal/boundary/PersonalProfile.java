@@ -5,13 +5,19 @@
  */
 package it.polimi.business.meteocal.boundary;
 
+import it.polimi.meteocal.business.control.AddUser;
 import it.polimi.meteocal.business.control.ManagePersonalData;
 import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.User;
+import java.util.Collection;
+import java.util.Iterator;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -20,17 +26,32 @@ import javax.inject.Named;
 @Named
 @RequestScoped
 public class PersonalProfile {
+    
+    @PersistenceContext
+    EntityManager em;
 
     @EJB
     private ManagePersonalData mpd;
 
     @Inject
     RegisterValidation rv;
+    
+    @Inject
+    AddUser ad;
 
     private User user;
     private String contact;
     private String message;
     private String confPassword;
+    private Collection<User> contacts;
+
+    public Collection<User> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Collection<User> contacts) {
+        this.contacts = contacts;
+    }
 
     public String getConfPassword() {
         return this.confPassword;
@@ -91,7 +112,27 @@ public class PersonalProfile {
     }
 
     public void submitAddUser() {
-
-        mpd.addUser(contact);
+        ad.addUser(contact);
     }
+    
+    /**
+     * In teoria dovrebbe aggiornare i contatti per visualizzare nella pagina ma
+     * non so bene come fare la query, quindi per ora non funziona
+     * @return 
+     */
+    public Collection<User> updateContacts() {
+
+        user = rv.getLoggedUser();
+
+        Query query = em.createQuery("SELECT c.idContact FROM join table Contact c WHERE c.idUser=:ID");
+        query.setParameter("ID", user.getIdUser());
+        Collection<User> tmplist = query.getResultList();
+        Iterator<User> tmpIter = tmplist.iterator();
+        while (tmpIter.hasNext()) {
+            contacts.add(tmpIter.next());
+        }
+
+        return contacts;
+    }
+    
 }
