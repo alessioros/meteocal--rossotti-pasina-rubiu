@@ -8,20 +8,11 @@ package it.polimi.business.meteocal.boundary;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-import it.polimi.meteocal.business.control.ManageCalendar;
-import it.polimi.meteocal.business.entity.User;
-import it.polimi.meteocal.business.entity.Event;
 import java.security.Principal;
 import java.util.Locale;
-import javax.ejb.EJB;
-import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -128,7 +119,7 @@ public class CalendarTable{
                 else
                     date.setDate(date.getDate()-((date.getDay()+6)%7));                  
             }
-            if(date.getDay()==pos%7){
+            if(pos%7==date.getDay()){
                 result=this.getDayNum();                    
                 if(pos<42)
                     date.setDate(date.getDate()+1); 
