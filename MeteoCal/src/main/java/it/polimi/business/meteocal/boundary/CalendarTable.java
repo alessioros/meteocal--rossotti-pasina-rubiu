@@ -31,17 +31,13 @@ import javax.servlet.http.HttpSession;
  */
 @Named
 @RequestScoped
-public class Calendar{
-    
-    @EJB
-    private ManageCalendar mc;
-    
-    private User user;
+public class CalendarTable{
+    private static Date today=new Date();
     private Date date;
     private boolean set =false;
     private int actual=13;
     
-    public Calendar() {
+    public CalendarTable() {
         Principal principal;
         HttpSession session;
         FacesContext context = FacesContext.getCurrentInstance();
@@ -56,14 +52,13 @@ public class Calendar{
             date.setDate(1);
             session.setAttribute("cal", date);
         }
-        //this.today();
         
     }
     private Date getSessionDate(){
-        Principal principal;
+        //Principal principal;
         HttpSession session;
         FacesContext context = FacesContext.getCurrentInstance();
-        principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
+        //principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
         HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
         session = request.getSession();        
         date=(Date)session.getAttribute("cal");
@@ -151,22 +146,12 @@ public class Calendar{
         else
             if(pos%7==0&&date.getMonth()!=actual)
                 return "dayNumbOldHoly";
-        else
-            if(date.getMonth()==actual&&pos%7!=0)        
-                return "dayNumbWeek";
-        else
-            //if(date.getMonth()!=actual&&pos%7!=0)  
-                return "dayNumbOld";
-     }   
-    public void setUser(User user){
-        this.user=user;
-    }    
-    public User getUser(){
-    
-        if(this.user==null){
-            this.user=new User();
-        }
-        return user;
-    }
+            else
+                if(date.getMonth()==actual&&pos%7!=0)        
+                    return "dayNumbWeek";
+                else
+                    return "dayNumbOld";
+         }   
+   
     
 }

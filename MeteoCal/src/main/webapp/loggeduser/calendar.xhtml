@@ -30,9 +30,9 @@
       <table class='calendar'>
         <tr>
             <td id='monthcont' colspan='7'>
-                <h:form><h:commandLink action="#{calendar.prev()}" a:id="prev"/></h:form>
-                <center><a id='month'>#{calendar.monthStr} #{calendar.year}</a></center>
-                <h:form><h:commandLink action="#{calendar.next()}" a:id="next"/></h:form>
+                <h:form><h:commandLink action="#{calendarTable.prev()}" a:id="prev"/></h:form>
+                <center><a id='month'>#{calendarTable.monthStr} #{calendarTable.year}</a></center>
+                <h:form><h:commandLink action="#{calendarTable.next()}" a:id="next"/></h:form>
                 <br/>
             </td>
         </tr>
@@ -62,43 +62,43 @@
         <tr>
           <td>
             <div class="mask">
-                <a id="#{calendar.displayColDay(1)}">#{calendar.displayNumDay(1)}</a>
+                <a id="#{calendarTable.displayColDay(1)}">#{calendarTable.displayNumDay(1)}</a>
               <h:link outcome="createEvent"><div class="empty"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(2)}">#{calendar.displayNumDay(2)}</a>
+              <a id="#{calendarTable.displayColDay(2)}">#{calendarTable.displayNumDay(2)}</a>
               <h:link outcome=""><div class="locked"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(3)}">#{calendar.displayNumDay(3)}</a>
+              <a id="#{calendarTable.displayColDay(3)}">#{calendarTable.displayNumDay(3)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(4)}">#{calendar.displayNumDay(4)}</a>
+              <a id="#{calendarTable.displayColDay(4)}">#{calendarTable.displayNumDay(4)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(5)}">#{calendar.displayNumDay(5)}</a>
+              <a id="#{calendarTable.displayColDay(5)}">#{calendarTable.displayNumDay(5)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(6)}">#{calendar.displayNumDay(6)}</a>
+              <a id="#{calendarTable.displayColDay(6)}">#{calendarTable.displayNumDay(6)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(7)}">#{calendar.displayNumDay(7)}</a>
+              <a id="#{calendarTable.displayColDay(7)}">#{calendarTable.displayNumDay(7)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>
@@ -106,188 +106,188 @@
         <tr>                
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(8)}">#{calendar.displayNumDay(8)}</a>
+              <a id="#{calendarTable.displayColDay(8)}">#{calendarTable.displayNumDay(8)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>        
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(9)}">#{calendar.displayNumDay(9)}</a>
+              <a id="#{calendarTable.displayColDay(9)}">#{calendarTable.displayNumDay(9)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(10)}">#{calendar.displayNumDay(10)}</a>
+              <a id="#{calendarTable.displayColDay(10)}">#{calendarTable.displayNumDay(10)}</a>
               <h:link outcome="today_events"><div class="event"></div></h:link>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(11)}">#{calendar.displayNumDay(11)}</a>
+              <a id="#{calendarTable.displayColDay(11)}">#{calendarTable.displayNumDay(11)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(12)}">#{calendar.displayNumDay(12)}</a>
+              <a id="#{calendarTable.displayColDay(12)}">#{calendarTable.displayNumDay(12)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(13)}">#{calendar.displayNumDay(13)}</a>
+              <a id="#{calendarTable.displayColDay(13)}">#{calendarTable.displayNumDay(13)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(14)}">#{calendar.displayNumDay(14)}</a>
+              <a id="#{calendarTable.displayColDay(14)}">#{calendarTable.displayNumDay(14)}</a>
             </div>
           </td>
         </tr>
         <tr>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(15)}">#{calendar.displayNumDay(15)}</a>
+              <a id="#{calendarTable.displayColDay(15)}">#{calendarTable.displayNumDay(15)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(16)}">#{calendar.displayNumDay(16)}</a>
+              <a id="#{calendarTable.displayColDay(16)}">#{calendarTable.displayNumDay(16)}</a>
             </div>
           </td>        
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(17)}">#{calendar.displayNumDay(17)}</a>
+              <a id="#{calendarTable.displayColDay(17)}">#{calendarTable.displayNumDay(17)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(18)}">#{calendar.displayNumDay(18)}</a>
+              <a id="#{calendarTable.displayColDay(18)}">#{calendarTable.displayNumDay(18)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(19)}">#{calendar.displayNumDay(19)}</a>
+              <a id="#{calendarTable.displayColDay(19)}">#{calendarTable.displayNumDay(19)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(20)}">#{calendar.displayNumDay(20)}</a>
+              <a id="#{calendarTable.displayColDay(20)}">#{calendarTable.displayNumDay(20)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(21)}">#{calendar.displayNumDay(21)}</a>
+              <a id="#{calendarTable.displayColDay(21)}">#{calendarTable.displayNumDay(21)}</a>
             </div>
           </td>
         </tr>
         <tr>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(22)}">#{calendar.displayNumDay(22)}</a>
+              <a id="#{calendarTable.displayColDay(22)}">#{calendarTable.displayNumDay(22)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(23)}">#{calendar.displayNumDay(23)}</a>
+              <a id="#{calendarTable.displayColDay(23)}">#{calendarTable.displayNumDay(23)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(24)}">#{calendar.displayNumDay(24)}</a>
+              <a id="#{calendarTable.displayColDay(24)}">#{calendarTable.displayNumDay(24)}</a>
             </div>
           </td>        
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(25)}">#{calendar.displayNumDay(25)}</a>
+              <a id="#{calendarTable.displayColDay(25)}">#{calendarTable.displayNumDay(25)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(26)}">#{calendar.displayNumDay(26)}</a>
+              <a id="#{calendarTable.displayColDay(26)}">#{calendarTable.displayNumDay(26)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(27)}">#{calendar.displayNumDay(27)}</a>
+              <a id="#{calendarTable.displayColDay(27)}">#{calendarTable.displayNumDay(27)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(28)}">#{calendar.displayNumDay(28)}</a>
+              <a id="#{calendarTable.displayColDay(28)}">#{calendarTable.displayNumDay(28)}</a>
             </div>
           </td>
         </tr>
         <tr>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(29)}">#{calendar.displayNumDay(29)}</a>
+              <a id="#{calendarTable.displayColDay(29)}">#{calendarTable.displayNumDay(29)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(30)}">#{calendar.displayNumDay(30)}</a>
+              <a id="#{calendarTable.displayColDay(30)}">#{calendarTable.displayNumDay(30)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(31)}">#{calendar.displayNumDay(31)}</a>
+              <a id="#{calendarTable.displayColDay(31)}">#{calendarTable.displayNumDay(31)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(32)}">#{calendar.displayNumDay(32)}</a>
+              <a id="#{calendarTable.displayColDay(32)}">#{calendarTable.displayNumDay(32)}</a>
             </div>  
           </td>
           <td>  
             <div class="mask">
-              <a id="#{calendar.displayColDay(33)}">#{calendar.displayNumDay(33)}</a>
+              <a id="#{calendarTable.displayColDay(33)}">#{calendarTable.displayNumDay(33)}</a>
             </div>
           </td>
           <td>  
             <div class="mask">
-              <a id="#{calendar.displayColDay(34)}">#{calendar.displayNumDay(34)}</a>
+              <a id="#{calendarTable.displayColDay(34)}">#{calendarTable.displayNumDay(34)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(35)}">#{calendar.displayNumDay(35)}</a>
+              <a id="#{calendarTable.displayColDay(35)}">#{calendarTable.displayNumDay(35)}</a>
             </div>  
           </td>
         </tr>        
         <tr>
           <td>  
             <div class="mask">
-              <a id="#{calendar.displayColDay(36)}">#{calendar.displayNumDay(36)}</a>
+              <a id="#{calendarTable.displayColDay(36)}">#{calendarTable.displayNumDay(36)}</a>
             </div>    
           </td>
           <td>  
             <div class="mask">
-              <a id="#{calendar.displayColDay(37)}">#{calendar.displayNumDay(37)}</a>
+              <a id="#{calendarTable.displayColDay(37)}">#{calendarTable.displayNumDay(37)}</a>
             </div>          
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(38)}">#{calendar.displayNumDay(38)}</a>
+              <a id="#{calendarTable.displayColDay(38)}">#{calendarTable.displayNumDay(38)}</a>
             </div>
           </td>
           <td>  
             <div class="mask">
-              <a id="#{calendar.displayColDay(39)}">#{calendar.displayNumDay(39)}</a>
+              <a id="#{calendarTable.displayColDay(39)}">#{calendarTable.displayNumDay(39)}</a>
             </div>
           </td>
           <td>
             <div class="mask">
-              <a id="#{calendar.displayColDay(40)}">#{calendar.displayNumDay(40)}</a>
+              <a id="#{calendarTable.displayColDay(40)}">#{calendarTable.displayNumDay(40)}</a>
             </div>  
           </td>
           <td> 
             <div class="mask">
-              <a id="#{calendar.displayColDay(41)}">#{calendar.displayNumDay(41)}</a>
+              <a id="#{calendarTable.displayColDay(41)}">#{calendarTable.displayNumDay(41)}</a>
             </div> 
           </td>
           <td>  
             <div class="mask">
-              <a id="#{calendar.displayColDay(42)}">#{calendar.displayNumDay(42)}</a>
+              <a id="#{calendarTable.displayColDay(42)}">#{calendarTable.displayNumDay(42)}</a>
             </div>
           </td>
         </tr>
