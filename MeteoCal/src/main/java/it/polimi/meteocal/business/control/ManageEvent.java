@@ -2,7 +2,6 @@ package it.polimi.meteocal.business.control;
 
 import it.polimi.meteocal.business.entity.Event;
 import it.polimi.meteocal.business.entity.Location;
-import java.security.Principal;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -15,11 +14,13 @@ public class ManageEvent {
     EntityManager em;
     
     @Inject
-    Principal principal;
+    RegisterValidation rv;
+    
   
     public void createEvent(Event event,Location loc) {
         em.persist(loc);
         event.setIdLocation(loc);
+        event.setIdOrganizer(rv.getLoggedUser());
         em.persist(event);
     }
     
