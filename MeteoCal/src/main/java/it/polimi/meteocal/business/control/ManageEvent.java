@@ -16,9 +16,10 @@ public class ManageEvent {
     
     @Inject
     Principal principal;
-    
+  
     public void createEvent(Event event,Location loc) {
         em.persist(loc);
+        event.setIdLocation(loc);
         em.persist(event);
     }
     
