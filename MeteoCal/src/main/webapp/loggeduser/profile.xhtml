@@ -27,6 +27,8 @@
         </f:metadata>
        <div class="personal_info">
            <a class='title'>Personal Info:</a>
+           <h:dataTable value="#{personalProfile.user}" var="user">
+           </h:dataTable>
            <ul>
                <li>
                     <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
