@@ -56,7 +56,7 @@ public class AddUser {
             if (!checkexist.isEmpty()) {
                 utx.begin();
                 user = rv.getLoggedUser();
-                user.setUserCollection(checkexist);
+                user.getUserCollection().add(checkexist.get(0));
                 utx.commit();
             }
             

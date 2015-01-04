@@ -118,7 +118,6 @@ public class PersonalProfile {
 
         user = rv.getLoggedUser();
         contacts=(List<User>) user.getUserCollection();
-        System.out.println(contacts.get(0).getUsername());
         return contacts;   
     }
     
