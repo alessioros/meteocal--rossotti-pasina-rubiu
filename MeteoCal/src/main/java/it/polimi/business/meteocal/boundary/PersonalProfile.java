@@ -9,8 +9,8 @@ import it.polimi.meteocal.business.control.AddUser;
 import it.polimi.meteocal.business.control.ManagePersonalData;
 import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.User;
-import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -43,13 +43,13 @@ public class PersonalProfile {
     private String contact;
     private String message;
     private String confPassword;
-    private Collection<User> contacts;
+    private List<User> contacts;
 
-    public Collection<User> getContacts() {
+    public List<User> getContacts() {
         return contacts;
     }
 
-    public void setContacts(Collection<User> contacts) {
+    public void setContacts(List<User> contacts) {
         this.contacts = contacts;
     }
 
@@ -111,23 +111,15 @@ public class PersonalProfile {
     }
     
     /**
-     * In teoria dovrebbe aggiornare i contatti per visualizzare nella pagina ma
-     * non so bene come fare la query, quindi per ora non funziona
+     * Prende la collection dei contatti, la casta a list e la mette in contacts
      * @return 
      */
-    public Collection<User> updateContacts() {
+    public List<User> updateContacts() {
 
         user = rv.getLoggedUser();
-
-        Query query = em.createQuery("SELECT c.idContact FROM join table Contact c WHERE c.idUser=:ID");
-        query.setParameter("ID", user.getIdUser());
-        Collection<User> tmplist = query.getResultList();
-        Iterator<User> tmpIter = tmplist.iterator();
-        while (tmpIter.hasNext()) {
-            contacts.add(tmpIter.next());
-        }
-
-        return contacts;
+        contacts=(List<User>) user.getUserCollection();
+        System.out.println(contacts.get(0).getUsername());
+        return contacts;   
     }
     
 }

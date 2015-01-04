@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
         <title>Profile</title>
@@ -14,21 +15,22 @@
     </h:head>
     <h:body>
         <div id='menuBar'>
-         <ul>
-           <li><h:link outcome="calendar" value="Home"/></li>
-           <li><h:link outcome="profile" value="Profile"/></li>
-           <li><h:link outcome="notifications" value="Notifications"/></li>
-           <li><h:link outcome="about_logged" value="About"/></li>
-           <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
-         </ul>
-       </div>
+            <ul>
+                <li><h:link outcome="calendar" value="Home"/></li>
+                <li><h:link outcome="profile" value="Profile"/></li>
+                <li><h:link outcome="notifications" value="Notifications"/></li>
+                <li><h:link outcome="about_logged" value="About"/></li>
+                <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
+            </ul>
+        </div>
         <f:metadata>
             <f:viewAction action="#{personalProfile.showPersonalData()}"/>
+            <f:viewAction action="#{personalProfile.updateContacts()}"/>
         </f:metadata>
-       <div class="personal_info">
-           <a class='title'>Personal Info:</a>
-           <ul>
-               <li>
+        <div class="personal_info">
+            <a class='title'>Personal Info:</a>
+            <ul>
+                <li>
                     <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
                     <h:outputText id="name" value="#{personalProfile.user.name}"></h:outputText>
                 </li>
@@ -36,7 +38,7 @@
                     <h:outputLabel a:id='fieldName' for="surname">Surname:</h:outputLabel>
                     <h:outputText id="surname" value="#{personalProfile.user.surname}"></h:outputText>
                 </li>
-               <li>
+                <li>
                     <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
                     <h:outputText id="username" value="#{personalProfile.user.username}"></h:outputText>
                 </li>
@@ -49,18 +51,20 @@
                         <h:button outcome='changeData' value='CHANGE DATA' a:id='button-change'/>
                     </h:form>
                 </li>
-           </ul>
-       </div>
-       
+            </ul>
+        </div>
+
         <div class="addrList">
             <a class='addrTitle'>Address List:</a>
             <ul>
                 <li>
-                    <h:inputTextarea id="addresslist" value=" - #{request.userPrincipal.name}">
-                    <h:dataTable value="#{personalProfile.contacts}" var="contact">
-                        #{contact.username}
-                    </h:dataTable>
-                    </h:inputTextarea>
+                        <ui:repeat value="#{personalProfile.contacts}" var="contact">
+                            <li>
+                                <h:link value="#{contact.username}" outcome="index">
+                                    <f:param name="username" value="#{contact.username}" />
+                                </h:link>
+                            </li>
+                        </ui:repeat>
                 </li>
                 <li>
                     <h:form>
