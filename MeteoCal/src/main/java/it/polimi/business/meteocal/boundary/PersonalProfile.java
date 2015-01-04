@@ -97,15 +97,10 @@ public class PersonalProfile {
     public String submitChangeData() {
 
         this.mpd = new ManagePersonalData();
-        boolean success = false;
 
-        success = mpd.changeData(user);
-
-        if (success) {
-            this.message = "Data succesfully updated!";
-        } else {
-            this.message = "Something wrong!";
-        }
+        mpd.changeData(user);
+        
+        this.message = "Data succesfully updated!";
 
         return "";
 

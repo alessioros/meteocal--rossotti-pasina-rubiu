@@ -85,13 +85,12 @@ public class ManagePersonalData {
         return this.user;
     }
 
-    public boolean changeData(User updated) {
+    public void changeData(User updated) {
 
         principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
         String username = principal.getName();
         updated.setUsername(username);
         String field = "";
-        boolean success = false;
 
         PreparedStatement ps = null;
         Connection con = null;
@@ -100,35 +99,52 @@ public class ManagePersonalData {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
-
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            
             field = updated.getName();
             if (!"".equals(field)) {
                 String sql = "update user set Name='" + field + "' where username='" + username + "'";
                 ps = con.prepareStatement(sql);
                 result = ps.executeUpdate();
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
             field = updated.getSurname();
             if (!"".equals(field)) {
                 String sql = "update user set Surname='" + field + "' where username='" + username + "'";
                 ps = con.prepareStatement(sql);
                 result = ps.executeUpdate();
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
             field = updated.getPassword();
             if (!"".equals(field)) {
                 String sql = "update user set Password='" + field + "' where username='" + username + "'";
                 ps = con.prepareStatement(sql);
                 result = ps.executeUpdate();
             }
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        try {
             field = updated.getUsername();
             if (!"".equals(field)) {
                 String sql = "update user set Username='" + field + "' where username='" + username + "'";
                 ps = con.prepareStatement(sql);
                 result = ps.executeUpdate();
             }
-            success = true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -139,7 +155,5 @@ public class ManagePersonalData {
                 e.printStackTrace();
             }
         }
-
-        return success;
     }
 }
