@@ -38,12 +38,12 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         </div>
         <div class="field">
             <h:outputLabel a:id='fieldName' for="starttime">Start Time:</h:outputLabel>
-            <h:inputText id='starttime' a:placeholder="dd/mm/yyyy : HH:mm" value="#{eventDetails.startDateStr}" required="true" class='feedback-input' requiredMessage="Start Time is required"/>
+            <h:inputText id='starttime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.startDateStr}" required="true" class='feedback-input' requiredMessage="Start Time is required"/>
             <br/><div class="error"><h:message for="starttime" /></div>
         </div>
         <div class="field">
             <h:outputLabel a:id='fieldName' for="endtime">End Time:</h:outputLabel>
-            <h:inputText id='endtime' a:placeholder="dd/mm/yyyy : HH:mm" value="#{eventDetails.endDateStr}" required="true" class='feedback-input' requiredMessage="End Time is required"/>
+            <h:inputText id='endtime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.endDateStr}" required="true" class='feedback-input' requiredMessage="End Time is required"/>
             <br/><div class="error"><h:message for="endtime" /></div>
         </div>
         <div class='field'>
