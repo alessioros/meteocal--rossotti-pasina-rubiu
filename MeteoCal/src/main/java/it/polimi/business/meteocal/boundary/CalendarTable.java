@@ -5,13 +5,16 @@
  */
 package it.polimi.business.meteocal.boundary;
 
+import it.polimi.meteocal.business.control.ManageCalendar;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Locale;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -25,10 +28,14 @@ import javax.servlet.http.HttpSession;
 public class CalendarTable{
     private static Date today=new Date();
     private Date date;
+    
     private boolean set =false;
     private int actual=13;
     
-    public CalendarTable() {
+    @Inject 
+    ManageCalendar mc;
+    
+    public CalendarTable() {       
         Principal principal;
         HttpSession session;
         FacesContext context = FacesContext.getCurrentInstance();
@@ -143,6 +150,12 @@ public class CalendarTable{
                 else
                     return "dayNumbOld";
          }   
-   
+    public String displayEventClass(){
+        if(mc.scheduleEvent(date))
+            return "event";
+        else
+            return "empty";
+    }
+    
     
 }
