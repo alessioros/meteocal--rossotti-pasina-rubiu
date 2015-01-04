@@ -5,35 +5,10 @@ xmlns:h="http://xmlns.jcp.org/jsf/html"
 xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
   <h:head>
     <title>Create Event</title>
-    <!---<h:outputStylesheet library="css" name="registration.css"  />-->
+    <h:outputStylesheet library="css" name="registration.css"  />
     <h:outputStylesheet library="css" name="application.css"  />
     <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
     <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
-    <!--- Date Time -->
-    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css" media="screen" href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css"/>
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"/> 
-    <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"/>
-    <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"/>
-    <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js"/>
-    <script type="text/javascript">
-        $(function() {
-          $('#datetimepicker2').datetimepicker({
-            language: 'en',
-            pick12HourFormat: true
-          });
-        });
-        $.fn.datetimepicker.defaults = {
-            maskInput: false,           // disables the text input mask
-            pickDate: true,            // disables the date picker
-            pickTime: true,            // disables de time picker
-            pick12HourFormat: false,   // enables the 12-hour format time picker
-            pickSeconds: true,         // disables seconds in the time picker
-            startDate: -Infinity,      // set a minimum date
-            endDate: Infinity          // set a maximum date
-        };
-    </script>
-    <!--- Date Time -->
   </h:head>
 
   <h:body>
@@ -60,6 +35,16 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
             <h:outputLabel a:id='desc' for="description">Description:</h:outputLabel>
             <h:inputTextarea a:id='description' value="#{eventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
             <br/><div class="error"><h:message for="description" /></div>
+        </div>
+        <div class="field">
+            <h:outputLabel a:id='fieldName' for="starttime">Start Time:</h:outputLabel>
+            <h:inputText id='starttime' a:placeholder="dd/mm/yyyy : HH:mm" value="#{eventDetails.startDateStr}" required="true" class='feedback-input' requiredMessage="Start Time is required"/>
+            <br/><div class="error"><h:message for="starttime" /></div>
+        </div>
+        <div class="field">
+            <h:outputLabel a:id='fieldName' for="endtime">End Time:</h:outputLabel>
+            <h:inputText id='endtime' a:placeholder="dd/mm/yyyy : HH:mm" value="#{eventDetails.endDateStr}" required="true" class='feedback-input' requiredMessage="End Time is required"/>
+            <br/><div class="error"><h:message for="endtime" /></div>
         </div>
         <div class='field'>
             <label id='fieldName'>Public:</label>
@@ -104,16 +89,5 @@ xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
         </div>
      </h:form>
     </div>
-        <div class="well">
-  <div id="datetimepicker2" class="input-append">
-    <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text"></input>
-    <span class="add-on">
-      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-      </i>
-    </span>
-  </div>
-  </div>
-      
-    
   </h:body>
 </html>
