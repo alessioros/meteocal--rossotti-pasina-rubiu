@@ -23,10 +23,10 @@ import javax.transaction.UserTransaction;
 @ManagedBean
 @RequestScoped
 public class AddUser {
-    
+
     @PersistenceContext
     EntityManager em;
-    
+
     @Resource
     UserTransaction utx;
 
@@ -40,34 +40,37 @@ public class AddUser {
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     private User user;
-    
+
     /**
-     * Aggiunge nella tabella contact un record con l'id dell'utente loggato e l'id
-     * dell'utente di cui si è passato l'username
-     * @param username 
+     * Aggiunge nella tabella contact un record con l'id dell'utente loggato e
+     * l'id dell'utente di cui si è passato l'username
+     *
+     * @param username
      */
     public void addUser(String username) {
         try {
+            user = rv.getLoggedUser();
+            if (user.getUsername().equals(username)) {
 
-            List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
-            
-            if (!checkexist.isEmpty()) {
-                utx.begin();
-                user = rv.getLoggedUser();
-                user.getUserCollection().add(checkexist.get(0));
-                utx.commit();
+                List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
+
+                if (!checkexist.isEmpty()) {
+                    utx.begin();
+
+                    user.getUserCollection().add(checkexist.get(0));
+                    utx.commit();
+                }
             }
-            
         } catch (Exception e) {
-            
+
             e.printStackTrace();
             try {
                 utx.rollback();
             } catch (IllegalStateException | SecurityException | SystemException exception) {
             }
-            
+
         }
     }
 

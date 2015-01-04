@@ -9,22 +9,20 @@ import it.polimi.meteocal.business.control.AddUser;
 import it.polimi.meteocal.business.control.ManagePersonalData;
 import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.User;
-import java.util.Iterator;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 
 /**
  *
  * @author alessiorossotti
  */
-@Named
-@RequestScoped
+@ManagedBean
+@ViewScoped
 public class PersonalProfile {
     
     @PersistenceContext
