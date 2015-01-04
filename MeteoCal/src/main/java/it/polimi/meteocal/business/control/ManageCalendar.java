@@ -61,14 +61,12 @@ public class ManageCalendar {
     public boolean scheduleEvent(Date date){
         try {
             Iterator<Event> cal;            
-            Date tmp = (Date)date.clone();
-            
-            //utx.begin();
-            user = rv.getLoggedUser();            
-            cal = user.getEventCollection().iterator();
-            //user.getEventCollection().
-            //utx.commit();
+            Date tmp = (Date)date.clone();       
             tmp.setDate(date.getDate()-1);
+            
+            user = rv.getLoggedUser();            
+            cal = user.getEventCollection().iterator();           
+            
             while(cal.hasNext())
             {
                 Event e= cal.next();
