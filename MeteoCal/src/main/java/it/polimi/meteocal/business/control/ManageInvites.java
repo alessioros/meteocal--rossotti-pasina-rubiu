@@ -28,8 +28,15 @@ public class ManageInvites {
     
     private Notification notificationInvite;
     private Invitation invitation;
-    private Usernotification userwithnotifications;
+    private Usernotification usernotifications;
     
+    /**
+     * Takes a list of users and a event and sets all the tables Invitation
+     * Notification and Usernotification in the right way to create a invitation
+     * list
+     * @param invited
+     * @param event 
+     */
     public void createInvites(List<User> invited, Event event){
         try{
             
@@ -42,9 +49,9 @@ public class ManageInvites {
             invitation.setAccepted(Boolean.FALSE);
             
             for(User invite: invited){
-                userwithnotifications.setNotification(notificationInvite);
-                userwithnotifications.setUser(invite);
-                userwithnotifications.setPending(Boolean.TRUE);
+                usernotifications.setNotification(notificationInvite);
+                usernotifications.setUser(invite);
+                usernotifications.setPending(Boolean.TRUE);
             }
             
             utx.commit();
