@@ -11,9 +11,9 @@ import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.User;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -21,8 +21,8 @@ import javax.persistence.PersistenceContext;
  *
  * @author alessiorossotti
  */
-@ManagedBean
-@ViewScoped
+@Named
+@RequestScoped
 public class PersonalProfile {
     
     @PersistenceContext
@@ -105,7 +105,10 @@ public class PersonalProfile {
     }
 
     public void submitAddUser() {
-        ad.addUser(contact);
+        user = rv.getLoggedUser();
+        if(!user.getUsername().equals(contact)){
+                    ad.addUser(contact);
+        }
     }
     
     /**

@@ -51,17 +51,15 @@ public class AddUser {
      */
     public void addUser(String username) {
         try {
-            user = rv.getLoggedUser();
-            if (user.getUsername().equals(username)) {
+            
 
-                List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
+            List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
 
-                if (!checkexist.isEmpty()) {
-                    utx.begin();
-
-                    user.getUserCollection().add(checkexist.get(0));
-                    utx.commit();
-                }
+            if (!checkexist.isEmpty()) {
+                utx.begin();
+                user = rv.getLoggedUser();
+                user.getUserCollection().add(checkexist.get(0));
+                utx.commit();
             }
         } catch (Exception e) {
 
