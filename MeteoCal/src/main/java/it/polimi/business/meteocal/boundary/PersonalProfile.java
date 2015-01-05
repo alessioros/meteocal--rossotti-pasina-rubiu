@@ -109,6 +109,7 @@ public class PersonalProfile {
         if(!user.getUsername().equals(contact)){
                     ad.addUser(contact);
         }
+        contacts=updateContacts();
     }
     
     /**

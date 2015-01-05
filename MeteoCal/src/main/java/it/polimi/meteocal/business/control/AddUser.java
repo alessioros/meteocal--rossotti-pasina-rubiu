@@ -57,8 +57,10 @@ public class AddUser {
 
             if (!checkexist.isEmpty()) {
                 utx.begin();
+                
                 user = rv.getLoggedUser();
                 user.getUserCollection().add(checkexist.get(0));
+               
                 utx.commit();
             }
         } catch (Exception e) {

@@ -58,6 +58,7 @@
             <a class='addrTitle'>Address List:</a>
             <ul>
                 <li>
+                    <h:panelGrid id="textarea">
                         <ui:repeat value="#{personalProfile.contacts}" var="contact">
                             <li>
                                 <h:link value="#{contact.username}" outcome="index">
@@ -65,6 +66,7 @@
                                 </h:link>
                             </li>
                         </ui:repeat>
+                    </h:panelGrid>
                 </li>
                 <li>
                     <h:form>
