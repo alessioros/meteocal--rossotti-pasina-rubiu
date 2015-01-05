@@ -13,4 +13,9 @@
 	  <managed-bean-class>it.polimi.meteocal.business.control</managed-bean-class>
 	  <managed-bean-scope>request</managed-bean-scope>
          </managed-bean>
+         <managed-bean>
+	  <managed-bean-name>InvitePeople</managed-bean-name>
+	  <managed-bean-class>it.polimi.business.meteocal.boundary</managed-bean-class>
+	  <managed-bean-scope>view</managed-bean-scope>
+         </managed-bean>
 </faces-config>

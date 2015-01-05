@@ -259,7 +259,7 @@ input.toggle:checked + label:after {
 	float:right;
 }
 
-#button-create{
+#button-create,#button-invite{
 	width: 250px;
 	border: #fbfbfb solid 2px;
 	background-color: #8DB9CB;
