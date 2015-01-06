@@ -1,93 +1,94 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-xmlns:h="http://xmlns.jcp.org/jsf/html"
-xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
-  <h:head>
-    <title>Create Event</title>
-    <h:outputStylesheet library="css" name="registration.css"  />
-    <h:outputStylesheet library="css" name="application.css"  />
-    <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
-  </h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Create Event</title>
+        <h:outputStylesheet library="css" name="registration.css"  />
+        <h:outputStylesheet library="css" name="application.css"  />
+        <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
+    </h:head>
 
-  <h:body>
+    <h:body>
 
-    <div id='menuBar'>
-      <ul>
-        <li><h:link outcome="calendar" value="Home"/></li>
-        <li><h:link outcome="profile" value="Profile"/></li>
-        <li><h:link outcome="notifications" value="Notifications"/></li>
-        <li><h:link outcome="about_logged" value="About"/></li>
-      </ul>
-    </div>
+        <div id='menuBar'>
+            <ul>
+                <li><h:link outcome="calendar" value="Home"/></li>
+                <li><h:link outcome="profile" value="Profile"/></li>
+                <li><h:link outcome="notifications" value="Notifications"/></li>
+                <li><h:link outcome="about_logged" value="About"/></li>
+            </ul>
+        </div>
 
-    <div class='title'>Create New Event</div>
+        <div class='title'>Create New Event</div>
 
-    <div class='form-div'>
-      <h:form>
-        <div class='field'>
-            <h:outputLabel a:id='fieldName' for="evname">Event name:</h:outputLabel>
-            <h:inputText id='evname' value="#{eventDetails.event.name}" required="true" class='feedback-input' requiredMessage="Event name is required"/>
-            <br/><div class="error"><h:message for="evname" /></div>
+        <div class='form-div'>
+            <h:form>
+                <div class='field'>
+                    <h:outputLabel a:id='fieldName' for="evname">Event name:</h:outputLabel>
+                    <h:inputText id='evname' value="#{eventDetails.event.name}" required="true" class='feedback-input' requiredMessage="Event name is required"/>
+                    <br/><div class="error"><h:message for="evname" /></div>
+                </div>
+                <div class='field'>
+                    <h:outputLabel a:id='desc' for="description">Description:</h:outputLabel>
+                    <h:inputTextarea a:id='description' value="#{eventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
+                    <br/><div class="error"><h:message for="description" /></div>
+                </div>
+                <div class="field">
+                    <h:outputLabel a:id='fieldName' for="starttime">Start Time:</h:outputLabel>
+                    <h:inputText id='starttime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.startDateStr}" required="true" class='feedback-input' requiredMessage="Start Time is required"/>
+                    <br/><div class="error"><h:message for="starttime" /></div>
+                </div>
+                <div class="field">
+                    <h:outputLabel a:id='fieldName' for="endtime">End Time:</h:outputLabel>
+                    <h:inputText id='endtime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.endDateStr}" required="true" class='feedback-input' requiredMessage="End Time is required"/>
+                    <br/><div class="error"><h:message for="endtime" /></div>
+                </div>
+                <div class='field'>
+                    <label id='fieldName'>Public:</label>
+                    <h:selectBooleanCheckbox id="public" a:class='toggle' value="#{eventDetails.event.public1}"/>
+                    <h:outputLabel for="public"></h:outputLabel>
+                </div>
+                <div class='field'>
+                    <label id='fieldName'>Outdoor:</label>
+                    <h:selectBooleanCheckbox id="outdoor" a:class='toggle' value="#{eventDetails.event.outDoor}"/>
+                    <h:outputLabel for="outdoor"></h:outputLabel>
+                </div>
+                <div class='field'>
+                    <h:outputLabel a:id='fieldName' for="lat">Latitude:</h:outputLabel>
+                    <h:inputText id='lat' class='feedback-input' value="#{eventDetails.loc.latitude}" required="true" requiredMessage="Latitude is required"/>
+                    <br/><div class="error"><h:message for="lat"/></div>
+                </div>
+                <div class='field'>
+                    <h:outputLabel a:id='fieldName' for="lon">Longitude:</h:outputLabel>
+                    <h:inputText id='lon' class='feedback-input' value="#{eventDetails.loc.longitude}" required="true" requiredMessage="Longitude is required"/>
+                    <br/><div class="error"><h:message for="lon"/></div>
+                </div>
+                <div class='field'>
+                    <h:outputLabel a:id='fieldName' for="state">State:</h:outputLabel>
+                    <h:inputText id='state' class='feedback-input' value="#{eventDetails.loc.state}" required="true" requiredMessage="State is required"/>
+                    <br/><div class="error"><h:message for="state"/></div>
+                </div>
+                <div class='field'>
+                    <h:outputLabel a:id='fieldName' for="city">City:</h:outputLabel>
+                    <h:inputText id='city' class='feedback-input' value="#{eventDetails.loc.city}" required="true" requiredMessage="City is required"/>
+                    <br/><div class="error"><h:message for="city"/></div>
+                </div>
+                <div class='field'>
+                    <h:outputLabel a:id='fieldName' for="addr">Address:</h:outputLabel>
+                    <h:inputText id='addr' class='feedback-input' value="#{eventDetails.loc.address}" required="true" requiredMessage="Address is required"/>
+                    <br/><div class="error"><h:message for="addr"/></div>
+                </div>
+                <div class="resmessage">
+                    <h:outputText value="#{eventDetails.message}"></h:outputText>
+                </div>
+                <div class='submit'>
+                    <h:commandButton type='submit' value='CREATE' a:id='button-create' action="#{eventDetails.create()}"/>
+                </div>
+            </h:form>
         </div>
-        <div class='field'>
-            <h:outputLabel a:id='desc' for="description">Description:</h:outputLabel>
-            <h:inputTextarea a:id='description' value="#{eventDetails.event.description}" required="true" class='feedback-input' requiredMessage="Description is required"/>
-            <br/><div class="error"><h:message for="description" /></div>
-        </div>
-        <div class="field">
-            <h:outputLabel a:id='fieldName' for="starttime">Start Time:</h:outputLabel>
-            <h:inputText id='starttime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.startDateStr}" required="true" class='feedback-input' requiredMessage="Start Time is required"/>
-            <br/><div class="error"><h:message for="starttime" /></div>
-        </div>
-        <div class="field">
-            <h:outputLabel a:id='fieldName' for="endtime">End Time:</h:outputLabel>
-            <h:inputText id='endtime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.endDateStr}" required="true" class='feedback-input' requiredMessage="End Time is required"/>
-            <br/><div class="error"><h:message for="endtime" /></div>
-        </div>
-        <div class='field'>
-            <label id='fieldName'>Public:</label>
-            <h:selectBooleanCheckbox id="public" a:class='toggle' value="#{eventDetails.event.public1}"/>
-            <h:outputLabel for="public"></h:outputLabel>
-        </div>
-        <div class='field'>
-            <label id='fieldName'>Outdoor:</label>
-            <h:selectBooleanCheckbox id="outdoor" a:class='toggle' value="#{eventDetails.event.outDoor}"/>
-            <h:outputLabel for="outdoor"></h:outputLabel>
-        </div>
-        <div class='field'>
-            <h:outputLabel a:id='fieldName' for="lat">Latitude:</h:outputLabel>
-            <h:inputText id='lat' class='feedback-input' value="#{eventDetails.loc.latitude}" required="true" requiredMessage="Latitude is required"/>
-            <br/><div class="error"><h:message for="lat"/></div>
-        </div>
-        <div class='field'>
-            <h:outputLabel a:id='fieldName' for="lon">Longitude:</h:outputLabel>
-            <h:inputText id='lon' class='feedback-input' value="#{eventDetails.loc.longitude}" required="true" requiredMessage="Longitude is required"/>
-            <br/><div class="error"><h:message for="lon"/></div>
-        </div>
-        <div class='field'>
-            <h:outputLabel a:id='fieldName' for="state">State:</h:outputLabel>
-            <h:inputText id='state' class='feedback-input' value="#{eventDetails.loc.state}" required="true" requiredMessage="State is required"/>
-            <br/><div class="error"><h:message for="state"/></div>
-        </div>
-        <div class='field'>
-            <h:outputLabel a:id='fieldName' for="city">City:</h:outputLabel>
-            <h:inputText id='city' class='feedback-input' value="#{eventDetails.loc.city}" required="true" requiredMessage="City is required"/>
-            <br/><div class="error"><h:message for="city"/></div>
-        </div>
-        <div class='field'>
-            <h:outputLabel a:id='fieldName' for="addr">Address:</h:outputLabel>
-            <h:inputText id='addr' class='feedback-input' value="#{eventDetails.loc.address}" required="true" requiredMessage="Address is required"/>
-            <br/><div class="error"><h:message for="addr"/></div>
-        </div>
-          <div class="resmessage">
-              <h:outputText value="#{eventDetails.message}"></h:outputText>
-          </div>
-        <div class='submit'>
-            <h:commandButton type='submit' value='CREATE' a:id='button-create' action="#{eventDetails.create()}"/>
-        </div>
-     </h:form>
-    </div>
-  </h:body>
+    </h:body>
 </html>

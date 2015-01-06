@@ -93,7 +93,8 @@ public class EventDetails {
         me.createEvent(event,loc);
         
         message="Event Created!";
-        return "/calendar.xhtml?faces-redirect=true";
+        
+        return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event="+event.getIdEvent();
     }
     
 }
