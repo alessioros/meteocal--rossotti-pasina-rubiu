@@ -31,19 +31,23 @@ public class EventDetails {
     private String endDateStr;
     private String lat;
     private String lon;
-    
-    
-    public Date dateConverter(String input){
-        
-        Date date=null;
-        try {
-            date = formatter.parse(input);
-        } catch (ParseException ex) {
-            Logger.getLogger(EventDetails.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return date;
+
+    public void setLat(String lat) {
+        this.lat = lat;
     }
+
+    public void setLon(String lon) {
+        this.lon = lon;
+    }
+    
+    public String getLat() {
+        return lat;
+    }
+
+    public String getLon() {
+        return lon;
+    }
+    
     public String getStartDateStr() {
         return this.startDateStr;
     }
@@ -89,7 +93,19 @@ public class EventDetails {
     public void setEvent(Event event) {
         this.event = event;
     }
-
+    
+    public Date dateConverter(String input){
+        
+        Date date=null;
+        try {
+            date = formatter.parse(input);
+        } catch (ParseException ex) {
+            Logger.getLogger(EventDetails.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return date;
+    }
+    
     public String create() {		
         
         
