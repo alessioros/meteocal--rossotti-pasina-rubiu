@@ -38,12 +38,10 @@ public class Location implements Serializable {
     @GeneratedValue
     @Column(name = "idLocation")
     private Integer idLocation;
-    @Size(max = 45)
     @Column(name = "Latitude")
-    private String latitude;
-    @Size(max = 45)
+    private float latitude;
     @Column(name = "Longitude")
-    private String longitude;
+    private float longitude;
     @Size(max = 45)
     @Column(name = "State")
     private String state;
@@ -73,19 +71,19 @@ public class Location implements Serializable {
         this.idLocation = idLocation;
     }
 
-    public String getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public void setLatitude(float latitude) {
         this.latitude = latitude;
     }
 
-    public String getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public void setLongitude(float longitude) {
         this.longitude = longitude;
     }
 

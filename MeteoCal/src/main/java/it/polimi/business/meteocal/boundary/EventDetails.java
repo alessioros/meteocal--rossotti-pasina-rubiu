@@ -1,5 +1,6 @@
 package it.polimi.business.meteocal.boundary;
 
+import it.polimi.meteocal.business.control.CheckFields;
 import it.polimi.meteocal.business.control.ManageEvent;
 import it.polimi.meteocal.business.entity.Event;
 import it.polimi.meteocal.business.entity.Location;
@@ -18,6 +19,9 @@ public class EventDetails {
     
     @EJB
     private ManageEvent me;
+    
+    @EJB
+    private CheckFields cf;
 
     private Event event;
     private Location loc;
@@ -25,6 +29,8 @@ public class EventDetails {
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy : HH:mm");
     private String startDateStr;
     private String endDateStr;
+    private String lat;
+    private String lon;
     
     
     public Date dateConverter(String input){
@@ -89,12 +95,29 @@ public class EventDetails {
         
         event.setStartTime(dateConverter(startDateStr));
 	event.setEndTime(dateConverter(endDateStr));
+        loc.setLatitude(Float.parseFloat(lat));
+        loc.setLongitude(Float.parseFloat(lon));
+        
+        if(!cf.checkDateTimes(event.getStartTime(), event.getEndTime())){
+        
+            message="Error! Start time must be after End Time";
+            return "";
+        }
+        else if(!cf.checkCoordinates(loc.getLatitude(),loc.getLongitude())){
+            
+            message="Error! Invalid coordinates";
+            return "";
+        }
+        else{
+            
+            me.createEvent(event,loc);
+        
+            message="Event Created!";
 
-        me.createEvent(event,loc);
+            return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event="+event.getIdEvent();
+            
+        }
         
-        message="Event Created!";
-        
-        return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event="+event.getIdEvent();
     }
     
 }
