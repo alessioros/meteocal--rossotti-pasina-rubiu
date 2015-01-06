@@ -16,6 +16,8 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -27,7 +29,9 @@ public class InvitePeople {
     
     private User user;
     private List<User> contacts;
-    private Event event;
+    
+    @PersistenceContext
+    EntityManager em;
     
     @Inject
     RegisterValidation rv;
@@ -35,46 +39,50 @@ public class InvitePeople {
     @Inject
     ManageInvites mi;
     
+    private Integer event;
+    
     private Map<Integer, Boolean> selectedIds = new HashMap<>();
     private List<User> invited;
 
     // Actions -----------------------------------------------------------------------------------
-
     public void invite() {
         
-        contacts=updateContacts();
-
-        invited= new ArrayList<>();
+        contacts = updateContacts();
+        
+        invited = new ArrayList<>();
         for (User contact : contacts) {
-
+            
             if (selectedIds.get(contact.getIdUser())) {
                 invited.add(contact);
-                selectedIds.remove(contact.getIdUser()); 
+                selectedIds.remove(contact.getIdUser());                
             }
         }
-        mi.createInvites(invited, event);
+        List<Event> tmplist=em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
+
+        mi.createInvites(invited, tmplist.get(0));
         
     }
+
     
     public List<User> updateContacts() {
-
+        
         user = rv.getLoggedUser();
-        contacts=(List<User>) user.getUserCollection();
-        return contacts;   
+        contacts = (List<User>) user.getUserCollection();
+        return contacts;        
     }
-
+    
     public User getUser() {
         return user;
     }
-
+    
     public void setUser(User user) {
         this.user = user;
     }
-
+    
     public List<User> getContacts() {
         return contacts;
     }
-
+    
     public void setContacts(List<User> contacts) {
         this.contacts = contacts;
     }
@@ -82,18 +90,33 @@ public class InvitePeople {
     public Map<Integer, Boolean> getSelectedIds() {
         return selectedIds;
     }
-
+    
     public void setSelectedIds(Map<Integer, Boolean> selectedIds) {
         this.selectedIds = selectedIds;
     }
-
+    
     public List<User> getSelectedDataList() {
         return invited;
     }
-
+    
     public void setSelectedDataList(List<User> selectedDataList) {
         this.invited = selectedDataList;
     }
+    
+    public Integer getEvent() {
+        return event;
+    }
 
+    public void setEvent(Integer event) {
+        this.event = event;
+    }
 
+    public List<User> getInvited() {
+        return invited;
+    }
+
+    public void setInvited(List<User> invited) {
+        this.invited = invited;
+    }
+    
 }

@@ -7,7 +7,7 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
-        <title>Profile</title>
+        <title>Invite</title>
         <h:outputStylesheet library="css" name="profile.css"  />
         <h:outputStylesheet library="css" name="application.css"  />
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
@@ -25,6 +25,7 @@
         </div>
         <f:metadata>
             <f:viewAction action="#{invitePeople.updateContacts()}"/>
+            <f:viewParam name="event" value="#{invitePeople.event}"/>
         </f:metadata>
         <div class="addrList">
             <a class='addrTitle'>Address List:</a>
