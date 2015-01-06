@@ -17,6 +17,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
@@ -24,13 +27,18 @@ import javax.mail.internet.AddressException;
  *
  * @author alessiorossotti
  */
+@ManagedBean
+@RequestScoped   
 public class AccessValidation {
     
     private String password;
     private String confpassword;
-    private String username;
+    private String username4email;
     private String message;
     private String email;
+    
+    @ManagedProperty(value = "#{param.username}")
+    private String username;
     
      @EJB
     private SendEmailBean sm;
@@ -78,6 +86,14 @@ public class AccessValidation {
         this.username = username;
     }
     
+    public String getUsername4email() {
+        return this.username4email;
+    }
+
+    public void setUsername4email(String username4email) {
+        this.username4email = username4email;
+    }
+    
     public void passwordRecovery(){
         
         PreparedStatement ps = null;
@@ -92,7 +108,7 @@ public class AccessValidation {
                 rs = ps.executeQuery();
                 
                 while (rs.next()) {
-                    username=rs.getString(1);
+                    username4email=rs.getString(1);
                 }
             }
             catch (Exception e) {
@@ -110,9 +126,9 @@ public class AccessValidation {
            
            sm.generateAndSendEmail(email,
                    "Reset Your Password",
-                   "Hei, your username is:"+username+
+                   "Hei, your username is:"+username4email+
                     ",<br>Click on the link to reset your password:"
-                   + "<a href=\"http://localhost:8080/MeteoCal/reset.xhtml?email="+email
+                   + "<a href=\"http://localhost:8080/MeteoCal/reset.xhtml?username="+username4email
                     +"\">Reset</a>");
            
        }catch(AddressException e){
@@ -129,12 +145,13 @@ public class AccessValidation {
         Connection con = null;
         int result;
         
-        if (!cf.checkPassword(password, PasswordEncrypter.encryptPassword(confpassword))) {
+        if (!cf.checkPassword(password, confpassword)) {
             message = "Passwords don't match.";
         } else if (confpassword.length() < 6) {
             message = "Password should be at least 6 characters";
         } else {
-        
+            
+            password=PasswordEncrypter.encryptPassword(password);
             try {
                 Class.forName("com.mysql.jdbc.Driver");
                 con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
@@ -142,7 +159,7 @@ public class AccessValidation {
                 ps = con.prepareStatement(sql);
                 result = ps.executeUpdate();
 
-                message="Password has been reset!";
+                message="Password has been reset "+username+"!";
             }
             catch (Exception e) {
                 e.printStackTrace();
