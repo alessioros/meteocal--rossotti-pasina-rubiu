@@ -5,6 +5,7 @@
  */
 package it.polimi.meteocal.business.control;
 
+import java.util.Date;
 import it.polimi.meteocal.business.entity.User;
 import java.util.List;
 import javax.ejb.Stateless;
@@ -59,4 +60,19 @@ public class CheckFields {
             return password1.equals(password2);
     }
     
+    public boolean checkCoordinates(float lat, float lon){
+    
+        if(lat>=-85 && lat <=85 && lon>=-180 && lon <=180){
+            return true;
+        }
+        else return false;
+    }
+    
+    public boolean checkDateTimes(Date start, Date end){
+        
+        if(start.compareTo(end)<0){
+        return true;
+        }
+        else return false;
+    }
 }

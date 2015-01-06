@@ -16,6 +16,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -62,7 +63,7 @@ public class AccessValidation {
         this.confpassword = confpassword;
     }
 
-         public String getMessage() {
+    public String getMessage() {
         return this.message;
     }
 
@@ -126,7 +127,7 @@ public class AccessValidation {
            
            sm.generateAndSendEmail(email,
                    "Reset Your Password",
-                   "Hei, your username is:"+username4email+
+                   "Hei, your username is: "+username4email+
                     ",<br>Click on the link to reset your password:"
                    + "<a href=\"http://localhost:8080/MeteoCal/reset.xhtml?username="+username4email
                     +"\">Reset</a>");
