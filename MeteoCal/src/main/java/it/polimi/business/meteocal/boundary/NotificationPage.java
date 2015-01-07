@@ -3,16 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.polimi.meteocal.business.control;
+/**
+ *
+ * @author teo
+ */
+package it.polimi.business.meteocal.boundary;
 
+import it.polimi.meteocal.business.control.ManageNotifications;
+import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.Notification;
 import it.polimi.meteocal.business.entity.User;
 import it.polimi.meteocal.business.entity.Usernotification;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -21,9 +28,12 @@ import javax.persistence.Query;
  *
  * @author teo
  */
-@Named
-@RequestScoped
-public class ManageNotification {
+@ManagedBean
+@ViewScoped
+public class NotificationPage {
+
+    @Inject
+    ManageNotifications mn;
 
     @PersistenceContext
     private EntityManager em;
@@ -32,7 +42,8 @@ public class ManageNotification {
     private RegisterValidation rv;
 
     private User user;
-    private List<Notification> notifications=new ArrayList();
+    private List<Notification> notifications = new ArrayList();
+    private Notification notification;
 
     public List<Notification> updateNotifications() {
         user = rv.getLoggedUser();
@@ -46,8 +57,15 @@ public class ManageNotification {
                 notifications.add(notification.getNotification());
             }
         }
-
         return notifications;
+    }
+
+    public void accept() {
+        mn.acceptInvite(notification);
+    }
+
+    public void decline() {
+        mn.declineInvite(notification);
     }
 
     public User getUser() {
@@ -65,4 +83,13 @@ public class ManageNotification {
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
+    
+    public Notification getNotification() {
+        return notification;
+    }
+
+    public void setNotification(Notification notification) {
+        this.notification = notification;
+    }
+    
 }

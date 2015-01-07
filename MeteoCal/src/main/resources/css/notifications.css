@@ -14,3 +14,33 @@ html{
 	margin-left:100px;
 	display:block;
 }
+
+#button-accept,#button-decline{
+  margin-bottom:20px;
+  border: #fbfbfb solid 2px;
+  background-color: #8DB9CB;
+  color:white;
+  font-size:18px;
+  padding:10px;
+  font-weight:200;
+  margin-left:auto;
+  width:auto;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  display:block;
+}
+
+#button-accept:hover,#button-decline:hover{
+  background-color: white;
+  color: #8DB9CB;
+  border: #8DB9CB solid 2px;
+}
+
+#button-accept,#button-decline{
+    margin-top:10px;
+    padding:5px;
+    padding-left: 10px;
+    margin-left:0px;
+    float:bottom;
+}
