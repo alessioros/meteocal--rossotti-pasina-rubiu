@@ -158,9 +158,9 @@ public class CalendarTable{
     }
     public String displayEventOutcome(){
         if(mc.scheduleEvent(date))
-            return "today_events";
+            return "today_events?date=" + (Date)date.clone();
         else
-            return "createEvent";
+            return "createEvent?date=" + date;
     }
     
     
