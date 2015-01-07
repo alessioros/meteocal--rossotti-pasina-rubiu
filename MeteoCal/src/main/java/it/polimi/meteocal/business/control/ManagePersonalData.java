@@ -10,11 +10,15 @@ import java.security.Principal;
 import java.sql.*;
 import java.util.List;
 import javax.annotation.Resource;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -22,20 +26,20 @@ import javax.transaction.UserTransaction;
  *
  * @author alessiorossotti
  */
-@Stateless
+@ManagedBean
+@RequestScoped
 public class ManagePersonalData {
-
-    
 
     @PersistenceContext
     EntityManager em;
 
-    @Inject
-    Principal principal;
-    
+    @Resource
+    UserTransaction utx;
+
+    @EJB
+    private RegisterValidation rv;
 
     private User user;
-
 
     public void setUser(User user) {
         this.user = user;
@@ -49,111 +53,36 @@ public class ManagePersonalData {
         return user;
     }
 
-    public User getData() {
-
-        this.user = new User();
-        principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-        String username = principal.getName();
-        PreparedStatement ps = null;
-        Connection con = null;
-        ResultSet rs = null;
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
-            String sql = "select * from user where username='" + username + "'";
-            ps = con.prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                user.setUsername(username);
-                user.setName(rs.getString("Name"));
-                user.setSurname(rs.getString("Surname"));
-                user.setEmail(rs.getString("Email"));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                con.close();
-                ps.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        return this.user;
-    }
-
     public void changeData(User updated) {
 
-        principal = FacesContext.getCurrentInstance().getExternalContext().getUserPrincipal();
-        String username = principal.getName();
-        updated.setUsername(username);
-        String field = "";
-
-        PreparedStatement ps = null;
-        Connection con = null;
-        int result;
-
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        try {
+
+            utx.begin();
+            user = rv.getLoggedUser();
+            if (!"".equals(updated.getName())) {
+                user.setName(updated.getName());
+            }
+            if (!"".equals(updated.getSurname())) {
+                user.setSurname(updated.getSurname());
+            }
+            if (!"".equals(updated.getPassword())) {
+                user.setPassword(updated.getPassword());
+            }
+            if (!"".equals(updated.getUsername())) {
+                user.setUsername(updated.getUsername());
+            }
             
-            field = updated.getName();
-            if (!"".equals(field)) {
-                String sql = "update user set Name='" + field + "' where username='" + username + "'";
-                ps = con.prepareStatement(sql);
-                result = ps.executeUpdate();
-            }
+            utx.commit();  
+
         } catch (Exception e) {
+
             e.printStackTrace();
-        }
-        
-        try {
-            field = updated.getSurname();
-            if (!"".equals(field)) {
-                String sql = "update user set Surname='" + field + "' where username='" + username + "'";
-                ps = con.prepareStatement(sql);
-                result = ps.executeUpdate();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        try {
-            field = updated.getPassword();
-            if (!"".equals(field)) {
-                String sql = "update user set Password='" + field + "' where username='" + username + "'";
-                ps = con.prepareStatement(sql);
-                result = ps.executeUpdate();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        
-        try {
-            field = updated.getUsername();
-            if (!"".equals(field)) {
-                String sql = "update user set Username='" + field + "' where username='" + username + "'";
-                ps = con.prepareStatement(sql);
-                result = ps.executeUpdate();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
             try {
-                con.close();
-                ps.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
             }
+
         }
+
     }
 }

@@ -28,7 +28,7 @@ public class PersonalProfile {
     @PersistenceContext
     EntityManager em;
 
-    @EJB
+    @Inject
     private ManagePersonalData mpd;
 
     @Inject
@@ -92,15 +92,12 @@ public class PersonalProfile {
         return user = rv.getLoggedUser();
     }
 
-    public String submitChangeData() {
+    public void submitChangeData() {
 
-        this.mpd = new ManagePersonalData();
-
+        user.setIdUser(rv.getLoggedUser().getIdUser());
         mpd.changeData(user);
         
         this.message = "Data succesfully updated!";
-
-        return "";
 
     }
 

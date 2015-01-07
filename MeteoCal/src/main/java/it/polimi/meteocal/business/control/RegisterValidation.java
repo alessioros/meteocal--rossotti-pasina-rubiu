@@ -40,6 +40,7 @@ public class RegisterValidation {
     public void createUser(User user) {
 
         user.setGroupname("USERS");
+        user.setPublicCalendar(Boolean.TRUE);
         user.setVerified(Boolean.FALSE);
         user.setVerificationkey(UUID.randomUUID().toString());
         em.persist(user);

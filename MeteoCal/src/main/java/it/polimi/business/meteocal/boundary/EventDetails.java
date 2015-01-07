@@ -2,6 +2,7 @@ package it.polimi.business.meteocal.boundary;
 
 import it.polimi.meteocal.business.control.CheckFields;
 import it.polimi.meteocal.business.control.ManageEvent;
+import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.Event;
 import it.polimi.meteocal.business.entity.Location;
 import java.text.ParseException;
@@ -22,6 +23,9 @@ public class EventDetails {
     
     @EJB
     private CheckFields cf;
+    
+    @EJB
+    private RegisterValidation rv;
 
     private Event event;
     private Location loc;
@@ -108,7 +112,7 @@ public class EventDetails {
     
     public String create() {		
         
-        
+        event.setIdOrganizer(rv.getLoggedUser());
         event.setStartTime(dateConverter(startDateStr));
 	event.setEndTime(dateConverter(endDateStr));
         loc.setLatitude(Float.parseFloat(lat));
