@@ -81,6 +81,7 @@ input.toggle:checked + label:after {
 	width:auto;
 	height:auto;
 	margin-top:15px;
+        margin-bottom: 50px;
 	margin-left:100px;
 	text-align:left;
 	border-collapse:collapse;
@@ -163,7 +164,7 @@ input.toggle:checked + label:after {
 	padding-left:10px;
 	display:block;
 }
-.empty,.locked,.event{
+.empty,.event{
 	margin-left:auto;
 	margin-right:auto;
 	height:40px;
@@ -177,15 +178,21 @@ input.toggle:checked + label:after {
 	background-image:url("#{resource['css:icons/plus.png']}");
 }
 
-.locked{
-	background-image:url("#{resource['css:icons/lockev.png']}");
-}
-
 .event{
-	background-image:url("#{resource['css:icons/search.png']}");
+        opacity:1;
+        transition: opacity 0.3s ease-in;
+        height:35px;
+	width:35px;
+	background-size:35px 35px;
+	background-image:url("#{resource['css:icons/pin.png']}");
 }
-
-.mask:hover .empty,.mask:hover .locked,.mask:hover .event{
+.mask:hover .event{
+        height:40px;
+	width:40px;
+	background-size:40px 40px;
+        background-image:url("#{resource['css:icons/search.png']}");
+}
+.mask:hover .empty{
 	opacity:1;
 }
 
