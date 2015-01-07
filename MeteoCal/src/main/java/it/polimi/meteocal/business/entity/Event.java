@@ -50,6 +50,9 @@ public class Event implements Serializable {
     @Size(max = 45)
     @Column(name = "Description")
     private String description;
+    @Size(max = 45)
+    @Column(name = "Image")
+    private String image;
     @Column(name = "StartTime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
