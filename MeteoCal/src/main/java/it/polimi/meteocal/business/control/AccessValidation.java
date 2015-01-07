@@ -6,47 +6,55 @@
 package it.polimi.meteocal.business.control;
 
 import it.polimi.meteocal.business.beans.SendEmailBean;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
-import it.polimi.meteocal.business.control.PasswordEncrypter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import javax.annotation.PostConstruct;
+import it.polimi.meteocal.business.entity.User;
+import java.util.UUID;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ManagedProperty;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author alessiorossotti
  */
 @ManagedBean
-@RequestScoped   
+@RequestScoped
 public class AccessValidation {
-    
+
     private String password;
     private String confpassword;
-    private String username4email;
     private String message;
     private String email;
-    
-    @ManagedProperty(value = "#{param.username}")
-    private String username;
-    
-     @EJB
+    private User user;
+    private String key;
+
+    @PersistenceContext
+    EntityManager em;
+
+    @EJB
     private SendEmailBean sm;
-    
+
     @EJB
     private CheckFields cf;
-    
+
+    @Resource
+    UserTransaction utx;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
     public String getPassword() {
         return this.password;
     }
@@ -54,7 +62,7 @@ public class AccessValidation {
     public void setPassword(String password) {
         this.password = password;
     }
-    
+
     public String getConfpassword() {
         return this.confpassword;
     }
@@ -70,7 +78,7 @@ public class AccessValidation {
     public void setMessage(String message) {
         this.message = message;
     }
-    
+
     public String getEmail() {
         return this.email;
     }
@@ -79,100 +87,88 @@ public class AccessValidation {
         this.email = email;
     }
 
-    public String getUsername() {
-        return this.username;
-    }
+    public void passwordRecovery() {
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    
-    public String getUsername4email() {
-        return this.username4email;
-    }
+        Query query;
 
-    public void setUsername4email(String username4email) {
-        this.username4email = username4email;
-    }
-    
-    public void passwordRecovery(){
-        
-        PreparedStatement ps = null;
-        Connection con = null;
-        ResultSet rs = null;
-        
-        try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
-                String sql = "select username from user where email='" + email + "'";
-                ps = con.prepareStatement(sql);
-                rs = ps.executeQuery();
-                
-                while (rs.next()) {
-                    username4email=rs.getString(1);
-                }
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    con.close();
-                    ps.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        if (cf.checkEmail(email)) {
+            message = "This email doesn't exist";
+
+            return;
         }
-        
-        try{ 
-           
-           sm.generateAndSendEmail(email,
-                   "Reset Your Password",
-                   "Hei, your username is: "+username4email+
-                    ",<br>Click on the link to reset your password:"
-                   + "<a href=\"http://localhost:8080/MeteoCal/reset.xhtml?username="+username4email
-                    +"\">Reset</a>");
-           
-       }catch(AddressException e){
+        try {
+            utx.begin();
+
+            query = em.createQuery("select u from User u where u.email=:em");
+            query.setParameter("em", email);
+            user = (User) query.getResultList().get(0);
+            user.setVerificationkey(UUID.randomUUID().toString());
+
+            utx.commit();
+
+        } catch (Exception e) {
+
             e.printStackTrace();
-       }catch(MessagingException e){
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }
+
+        }
+
+        try {
+
+            sm.generateAndSendEmail(email,
+                    "Reset Your Password",
+                    "Hei, your username is: " + user.getUsername()
+                    + ",<br>Click on the link to reset your password:"
+                    + "<a href=\"http://localhost:8080/MeteoCal/reset.xhtml?key=" + user.getVerificationkey()
+                    + "\">Reset</a>");
+
+        } catch (AddressException e) {
             e.printStackTrace();
-       }
-        message="Email sent! , please check your mail";
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+        message = "Email sent! , please check your mail";
     }
-    
-    public void passwordReset(){
-        
-        PreparedStatement ps = null;
-        Connection con = null;
-        int result;
-        
+
+    public void passwordReset() {
+
+        Query query;
+
         if (!cf.checkPassword(password, confpassword)) {
-            message = "Passwords don't match.";
+            message = "Passwords don't match";
         } else if (confpassword.length() < 6) {
             message = "Password should be at least 6 characters";
         } else {
-            
-            password=PasswordEncrypter.encryptPassword(password);
-            try {
-                Class.forName("com.mysql.jdbc.Driver");
-                con = DriverManager.getConnection("jdbc:mysql://localhost:3306/meteocaldb", "root", "root");
-                String sql = "update user set Password='" + password + "' where username='" + username + "'";
-                ps = con.prepareStatement(sql);
-                result = ps.executeUpdate();
 
-                message="Password has been reset "+username+"!";
-            }
-            catch (Exception e) {
+            try {
+
+                utx.begin();
+                query = em.createQuery("select u from User u where u.verificationkey=:vk");
+                query.setParameter("vk", key);
+
+                user = (User) query.getResultList().get(0);
+
+                user.setPassword(password);
+
+                utx.commit();
+                user.setVerificationkey(null);
+                message = "Password has been reset!";
+
+            } catch (Exception e) {
+
                 e.printStackTrace();
-            } finally {
                 try {
-                    con.close();
-                    ps.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    utx.rollback();
+                } catch (IllegalStateException | SecurityException | SystemException exception) {
                 }
+
             }
+
         }
     }
-    
+
 }

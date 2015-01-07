@@ -2,12 +2,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>MeteoCal Homepage</title>
         <h:outputStylesheet library="css" name="homepage.css"  />
         <h:outputStylesheet library="css" name="application.css"  />
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
+        <f:metadata>
+            <f:viewParam name="key" value="#{accessValidation.key}"/>
+        </f:metadata>
     </h:head>
     <h:body>
         <div id='menuBar'>

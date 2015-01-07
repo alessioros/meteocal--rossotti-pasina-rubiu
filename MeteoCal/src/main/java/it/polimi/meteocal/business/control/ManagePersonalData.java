@@ -6,19 +6,12 @@
 package it.polimi.meteocal.business.control;
 
 import it.polimi.meteocal.business.entity.User;
-import java.security.Principal;
-import java.sql.*;
-import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
