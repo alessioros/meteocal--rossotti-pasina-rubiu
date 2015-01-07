@@ -156,6 +156,12 @@ public class CalendarTable{
         else
             return "empty";
     }
+    public String displayEventOutcome(){
+        if(mc.scheduleEvent(date))
+            return "today_events";
+        else
+            return "createEvent";
+    }
     
     
 }
