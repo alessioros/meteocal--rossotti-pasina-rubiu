@@ -6,7 +6,9 @@
 package it.polimi.business.meteocal.boundary;
 
 import it.polimi.meteocal.business.control.AddUser;
+import it.polimi.meteocal.business.control.CheckFields;
 import it.polimi.meteocal.business.control.ManagePersonalData;
+import it.polimi.meteocal.business.control.PasswordEncrypter;
 import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.User;
 import java.util.List;
@@ -36,6 +38,9 @@ public class PersonalProfile {
     
     @Inject
     AddUser ad;
+    
+    @EJB
+    private CheckFields cf;
 
     private User user;
     private String contact;
@@ -93,11 +98,24 @@ public class PersonalProfile {
     }
 
     public void submitChangeData() {
-
-        user.setIdUser(rv.getLoggedUser().getIdUser());
-        mpd.changeData(user);
         
-        this.message = "Data succesfully updated!";
+        if (!cf.checkUsername(user.getUsername())) {
+            message = "The username you have chosen already exists.";
+        } else if (!cf.checkEmail(user.getEmail())) {
+            message = "The email you have chosen already exists.";
+        } else if (!cf.checkEmailCorrectness(user.getEmail())) {
+            message = "Please insert a valid email address.";
+        } else if (!cf.checkPassword(user.getPassword(), PasswordEncrypter.encryptPassword(confPassword))) {
+            message = "Passwords don't match.";
+        } else if (confPassword.length() < 6) {
+            message = "Password should be at least 6 characters";
+        } else {
+            user.setIdUser(rv.getLoggedUser().getIdUser());
+            mpd.changeData(user);
+        
+            this.message = "Data succesfully updated!";
+        }
+        
 
     }
 
