@@ -157,10 +157,11 @@ public class CalendarTable{
             return "empty";
     }
     public String displayEventOutcome(){
-        if(mc.scheduleEvent(date))
-            return "today_events?date=" + (Date)date.clone();
+       /* if(mc.scheduleEvent(date))
+            return "today_events?date=";
         else
-            return "createEvent?date=" + date;
+            return "createEvent?date=";*/
+        return "";
     }
     
     
