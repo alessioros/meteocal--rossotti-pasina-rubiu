@@ -1,0 +1,89 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6-gen-2015, 17.31.29
+    Author     : teo
+*/
+html{
+	background-image:url("#{resource['css:img/bg_pattern.png']}");
+        background-repeat: repeat;
+        font-family: 'Dosis', sans-serif;
+}
+
+.title{
+    font-size:35px;
+    margin-left:50px;
+    display:block;
+    width:380px;
+}
+
+.addrList ul{
+    padding:30px;
+    background-color:rgba(141,185,203,0.2);
+    list-style: none;
+    font-size: 20px;
+    border:1px solid #8DB9CB;
+    border-radius: 5px;
+    display: block;
+    height:300px;
+}
+
+#fieldName{
+    color:#F66448;
+    width:120px;
+    display:inline-block;
+}
+
+#button-invite{
+  margin-bottom:20px;
+  border: #fbfbfb solid 2px;
+  background-color: #8DB9CB;
+  color:white;
+  font-size:18px;
+  padding:10px;
+  font-weight:200;
+  margin-left:auto;
+  width:auto;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+  display:block;
+}
+
+#button-invite:hover{
+  background-color: white;
+  color: #8DB9CB;
+  border: #8DB9CB solid 2px;
+}
+
+#button-invite{
+    margin-top:10px;
+    padding:5px;
+    padding-left: 10px;
+    margin-left:0px;
+    float:bottom;
+}
+
+.addrList{
+    margin-top:50px;
+    width:available;
+    display:inline-block;
+}
+
+.addrTitle{
+    margin-left:50px;
+    font-size:35px;
+    display:block;
+    width: 380px;
+}
+
+.error{
+    margin-top:5px;
+    font-size: 16px;
+    padding-left:10px;
+    width:50%;
+    color: red;
+}

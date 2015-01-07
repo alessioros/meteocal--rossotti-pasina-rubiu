@@ -8,7 +8,7 @@
 
     <h:head>
         <title>Invite</title>
-        <h:outputStylesheet library="css" name="profile.css"  />
+        <h:outputStylesheet library="css" name="invitePeople.css"  />
         <h:outputStylesheet library="css" name="application.css"  />
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
@@ -50,7 +50,7 @@
                         </h:dataTable>
                     </li>
                     <li>
-                        <h:commandButton type='submit' value='Invite' a:id='button-add' action="#{invitePeople.invite()}"/>
+                        <h:commandButton type='submit' value='Invite' a:id='button-invite' action="#{invitePeople.invite()}"/>
                         <br/><div class="error"><h:message for="contact"/></div>   
 
                     </li>

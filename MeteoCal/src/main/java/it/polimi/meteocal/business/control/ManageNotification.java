@@ -8,7 +8,7 @@ package it.polimi.meteocal.business.control;
 import it.polimi.meteocal.business.entity.Notification;
 import it.polimi.meteocal.business.entity.User;
 import it.polimi.meteocal.business.entity.Usernotification;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -30,8 +30,25 @@ public class ManageNotification {
 
     @EJB
     private RegisterValidation rv;
-       
+
     private User user;
+    private List<Notification> notifications=new ArrayList();
+
+    public List<Notification> updateNotifications() {
+        user = rv.getLoggedUser();
+        //prende tutte le notifiche dell'utente loggato
+        Query query = em.createQuery("SELECT n FROM Usernotification n WHERE n.user=:USER");
+        query.setParameter("USER", user);
+        List<Usernotification> tmplist = query.getResultList();
+        //mette le notifiche in notifications
+        for (Usernotification notification : tmplist) {
+            if (notification != null) {
+                notifications.add(notification.getNotification());
+            }
+        }
+
+        return notifications;
+    }
 
     public User getUser() {
         return user;
@@ -41,20 +58,11 @@ public class ManageNotification {
         this.user = user;
     }
 
-    private List<Notification> notifications;
-
     public List<Notification> getNotifications() {
-
-        user = rv.getLoggedUser();
-
-        Query query = em.createQuery("SELECT n FROM Usernotification n WHERE n.user.idUser=:ID");
-        query.setParameter("ID", user.getIdUser());
-        List<Usernotification> tmplist = query.getResultList();
-        Iterator<Usernotification> tmpIter = tmplist.iterator();
-        while (tmpIter.hasNext()) {
-            notifications.add(tmpIter.next().getNotification());
-        }
-
         return notifications;
+    }
+
+    public void setNotifications(List<Notification> notifications) {
+        this.notifications = notifications;
     }
 }
