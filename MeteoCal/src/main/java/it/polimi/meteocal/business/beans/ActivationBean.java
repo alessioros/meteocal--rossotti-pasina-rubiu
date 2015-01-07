@@ -65,7 +65,6 @@ public class ActivationBean {
             if (tmplist.isEmpty() == false) {
                 // Delete activation key from database.
                 tmplist.get(0).setVerificationkey(null);
-                System.out.println(tmplist.get(0).getUsername());
                 tmplist.get(0).setVerified(true);
                 valid = true;
                 utx.commit();

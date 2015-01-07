@@ -13,24 +13,27 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
     </h:head>
     <h:body>
+        <div id='menuBar'>
+            <ul>
+                <li><h:link outcome="calendar" value="Home"/></li>
+                <li><h:link outcome="profile" value="Profile"/></li>
+                <li><h:link outcome="notifications" value="Notifications"/></li>
+                <li><h:link outcome="about_logged" value="About"/></li>
+                <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
+            </ul>
+        </div>
+        <f:metadata>
+            <f:viewAction action="#{manageNotification.updateNotifications()}"/>
+        </f:metadata>
+
+        <a class='title'>Notifications:</a>
+     
         <h:dataTable value="#{manageNotification.notifications}" var="notification">
-            
+
             <h:column>
-                <f:facet name="header">Notifications</f:facet>
                 #{notification.description}
             </h:column>
-          
+
         </h:dataTable>
-        <div id='menuBar'>
-         <ul>
-           <li><h:link outcome="calendar" value="Home"/></li>
-           <li><h:link outcome="profile" value="Profile"/></li>
-           <li><h:link outcome="notifications" value="Notifications"/></li>
-           <li><h:link outcome="about_logged" value="About"/></li>
-           <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
-         </ul>
-       </div>
-       
-       <a class='title'>Notifications:</a>
     </h:body>
 </html>
