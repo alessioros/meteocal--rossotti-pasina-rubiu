@@ -51,7 +51,7 @@ public class ManageInvites {
 
         for (User invite : invited) {
             usernotificationsPK.setIdNotification(notificationInvite.getIdNotification());
-            usernotificationsPK.setIdUser(invite.getIdUser());
+        usernotificationsPK.setIdUser(invite.getIdUser());
 
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);
