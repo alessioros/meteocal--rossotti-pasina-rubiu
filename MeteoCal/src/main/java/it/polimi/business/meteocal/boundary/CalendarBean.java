@@ -40,6 +40,7 @@ public class CalendarBean{
         this.getSessionDate();
         if(date == null){
             date=new Date();
+            date.setMinutes(((int)(date.getMinutes()/15)+1)*15);
             date.setDate(1);
             this.setSessionDate();
         }       
@@ -62,12 +63,14 @@ public class CalendarBean{
         if(date == null){
             date=new Date();
             date.setDate(1);
+            date.setMinutes(((int)(date.getMinutes()/15)+1)*15);
             this.setSessionDate();
         }
         return date;
     }   
     public void today(){        
         date=new Date();  
+        date.setMinutes(((int)(date.getMinutes()/15)+1)*15);
         this.setSessionDate();        
     }
     public String getDayNum(){
@@ -124,12 +127,19 @@ public class CalendarBean{
         else
             return "empty";
     }
-    public String eventOutcome(){
+    public String eventOutcome(){        
         if(mc.scheduleEvent(date))
             return "today_events?date="+date.getTime();
         else
             return "createEvent?date="+date.getTime();
-      
+    }
+    public String eventOutcome(String str){ 
+        if(str.equalsIgnoreCase("today")){
+            this.today();
+            return "createEvent?date="+date.getTime();
+        }
+        else
+            return "createEvent";
     }
 
     
