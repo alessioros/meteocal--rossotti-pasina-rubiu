@@ -106,14 +106,14 @@ public class CalendarTable{
         date.setMonth(this.getDate().getMonth()-1);      
     }
    
-    public String weekDay(int pos){ 
-        if(pos%7==0&&date.getMonth()==actual)
+    public String weekDay(){ 
+        if(date.getDay()==0&&date.getMonth()==actual)
             return "dayNumbHoly";
         else
-            if(pos%7==0&&date.getMonth()!=actual)
+            if(date.getDay()==0&&date.getMonth()!=actual)
                 return "dayNumbOldHoly";
             else
-                if(date.getMonth()==actual&&pos%7!=0)        
+                if(date.getMonth()==actual&&date.getDay()!=0)        
                     return "dayNumbWeek";
                 else
                     return "dayNumbOld";
@@ -125,11 +125,11 @@ public class CalendarTable{
             return "empty";
     }
     public String eventOutcome(){
-       /* if(mc.scheduleEvent(date))
-            return "today_events?date=";
+        if(mc.scheduleEvent(date))
+            return "today_events?faces-redirect=true&date="+date.getTime();
         else
-            return "createEvent?date=";*/
-        return "";
+            return "createEvent?faces-redirect=true&date="+date.getTime();
+      
     }
 
     
@@ -146,7 +146,7 @@ public class CalendarTable{
         for(int j=0;j<6;j++){   
             Week w = new Week();
             for(int i =1;i<8;i++){
-                Day d = new Day(date,this.eventOutcome(),this.eventClass(),this.weekDay(i));
+                Day d = new Day(date,this.eventOutcome(),this.eventClass(),this.weekDay());
                 w.getWeek().add(d);
                 date.setDate(date.getDate()+1);                 
             }
