@@ -61,18 +61,16 @@ public class ManageCalendar {
     public boolean scheduleEvent(Date date){
         try {
             Iterator<Event> cal;            
-            Date tmp = (Date)date.clone();       
-            tmp.setDate(date.getDate()-1);
-            
+           
             user = rv.getLoggedUser();            
             cal = user.getEventCollection().iterator();           
             
             while(cal.hasNext())
             {
                 Event e= cal.next();
-                if( e.getStartTime().getYear()   ==  tmp.getYear() &&
-                    e.getStartTime().getMonth()  ==  tmp.getMonth() &&
-                    e.getStartTime().getDate()   ==  tmp.getDate())
+                if( e.getStartTime().getYear()   ==  date.getYear() &&
+                    e.getStartTime().getMonth()  ==  date.getMonth() &&
+                    e.getStartTime().getDate()   ==  date.getDate())
                             return true;                    
             }
             return false;                                    

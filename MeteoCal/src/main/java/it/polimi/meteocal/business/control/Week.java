@@ -3,30 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.polimi.business.meteocal.boundary;
+package it.polimi.meteocal.business.control;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 /**
  *
- * @author roobew
+ * @author Simone
  */
 @Named
 @RequestScoped
-public class TodayBeans {
-    private Date date;
+public class Week {
+    private List<Day> week = new ArrayList();
 
-    public Date getDate() {
-        return date;
+    public List<Day> getWeek() {
+        return week;
     }
 
-    public void prova(){
-        System.out.println(date);
+    public void setWeek(List<Day> week) {
+        this.week = week;
     }
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    
     
 }
