@@ -28,7 +28,7 @@ import javax.servlet.http.HttpSession;
  */
 @Named
 @RequestScoped
-public class CalendarTable{    
+public class CalendarBean{    
     private Date date;
     private List<Week> cal = new ArrayList();    
     private int actual=13;
@@ -36,7 +36,7 @@ public class CalendarTable{
     @Inject 
     ManageCalendar mc;
     
-    public CalendarTable() {                            
+    public CalendarBean() {                            
         this.getSessionDate();
         if(date == null){
             date=new Date();

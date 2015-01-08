@@ -15,7 +15,7 @@ import javax.inject.Named;
  */
 @Named
 @RequestScoped
-public class TodayBeans {
+public class TodayBean {
     private Date date;
 
     public Date getDate() {
