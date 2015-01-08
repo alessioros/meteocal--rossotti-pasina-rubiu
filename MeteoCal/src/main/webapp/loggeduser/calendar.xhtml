@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
         <title>Calendar</title>
@@ -26,7 +28,12 @@
       <div class="switch">
          <h:selectBooleanCheckbox id="public" a:class='toggle' /> 
          <h:outputLabel for="public"><a id='publiclabel'>Public:</a></h:outputLabel>
-      </div>      
+      </div>  
+      <f:metadata>
+          <f:viewAction action="#{calendarTable.today()}"/>
+      </f:metadata>
+      
+      
       <table class='calendar'>
         <tr>
             <td id='monthcont' colspan='7'>
@@ -37,292 +44,27 @@
             </td>
         </tr>
         <tr>
-          <td id='daycont'>              
-              Mon
-          </td>
-          <td id='daycont'>  
-              Tue             
-          </td>
-          <td id='daycont'>           
-              Wed         
-          </td>
-          <td id='daycont'>           
-              Thu        
-          </td>
-          <td id='daycont'>
-              Fry                
-          </td>
-          <td id='daycont'>  
-              Sat             
-          </td>
-          <td id='daycont'>   
-              Sun               
-          </td>
-        </tr>          
-        <tr>
-          <td>
-            <div class="mask">
-                <a id="#{calendarTable.displayColDay(1)}">#{calendarTable.displayNumDay(1)}</a>
-                <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(2)}">#{calendarTable.displayNumDay(2)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(3)}">#{calendarTable.displayNumDay(3)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(4)}">#{calendarTable.displayNumDay(4)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(5)}">#{calendarTable.displayNumDay(5)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(6)}">#{calendarTable.displayNumDay(6)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(7)}">#{calendarTable.displayNumDay(7)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-        </tr>
-        <tr>                
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(8)}">#{calendarTable.displayNumDay(8)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>        
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(9)}">#{calendarTable.displayNumDay(9)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(10)}">#{calendarTable.displayNumDay(10)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(11)}">#{calendarTable.displayNumDay(11)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(12)}">#{calendarTable.displayNumDay(12)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(13)}">#{calendarTable.displayNumDay(13)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(14)}">#{calendarTable.displayNumDay(14)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(15)}">#{calendarTable.displayNumDay(15)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(16)}">#{calendarTable.displayNumDay(16)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>        
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(17)}">#{calendarTable.displayNumDay(17)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(18)}">#{calendarTable.displayNumDay(18)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(19)}">#{calendarTable.displayNumDay(19)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(20)}">#{calendarTable.displayNumDay(20)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(21)}">#{calendarTable.displayNumDay(21)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(22)}">#{calendarTable.displayNumDay(22)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(23)}">#{calendarTable.displayNumDay(23)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(24)}">#{calendarTable.displayNumDay(24)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>        
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(25)}">#{calendarTable.displayNumDay(25)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(26)}">#{calendarTable.displayNumDay(26)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(27)}">#{calendarTable.displayNumDay(27)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(28)}">#{calendarTable.displayNumDay(28)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(29)}">#{calendarTable.displayNumDay(29)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(30)}">#{calendarTable.displayNumDay(30)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(31)}">#{calendarTable.displayNumDay(31)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(32)}">#{calendarTable.displayNumDay(32)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>  
-          </td>
-          <td>  
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(33)}">#{calendarTable.displayNumDay(33)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>  
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(34)}">#{calendarTable.displayNumDay(34)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(35)}">#{calendarTable.displayNumDay(35)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>  
-          </td>
-        </tr>        
-        <tr>
-          <td>  
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(36)}">#{calendarTable.displayNumDay(36)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>    
-          </td>
-          <td>  
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(37)}">#{calendarTable.displayNumDay(37)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>          
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(38)}">#{calendarTable.displayNumDay(38)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>  
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(39)}">#{calendarTable.displayNumDay(39)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-          <td>
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(40)}">#{calendarTable.displayNumDay(40)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>  
-          </td>
-          <td> 
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(41)}">#{calendarTable.displayNumDay(41)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div> 
-          </td>
-          <td>  
-            <div class="mask">
-              <a id="#{calendarTable.displayColDay(42)}">#{calendarTable.displayNumDay(42)}</a>
-              <h:link outcome="#{calendarTable.displayEventOutcome()}"><div class="#{calendarTable.displayEventClass()}"></div></h:link>
-            </div>
-          </td>
-        </tr>
+          <td id='daycont'>Mon</td>
+          <td id='daycont'>Tue</td>
+          <td id='daycont'>Wed</td>
+          <td id='daycont'>Thu</td>
+          <td id='daycont'>Fry</td>
+          <td id='daycont'>Sat</td>
+          <td id='daycont'>Sun</td>
+        </tr>  
+        #{calendarTable.createCal()}
+          <ui:repeat var="w" value="#{calendarTable.cal}" >
+              <tr>
+                  <ui:repeat var="day" value="#{w.week}" >
+                    <td>
+                        <div class="mask">
+                            <a id="#{day.weekDay}">#{day.dayNum()}</a>
+                            <h:link outcome="#{day.eventOutcome}"><div class="#{day.eventClass}"></div></h:link>
+                        </div>
+                    </td>
+                  </ui:repeat>
+              </tr>          
+          </ui:repeat>                           
       </table>
       <div class='submit'>
           <h:button outcome='createEvent' value='CREATE NEW EVENT' id='button-create'/>
