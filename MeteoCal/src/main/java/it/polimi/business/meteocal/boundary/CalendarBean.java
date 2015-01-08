@@ -126,9 +126,9 @@ public class CalendarBean{
     }
     public String eventOutcome(){
         if(mc.scheduleEvent(date))
-            return "today_events?faces-redirect=true&date="+date.getTime();
+            return "today_events?date="+date.getTime();
         else
-            return "createEvent?faces-redirect=true&date="+date.getTime();
+            return "createEvent?date="+date.getTime();
       
     }
 

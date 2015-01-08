@@ -3,7 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    
     <h:head>
         <title>Create Event</title>
         <h:outputStylesheet library="css" name="registration.css"  />
@@ -38,13 +40,13 @@
                     <br/><div class="error"><h:message for="description" /></div>
                 </div>
                 <div class="field">
-                    <h:outputLabel a:id='fieldName' for="starttime">Start Time:</h:outputLabel>
-                    <h:inputText id='starttime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.startDateStr}" required="true" class='feedback-input' requiredMessage="Start Time is required"/>
+                    <h:outputLabel a:id='fieldName' for="starttime">Start Time:</h:outputLabel>                    
+                    <p:calendar id='starttime' value="#{eventDetails.startDateStr}" pattern="dd/MM/yyyy   HH:mm" stepMinute="15" required="true" requiredMessage="Start Time is required"/>                                     
                     <br/><div class="error"><h:message for="starttime" /></div>
-                </div>
+                </div>                
                 <div class="field">
-                    <h:outputLabel a:id='fieldName' for="endtime">End Time:</h:outputLabel>
-                    <h:inputText id='endtime' a:placeholder="dd/mm/yyyy : hh:mm" value="#{eventDetails.endDateStr}" required="true" class='feedback-input' requiredMessage="End Time is required"/>
+                    <h:outputLabel a:id='fieldName' for="endtime">End Time:</h:outputLabel>                    
+                    <p:calendar id="endtime"  value="#{eventDetails.endDateStr}" pattern="dd/MM/yyyy   HH:mm" stepMinute="15" required="true" requiredMessage="End Time is required"/>                                      
                     <br/><div class="error"><h:message for="endtime" /></div>
                 </div>
                 <div class='field'>

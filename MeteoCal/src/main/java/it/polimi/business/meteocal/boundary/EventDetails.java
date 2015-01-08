@@ -30,9 +30,9 @@ public class EventDetails {
     private Event event;
     private Location loc;
     private String message;
-    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy : HH:mm");
-    private String startDateStr;
-    private String endDateStr;
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy   HH:mm");
+    private Date startDateStr;
+    private Date endDateStr;
     private String lat;
     private String lon;
 
@@ -52,19 +52,19 @@ public class EventDetails {
         return lon;
     }
     
-    public String getStartDateStr() {
+    public Date getStartDateStr() {
         return this.startDateStr;
     }
 
-    public void setStartDateStr(String startDateStr) {
-        this.startDateStr = startDateStr;
+    public void setStartDateStr(Date startDateStr) {
+         this.startDateStr = startDateStr;
     }
     
-    public String getEndDateStr() {
+    public Date getEndDateStr() {
         return this.endDateStr;
     }
 
-    public void setEndDateStr(String startDateStr) {
+    public void setEndDateStr(Date startDateStr) {
         this.endDateStr = startDateStr;
     }
     
@@ -113,8 +113,8 @@ public class EventDetails {
     public String create() {		
         
         event.setIdOrganizer(rv.getLoggedUser());
-        event.setStartTime(dateConverter(startDateStr));
-	event.setEndTime(dateConverter(endDateStr));
+        event.setStartTime(startDateStr);
+	event.setEndTime(endDateStr);
         loc.setLatitude(Float.parseFloat(lat));
         loc.setLongitude(Float.parseFloat(lon));
         
