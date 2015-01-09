@@ -5,6 +5,7 @@
  */
 package it.polimi.business.meteocal.boundary;
 
+import it.polimi.meteocal.business.control.AddUser;
 import it.polimi.meteocal.business.control.ManageInvites;
 import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.Event;
@@ -26,91 +27,102 @@ import javax.persistence.PersistenceContext;
 @ManagedBean
 @ViewScoped
 public class InvitePeople {
-    
+
     private User user;
     private List<User> contacts;
-    
+
     @PersistenceContext
     EntityManager em;
-    
+
     @Inject
     RegisterValidation rv;
-    
+
     @Inject
     ManageInvites mi;
-    
+
+    @Inject
+    AddUser ad;
+
     private Integer event;
-    
+    private String contact;
+
     private Map<Integer, Boolean> selectedIds = new HashMap<>();
     private List<User> invited;
 
     // Actions -----------------------------------------------------------------------------------
     public String invite() {
-        
+
         contacts = updateContacts();
-        
+
         invited = new ArrayList<>();
         for (User contact : contacts) {
-            
+
             if (selectedIds.get(contact.getIdUser())) {
                 invited.add(contact);
-                selectedIds.remove(contact.getIdUser());                
+                selectedIds.remove(contact.getIdUser());
             }
         }
-        List<Event> tmplist=em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
+        List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
 
         mi.createInvites(invited, tmplist.get(0));
-        
+
         return "calendar?faces-redirect=true";
-        
+
     }
 
-    
+    public void addUser() {
+        user = rv.getLoggedUser();
+        if (!user.getUsername().equals(contact)) {
+            ad.addUser(contact);
+        }
+        contacts = updateContacts();
+    }
+
     public List<User> updateContacts() {
-        
+
         user = rv.getLoggedUser();
         contacts = (List<User>) user.getUserCollection();
-        return contacts;        
+        return contacts;
     }
-    
+
     public User getUser() {
         return user;
     }
-    
+
     public void setUser(User user) {
         this.user = user;
     }
-    
+
     public List<User> getContacts() {
         return contacts;
     }
-    
+
     public void setContacts(List<User> contacts) {
         this.contacts = contacts;
     }
-    
-    public Map<Integer, Boolean> getSelectedIds() {
-        return selectedIds;
-    }
-    
-    public void setSelectedIds(Map<Integer, Boolean> selectedIds) {
-        this.selectedIds = selectedIds;
-    }
-    
-    public List<User> getSelectedDataList() {
-        return invited;
-    }
-    
-    public void setSelectedDataList(List<User> selectedDataList) {
-        this.invited = selectedDataList;
-    }
-    
+
     public Integer getEvent() {
         return event;
     }
 
     public void setEvent(Integer event) {
         this.event = event;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public Map<Integer, Boolean> getSelectedIds() {
+        return selectedIds;
+    }
+
+    public void setSelectedIds(Map<Integer, Boolean> selectedIds) {
+        this.selectedIds = selectedIds;
     }
 
     public List<User> getInvited() {
@@ -120,5 +132,5 @@ public class InvitePeople {
     public void setInvited(List<User> invited) {
         this.invited = invited;
     }
-    
+
 }
