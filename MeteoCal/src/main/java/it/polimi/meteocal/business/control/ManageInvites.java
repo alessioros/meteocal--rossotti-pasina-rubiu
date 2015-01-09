@@ -26,10 +26,10 @@ public class ManageInvites {
     @PersistenceContext
     EntityManager em;
 
-    private Notification notificationInvite=new Notification();
-    private Invitation invitation=new Invitation();
-    private Usernotification usernotifications=new Usernotification();
-    private UsernotificationPK usernotificationsPK=new UsernotificationPK();
+    private Notification notificationInvite;
+    private Invitation invitation;
+    private Usernotification usernotifications;
+    private UsernotificationPK usernotificationsPK;
 
     /**
      * Takes a list of users and a event and sets all the tables Invitation
@@ -40,7 +40,12 @@ public class ManageInvites {
      * @param event
      */
     public void createInvites(List<User> invited, Event event) {
-
+        
+        notificationInvite = new Notification();
+        invitation = new Invitation();
+        usernotifications = new Usernotification();
+        usernotificationsPK = new UsernotificationPK();
+        
         notificationInvite.setDescription("You have been invited to the event " + event.getName());
         notificationInvite.setIdEvent(event);
         em.persist(notificationInvite);
@@ -51,7 +56,7 @@ public class ManageInvites {
 
         for (User invite : invited) {
             usernotificationsPK.setIdNotification(notificationInvite.getIdNotification());
-        usernotificationsPK.setIdUser(invite.getIdUser());
+            usernotificationsPK.setIdUser(invite.getIdUser());
 
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);

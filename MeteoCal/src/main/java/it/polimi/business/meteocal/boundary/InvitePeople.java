@@ -45,7 +45,7 @@ public class InvitePeople {
     private List<User> invited;
 
     // Actions -----------------------------------------------------------------------------------
-    public void invite() {
+    public String invite() {
         
         contacts = updateContacts();
         
@@ -60,6 +60,8 @@ public class InvitePeople {
         List<Event> tmplist=em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
 
         mi.createInvites(invited, tmplist.get(0));
+        
+        return "calendar?faces-redirect=true";
         
     }
 

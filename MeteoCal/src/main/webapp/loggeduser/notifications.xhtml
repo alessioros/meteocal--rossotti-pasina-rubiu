@@ -36,15 +36,11 @@
                 </h:column>
 
                 <h:column>
-                    <h:commandButton value='Accept' a:id='button-accept' action="#{notificationPage.accept}">
-                        <f:setPropertyActionListener target="#{notificationPage.notification}" value="#{notification}" />
-                    </h:commandButton>
+                    <h:commandButton value='Accept' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
                 </h:column>
 
                 <h:column>
-                    <h:commandButton value='Decline' a:id='button-decline' action="#{notificationPage.decline}">
-                        <f:setPropertyActionListener target="#{notificationPage.notification}" value="#{notification}" />
-                    </h:commandButton>
+                    <h:commandButton value='Decline' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
                 </h:column>
 
             </h:dataTable>
