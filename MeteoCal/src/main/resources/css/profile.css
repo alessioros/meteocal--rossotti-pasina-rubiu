@@ -44,7 +44,7 @@ html{
     display:inline-block;
 }
 
-#button-change,#button-add{
+#button-change{
   margin-top:50px;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;
@@ -60,20 +60,31 @@ html{
   display:block;
 }
 
-#button-change:hover,#button-add:hover{
+#button-add{
+    background-color:rgba(255,0,0,0);
+    margin-top:10px;
+    width:37px;
+    height:37px;
+    border:0px;
+    background-image:url("#{resource['css:icons/adduser.png']}");
+    background-repeat:no-repeat;
+    background-size: 37px 37px;
+    float:right;
+    margin-right:80px;
+    opacity:1;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: ocapity 0.5s;
+}
+
+#button-add:hover{
+    opacity:0.8;
+}
+#button-change:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
 }
 
-#button-add{
-    margin-top:10px;
-    padding:5px;
-    padding-left: 10px;
-    margin-left:0px;
-    float:right;
-    margin-right:20px;
-}
 .addrList{
     float:right;
     margin-right:80px;
