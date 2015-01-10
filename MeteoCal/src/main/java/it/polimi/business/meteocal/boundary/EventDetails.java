@@ -31,11 +31,13 @@ public class EventDetails {
     private Location loc;
     private String message;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy   HH:mm");
-    private Date startDateStr;
-    private Date endDateStr;
+    private long startDateLong;
+    private long endDateLong;
+    private Date startDate;
+    private Date endDate;
     private String lat;
     private String lon;
-
+    
     public void setLat(String lat) {
         this.lat = lat;
     }
@@ -51,21 +53,39 @@ public class EventDetails {
     public String getLon() {
         return lon;
     }
-    
-    public Date getStartDateStr() {
-        return this.startDateStr;
+
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setStartDateStr(Date startDateStr) {
-         this.startDateStr = startDateStr;
-    }
-    
-    public Date getEndDateStr() {
-        return this.endDateStr;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public void setEndDateStr(Date startDateStr) {
-        this.endDateStr = startDateStr;
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+    
+    
+    
+    public long getStartDateLong() {
+        return this.startDateLong;
+    }
+
+    public void setStartDateLong(long startDateLong) {
+         this.startDateLong = startDateLong;
+    }
+    
+    public long getEndDateLong() {
+        return this.endDateLong;
+    }
+
+    public void setEndDateLong(long startDateLong) {
+        this.endDateLong = startDateLong;
     }
     
     public String getMessage() {
@@ -98,23 +118,18 @@ public class EventDetails {
         this.event = event;
     }
     
-    public Date dateConverter(String input){
-        
-        Date date=null;
-        try {
-            date = formatter.parse(input);
-        } catch (ParseException ex) {
-            Logger.getLogger(EventDetails.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return date;
+    public void dateConverter(){
+        this.startDate = new Date(this.startDateLong);
+        this.endDate = new Date(this.endDateLong+3600000);
+        //this.startDate.setTime(this.startDateLong);
+        //this.endDate.setTime(this.endDateLong);               
     }
     
     public String create() {		
         
         event.setIdOrganizer(rv.getLoggedUser());
-        event.setStartTime(startDateStr);
-	event.setEndTime(endDateStr);
+        event.setStartTime(startDate);
+	event.setEndTime(endDate);
         loc.setLatitude(Float.parseFloat(lat));
         loc.setLongitude(Float.parseFloat(lon));
         

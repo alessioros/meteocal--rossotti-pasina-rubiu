@@ -67,7 +67,8 @@
           </ui:repeat>                           
       </table>
       <div class='submit'>
-          <h:button outcome='createEvent' value='CREATE NEW EVENT' id='button-create'/>
+          
+          <h:button outcome='#{calendarBean.eventOutcome("today")}' value='CREATE NEW EVENT' id='button-create'/>
       </div>
    <!--   <div class='submit'>
           <h:button outcome='invitePeople' value='INVITE' id='button-invite'/>

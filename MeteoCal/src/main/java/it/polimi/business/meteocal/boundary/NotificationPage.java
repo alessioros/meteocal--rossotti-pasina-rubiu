@@ -42,8 +42,8 @@ public class NotificationPage {
     private RegisterValidation rv;
 
     private User user;
+    private String message;
     private List<Notification> notifications = new ArrayList();
-    private Notification notification;
 
     public List<Notification> updateNotifications() {
         user = rv.getLoggedUser();
@@ -60,12 +60,14 @@ public class NotificationPage {
         return notifications;
     }
 
-    public void accept() {
+    public void accept(Notification notification) {
         mn.acceptInvite(notification);
+        message="Invite accepted!";
     }
 
-    public void decline() {
+    public void decline(Notification notification) {
         mn.declineInvite(notification);
+        message="Invite declined";
     }
 
     public User getUser() {
@@ -83,13 +85,13 @@ public class NotificationPage {
     public void setNotifications(List<Notification> notifications) {
         this.notifications = notifications;
     }
-    
-    public Notification getNotification() {
-        return notification;
+
+    public String getMessage() {
+        return message;
     }
 
-    public void setNotification(Notification notification) {
-        this.notification = notification;
+    public void setMessage(String message) {
+        this.message = message;
     }
     
 }

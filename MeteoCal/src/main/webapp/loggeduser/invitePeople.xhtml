@@ -55,6 +55,11 @@
 
                     </li>
                 </h:form>
+                <h:form>
+                    <h:inputText id='contact' value="#{invitePeople.contact}" required="true" class='feedback-input' requiredMessage="Insert a valid username"/>
+                    <h:commandButton type='submit' value='Add new user to addresslist' a:id='button-add' action="#{invitePeople.addUser()}"/>
+                    <br/><div class="error"><h:message for="contact"/></div>   
+                </h:form>    
             </ul>
         </div> 
     </h:body>

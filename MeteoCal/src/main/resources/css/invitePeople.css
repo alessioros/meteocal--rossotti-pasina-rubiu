@@ -37,7 +37,7 @@ html{
     display:inline-block;
 }
 
-#button-invite{
+#button-invite,#button-add{
   margin-bottom:20px;
   border: #fbfbfb solid 2px;
   background-color: #8DB9CB;
@@ -53,7 +53,7 @@ html{
   display:block;
 }
 
-#button-invite:hover{
+#button-invite:hover,button-add:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
