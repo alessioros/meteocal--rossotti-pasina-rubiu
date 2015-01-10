@@ -141,9 +141,6 @@ public class CalendarBean{
         else
             return "createEvent";
     }
-
-    
-    
     public void createCal(){
         //trovo il primo giorno da visualizzare                         
         actual=date.getMonth();
@@ -168,4 +165,6 @@ public class CalendarBean{
             
         
     }
+    
+    
 }

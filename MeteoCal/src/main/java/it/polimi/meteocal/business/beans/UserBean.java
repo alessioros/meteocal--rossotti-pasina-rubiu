@@ -6,9 +6,15 @@
 package it.polimi.meteocal.business.beans;
 
 import it.polimi.meteocal.business.control.RegisterValidation;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
+import javax.transaction.NotSupportedException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -19,11 +25,33 @@ import javax.inject.Named;
 public class UserBean {
     @EJB
     RegisterValidation rm;
+    @Resource
+    UserTransaction utx;
     
     public UserBean() {
     }
     
     public String getName() {
         return rm.getLoggedUser().getName();
+    }
+    
+    public boolean getCalendarVisibility(){
+        return rm.getLoggedUser().getPublicCalendar();
+    }
+    public void setCalendarVisibility(boolean calendarVisibility){
+        try {
+            utx.begin();
+            rm.getLoggedUser().setPublicCalendar(calendarVisibility);
+            utx.commit();
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception){
+                ;
+            }
+        
+        }
     }
 }
