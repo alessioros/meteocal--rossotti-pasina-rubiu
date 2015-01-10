@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.polimi.business.meteocal.boundary;
 
 import it.polimi.meteocal.business.control.CheckFields;
@@ -13,10 +8,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
-/**
- *
- * @author alessiorossotti
- */
 @Named
 @RequestScoped
 public class Registration {
@@ -29,9 +20,6 @@ public class Registration {
     private User user;
     private String message;
     private String confpassword;
-
-    public Registration() {
-    }
 
     public String getMessage() {
         return this.message;
@@ -47,7 +35,11 @@ public class Registration {
         }
         return user;
     }
-
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+    
     public String getConfpassword() {
         return confpassword;
     }
@@ -56,12 +48,9 @@ public class Registration {
         this.confpassword = confpassword;
     }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     /**
-     * checks the fields of the registrations and if OK creates the user
+     * checks the registrations fields and if they are OK creates the user
      */
     public void register() {
         if (!cf.checkUsername(user.getUsername())) {
@@ -79,4 +68,5 @@ public class Registration {
             message = "Confirmation email sent, please check your email";
         }
     }
+    
 }

@@ -6,6 +6,7 @@
 package it.polimi.meteocal.business.control;
 
 import it.polimi.meteocal.business.entity.User;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
@@ -15,10 +16,6 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
-/**
- *
- * @author alessiorossotti
- */
 @ManagedBean
 @RequestScoped
 public class ManagePersonalData {
@@ -45,7 +42,12 @@ public class ManagePersonalData {
         }
         return user;
     }
-
+    
+    /**
+     * Changes the user fields that have been passed not empty
+     * they are stored in passed User:
+     * @param updated
+     */
     public void changeData(User updated) {
 
         try {
@@ -77,5 +79,36 @@ public class ManagePersonalData {
 
         }
 
+    }
+    
+    /**
+     * Aggiunge nella tabella contact un record con l'id dell'utente loggato e
+     * l'id dell'utente di cui si è passato l'username
+     *
+     * @param username
+     */
+    public void addUser(String username) {
+        try {
+            
+
+            List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
+
+            if (!checkexist.isEmpty()) {
+                utx.begin();
+                
+                user = rv.getLoggedUser();
+                user.getUserCollection().add(checkexist.get(0));
+               
+                utx.commit();
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }
+
+        }
     }
 }

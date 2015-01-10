@@ -5,7 +5,6 @@
  */
 package it.polimi.business.meteocal.boundary;
 
-import it.polimi.meteocal.business.control.AddUser;
 import it.polimi.meteocal.business.control.CheckFields;
 import it.polimi.meteocal.business.control.ManagePersonalData;
 import it.polimi.meteocal.business.control.PasswordEncrypter;
@@ -35,9 +34,6 @@ public class PersonalProfile {
 
     @Inject
     RegisterValidation rv;
-    
-    @Inject
-    AddUser ad;
     
     @EJB
     private CheckFields cf;
@@ -122,7 +118,7 @@ public class PersonalProfile {
     public void submitAddUser() {
         user = rv.getLoggedUser();
         if(!user.getUsername().equals(contact)){
-                    ad.addUser(contact);
+                    mpd.addUser(contact);
         }
         contacts=updateContacts();
     }

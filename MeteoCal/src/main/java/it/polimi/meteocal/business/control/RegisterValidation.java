@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.polimi.meteocal.business.control;
 
 import it.polimi.meteocal.business.beans.SendEmailBean;
@@ -36,7 +31,13 @@ public class RegisterValidation {
     
     @EJB
     private SendEmailBean sm;
-
+    
+    /**
+     * Persist the user that want to register and sends an email
+     * for register confirmation with a generated key
+     * Calendar is set public by default
+     * @param user
+     */
     public void createUser(User user) {
 
         user.setGroupname("USERS");
@@ -62,11 +63,11 @@ public class RegisterValidation {
        
     }
 
-    public void unregister() {
-        em.remove(getLoggedUser());
-    }
-    
-     public User getLoggedUser() {
+    /**
+     * Returns the currently logged user
+     * @return loggedUser
+     */
+    public User getLoggedUser() {
          Query query = em.createQuery("SELECT u FROM User u WHERE u.username=:USERNAME");
         query.setParameter("USERNAME", principal.getName());
         List<User> user = query.getResultList();

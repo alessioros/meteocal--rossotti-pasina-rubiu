@@ -5,8 +5,8 @@
  */
 package it.polimi.business.meteocal.boundary;
 
-import it.polimi.meteocal.business.control.AddUser;
 import it.polimi.meteocal.business.control.ManageInvites;
+import it.polimi.meteocal.business.control.ManagePersonalData;
 import it.polimi.meteocal.business.control.RegisterValidation;
 import it.polimi.meteocal.business.entity.Event;
 import it.polimi.meteocal.business.entity.User;
@@ -33,15 +33,15 @@ public class InvitePeople {
 
     @PersistenceContext
     EntityManager em;
+    
+    @Inject
+    ManagePersonalData mpd;
 
     @Inject
     RegisterValidation rv;
 
     @Inject
     ManageInvites mi;
-
-    @Inject
-    AddUser ad;
 
     private Integer event;
     private String contact;
@@ -73,7 +73,7 @@ public class InvitePeople {
     public void addUser() {
         user = rv.getLoggedUser();
         if (!user.getUsername().equals(contact)) {
-            ad.addUser(contact);
+            mpd.addUser(contact);
         }
         contacts = updateContacts();
     }

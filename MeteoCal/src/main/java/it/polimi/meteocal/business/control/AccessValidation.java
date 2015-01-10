@@ -151,12 +151,10 @@ public class AccessValidation {
                 query.setParameter("vk", key);
 
                 user = (User) query.getResultList().get(0);
-
                 user.setPassword(password);
-
-                utx.commit();
                 user.setVerificationkey(null);
                 message = "Password has been reset!";
+                utx.commit();
 
             } catch (Exception e) {
 
