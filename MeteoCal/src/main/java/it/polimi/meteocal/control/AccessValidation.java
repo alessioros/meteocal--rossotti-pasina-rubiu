@@ -28,12 +28,7 @@ import javax.transaction.UserTransaction;
 @RequestScoped
 public class AccessValidation {
 
-    private String password;
-    private String confpassword;
-    private String message;
-    private String email;
     private User user;
-    private String key;
 
     @PersistenceContext
     EntityManager em;
@@ -41,61 +36,18 @@ public class AccessValidation {
     @EJB
     private SendEmailBean sm;
 
-    @EJB
-    private CheckFields cf;
-
     @Resource
     UserTransaction utx;
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getConfpassword() {
-        return this.confpassword;
-    }
-
-    public void setConfpassword(String confpassword) {
-        this.confpassword = confpassword;
-    }
-
-    public String getMessage() {
-        return this.message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void passwordRecovery() {
+    /**
+     * Sends an email to the user with info for recoverying the password
+     *
+     * @param email of the user
+     */
+    public void passwordRecovery(String email) {
 
         Query query;
 
-        if (cf.checkEmail(email)) {
-            message = "This email doesn't exist";
-
-            return;
-        }
         try {
             utx.begin();
 
@@ -131,42 +83,38 @@ public class AccessValidation {
             e.printStackTrace();
         }
 
-        message = "Email sent! , please check your mail";
     }
 
-    public void passwordReset() {
+    /**
+     * Checks the two password, if the fields are correct changes user's
+     * password
+     */
+    public void passwordReset(String password, String confpassword,String key) {
 
         Query query;
 
-        if (!cf.checkPassword(password, confpassword)) {
-            message = "Passwords don't match";
-        } else if (confpassword.length() < 6) {
-            message = "Password should be at least 6 characters";
-        } else {
+        try {
 
+            utx.begin();
+            query = em.createQuery("select u from User u where u.verificationkey=:vk");
+            query.setParameter("vk", key);
+
+            user = (User) query.getResultList().get(0);
+            user.setPassword(password);
+            user.setVerificationkey(null);
+
+            utx.commit();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
             try {
-
-                utx.begin();
-                query = em.createQuery("select u from User u where u.verificationkey=:vk");
-                query.setParameter("vk", key);
-
-                user = (User) query.getResultList().get(0);
-                user.setPassword(password);
-                user.setVerificationkey(null);
-                message = "Password has been reset!";
-                utx.commit();
-
-            } catch (Exception e) {
-
-                e.printStackTrace();
-                try {
-                    utx.rollback();
-                } catch (IllegalStateException | SecurityException | SystemException exception) {
-                }
-
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
             }
 
         }
+
     }
 
 }

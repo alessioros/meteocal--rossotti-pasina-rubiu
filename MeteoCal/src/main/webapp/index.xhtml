@@ -28,21 +28,21 @@
       <div class='form-div'>
         <h:form>
           <div id='username'>
-            <h:inputText class='feedback-input' a:placeholder='Username or Email' required="true" value="#{loginBean.username}" id='username' requiredMessage="Username is required"/>
+            <h:inputText class='feedback-input' a:placeholder='Username or Email' required="true" value="#{login.username}" id='username' requiredMessage="Username is required"/>
             <br/><div class="error"><h:message for="username" /></div>
           </div>
           <div id='password'>
-            <h:inputSecret class='feedback-input' a:placeholder='Password' required="true" value="#{loginBean.password}" id='password' requiredMessage="Password is required"/>
+            <h:inputSecret class='feedback-input' a:placeholder='Password' required="true" value="#{login.password}" id='password' requiredMessage="Password is required"/>
             <br/>
             <div class="error">
                 <h:message for="password" />
-                <h:outputText value="#{loginBean.message}"></h:outputText>
+                <h:outputText value="#{login.message}"></h:outputText>
             </div>
           </div>
           <p class='forgot'><h:link outcome="forgot" value="Forgot your password?"/></p>
           <div class='submit'>
             <h:button outcome='registration' value='REGISTER' a:id='button-reg'/>
-            <h:commandButton type='submit' value='LOG IN' a:id='button-log' action="#{loginBean.login()}"/> 
+            <h:commandButton type='submit' value='LOG IN' a:id='button-log' action="#{login.login()}"/> 
           </div>
         </h:form>
       </div>

@@ -10,7 +10,7 @@
         <h:outputStylesheet library="css" name="application.css"  />
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
         <f:metadata>
-            <f:viewParam name="key" value="#{accessValidation.key}"/>
+            <f:viewParam name="key" value="#{login.key}"/>
         </f:metadata>
     </h:head>
     <h:body>
@@ -26,13 +26,13 @@
         <h:form>
           <div class='formreset'>
             <h:outputLabel a:id='fieldName' for="pass">Password:</h:outputLabel>
-            <h:inputSecret class='feedback-input' required="true" value="#{accessValidation.password}" id='pass' requiredMessage="Enter a Password"/>
+            <h:inputSecret class='feedback-input' required="true" value="#{login.password}" id='pass' requiredMessage="Enter a Password"/>
             <br/><div class="error"><h:message for="pass" /></div>
             <h:outputLabel a:id='fieldName' for="confpass">Confirm password:</h:outputLabel>
-            <h:inputSecret class='feedback-input' required="true" value="#{accessValidation.confpassword}" id='confpass' requiredMessage="Confirm your Password"/>
+            <h:inputSecret class='feedback-input' required="true" value="#{login.confpassword}" id='confpass' requiredMessage="Confirm your Password"/>
             <br/><div class="error"><h:message for="confpass" /></div>
-            <h:outputText class='message' value="#{accessValidation.message}"></h:outputText>
-            <h:commandButton type='submit' value='RESET' a:id='button-reset' action="#{accessValidation.passwordReset()}"/>
+            <h:outputText class='message' value="#{login.message}"></h:outputText>
+            <h:commandButton type='submit' value='RESET' a:id='button-reset' action="#{login.submitPasswordReset()}"/>
           </div>
         </h:form>
     </h:body>

@@ -22,10 +22,10 @@
         <h:form>
           <div class='form'>
             <h:outputLabel a:id='fieldName' for="email">Insert your email:</h:outputLabel>
-            <h:inputText class='feedback-input forgot-input' required="true" value="#{accessValidation.email}" id='email' requiredMessage="Enter an email"/>
+            <h:inputText class='feedback-input forgot-input' required="true" value="#{login.email}" id='email' requiredMessage="Enter an email"/>
             <br/><div class="error"><h:message for="email" /></div>
-            <h:outputText class='message' value="#{accessValidation.message}"></h:outputText>
-            <h:commandButton type='submit' value='RESET' a:id='button-reset' action="#{accessValidation.passwordRecovery()}"/>
+            <h:outputText class='message' value="#{login.message}"></h:outputText>
+            <h:commandButton type='submit' value='RESET' a:id='button-reset' action="#{login.submitPasswordRecovery()}"/>
           </div>
         </h:form>
     </h:body>
