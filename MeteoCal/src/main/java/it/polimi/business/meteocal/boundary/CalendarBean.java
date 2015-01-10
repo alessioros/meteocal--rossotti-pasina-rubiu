@@ -135,8 +135,8 @@ public class CalendarBean{
     }
     public String eventOutcome(String str){ 
         if(str.equalsIgnoreCase("today")){
-            this.today();
-            return "createEvent?date="+date.getTime();
+            Date tmp = new Date();
+            return "createEvent?date="+tmp.getTime();
         }
         else
             return "createEvent";
