@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
 import javax.transaction.NotSupportedException;
 import javax.transaction.SystemException;
@@ -27,6 +28,7 @@ public class UserBean {
     RegisterValidation rm;
     @Resource
     UserTransaction utx;
+    boolean publicCalendar;
     
     public UserBean() {
     }
@@ -34,14 +36,23 @@ public class UserBean {
     public String getName() {
         return rm.getLoggedUser().getName();
     }
-    
-    public boolean getCalendarVisibility(){
-        return rm.getLoggedUser().getPublicCalendar();
+
+    public boolean isPublicCalendar() {
+        this.publicCalendar = rm.getLoggedUser().getPublicCalendar();
+        return publicCalendar;
     }
-    public void setCalendarVisibility(boolean calendarVisibility){
+
+    public void setPublicCalendar(boolean publicCalendar) {
+        ;//this.publicCalendar = publicCalendar;
+    }
+    
+    
+    public void change(){
+       this.publicCalendar = !this.isPublicCalendar();
+        //System.out.println("qui");
         try {
             utx.begin();
-            rm.getLoggedUser().setPublicCalendar(calendarVisibility);
+            rm.getLoggedUser().setPublicCalendar(publicCalendar);
             utx.commit();
         } catch (Exception e) {
 
@@ -53,5 +64,8 @@ public class UserBean {
             }
         
         }
+    }
+    public void setCalendarVisibility(boolean calendarVisibility){
+        
     }
 }

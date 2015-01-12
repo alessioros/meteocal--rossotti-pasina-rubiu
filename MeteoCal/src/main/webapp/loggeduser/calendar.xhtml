@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <title>Calendar</title>
@@ -26,7 +27,18 @@
 
       <a class='title'>Calendar:</a>
       <div class="switch">
-          <h:selectBooleanCheckbox id="public" value="#{userBean.calendarVisibility}" a:class='toggle' /> 
+          <h:selectBooleanCheckbox id="public" value="#{userBean.publicCalendar}" a:class='toggle'>
+                <!-- 
+                    <p:selectBooleanButton onLabel="Public" offLabel="Private"  onIcon="ui-icon-check" offIcon="ui-icon-close" id="public" onchange="" value="" style=" width: 60; height: 30 "/>      
+                    <h:selectBooleanCheckbox id="public" value="" onclick='submit()' immediate="true" valueChangeListener='' a:class='toggle' /> 
+                    <h:outputLabel for="public"><a id='publiclabel'>Public:</a></h:outputLabel>       
+
+                    <center>
+                       <p:selectBooleanButton onLabel="Public" offLabel="Private" onIcon="ui-icon-check" offIcon="ui-icon-close" id="public" value="" style=" width: 60; height: 30 ">
+                    </center>        
+                -->
+            <p:ajax listener="#{userBean.change()}"/>
+        </h:selectBooleanCheckbox>
          <h:outputLabel for="public"><a id='publiclabel'>Public:</a></h:outputLabel>
       </div>  
       <f:metadata>
