@@ -266,7 +266,24 @@ input.toggle:checked + label:after {
 	float:right;
 }
 
-#button-create,#button-invite{
+#button-search{
+	border: #fbfbfb solid 2px;
+	background-color: #8DB9CB;
+	color:white;
+	font-size:20px;
+	font-weight:200;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+	transition: all 0.5s;
+}
+
+#button-search:hover{
+    background-color: white;
+	color: #8DB9CB;
+	border: #8DB9CB solid 2px;
+}
+
+#button-create{
 	width: 250px;
 	border: #fbfbfb solid 2px;
 	background-color: #8DB9CB;
@@ -285,3 +302,12 @@ input.toggle:checked + label:after {
 	color: #8DB9CB;
 	border: #8DB9CB solid 2px;
 }
+
+.error{
+    margin-top:5px;
+    font-size: 16px;
+    padding-left:10px;
+    width:50%;
+    color: red;
+}
+

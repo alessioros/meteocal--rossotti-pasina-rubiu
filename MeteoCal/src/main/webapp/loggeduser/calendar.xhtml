@@ -15,19 +15,26 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
     </h:head>
     <h:body>
-     <div id='menuBar'>
-      <ul>
-        <li><h:link outcome="calendar" value="Home"/></li>
-        <li><h:link outcome="profile" value="Profile"/></li>
-        <li><h:link outcome="notifications" value="Notifications"/></li>
-        <li><h:link outcome="about_logged" value="About"/></li>
-        <li id='logout'><h:form><h:commandLink action="#{login.logout()}" value="logout"/></h:form></li>
-      </ul>
-    </div>
+        <div id='menuBar'>
+            <ul>
+                <li><h:link outcome="calendar" value="Home"/></li>
+                <li><h:link outcome="profile" value="Profile"/></li>
+                <li><h:link outcome="notifications" value="Notifications"/></li>
+                <li><h:link outcome="about_logged" value="About"/></li>
+                <li id='logout'><h:form><h:commandLink action="#{login.logout()}" value="logout"/></h:form></li>
+            </ul>
+        </div>
+        <div>
+            <h:form>
+                <h:inputText id='search' value="#{search.input}" required="true" class='feedback-input' requiredMessage="Insert something to search for"/>
+                <h:commandButton type='submit' value='Search' a:id='button-search' action="#{search.searchUser()}"/>
+                <br/><div class="error"><h:message for="search"/></div>   
+            </h:form>  
+        </div>
 
-      <a class='title'>Calendar:</a>
-      <div class="switch">
-          <h:selectBooleanCheckbox id="public" value="#{userBean.publicCalendar}" a:class='toggle'>
+        <a class='title'>Calendar:</a>
+        <div class="switch">
+            <h:selectBooleanCheckbox id="public" value="#{userBean.publicCalendar}" a:class='toggle'>
                 <!-- 
                     <p:selectBooleanButton onLabel="Public" offLabel="Private"  onIcon="ui-icon-check" offIcon="ui-icon-close" id="public" onchange="" value="" style=" width: 60; height: 30 "/>      
                     <h:selectBooleanCheckbox id="public" value="" onclick='submit()' immediate="true" valueChangeListener='' a:class='toggle' /> 
@@ -37,53 +44,53 @@
                        <p:selectBooleanButton onLabel="Public" offLabel="Private" onIcon="ui-icon-check" offIcon="ui-icon-close" id="public" value="" style=" width: 60; height: 30 ">
                     </center>        
                 -->
-            <p:ajax listener="#{userBean.change()}"/>
-        </h:selectBooleanCheckbox>
-         <h:outputLabel for="public"><a id='publiclabel'>Public:</a></h:outputLabel>
-      </div>  
-      <f:metadata>
-          <f:viewAction action="#{calendarBean.today()}"/>
-      </f:metadata>
-      
-      
-      <table class='calendar'>
-        <tr>
-            <td id='monthcont' colspan='7'>
-                <h:form><h:commandLink action="#{calendarBean.prev()}" a:id="prev"/></h:form>
-                <center><a id='month'>#{calendarBean.monthStr} #{calendarBean.year}</a></center>
-                <h:form><h:commandLink action="#{calendarBean.next()}" a:id="next"/></h:form>
-                <br/>
-            </td>
-        </tr>
-        <tr>
-          <td id='daycont'>Mon</td>
-          <td id='daycont'>Tue</td>
-          <td id='daycont'>Wed</td>
-          <td id='daycont'>Thu</td>
-          <td id='daycont'>Fry</td>
-          <td id='daycont'>Sat</td>
-          <td id='daycont'>Sun</td>
-        </tr>  
-        #{calendarBean.createCal()}
-          <ui:repeat var="w" value="#{calendarBean.cal}" >
-              <tr>
-                  <ui:repeat var="day" value="#{w.week}" >
-                    <td>
-                        <div class="mask">
-                            <a id="#{day.weekDay}">#{day.dayNum()}</a>
-                            <h:link outcome="#{day.eventOutcome}"><div class="#{day.eventClass}"></div></h:link>
-                        </div>
-                    </td>
-                  </ui:repeat>
-              </tr>          
-          </ui:repeat>                           
-      </table>
-      <div class='submit'>
-          
-          <h:button outcome='#{calendarBean.eventOutcome("today")}' value='CREATE NEW EVENT' id='button-create'/>
-      </div>
-   <!--   <div class='submit'>
-          <h:button outcome='invitePeople' value='INVITE' id='button-invite'/>
-      </div>-->
+                <p:ajax listener="#{userBean.change()}"/>
+            </h:selectBooleanCheckbox>
+            <h:outputLabel for="public"><a id='publiclabel'>Public:</a></h:outputLabel>
+        </div>  
+        <f:metadata>
+            <f:viewAction action="#{calendarBean.today()}"/>
+        </f:metadata>
+
+
+        <table class='calendar'>
+            <tr>
+                <td id='monthcont' colspan='7'>
+                    <h:form><h:commandLink action="#{calendarBean.prev()}" a:id="prev"/></h:form>
+                    <center><a id='month'>#{calendarBean.monthStr} #{calendarBean.year}</a></center>
+                    <h:form><h:commandLink action="#{calendarBean.next()}" a:id="next"/></h:form>
+                    <br/>
+                </td>
+            </tr>
+            <tr>
+                <td id='daycont'>Mon</td>
+                <td id='daycont'>Tue</td>
+                <td id='daycont'>Wed</td>
+                <td id='daycont'>Thu</td>
+                <td id='daycont'>Fry</td>
+                <td id='daycont'>Sat</td>
+                <td id='daycont'>Sun</td>
+            </tr>  
+            #{calendarBean.createCal()}
+            <ui:repeat var="w" value="#{calendarBean.cal}" >
+                <tr>
+                    <ui:repeat var="day" value="#{w.week}" >
+                        <td>
+                            <div class="mask">
+                                <a id="#{day.weekDay}">#{day.dayNum()}</a>
+                                <h:link outcome="#{day.eventOutcome}"><div class="#{day.eventClass}"></div></h:link>
+                            </div>
+                        </td>
+                    </ui:repeat>
+                </tr>          
+            </ui:repeat>                           
+        </table>
+        <div class='submit'>
+
+            <h:button outcome='#{calendarBean.eventOutcome("today")}' value='CREATE NEW EVENT' id='button-create'/>
+        </div>
+        <!--   <div class='submit'>
+               <h:button outcome='invitePeople' value='INVITE' id='button-invite'/>
+           </div>-->
     </h:body>
 </html>
