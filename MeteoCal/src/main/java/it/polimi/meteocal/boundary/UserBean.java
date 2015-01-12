@@ -65,7 +65,4 @@ public class UserBean {
         
         }
     }
-    public void setCalendarVisibility(boolean calendarVisibility){
-        
-    }
 }
