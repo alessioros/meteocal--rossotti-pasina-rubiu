@@ -30,6 +30,9 @@
                 <h:commandButton type='submit' value='Search' a:id='button-search' action="#{search.searchUser()}"/>
                 <br/><div class="error"><h:message for="search"/></div>   
             </h:form>  
+            <h:form>
+                <h:commandButton type='submit' value='Forecast' a:id='button-search' action="#{manageForecast.updateForecast()}"/>
+            </h:form>
         </div>
 
         <a class='title'>Calendar:</a>
