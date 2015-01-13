@@ -74,6 +74,7 @@ html{
     opacity:1;
     -webkit-transition: opacity 0.5s;
     -moz-transition: ocapity 0.5s;
+    cursor:pointer;
 }
 
 #button-add:hover{

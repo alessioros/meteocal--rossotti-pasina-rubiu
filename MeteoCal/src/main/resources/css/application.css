@@ -67,6 +67,44 @@ html{
   transition: width .25s;
 }
 
+#searchbox{
+    width:230px;
+    margin-left:500px;
+    padding:5px;
+    font-family: 'Dosis', sans-serif;
+}
+
+#searchbox .searchtext{ 
+    width:150px;
+    height: 20px;
+    padding-left: 10px;
+    margin-right:20px;
+    border-radius:10px;
+}
+
+#searchbox .serror{
+    font-size:12px;
+    color:red;
+}
+
+#button-search{
+    background-color:rgba(255,0,0,0);
+    width:20px;
+    height:20px;
+    border:0px;
+    margin:0px;
+    background-image:url("#{resource['css:icons/searchbar.png']}");
+    background-repeat:no-repeat;
+    background-size: 20px 20px;
+    opacity:1;
+    -webkit-transition: opacity 0.5s;
+    -moz-transition: ocapity 0.5s;
+    cursor:pointer;
+}
+
+#button-search:hover{
+    background-image:url("#{resource['css:icons/searchbarhover.png']}");
+}
 #logout{
     float:right;
     background:#F66448;  

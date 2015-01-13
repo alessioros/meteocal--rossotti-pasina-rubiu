@@ -21,20 +21,15 @@
                 <li><h:link outcome="profile" value="Profile"/></li>
                 <li><h:link outcome="notifications" value="Notifications"/></li>
                 <li><h:link outcome="about_logged" value="About"/></li>
+                <li id="searchbox">
+                    <h:form>
+                        <h:inputText id='search' class='searchtext' value="#{search.input}" required="true"/>
+                        <h:commandButton type='submit' value=' ' a:id='button-search' action="#{search.searchUser()}"/>   
+                    </h:form>  
+                </li>
                 <li id='logout'><h:form><h:commandLink action="#{login.logout()}" value="logout"/></h:form></li>
             </ul>
         </div>
-        <div>
-            <h:form>
-                <h:inputText id='search' value="#{search.input}" required="true" class='feedback-input' requiredMessage="Insert something to search for"/>
-                <h:commandButton type='submit' value='Search' a:id='button-search' action="#{search.searchUser()}"/>
-                <br/><div class="error"><h:message for="search"/></div>   
-            </h:form>  
-            <h:form>
-                <h:commandButton type='submit' value='Forecast' a:id='button-search' action="#{manageForecast.updateForecast()}"/>
-            </h:form>
-        </div>
-
         <a class='title'>Calendar:</a>
         <div class="switch">
             <h:selectBooleanCheckbox id="public" value="#{userBean.publicCalendar}" a:class='toggle'>

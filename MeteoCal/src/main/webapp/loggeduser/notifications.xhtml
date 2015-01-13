@@ -20,6 +20,12 @@
                 <li><h:link outcome="profile" value="Profile"/></li>
                 <li><h:link outcome="notifications" value="Notifications"/></li>
                 <li><h:link outcome="about_logged" value="About"/></li>
+                <li id="searchbox">
+                    <h:form>
+                        <h:inputText id='search' class='searchtext' value="#{search.input}" required="true"/>
+                        <h:commandButton type='submit' value=' ' a:id='button-search' action="#{search.searchUser()}"/>   
+                    </h:form>  
+                </li>
                 <li id='logout'><h:form><h:commandLink action="#{login.logout()}" value="logout"/></h:form></li>
             </ul>
         </div>
