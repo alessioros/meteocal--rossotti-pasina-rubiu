@@ -1,10 +1,32 @@
 .info{
+    padding:10px;
     margin-top:50px;
     margin-left:50px;
     height:283px;
     width:500px;
     border:1px solid #8DB9CB;
     display: inline-block;
+    font-family: 'Dosis', sans-serif;
+}
+
+.info #title{
+    font-size:30px;
+    color:#F66448;
+    margin-bottom: 40px;
+    display:block;
+}
+
+.info #stime,.info #etime{
+    font-size:20px;
+    color:black;
+    display:block;
+}
+
+.info #outd{
+    font-size:20px;
+    margin-top: 30px;
+    color:blue;
+    display:block;
 }
 
 .image{
@@ -28,12 +50,13 @@
     width:500px;
     font-size: 18px;
     border:1px solid #8DB9CB;
+    padding:5px;
     display: inline-block;
 }
 
 .googleMap{
     margin-top:50px;
-    margin-left:50px;
+    margin-left:80px;
     height:250px;
     width:350px;
     float:left;
