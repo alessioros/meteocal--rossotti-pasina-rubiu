@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>MeteoCal Homepage</title>
         <h:outputStylesheet library="css" name="homepage.css"  />
@@ -10,6 +11,9 @@
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
     </h:head>
     <h:body>
+        <f:metadata>
+            <f:viewAction action="#{manageForecast.weatherHome()}"/>
+        </f:metadata>
       <div id='menuBar'>
         <ul>
           <li><h:link outcome="index" value="Home"/></li>
@@ -49,8 +53,8 @@
 
 
       <div id='weather'>
-        <a id='city'>New York</a><br/>
-        <a id='temperature'>22°C</a>
+          <a id='city'>#{manageForecast.cityHome}</a><br/>
+        <a id='temperature'>#{manageForecast.tempHome} °C</a>
       </div>
     </h:body>
 </html>
