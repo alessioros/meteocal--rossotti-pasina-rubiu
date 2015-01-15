@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.polimi.meteocal.control;
 
 import it.polimi.meteocal.entity.User;
@@ -13,6 +8,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.NotSupportedException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -42,10 +38,11 @@ public class ManagePersonalData {
         }
         return user;
     }
-    
+
     /**
-     * Changes the user fields that have been passed not empty
-     * they are stored in passed User:
+     * Changes the user fields that have been passed not empty they are stored
+     * in passed User:
+     *
      * @param updated
      */
     public void changeData(User updated) {
@@ -66,8 +63,8 @@ public class ManagePersonalData {
             if (!"".equals(updated.getUsername())) {
                 user.setUsername(updated.getUsername());
             }
-            
-            utx.commit();  
+
+            utx.commit();
 
         } catch (Exception e) {
 
@@ -80,25 +77,24 @@ public class ManagePersonalData {
         }
 
     }
-    
+
     /**
-     * Aggiunge nella tabella contact un record con l'id dell'utente loggato e
-     * l'id dell'utente di cui si è passato l'username
+     * Adds a record in the table contact with logged user id and the id of the
+     * user with passed username
      *
      * @param username
      */
     public void addUser(String username) {
         try {
-            
 
             List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
 
             if (!checkexist.isEmpty()) {
                 utx.begin();
-                
+
                 user = rv.getLoggedUser();
                 user.getUserCollection().add(checkexist.get(0));
-               
+
                 utx.commit();
             }
         } catch (Exception e) {
@@ -110,5 +106,45 @@ public class ManagePersonalData {
             }
 
         }
+    }
+
+    /**
+     * Deletes the record in the table contact with logged user id and the id of
+     * the user with passed username
+     *
+     * @param username
+     */
+    public void deleteUser(String username) {
+
+        try {
+            List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
+
+            if (!checkexist.isEmpty()) {
+
+                utx.begin();
+
+                user = rv.getLoggedUser();
+                user.getUserCollection().remove(checkexist.get(0));
+
+                utx.commit();
+            }
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }
+
+        }
+    }
+
+    public User getUserData(String username) {
+
+        List<User> users = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
+
+        user = (User) users.get(0);
+
+        return user;
     }
 }

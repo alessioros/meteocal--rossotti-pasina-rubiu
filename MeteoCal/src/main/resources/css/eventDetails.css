@@ -2,7 +2,6 @@ html{
 	background-image:url("#{resource['css:img/bg_pattern.png']}");
         background-repeat: repeat;
         font-family: 'Dosis', sans-serif;
-        opacity:0.5;
 }
 
 .info{

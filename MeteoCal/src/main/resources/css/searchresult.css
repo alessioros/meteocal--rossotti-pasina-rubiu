@@ -5,31 +5,52 @@ html{
 }
 
 .personal_info{
-    margin-left:80px;
-    margin-top:50px;
-    padding:20px;
-    width: 450px;   
+    margin-left:100px;
+    margin-top:80px;
+    width: 500px;   
     height:400px;
+    border: 1px solid #FFF;
+    border-radius:5px;
     display:inline-block;
     background-color:rgba(141,185,203,0.2);
     text-align: left;
 }
 
+thead,tbody{
+    width:480px;
+}
+thead tr{
+    padding-left:20px;
+    padding-top:10px;
+    padding-bottom:10px;
+    margin-bottom:20px;
+    width: 480px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color:#F66448;
+    display: inline-block;
+}
+
+
+tbody tr{
+    padding-left:25px;
+    padding-top:5px;
+    width: 500px;
+    display: inline-block;
+}
+
 tbody #fieldName{
     font-size:18px;
-    
 }
 
 thead #fieldName{
     font-size:22px;
-    color:red; 
+    color:white;
 }
 
 td,th{
     margin-right:10px;
-    width:100px;
+    width:120px;
+    display: inline-block;
 }
 
-thead tr{
-    margin-bottom:20px; 
-}

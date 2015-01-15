@@ -123,8 +123,19 @@ public class PersonalProfile {
         contacts=updateContacts();
     }
     
+    public void submitDeleteUser(String username) {
+        mpd.deleteUser(username);
+        
+        user=showPersonalData();
+    }
+    
+    public void showUserData(){
+        
+        user=mpd.getUserData(user.getUsername());
+    }
+    
     /**
-     * Prende la collection dei contatti, la casta a list e la mette in contacts
+     * Gets contact collection, makes the cast to list and puts it in contacts
      * @return 
      */
     public List<User> updateContacts() {

@@ -30,11 +30,11 @@
             </ul>
         </div>
         <f:metadata>
-            <f:viewAction action="#{personalProfile.showPersonalData()}"/>
-            <f:viewAction action="#{personalProfile.updateContacts()}"/>
+            <f:viewParam name="username" value="#{personalProfile.user.username}"/>
+            <f:viewAction action="#{personalProfile.showUserData()}"/>
         </f:metadata>
         <div class="personal_info">
-            <a class='title'>Personal Info:</a>
+            <a class='title'>User's Info:</a>
             <ul>
                 <li>
                     <h:outputLabel a:id='fieldName' for="name">Name:</h:outputLabel>
@@ -49,40 +49,14 @@
                     <h:outputText id="username" value="#{personalProfile.user.username}"></h:outputText>
                 </li>
                 <li>
-                    <h:outputLabel a:id='fieldName' for="email">Email:</h:outputLabel>
-                    <h:outputText id="email" value="#{personalProfile.user.email}"></h:outputText>
-                </li>
-                <li>
                     <h:form>
-                        <h:button outcome='changeData' value='CHANGE DATA' a:id='button-change'/>
+                        <h:commandButton action="#{personalProfile.submitAddUser()}" value='ADD USER' a:id='button-adduser'/>
+                        <h:button outcome='changeData' value='VIEW CALENDAR' a:id='button-viewcal'/>
                     </h:form>
                 </li>
             </ul>
         </div>
-
-        <div class="addrList">
-            <a class='addrTitle'>Address List:</a>
-            <ul>
-                <li>
-                    <h:panelGrid a:id="textarea">
-                        <ui:repeat value="#{personalProfile.contacts}" var="contact">
-                            <li>
-                                <h:form>
-                                    <h:link value="#{contact.username}" outcome="user_info?username=#{contact.username}"/>
-                                    <h:commandButton type='submit' value=' ' a:id='button-del' action="#{personalProfile.submitDeleteUser(contact.username)}"/>
-                                </h:form>
-                            </li>
-                        </ui:repeat>
-                    </h:panelGrid>
-                </li>
-                <li>
-                    <h:form>
-                        <h:inputText id='contact' value="#{personalProfile.contact}" required="true" class='feedback-input' requiredMessage="Insert a valid username"/>
-                        <h:commandButton type='submit' value=' ' a:id='button-add' action="#{personalProfile.submitAddUser()}"/>
-                        <br/><div class="error"><h:message for="contact"/></div>   
-                    </h:form>     
-                </li>
-            </ul>
-        </div> 
     </h:body>
 </html>
+
+
