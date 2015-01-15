@@ -25,10 +25,7 @@ thead tr{
     padding-bottom:10px;
     margin-bottom:20px;
     width: 480px;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background-color:#F66448;
-    display: inline-block;
+    display:block;
 }
 
 
@@ -40,17 +37,23 @@ tbody tr{
 }
 
 tbody #fieldName{
-    font-size:18px;
+    font-size:20px;
+    text-decoration: none;
+    color:black;
 }
 
 thead #fieldName{
     font-size:22px;
-    color:white;
+    color:#F66448;
 }
 
 td,th{
     margin-right:10px;
     width:120px;
     display: inline-block;
+}
+
+.usernamelink{
+    color:#3498db;
 }
 
