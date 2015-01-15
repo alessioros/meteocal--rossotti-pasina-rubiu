@@ -37,7 +37,7 @@
             </h:column>
             <h:column a:id='fieldName'>
                 <f:facet name="header">Username</f:facet>
-                #{result.username}
+                <h:link value="#{result.username}" outcome="user_info?username=#{result.username}"/>
             </h:column>
         </h:dataTable>
 

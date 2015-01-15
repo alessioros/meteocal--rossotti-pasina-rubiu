@@ -114,7 +114,10 @@ public class PersonalProfile {
         
 
     }
-
+    public void submitAddSeenUser(){
+    
+        mpd.addUser(user.getUsername());
+    }
     public void submitAddUser() {
         user = rv.getLoggedUser();
         if(!user.getUsername().equals(contact)){
@@ -124,6 +127,7 @@ public class PersonalProfile {
     }
     
     public void submitDeleteUser(String username) {
+        System.out.println(""+username);
         mpd.deleteUser(username);
         
         user=showPersonalData();

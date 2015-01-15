@@ -39,7 +39,7 @@ html{
     display:inline-block;
 }
 
-#button-change{
+#button-change,#button-adduser,#button-viewcal{
   margin-top:50px;
   border: #fbfbfb solid 2px;
   border-radius:8px;
@@ -114,7 +114,7 @@ html{
 #button-add:hover{
     opacity:0.8;
 }
-#button-change:hover{
+#button-change:hover,#button-adduser:hover,#button-viewcal:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
@@ -149,4 +149,15 @@ html{
     padding-left:10px;
     width:50%;
     color: red;
+}
+
+.buttons{
+    text-align: left;
+    margin-top:30px;
+}
+#button-adduser,#button-viewcal{
+    font-size:16px;
+    margin-right:20px;
+    margin-left:0;
+    display: inline-block;
 }

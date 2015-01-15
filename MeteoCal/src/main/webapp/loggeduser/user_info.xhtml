@@ -48,10 +48,10 @@
                     <h:outputLabel a:id='fieldName' for="username">Username:</h:outputLabel>
                     <h:outputText id="username" value="#{personalProfile.user.username}"></h:outputText>
                 </li>
-                <li>
+                <li class="buttons">
                     <h:form>
-                        <h:commandButton action="#{personalProfile.submitAddUser()}" value='ADD USER' a:id='button-adduser'/>
-                        <h:button outcome='changeData' value='VIEW CALENDAR' a:id='button-viewcal'/>
+                        <h:commandButton action="#{personalProfile.submitAddSeenUser()}" value='ADD USER' a:id='button-adduser'/>
+                        <h:button outcome='calendar' value='VIEW CALENDAR' a:id='button-viewcal'/>
                     </h:form>
                 </li>
             </ul>
