@@ -17,6 +17,9 @@ public class ManageEvent {
     @Inject
     RegisterValidation rv;
     
+    @Inject
+    ManageForecast mf;
+    
   
     public void createEvent(Event event,Location loc) {
         
@@ -29,6 +32,7 @@ public class ManageEvent {
         eventi=rv.getLoggedUser().getEventCollection();
         eventi.add(event);
         rv.getLoggedUser().setEventCollection(eventi);
+        mf.updateForecast();
     }
     
     public void deleteEvent(){

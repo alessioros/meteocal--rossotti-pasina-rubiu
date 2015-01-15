@@ -9,12 +9,15 @@ import it.polimi.meteocal.entity.Forecast;
 import it.polimi.meteocal.entity.Location;
 import java.util.List;
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.UserTransaction;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -22,8 +25,10 @@ import org.json.JSONObject;
  *
  * @author teo
  */
-@ManagedBean
+
+@Singleton
 @ViewScoped
+@ManagedBean
 public class ManageForecast {
 
     private String urlQuery;
@@ -38,11 +43,11 @@ public class ManageForecast {
 
     @PersistenceContext
     EntityManager em;
-
-    @PostConstruct
+    
     @Schedule(hour = "*/1", minute = "0", second = "0", persistent = false)
     public void updateForecast() {
         try {
+            
             place = em.createQuery("select l from Location l").getResultList();
             for (Location location : place) {
                 
@@ -62,7 +67,9 @@ public class ManageForecast {
                 JSONObject resItem = channel.getJSONObject("item");
                 JSONArray forecasts = resItem.getJSONArray("forecast");
                 for (int i = 0; i < forecasts.length(); i++) {
+                    
                     JSONObject fc = forecasts.getJSONObject(i);
+                    forecast=new Forecast();
                     forecast.setGeneral(fc.getString("text"));
                     forecast.setMaxTemp(fc.getString("high"));
                     forecast.setMinTemp(fc.getString("low"));
