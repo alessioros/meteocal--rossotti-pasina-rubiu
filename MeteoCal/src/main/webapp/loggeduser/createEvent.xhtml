@@ -65,28 +65,18 @@
                     <h:outputLabel for="outdoor"></h:outputLabel>
                 </div>
                 <div class='field'>
-                    <h:outputLabel a:id='fieldName' for="lat">Latitude:</h:outputLabel>
-                    <h:inputText id='lat' class='feedback-input' value="#{eventDetails.lat}" required="true" requiredMessage="Latitude is required"/>
-                    <br/><div class="error"><h:message for="lat"/></div>
-                </div>
-                <div class='field'>
-                    <h:outputLabel a:id='fieldName' for="lon">Longitude:</h:outputLabel>
-                    <h:inputText id='lon' class='feedback-input' value="#{eventDetails.lon}" required="true" requiredMessage="Longitude is required"/>
-                    <br/><div class="error"><h:message for="lon"/></div>
-                </div>
-                <div class='field'>
                     <h:outputLabel a:id='fieldName' for="state">State:</h:outputLabel>
-                    <h:inputText id='state' class='feedback-input' value="#{eventDetails.loc.state}" required="true" requiredMessage="State is required"/>
+                    <h:inputText id='state' class='feedback-input' value="#{eventDetails.state}" required="true" requiredMessage="State is required"/>
                     <br/><div class="error"><h:message for="state"/></div>
                 </div>
                 <div class='field'>
                     <h:outputLabel a:id='fieldName' for="city">City:</h:outputLabel>
-                    <h:inputText id='city' class='feedback-input' value="#{eventDetails.loc.city}" required="true" requiredMessage="City is required"/>
+                    <h:inputText id='city' class='feedback-input' value="#{eventDetails.city}" required="true" requiredMessage="City is required"/>
                     <br/><div class="error"><h:message for="city"/></div>
                 </div>
                 <div class='field'>
-                    <h:outputLabel a:id='fieldName' for="addr">Address:</h:outputLabel>
-                    <h:inputText id='addr' class='feedback-input' value="#{eventDetails.loc.address}" required="true" requiredMessage="Address is required"/>
+                    <h:outputLabel a:id='fieldName' for="address">Address:</h:outputLabel>
+                    <h:inputText id='addr' class='feedback-input' value="#{eventDetails.address}" required="true" requiredMessage="Address is required"/>
                     <br/><div class="error"><h:message for="addr"/></div>
                 </div>
                 <div class="resmessage">
