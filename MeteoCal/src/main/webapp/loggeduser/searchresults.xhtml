@@ -7,7 +7,7 @@
 
     <h:head>
         <title>Search Results</title>
-        <h:outputStylesheet library="css" name="todayevent.css"  />
+        <h:outputStylesheet library="css" name="searchresult.css"  />
         <h:outputStylesheet library="css" name="application.css"  />
         <link href='http://fonts.googleapis.com/css?family=Dosis' rel='stylesheet' type='text/css'/>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
@@ -26,15 +26,17 @@
                 <li id='logout'><h:form><h:commandLink action="#{login.logout()}" value="logout"/></h:form></li>
             </ul>
         </div>
-
-        <h:dataTable value="#{search.results}" var="result">
-            <h:column>
+        <h:dataTable class="personal_info" value="#{search.results}" var="result">
+            <h:column a:id='fieldName'>
+                <f:facet name="header">Name</f:facet>
                 #{result.name}
             </h:column>
-            <h:column>
+            <h:column a:id='fieldName'>
+                <f:facet name="header">Surname</f:facet>
                 #{result.surname}
             </h:column>
-            <h:column>
+            <h:column a:id='fieldName'>
+                <f:facet name="header">Username</f:facet>
                 #{result.username}
             </h:column>
         </h:dataTable>

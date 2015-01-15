@@ -140,12 +140,13 @@ input.toggle:checked + label:after {
 #button-reg,#button-create,#button-change{
   width: 20%;
   border: #fbfbfb solid 2px;
+  border-radius:8px;
+  box-shadow: 2px 2px 3px #888;
   background-color: #8DB9CB;
   color:white;
   font-size:20px;
   padding:10px;
   width:auto;
-  font-weight:200;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;

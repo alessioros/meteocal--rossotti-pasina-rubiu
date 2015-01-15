@@ -1,9 +1,10 @@
-/* 
-    Created on : 2-gen-2015, 12.34.24
-    Author     : alessiorossotti
-*/
+html{
+	background-image: url("#{resource['css:img/bg_pattern.png']}");
+	background-repeat: repeat;
+        font-family: 'Dosis', sans-serif;
+}
+
 .title{
-    font-family: 'Dosis', Arial, Helvetica, sans-serif;
     font-size: 40px;
     margin-top:50px;
     margin-left:50px;
@@ -25,7 +26,6 @@
 }
 
 .evDesc{
-    font-family: 'Dosis', Arial, Helvetica, sans-serif;
     display:inline-block;
     width:500px;
     height:200px;

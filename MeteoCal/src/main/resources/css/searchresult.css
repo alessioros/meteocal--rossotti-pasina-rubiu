@@ -1,0 +1,35 @@
+html{
+	background-image:url("#{resource['css:img/bg_pattern.png']}");
+        background-repeat: repeat;
+        font-family: 'Dosis', sans-serif;
+}
+
+.personal_info{
+    margin-left:80px;
+    margin-top:50px;
+    padding:20px;
+    width: 450px;   
+    height:400px;
+    display:inline-block;
+    background-color:rgba(141,185,203,0.2);
+    text-align: left;
+}
+
+tbody #fieldName{
+    font-size:18px;
+    
+}
+
+thead #fieldName{
+    font-size:22px;
+    color:red; 
+}
+
+td,th{
+    margin-right:10px;
+    width:100px;
+}
+
+thead tr{
+    margin-bottom:20px; 
+}
