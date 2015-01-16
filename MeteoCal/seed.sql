@@ -30,4 +30,14 @@ VALUES (109,'fedenargi@mailinator.com','USERS','Federica','password',1,'Nargi','
 INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Username,Verificationkey,Verified)
 VALUES (110,'stevej@mailinator.com','USERS','Steve','password',1,'Jobs','stevejobs',null,1);
 
+INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Username,Verificationkey,Verified)
+VALUES (111,'kasparov@mailinator.com','USERS','Garri','password',1,'Kasparov','kasparov',null,1);
+
 # ---------- EVENTS ----------
+
+INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
+VALUES (1,'A chess tournament is a series of chess games played competitively to determine a winning individual or team.
+           Since the first international chess tournament in London, 1851, chess tournaments have become the standard
+           form of chess competition among serious players.','USERS','chess.png','Chess Tournament',0,1,,null,111);
+
+# ---------- LOCATIONS ----------

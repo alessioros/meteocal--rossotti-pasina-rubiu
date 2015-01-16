@@ -1,0 +1,10 @@
+# istruzioni per seed.sql
+
+1. Aprire il terminale, far partire Mysql
+   (su Unix sudo /usr/local/mysql/support-files/mysql.server start)
+
+2. Usare il comando mysql -u root -p meteocaldb < [percorso di seed.sql]
+    (trascinare il file nel terminale per ottenere il percorso)
+
+3. Database aggiornato, per poter fare il login con gli utenti è necessario prima
+   utilizzare forgot password per ottenere una password hashata
