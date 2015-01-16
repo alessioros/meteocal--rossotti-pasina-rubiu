@@ -33,11 +33,13 @@ VALUES (110,'stevej@mailinator.com','USERS','Steve','5e884898da28047151d0e56f8dc
 INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Username,Verificationkey,Verified)
 VALUES (111,'kasparov@mailinator.com','USERS','Garri','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Kasparov','kasparov',null,1);
 
+# ---------- LOCATIONS ----------
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (1,'Viale Romagna','Milan',45.474297, 9.223977,'Italy');
+
 # ---------- EVENTS ----------
 
-#INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
-#VALUES (1,'A chess tournament is a series of chess games played competitively to determine a winning individual or team.
-#           Since the first international chess tournament in London, 1851, chess tournaments have become the standard
-#           form of chess competition among serious players.','USERS','chess.png','Chess Tournament',0,1,,null,111);
-
-# ---------- LOCATIONS ----------
+INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
+VALUES (1,'A chess tournament is a series of chess games played competitively to determine a winning individual or team.',
+        '2015-01-18 18:00:00','chess.png','Chess Tournament',0,1,'2015-01-16 12:00:00',1,111);

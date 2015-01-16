@@ -8,7 +8,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.NotSupportedException;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -138,7 +137,13 @@ public class ManagePersonalData {
 
         }
     }
-
+    
+    public String showCalendar(String username){
+    
+        return "/loggeduser/calendar.xhtml?faces-redirect=true";
+    }
+    
+    
     public User getUserData(String username) {
 
         List<User> users = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();

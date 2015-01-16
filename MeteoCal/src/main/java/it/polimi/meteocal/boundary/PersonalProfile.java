@@ -25,7 +25,7 @@ import javax.persistence.PersistenceContext;
 @Named
 @RequestScoped
 public class PersonalProfile {
-    
+
     @PersistenceContext
     EntityManager em;
 
@@ -34,7 +34,7 @@ public class PersonalProfile {
 
     @Inject
     RegisterValidation rv;
-    
+
     @EJB
     private CheckFields cf;
 
@@ -94,7 +94,7 @@ public class PersonalProfile {
     }
 
     public void submitChangeData() {
-        
+
         if (!cf.checkUsername(user.getUsername())) {
             message = "The username you have chosen already exists.";
         } else if (!cf.checkEmail(user.getEmail())) {
@@ -108,45 +108,74 @@ public class PersonalProfile {
         } else {
             user.setIdUser(rv.getLoggedUser().getIdUser());
             mpd.changeData(user);
-        
+
             this.message = "Data succesfully updated!";
         }
-        
 
     }
-    public void submitAddSeenUser(){
-    
-        mpd.addUser(user.getUsername());
+
+    public void submitAddSeenUser() {
+        String username = user.getUsername();
+        user = rv.getLoggedUser();
+        if (username==user.getUsername()){
+            message = "You can't add yourself!";
+        }else{
+            mpd.addUser(username);
+            showUserData();
+            message = "User added!";
+        }
     }
+    
+    /*  If user has a private calendar an error message is displayed,
+    *   If it's public instead is showed a page with his calendar
+    */
+    public void submitShowCalendar(){
+        
+        showUserData();
+        if(user.getPublicCalendar()){
+            mpd.showCalendar(user.getUsername());
+        }
+        else{
+            message="This user has a private calendar";
+        }
+    }
+    
+    /*  If the username is correct it is added in the contact list
+    */
     public void submitAddUser() {
         user = rv.getLoggedUser();
-        if(!user.getUsername().equals(contact)){
-                    mpd.addUser(contact);
+        if (!user.getUsername().equals(contact)) {
+            mpd.addUser(contact);
         }
-        contacts=updateContacts();
+        contacts = updateContacts();
     }
-    
+
     public void submitDeleteUser(String username) {
-        System.out.println(""+username);
-        mpd.deleteUser(username);
-        
-        user=showPersonalData();
+        System.out.println("PROVA PROVA PROVA");
+        System.out.println("" + username);
+        //mpd.deleteUser(username);
+
+        contacts = updateContacts();
     }
     
-    public void showUserData(){
-        
-        user=mpd.getUserData(user.getUsername());
+    /*  Gets user's data, based on the username in user
+    *   in user_info.xhtml user.username is setted from URL
+    */
+    public void showUserData() {
+
+        user = mpd.getUserData(user.getUsername());
     }
-    
+
     /**
      * Gets contact collection, makes the cast to list and puts it in contacts
-     * @return 
+     *
+     * @return
      */
     public List<User> updateContacts() {
 
         user = rv.getLoggedUser();
-        contacts=(List<User>) user.getUserCollection();
-        return contacts;   
+        contacts = (List<User>) user.getUserCollection();
+        return contacts;
     }
-    
+
 }
