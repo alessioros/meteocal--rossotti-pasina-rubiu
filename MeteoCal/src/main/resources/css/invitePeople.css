@@ -40,11 +40,12 @@ html{
 #button-invite,#button-add{
   margin-bottom:20px;
   border: #fbfbfb solid 2px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px #888;
   background-color: #8DB9CB;
   color:white;
   font-size:18px;
   padding:10px;
-  font-weight:200;
   margin-left:auto;
   width:auto;
   -webkit-transition: all 0.5s;
