@@ -32,7 +32,7 @@ public class ManageEvent {
         eventi=rv.getLoggedUser().getEventCollection();
         eventi.add(event);
         rv.getLoggedUser().setEventCollection(eventi);
-        mf.updateForecast();
+        mf.forecast();
     }
     
     public void deleteEvent(){

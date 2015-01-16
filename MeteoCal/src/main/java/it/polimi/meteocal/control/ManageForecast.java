@@ -52,7 +52,7 @@ public class ManageForecast {
             for (Location location : place) {
                 
                 woeid=woeidOfLocation(location.getAddress()+", "+location.getCity()+", "+location.getState());
-               
+
                 // Query da eseguire su Yahoo Weather
                 urlQuery = "select * from weather.forecast where woeid="+woeid;
 
@@ -107,28 +107,41 @@ public class ManageForecast {
     }
 
     public void forecast() {
-        String location;
-
         try {
-            // woeidOfLocation(location);
+            
+            place = em.createQuery("select l from Location l").getResultList();
+                
+                woeid=woeidOfLocation(place.get(place.size()-1).getAddress()+", "
+                        +place.get(place.size()-1).getCity()+", "
+                        +place.get(place.size()-1).getState());
 
-            urlQuery = "select * from weather.forecast where woeid=" + woeid;
+                // Query da eseguire su Yahoo Weather
+                urlQuery = "select * from weather.forecast where woeid="+woeid;
 
-            // Costruisco il JSON
-            JSONObject jsonWeather = yq.yahooRestQuery(urlQuery);
+                // Costruisco il JSON
+                JSONObject json = yq.yahooRestQuery(urlQuery);
 
-            JSONObject jsonQueryWeather = jsonWeather.getJSONObject("query");
-            JSONObject queryRes = jsonQueryWeather.getJSONObject("results");
-            JSONObject channel = queryRes.getJSONObject("channel");
-            JSONObject resItem = channel.getJSONObject("item");
-            JSONArray forecasts = resItem.getJSONArray("forecast");
-            for (int i = 0; i < forecasts.length(); i++) {
-                JSONObject fc = forecasts.getJSONObject(i);
-
-            }
+            
+                // stampo le previsioni per tutti i giorni:
+                JSONObject jsonQuery = json.getJSONObject("query");
+                JSONObject queryResults = jsonQuery.getJSONObject("results");
+                JSONObject channel = queryResults.getJSONObject("channel");
+                JSONObject resItem = channel.getJSONObject("item");
+                JSONArray forecasts = resItem.getJSONArray("forecast");
+                for (int i = 0; i < forecasts.length(); i++) {
+                    
+                    JSONObject fc = forecasts.getJSONObject(i);
+                    forecast=new Forecast();
+                    forecast.setGeneral(fc.getString("text"));
+                    forecast.setMaxTemp(fc.getString("high"));
+                    forecast.setMinTemp(fc.getString("low"));
+                    forecast.setIdLocation(place.get(place.size()-1));
+                    em.persist(forecast);
+                }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
     }
 
