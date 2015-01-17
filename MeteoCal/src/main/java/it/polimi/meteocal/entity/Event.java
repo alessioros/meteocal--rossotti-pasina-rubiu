@@ -8,6 +8,7 @@ package it.polimi.meteocal.entity;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import javax.inject.Named;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Simone
  */
+@Named
 @Entity
 @Table(name = "event")
 @XmlRootElement

@@ -2,7 +2,9 @@ package it.polimi.meteocal.control;
 
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -33,6 +35,17 @@ public class ManageEvent {
         eventi.add(event);
         rv.getLoggedUser().setEventCollection(eventi);
         mf.forecast();
+    }
+    public Event findEvent(int id){
+         try {
+            List<Event> event;
+            event = em.createQuery("Select e from Event e where e.idEvent=:ID").setParameter("ID", id).getResultList();
+            return event.get(0);                                       
+        } catch (Exception e) {
+            
+            e.printStackTrace();                        
+        }
+        return null;
     }
     
     public void deleteEvent(){

@@ -26,26 +26,23 @@
        </div>
         <f:metadata>
             <f:viewAction action="#{personalProfile.showPersonalData()}"/>
+            <f:viewParam name="id" value="#{eventDetails.idEvent}"/>
         </f:metadata>
         
         <div class="info">
-            <a id="title">Evento Prova</a><br/>
-            <a id="stime">Starts: Wed, 15 January 15:00</a><br/>
-            <a id="etime">Ends: Wed, 15 January 17:00</a><br/>
+            <a id="title">#{eventDetails.findEvent().name}</a><br/>
+            <a id="stime">Starts: #{eventDetails.findEvent().startTime.toLocaleString()}</a><br/>
+            <a id="etime">Ends: #{eventDetails.findEvent().endTime.toLocaleString()}</a><br/>
             <a id="outd">Oudoor Event</a>
         </div>
         <div class="image"></div><br/>
         <div class="googleMap">
             <h:form>
-                <m:map width="350px" height="250px" latitude="52.37" longitude="4.89" />
+                <m:map width="350px" height="250px" latitude="#{eventDetails.findEvent().idLocation.latitude}" longitude="#{eventDetails.findEvent().idLocation.longitude}" />
             </h:form>
         </div>
         <div class="description">
-            nde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
-            totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt,
-            explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos,
-            qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci v'elit, 
-            sed quia non numquam eius modi tempora incidunt
+            #{eventDetails.findEvent().description}         
         </div>
      </h:body>
 </html>
