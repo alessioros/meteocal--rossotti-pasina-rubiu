@@ -9,6 +9,7 @@ import it.polimi.meteocal.boundary.UserBean;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Event;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import java.util.Date;
@@ -68,9 +69,12 @@ public class ManageCalendar {
             while(cal.hasNext())
             {
                 Event e= cal.next();
-                if( e.getStartTime().getYear()   ==  date.getYear() &&
-                    e.getStartTime().getMonth()  ==  date.getMonth() &&
-                    e.getStartTime().getDate()   ==  date.getDate())
+                if( e.getStartTime().getYear()   <=  date.getYear() &&
+                    e.getStartTime().getMonth()  <=  date.getMonth() &&
+                    e.getStartTime().getDate()   <=  date.getDate() &&
+                    e.getEndTime().getYear()   >=  date.getYear() &&
+                    e.getEndTime().getMonth()  >=  date.getMonth() &&
+                    e.getEndTime().getDate()   >=  date.getDate())
                             return true;                    
             }
             return false;                                    
@@ -82,5 +86,32 @@ public class ManageCalendar {
         }
         return false;
     }
-    
+    public List<Event> dayEvent(Date date){
+        try {
+            Iterator<Event> event; 
+            List<Event> list = new ArrayList();
+           
+            user = rv.getLoggedUser();            
+            event = user.getEventCollection().iterator();           
+            
+            while(event.hasNext())
+            {
+                Event e= event.next();
+                if( e.getStartTime().getYear()   <=  date.getYear() &&
+                    e.getStartTime().getMonth()  <=  date.getMonth() &&
+                    e.getStartTime().getDate()   <=  date.getDate() &&
+                    e.getEndTime().getYear()   >=  date.getYear() &&
+                    e.getEndTime().getMonth()  >=  date.getMonth() &&
+                    e.getEndTime().getDate()   >=  date.getDate())
+                            list.add(e);
+            }
+            return list;                                    
+        } catch (Exception e) {
+            
+            e.printStackTrace();
+            
+            
+        }
+        return null;
+    }
 }

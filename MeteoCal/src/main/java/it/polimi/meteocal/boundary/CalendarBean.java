@@ -8,6 +8,7 @@ package it.polimi.meteocal.boundary;
 import it.polimi.meteocal.control.Day;
 import it.polimi.meteocal.control.ManageCalendar;
 import it.polimi.meteocal.control.Week;
+import it.polimi.meteocal.entity.Event;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -32,6 +33,9 @@ public class CalendarBean{
     private Date date;
     private List<Week> cal = new ArrayList();    
     private int actual=13;
+    
+    private long viewDate;
+    private List<Event> event = new ArrayList();
     
     @Inject 
     ManageCalendar mc;
@@ -165,6 +169,21 @@ public class CalendarBean{
             
         
     }
-    
+
+    public long getViewDate() {
+        return viewDate;
+    }
+    public void setViewDate(long viewDate) {
+        this.viewDate = viewDate;
+    }
+    public List<Event> getEvent() {
+        return event;
+    }
+    public void setEvent(List<Event> event) {
+        this.event = event;
+    }    
+    public void dayEvents(){
+       this.event = mc.dayEvent(new Date(this.viewDate));
+    }
     
 }
