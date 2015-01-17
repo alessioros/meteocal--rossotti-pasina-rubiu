@@ -1,12 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author teo
- */
 package it.polimi.meteocal.boundary;
 
 import it.polimi.meteocal.control.ManageNotifications;
@@ -44,14 +35,18 @@ public class NotificationPage {
     private User user;
     private String message;
     private List<Notification> notifications = new ArrayList();
-
+    
+    /**
+     * Returns all the logged user's notifications
+     * @return 
+     */
     public List<Notification> updateNotifications() {
         user = rv.getLoggedUser();
-        //prende tutte le notifiche dell'utente loggato
+        
         Query query = em.createQuery("SELECT n FROM Usernotification n WHERE n.user=:USER");
         query.setParameter("USER", user);
         List<Usernotification> tmplist = query.getResultList();
-        //mette le notifiche in notifications
+   
         for (Usernotification notification : tmplist) {
             if (notification != null) {
                 notifications.add(notification.getNotification());
@@ -59,17 +54,28 @@ public class NotificationPage {
         }
         return notifications;
     }
-
+    
+    /**
+     * submits accept notification to ManageNotifications 
+     * @param notification 
+     */
     public void accept(Notification notification) {
         mn.acceptInvite(notification);
         message="Invite accepted!";
     }
-
+    
+    /**
+     * submits decline notification to ManageNotifications 
+     * @param notification 
+     */
     public void decline(Notification notification) {
         mn.declineInvite(notification);
         message="Invite declined";
     }
-
+    
+    
+    // ----- Getters and setters -----
+    
     public User getUser() {
         return user;
     }

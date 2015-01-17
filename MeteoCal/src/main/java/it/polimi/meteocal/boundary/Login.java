@@ -37,54 +37,6 @@ public class Login {
     @EJB
     private CheckFields cf;
 
-    public String getMessage() {
-        return this.message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getUsername() {
-        return this.username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return this.password;
-    }
-
-    public String getConfpassword() {
-        return this.confpassword;
-    }
-
-    public void setConfpassword(String confpassword) {
-        this.confpassword = confpassword;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return this.email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
     /**
      * Get username and password and retrieve user, then checks if he/she has
      * verified his/her account
@@ -168,5 +120,56 @@ public class Login {
             message = "Password has been reset!";
         }
     }
+    
+    // ----- Getters and setters -----
+    
+    public String getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public String getUsername() {
+        return this.username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public String getConfpassword() {
+        return this.confpassword;
+    }
+
+    public void setConfpassword(String confpassword) {
+        this.confpassword = confpassword;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+    
 
 }

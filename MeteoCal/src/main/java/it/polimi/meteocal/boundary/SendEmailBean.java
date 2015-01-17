@@ -1,12 +1,5 @@
 package it.polimi.meteocal.boundary;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 import java.util.Properties;
 import javax.ejb.Stateless;
 import javax.mail.Message;
@@ -27,7 +20,17 @@ public class SendEmailBean {
         static Properties mailServerProperties;
         static Session getMailSession;
         static MimeMessage generateMailMessage;
-
+        
+        /**
+         * Sends an Email to to, with subject and content emailBody
+         * from the gmail account meteocalpolimi@gmail.com
+         * 
+         * @param to
+         * @param subject
+         * @param emailBody
+         * @throws AddressException
+         * @throws MessagingException 
+         */
         public void generateAndSendEmail(String to,String subject,String emailBody) throws AddressException, MessagingException {
  
         mailServerProperties = System.getProperties();
