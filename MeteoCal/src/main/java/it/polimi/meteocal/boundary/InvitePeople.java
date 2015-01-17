@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.polimi.meteocal.boundary;
 
 import it.polimi.meteocal.control.ManageInvites;
@@ -42,6 +37,9 @@ public class InvitePeople {
 
     @Inject
     ManageInvites mi;
+    
+    @Inject
+    PersonalProfile pp;
 
     private Integer event;
     private String contact;
@@ -49,7 +47,9 @@ public class InvitePeople {
     private Map<Integer, Boolean> selectedIds = new HashMap<>();
     private List<User> invited;
 
-    // Actions -----------------------------------------------------------------------------------
+    /**
+     * updates contacts then calls ManageInvites method createInvites
+     */
     public String invite() {
 
         contacts = updateContacts();
@@ -69,22 +69,28 @@ public class InvitePeople {
         return "calendar?faces-redirect=true";
 
     }
-
+    
+    /**
+     * calls personalprofile submitAddUser() and updates the contacts
+     */
     public void addUser() {
-        user = rv.getLoggedUser();
-        if (!user.getUsername().equals(contact)) {
-            mpd.addUser(contact);
-        }
+        
+        pp.submitAddUser();
         contacts = updateContacts();
     }
-
+    
+    /**
+     * updates contacts from user's userCollection
+     */
     public List<User> updateContacts() {
 
         user = rv.getLoggedUser();
         contacts = (List<User>) user.getUserCollection();
         return contacts;
     }
-
+    
+    // ----- Getters and setters -----
+    
     public User getUser() {
         return user;
     }
