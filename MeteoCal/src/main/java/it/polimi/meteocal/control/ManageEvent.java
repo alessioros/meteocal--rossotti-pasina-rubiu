@@ -34,8 +34,9 @@ public class ManageEvent {
         eventi=rv.getLoggedUser().getEventCollection();
         eventi.add(event);
         rv.getLoggedUser().setEventCollection(eventi);
-        mf.forecast();
+        mf.forecast(loc);
     }
+    
     public Event findEvent(int id){
          try {
             List<Event> event;
