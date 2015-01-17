@@ -198,14 +198,14 @@ public class EventDetails {
         this.idEvent = idEvent;
     }
     
-    public Event findEvent(){
-        return me.findEvent(this.idEvent);
+    public void findEvent(){
+        event = me.findEvent(this.idEvent);
     }
     
     public boolean canEdit(){
         User u = rv.getLoggedUser();
-        Event e = this.findEvent();
-        if(u.equals(e.getIdOrganizer()))
+        this.findEvent();        
+        if(u.equals(event.getIdOrganizer()))
             return true;
         else
             return false;
