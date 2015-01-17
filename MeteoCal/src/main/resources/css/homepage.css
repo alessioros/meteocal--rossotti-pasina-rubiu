@@ -22,14 +22,40 @@ html{
 
 #weather{
 	border:1px solid black;
-	padding:15px;
+	padding:10px;
 	text-align:center;
-	top:140px;
-	right:5.5%;
+        height:150px;
 	font-size:50px;
 	color:black;
 	text-shadow:1px 1px 1px white;
 	position:absolute;
+        right:5.5%;
+        top:140px;
+}
+#weather #city{
+    width:180px;
+}
+#weather #conditions{
+    
+    width:60px;
+    height:60px;
+    background-image: url("#{resource['css:icons/weather/sun.png']}");
+    background-size: 60px 60px;
+    margin-top:10px;
+    margin-left:10px;
+    float:left;
+    display:inline-block;
+}
+#weather #temperature{
+    
+    float:left;
+    margin-left:20px;
+    margin-top:10px;
+    width:80px;
+    height:60px;
+    line-height: 60px;
+    font-size:40px;
+    display:inline-block;
 }
 
 #slogan{
