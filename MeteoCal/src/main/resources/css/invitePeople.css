@@ -23,7 +23,7 @@ html{
         border-radius: 5px;
         display: block;
         width:400px;
-        height:300px;
+        min-height: 300px;
 }
 
 .selectUser{
@@ -82,7 +82,7 @@ input[type=text]{
 }
 
 #button-invite,#button-add{
-  margin-bottom:20px;
+  margin-bottom:10px;
   border: #fbfbfb solid 2px;
   border-radius: 8px;
   box-shadow: 2px 2px 3px #888;
@@ -117,7 +117,6 @@ input[type=text]{
 }
 
 .error{
-    margin-top:5px;
     font-size: 16px;
     padding-left:10px;
     width:50%;
