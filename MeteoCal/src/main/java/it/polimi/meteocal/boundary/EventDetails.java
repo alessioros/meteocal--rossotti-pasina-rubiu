@@ -6,6 +6,7 @@ import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
+import it.polimi.meteocal.entity.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
@@ -41,6 +42,7 @@ public class EventDetails {
     private String city;
     private String address;
     private String query;
+    private int idEvent;
 
     public void dateConverter() {
         this.startDate = new Date(this.startDateLong);
@@ -187,6 +189,26 @@ public class EventDetails {
     public void setEvent(Event event) {
         this.event = event;
     }
+
+    public int getIdEvent() {
+        return idEvent;
+    }
+
+    public void setIdEvent(int idEvent) {
+        this.idEvent = idEvent;
+    }
     
+    public Event findEvent(){
+        return me.findEvent(this.idEvent);
+    }
+    
+    public boolean canEdit(){
+        User u = rv.getLoggedUser();
+        Event e = this.findEvent();
+        if(u.equals(e.getIdOrganizer()))
+            return true;
+        else
+            return false;
+    }
 
 }
