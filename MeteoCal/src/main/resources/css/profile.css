@@ -74,7 +74,7 @@ html{
     width:37px;
     height:37px;
     border:0px;
-    background-image:url("#{resource['css:icons/adduser.png']}");
+    background-image:url("#{resource['css:icons/plus.png']}");
     background-repeat:no-repeat;
     background-size: 37px 37px;
     float:right;

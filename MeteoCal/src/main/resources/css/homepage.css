@@ -39,9 +39,9 @@ html{
     
     width:60px;
     height:60px;
-    background-image: url("#{resource['css:icons/weather/sun.png']}");
+    background-image: url("#{resource['css:icons/weather/variable.png']}");
     background-size: 60px 60px;
-    margin-top:10px;
+    margin-top:15px;
     margin-left:10px;
     float:left;
     display:inline-block;
@@ -49,9 +49,9 @@ html{
 #weather #temperature{
     
     float:left;
-    margin-left:20px;
+    margin-left:15px;
     margin-top:10px;
-    width:80px;
+    width:85px;
     height:60px;
     line-height: 60px;
     font-size:40px;
