@@ -36,16 +36,32 @@ html{
     width:180px;
 }
 #weather #conditions{
-    
     width:60px;
     height:60px;
-    background-image: url("#{resource['css:icons/weather/variable.png']}");
     background-size: 60px 60px;
     margin-top:15px;
     margin-left:10px;
     float:left;
     display:inline-block;
 }
+
+#weather .variable{
+    background-image: url("#{resource['css:icons/weather/variable.png']}");
+}
+
+#weather .Fair{
+    background-image: url("#{resource['css:icons/weather/sun.png']}");
+}
+
+#weather .Heavy,#weather .Light{
+    background-image: url("#{resource['css:icons/weather/cloud.png']}");
+}
+
+#weather .Rain{
+    background-image: url("#{resource['css:icons/weather/rain.png']}");
+}
+
+
 #weather #temperature{
     
     float:left;

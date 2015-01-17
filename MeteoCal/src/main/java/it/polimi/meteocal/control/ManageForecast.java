@@ -35,6 +35,7 @@ public class ManageForecast {
     private String woeid;
     private String cityHome;
     private String tempHome;
+    private String condHome;
     private List<Location> place;
     private Forecast forecast;
 
@@ -146,6 +147,7 @@ public class ManageForecast {
     }
 
     public void weatherHome() {
+        
         try {
 
             cityHome = "New York";
@@ -165,12 +167,15 @@ public class ManageForecast {
             JSONObject condition = resItem.getJSONObject("condition");
 
             tempHome = condition.getString("temp");
+            condHome = condition.getString("text");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
+    // ----- Getters and setters -----
+    
     public String getUrlQuery() {
         return urlQuery;
     }
@@ -201,6 +206,14 @@ public class ManageForecast {
 
     public void setTempHome(String tempHome) {
         this.tempHome = tempHome;
+    }
+    
+    public String getCondHome() {
+        return condHome;
+    }
+
+    public void setCondHome(String condHome) {
+        this.condHome = condHome;
     }
 
 }
