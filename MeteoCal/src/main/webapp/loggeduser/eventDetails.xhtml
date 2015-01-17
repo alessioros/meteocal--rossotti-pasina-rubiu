@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:m="http://code.google.com/p/gmaps4jsf/">
+      xmlns:m="http://code.google.com/p/gmaps4jsf/"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <title>Profile</title>
@@ -27,22 +28,29 @@
         <f:metadata>
             <f:viewAction action="#{personalProfile.showPersonalData()}"/>
             <f:viewParam name="id" value="#{eventDetails.idEvent}"/>
+            <f:viewAction action='#{eventDetails.findEvent()}'/>
         </f:metadata>
         
         <div class="info">
-            <a id="title">#{eventDetails.findEvent().name}</a><br/>
-            <a id="stime">Starts: #{eventDetails.findEvent().startTime.toLocaleString()}</a><br/>
-            <a id="etime">Ends: #{eventDetails.findEvent().endTime.toLocaleString()}</a><br/>
-            <a id="outd">Oudoor Event</a>
+            <a id="title">#{eventDetails.event.name}</a><br/>
+            <a id="stime">Starts: #{eventDetails.event.startTime.toLocaleString()}</a><br/>
+            <a id="etime">Ends: #{eventDetails.event.endTime.toLocaleString()}</a><br/>
+            <c:if test='#{eventDetails.event.outDoor==true}'>
+                <a id="outd" >Oudoor Event</a>
+            </c:if>
+            <c:if test='#{eventDetails.event.outDoor==false}'>
+                <a id="outd" >Indoor Event</a>
+            </c:if>
         </div>
         <div class="image"></div><br/>
         <div class="googleMap">
             <h:form>
-                <m:map width="350px" height="250px" latitude="#{eventDetails.findEvent().idLocation.latitude}" longitude="#{eventDetails.findEvent().idLocation.longitude}" />
+                <a id="loc">#{eventDetails.event.idLocation.address}, #{eventDetails.event.idLocation.city} </a>
+                <m:map width="350px" height="250px" latitude="#{eventDetails.event.idLocation.latitude}" longitude="#{eventDetails.event.idLocation.longitude}" />
             </h:form>
         </div>
         <div class="description">
-            #{eventDetails.findEvent().description}         
+            #{eventDetails.event.description}         
         </div>
      </h:body>
 </html>
