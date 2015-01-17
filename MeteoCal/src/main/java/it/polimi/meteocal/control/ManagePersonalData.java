@@ -1,6 +1,7 @@
 package it.polimi.meteocal.control;
 
 import it.polimi.meteocal.entity.User;
+import java.util.Collection;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -8,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -25,18 +27,6 @@ public class ManagePersonalData {
     private RegisterValidation rv;
 
     private User user;
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public User getUser() {
-
-        if (this.user == null) {
-            this.user = new User();
-        }
-        return user;
-    }
 
     /**
      * Changes the user fields that have been passed not empty they are stored
@@ -138,18 +128,71 @@ public class ManagePersonalData {
         }
     }
     
+    /**
+     * Shows the calendar page of User with passed username 
+     * @param username
+     * @return 
+     */
     public String showCalendar(String username){
     
         return "/loggeduser/calendar.xhtml?faces-redirect=true";
     }
     
-    
+    /**
+     * returns the data of User with passed username
+     * @param username
+     * @return 
+     */
     public User getUserData(String username) {
 
         List<User> users = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
 
         user = (User) users.get(0);
 
+        return user;
+    }
+    
+    /**
+     * checks if exists a User with passed username
+     * @param username
+     * @return 
+     */
+    public boolean existUser(String username){
+        
+        List<User> users = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
+        
+        return (!users.isEmpty());
+    }
+    
+    /**
+     * Checks if contact is already added in username's addresslist
+     * @param username
+     * @param contact
+     * @return 
+     */
+    public boolean userInContacts(String username,String contact){
+        
+        User User1,User2;
+        
+        User1=getUserData(username);
+        User2=getUserData(contact);
+        
+        Collection<User> contacts=User1.getUserCollection();
+        
+        return contacts.contains(User2);
+    }
+    
+    // ----- Getters and setters -----
+    
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+
+        if (this.user == null) {
+            this.user = new User();
+        }
         return user;
     }
 }

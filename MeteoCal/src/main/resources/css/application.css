@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
 html{
-  width:auto;
   height:800px;
   margin:0px auto 0px auto;
+  width:auto;
+  min-width: 1000px;
 }
+
 /* ---------------------- MENU BAR ----------------------*/
 
 #menuBar {

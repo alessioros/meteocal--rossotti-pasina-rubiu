@@ -79,7 +79,7 @@
                     <h:form>
                         <h:inputText id='contact' value="#{personalProfile.contact}" required="true" class='feedback-input' requiredMessage="Insert a valid username"/>
                         <h:commandButton type='submit' value=' ' a:id='button-add' action="#{personalProfile.submitAddUser()}"/>
-                        <br/><div class="error"><h:message for="contact"/></div>   
+                        <br/><div class="error">#{personalProfile.message}<h:message for="contact"/></div>   
                     </h:form>     
                 </li>
             </ul>

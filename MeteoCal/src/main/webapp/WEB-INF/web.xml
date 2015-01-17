@@ -40,7 +40,11 @@
         </auth-constraint>
     </security-constraint>
     <mime-mapping>
-        <extension>xhtml <!--{or the extension of file}--></extension>
+        <extension>xhtml</extension>
+        <mime-type>text/html</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>jsp</extension>
         <mime-type>text/html</mime-type>
     </mime-mapping>
 </web-app>
