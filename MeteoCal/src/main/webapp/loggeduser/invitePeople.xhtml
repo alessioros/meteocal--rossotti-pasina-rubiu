@@ -27,40 +27,25 @@
             <f:viewAction action="#{invitePeople.updateContacts()}"/>
             <f:viewParam name="event" value="#{invitePeople.event}"/>
         </f:metadata>
-        <div class="addrList">
-            <a class='addrTitle'>Address List:</a>
-            <ul>
-                <h:form>
-                    <li>
-                        <h:dataTable value="#{invitePeople.contacts}" var="contact">
+        
+        <a class='inviteTitle'>Invite People:</a>
+        <div class="invitePeople">
+            <a class="selectUser">Select Username:</a>
+            <h:form>
+                <h:dataTable value="#{invitePeople.contacts}" var="contact">
 
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Select" />
-                                </f:facet>
-                                <h:selectBooleanCheckbox value="#{invitePeople.selectedIds[contact.idUser]}" />
-                            </h:column>
-                            <h:column>
-                                <f:facet name="header">
-                                    <h:outputText value="Username" />
-                                </f:facet>
-                                #{contact.username}
-                            </h:column>
-
-                        </h:dataTable>
-                    </li>
-                    <li>
-                        <h:commandButton type='submit' value='Invite' a:id='button-invite' action="#{invitePeople.invite()}"/>
-                        <br/><div class="error"><h:message for="contact"/></div>   
-
-                    </li>
-                </h:form>
-                <h:form>
-                    <h:inputText id='contact' value="#{invitePeople.contact}" required="true" class='feedback-input' requiredMessage="Insert a valid username"/>
-                    <h:commandButton type='submit' value='Add new user to addresslist' a:id='button-add' action="#{invitePeople.addUser()}"/>
-                    <br/><div class="error"><h:message for="contact"/></div>   
-                </h:form>    
-            </ul>
+                    <h:column>
+                        <h:selectBooleanCheckbox a:id="#{contact.username}" value="#{invitePeople.selectedIds[contact.idUser]}" class="check" />
+                        <label for="#{contact.username}">#{contact.username}</label>
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton type='submit' value='INVITE' a:id='button-invite' action="#{invitePeople.invite()}"/>   
+            </h:form>
+            <h:form>
+                <h:inputText id='contact' value="#{invitePeople.contact}" required="true" requiredMessage="Insert a valid username"/>
+                <h:commandButton type='submit' value='Add New User' a:id='button-add' action="#{invitePeople.addUser()}"/>
+                <br/><div class="error"><h:message for="contact"/></div>   
+            </h:form>    
         </div> 
     </h:body>
 </html>
