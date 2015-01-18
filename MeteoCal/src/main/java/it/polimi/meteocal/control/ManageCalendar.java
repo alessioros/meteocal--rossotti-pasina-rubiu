@@ -5,25 +5,20 @@
  */
 package it.polimi.meteocal.control;
 
-import it.polimi.meteocal.boundary.UserBean;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Event;
 import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.annotation.Resource;
-import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**

@@ -287,6 +287,81 @@ input.toggle:checked + label:after {
 	border: #8DB9CB solid 2px;
 }
 
+.polimeteo{
+	border:1px solid black;
+        border-radius: 5px;
+	padding:15px;
+        padding-bottom: 30px;
+	text-align:center;
+	font-size:40px;
+        font-family: 'Dosis', sans-serif;
+	color:black;
+	text-shadow:1px 1px 1px white;
+        float: right;
+        margin-right:70px;
+        display: inline-block;
+        position:relative;
+        top:-500px;
+}
+
+.polimeteo #city{
+    width:340px;
+}
+
+.polimeteo #address{
+    font-size:20px;
+}
+.polimeteo #conditions{
+    width:60px;
+    height:60px;
+    background-size: 60px 60px;
+    margin-top:25px;
+    margin-left:95px;
+    float:left;
+    display:inline-block;
+}
+
+.polimeteo #temperature{
+    
+    float:left;
+    margin-left:20px;
+    margin-top:25px;
+    text-shadow: none;
+    height:60px;
+    line-height: 60px;
+    font-size:40px;
+    display:inline-block;
+}
+
+.polimeteo br{
+    clear:left;
+}
+
+.polimeteo #conddesc{
+    margin-top:5px;
+    font-size:20px;
+}
+
+.polimeteo .Fair{
+    background-image: url("#{resource['css:icons/weather/color/sun.png']}");
+}
+
+.polimeteo .Cloudy{
+    background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
+}
+
+polimeteo .Rain{
+    background-image: url("#{resource['css:icons/weather/color/rain.png']}");
+}
+
+polimeteo .Snow{
+    background-image: url("#{resource['css:icons/weather/color/snow.png']}");
+}
+
+polimeteo .Partly{
+    background-image: url("#{resource['css:icons/weather/mixed.png']}");
+}
+
 .error{
     margin-top:5px;
     font-size: 16px;

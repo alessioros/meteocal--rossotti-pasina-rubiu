@@ -45,15 +45,15 @@ html{
     display:inline-block;
 }
 
-#weather .variable{
-    background-image: url("#{resource['css:icons/weather/variable.png']}");
+#weather .Partly{
+    background-image: url("#{resource['css:icons/weather/mixed.png']}");
 }
 
 #weather .Fair{
     background-image: url("#{resource['css:icons/weather/sun.png']}");
 }
 
-#weather .Heavy,#weather .Light{
+#weather .Heavy,#weather .Cloudy{
     background-image: url("#{resource['css:icons/weather/cloud.png']}");
 }
 

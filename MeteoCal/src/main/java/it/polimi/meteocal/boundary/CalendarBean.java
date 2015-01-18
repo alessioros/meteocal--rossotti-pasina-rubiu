@@ -1,27 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package it.polimi.meteocal.boundary;
 
 import it.polimi.meteocal.control.Day;
 import it.polimi.meteocal.control.ManageCalendar;
 import it.polimi.meteocal.control.Week;
+import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.json.JSONObject;
 
 /**
  *
@@ -37,8 +34,19 @@ public class CalendarBean{
     private long viewDate;
     private List<Event> event = new ArrayList();
     
+    private String cityHome;
+    private String urlQuery;
+    private String woeid;
+    private String tempHome;
+    private String condHome;
+    
     @Inject 
     ManageCalendar mc;
+    
+    @EJB
+    YahooQueries yq;
+    
+    
     
     public CalendarBean() {                            
         this.getSessionDate();
@@ -77,33 +85,32 @@ public class CalendarBean{
         date.setMinutes(((int)(date.getMinutes()/15)+1)*15);
         this.setSessionDate();        
     }
-    public String getDayNum(){
-        return new SimpleDateFormat("d",Locale.US).format(this.getDate());
-    } 
-    public String getDayStr(){
-        return new SimpleDateFormat("E",Locale.US).format(this.getDate());
+    
+    public void weatherCal() {
+        try {
+
+            cityHome = "Milano";
+
+            woeid=yq.woeidOfLocation(cityHome);
+
+            urlQuery = "select * from weather.forecast where u=\"c\" and woeid=" + woeid;
+
+            JSONObject jsonWeather = yq.yahooRestQuery(urlQuery);
+
+            JSONObject jsonQueryWeather = jsonWeather.getJSONObject("query");
+            JSONObject queryRes = jsonQueryWeather.getJSONObject("results");
+            JSONObject channel = queryRes.getJSONObject("channel");
+            JSONObject resItem = channel.getJSONObject("item");
+            JSONObject condition = resItem.getJSONObject("condition");
+
+            tempHome = condition.getString("temp");
+            condHome = condition.getString("text");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    public String getMonthStr(){
-        return new SimpleDateFormat("MMMM",Locale.US).format(this.getDate());
-    }
-    public String getMonthNum(){
-        return new SimpleDateFormat("M",Locale.US).format(this.getDate());
-    }
-    public String getYear(){
-        return new SimpleDateFormat("y",Locale.US).format(this.getDate());
-    }
-    public String getHour(){
-        return new SimpleDateFormat("H",Locale.US).format(this.getDate());
-    }
-    public String getMinute(){
-        return new SimpleDateFormat("m",Locale.US).format(this.getDate());
-    }
-    public List<Week> getCal() {
-        return cal;
-    }
-    public void setCal(List<Week> cal) {
-        this.cal = cal;
-    }
+    
     public void next(){
         date.setDate(1);
         date.setMonth(this.getDate().getMonth()+1);
@@ -168,6 +175,76 @@ public class CalendarBean{
         
             
         
+    }
+    
+    // ----- Getters and setters -----
+    
+    public String getCityHome() {
+        return cityHome;
+    }
+
+    public void setCityHome(String cityHome) {
+        this.cityHome = cityHome;
+    }
+
+    public String getUrlQuery() {
+        return urlQuery;
+    }
+
+    public void setUrlQuery(String urlQuery) {
+        this.urlQuery = urlQuery;
+    }
+
+    public String getWoeid() {
+        return woeid;
+    }
+
+    public void setWoeid(String woeid) {
+        this.woeid = woeid;
+    }
+
+    public String getTempHome() {
+        return tempHome;
+    }
+
+    public void setTempHome(String tempHome) {
+        this.tempHome = tempHome;
+    }
+
+    public String getCondHome() {
+        return condHome;
+    }
+
+    public void setCondHome(String condHome) {
+        this.condHome = condHome;
+    }
+    
+    public String getDayNum(){
+        return new SimpleDateFormat("d",Locale.US).format(this.getDate());
+    } 
+    public String getDayStr(){
+        return new SimpleDateFormat("E",Locale.US).format(this.getDate());
+    }
+    public String getMonthStr(){
+        return new SimpleDateFormat("MMMM",Locale.US).format(this.getDate());
+    }
+    public String getMonthNum(){
+        return new SimpleDateFormat("M",Locale.US).format(this.getDate());
+    }
+    public String getYear(){
+        return new SimpleDateFormat("y",Locale.US).format(this.getDate());
+    }
+    public String getHour(){
+        return new SimpleDateFormat("H",Locale.US).format(this.getDate());
+    }
+    public String getMinute(){
+        return new SimpleDateFormat("m",Locale.US).format(this.getDate());
+    }
+    public List<Week> getCal() {
+        return cal;
+    }
+    public void setCal(List<Week> cal) {
+        this.cal = cal;
     }
 
     public long getViewDate() {

@@ -21,6 +21,28 @@ public class Registration {
     private String message;
     private String confpassword;
 
+    /**
+     * checks the registrations fields and if they are OK creates the user
+     */
+    public void register() {
+        if (!cf.checkUsername(user.getUsername())) {
+            message = "The username you have chosen already exists.";
+        } else if (!cf.checkEmail(user.getEmail())) {
+            message = "The email you have chosen already exists.";
+        } else if (!cf.checkEmailCorrectness(user.getEmail())) {
+            message = "Please insert a valid email address.";
+        } else if (!cf.checkPassword(user.getPassword(), PasswordEncrypter.encryptPassword(confpassword))) {
+            message = "Passwords don't match.";
+        } else if (confpassword.length() < 6) {
+            message = "Password should be at least 6 characters";
+        } else {
+            rv.createUser(user);
+            message = "Confirmation email sent, please check your email";
+        }
+    }
+    
+    // ----- Getters and setters -----
+    
     public String getMessage() {
         return this.message;
     }
@@ -49,24 +71,5 @@ public class Registration {
     }
 
 
-    /**
-     * checks the registrations fields and if they are OK creates the user
-     */
-    public void register() {
-        if (!cf.checkUsername(user.getUsername())) {
-            message = "The username you have chosen already exists.";
-        } else if (!cf.checkEmail(user.getEmail())) {
-            message = "The email you have chosen already exists.";
-        } else if (!cf.checkEmailCorrectness(user.getEmail())) {
-            message = "Please insert a valid email address.";
-        } else if (!cf.checkPassword(user.getPassword(), PasswordEncrypter.encryptPassword(confpassword))) {
-            message = "Passwords don't match.";
-        } else if (confpassword.length() < 6) {
-            message = "Password should be at least 6 characters";
-        } else {
-            rv.createUser(user);
-            message = "Confirmation email sent, please check your email";
-        }
-    }
     
 }
