@@ -77,7 +77,6 @@ html{
     background-image:url("#{resource['css:icons/plus.png']}");
     background-repeat:no-repeat;
     background-size: 37px 37px;
-    box-shadow: 2px 2px 3px #888;
     float:right;
     margin-right:80px;
     opacity:1;
