@@ -116,40 +116,9 @@ public class ManageForecast {
 
 
     }
-
-<<<<<<< HEAD
-    public void weatherHome() {
-        
-        try {
-
-            cityHome = "New York";
-
-            woeid=woeidOfLocation(cityHome);
-
-            urlQuery = "select * from weather.forecast where u=\"c\" and woeid=" + woeid;
-
-            // Costruisco il JSON
-            JSONObject jsonWeather = yq.yahooRestQuery(urlQuery);
-
-            //Estraggo la temperatura dal JSON
-            JSONObject jsonQueryWeather = jsonWeather.getJSONObject("query");
-            JSONObject queryRes = jsonQueryWeather.getJSONObject("results");
-            JSONObject channel = queryRes.getJSONObject("channel");
-            JSONObject resItem = channel.getJSONObject("item");
-            JSONObject condition = resItem.getJSONObject("condition");
-
-            tempHome = condition.getString("temp");
-            condHome = condition.getString("text");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     
     // ----- Getters and setters -----
-    
-=======
->>>>>>> 24646f87a85c3f0540042df741676d674582d302
+
     public String getUrlQuery() {
         return urlQuery;
     }

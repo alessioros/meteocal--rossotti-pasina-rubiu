@@ -26,6 +26,7 @@ public class Home {
     private String urlQuery;
     private String woeid;
     private String tempHome;
+    private String condHome;
     
     public void weatherHome() {
         try {
@@ -47,12 +48,13 @@ public class Home {
             JSONObject condition = resItem.getJSONObject("condition");
 
             tempHome = condition.getString("temp");
+            condHome = condition.getString("text");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+    
     public String getCityHome() {
         return cityHome;
     }
@@ -83,6 +85,14 @@ public class Home {
 
     public void setTempHome(String tempHome) {
         this.tempHome = tempHome;
+    }
+    
+     public String getCondHome() {
+        return condHome;
+    }
+
+    public void setCondHome(String condHome) {
+        this.condHome = condHome;
     }
     
     
