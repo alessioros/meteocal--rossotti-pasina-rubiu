@@ -74,14 +74,17 @@ public class PersonalProfile {
         String username = user.getUsername();
         user = rv.getLoggedUser();
         if (username.equals(user.getUsername())) {
+            
             message = "You can't add yourself!";
         }else if(mpd.userInContacts(user.getUsername(), username)){
             message = "User already added!";
         }else {
             mpd.addUser(username);
+            
             message = "User added!";
-            user.setUsername(username);
         }
+        user.setUsername(username);
+        showUserData();
     }
 
     /**  
