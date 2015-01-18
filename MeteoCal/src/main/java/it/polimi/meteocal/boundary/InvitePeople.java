@@ -12,6 +12,7 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -50,7 +51,7 @@ public class InvitePeople {
     /**
      * updates contacts then calls ManageInvites method createInvites
      */
-    public String invite() {
+    public String invite() throws MessagingException {
 
         contacts = updateContacts();
 
