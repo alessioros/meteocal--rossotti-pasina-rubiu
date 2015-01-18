@@ -24,7 +24,7 @@ public class YahooQueries {
     private URL weatherurl;
     private String urlPrefix = "https://query.yahooapis.com/v1/public/yql?q=";
     private String urlSuffix = "&format=json&diagnostics=true&callback=";
-    
+    private String urlQuery;
     
     /**
      * Receives a query, it asks yahooWeather service whit the query. It receives
@@ -70,4 +70,28 @@ public class YahooQueries {
         }
         return null;
     }
+    
+    public String woeidOfLocation(String location) {
+        try {
+
+            // Query da eseguire su Yahoo Weather
+            urlQuery = "select * from geo.placefinder where text=\"" + location + "\"";
+
+            // Costruisco il JSON
+            JSONObject json = yahooRestQuery(urlQuery);
+
+            // Ci faccio quel che devo.
+            // Ad esempio, stampo le previsioni per tutti i giorni:
+            JSONObject jsonQuery = json.getJSONObject("query");
+            JSONObject queryResults = jsonQuery.getJSONObject("results");
+            JSONObject pl = queryResults.getJSONObject("Result");
+
+            return pl.getString("woeid");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+    
 }

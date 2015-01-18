@@ -12,7 +12,7 @@
     </h:head>
     <h:body>
         <f:metadata>
-            <f:viewAction action="#{manageForecast.weatherHome()}"/>
+            <f:viewAction action="#{home.weatherHome()}"/>
         </f:metadata>
         <div id='menuBar'>
             <ul>
@@ -53,9 +53,15 @@
 
 
         <div id='weather'>
+<<<<<<< HEAD
             <div id='city'>#{manageForecast.cityHome}</div>
             <div id='conditions' class='#{manageForecast.condHome}'></div>
             <div id='temperature'>#{manageForecast.tempHome} °C</div>
+=======
+            <div id='city'>#{home.cityHome}</div>
+            <div id='conditions'></div>
+            <div id='temperature'>#{home.tempHome} °C</div>
+>>>>>>> 24646f87a85c3f0540042df741676d674582d302
         </div>
     </h:body>
 </html>
