@@ -37,17 +37,19 @@
         <h:form>
             <h:dataTable value="#{notificationPage.notifications}" var="notification">
 
-                <h:column>
-                    #{notification.description}
+                <h:column a:class="description">
+                    <div id="image"></div>
+                    <div id="desc">#{notification.description}</div>
                 </h:column>
 
                 <h:column>
-                    <h:commandButton value='Accept' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
+                    <h:commandButton value='ACCEPT' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
                 </h:column>
 
                 <h:column>
-                    <h:commandButton value='Decline' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
+                    <h:commandButton value='DECLINE' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
                 </h:column>
+
 
             </h:dataTable>
         </h:form>

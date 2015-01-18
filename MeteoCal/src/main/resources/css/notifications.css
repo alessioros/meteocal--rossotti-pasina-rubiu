@@ -1,46 +1,96 @@
-/* 
-    Created on : 27-dic-2014, 15.59.08
-    Author     : alessiorossotti
-*/
-
 html{
 	background-image:url("#{resource['css:img/bg_pattern.png']}");
+        background-repeat: repeat;
+        font-family: 'Dosis', sans-serif;
 }
 
 .title{
 	font-size:45px;
-	font-family: 'Dosis', sans-serif;
 	margin-top:40px;
 	margin-left:100px;
 	display:block;
 }
 
+table{
+    margin-left:80px;
+    margin-top:40px;
+    padding:30px;
+    background-color:rgba(141,185,203,0.2);
+    display: block;
+    width:800px;
+    min-height:350px;
+    border:1px solid #8DB9CB;
+}
+
+table tr{
+    background-color:white;
+    border:1px solid #888;
+    border-radius:5px;
+    display: block;
+    height:90px;
+    margin-bottom:15px;
+}
+
+table tr .description{
+    margin-right:50px;
+    min-width:500px;
+    display: inline-block;
+    float:left;
+}
+
+table tr .description #image{
+    margin:20px;
+    height:50px;
+    width:50px;
+    background-size: 50px 50px;
+    background-image: url("#{resource['css:icons/invite.png']}");
+    display: inline-block;
+    float:left;
+}
+
+table tr .description #desc{
+    height:90px;
+    line-height:90px;
+    font-size:18px;
+    display: inline-block;
+    float:left;
+}
+
 #button-accept,#button-decline{
-  margin-bottom:20px;
+  margin-top:25px;
   border: #fbfbfb solid 2px;
-  background-color: #8DB9CB;
+  border-radius: 8px;
+  box-shadow: 2px 2px 3px #888;
   color:white;
-  font-size:18px;
+  font-size:14px;
   padding:10px;
-  font-weight:200;
-  margin-left:auto;
+  padding-top:5px;
+  padding-bottom:5px;
   width:auto;
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
-  display:block;
+  display: inline-block;
+  float:left;
 }
 
-#button-accept:hover,#button-decline:hover{
+#button-accept{
+    background-color:#58BC6C;
+    margin-right:10px;
+}
+
+#button-decline{
+    background-color:#F66448;
+    margin-right:20px;
+}
+
+#button-accept:hover{
   background-color: white;
-  color: #8DB9CB;
-  border: #8DB9CB solid 2px;
+  color: #58BC6C;
+  border: #58BC6C solid 2px;
 }
-
-#button-accept,#button-decline{
-    margin-top:10px;
-    padding:5px;
-    padding-left: 10px;
-    margin-left:0px;
-    float:bottom;
+#button-decline:hover{
+  background-color: white;
+  color: #F66448;
+  border: #F66448 solid 2px;  
 }
