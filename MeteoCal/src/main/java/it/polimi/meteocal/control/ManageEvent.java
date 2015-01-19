@@ -55,11 +55,11 @@ public class ManageEvent {
     }
     
     public void updateEvent(Event updated,Location l){
-        /**DA SISTEMARE**/
         try {
             Event event=em.find(Event.class, updated.getIdEvent());
             
          //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
+            em.persist(l);
             event.setName(updated.getName());
             event.setDescription(updated.getDescription());
             event.setStartTime(updated.getStartTime());
@@ -95,9 +95,35 @@ public class ManageEvent {
         return null;
     }
     
-    public void deleteEvent(){
+    public void deleteEvent(int id){
+        try {
+            Event event=em.find(Event.class, id);
+            
+         //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
+            //em.persist(l);
+            event.setName(null);
+            event.setDescription(null);
+            event.setStartTime(null);
+            event.setEndTime(null);
+            event.setOutDoor(null);
+            event.setPublic1(null);
+            event.setIdLocation(null);   
+            //*/
+           // event =em.merge(updated);
+            em.persist(event);
+            
+            
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            /*try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }*/
+
+        }//*/
     }
-        
+           
     public void updateForecast(){
     }
     

@@ -104,14 +104,13 @@ public class EventDetails {
         else
             return "CREATE";
     }
-     public String buttonAction(){
+    public String buttonAction(){
         if(editing())
             return this.updateEvent();            
         else
             return this.create();
     }
     public String updateEvent(){   
-        /**DA SISTEMARE**/
        event.setIdEvent(this.idEvent);
        event.setStartTime(startDate);
        event.setEndTime(endDate);
@@ -154,7 +153,10 @@ public class EventDetails {
        
        
     }
-   
+    public String deleteEvent(){
+        me.deleteEvent(idEvent);
+        return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
+    }
     public String getState() {
         return state;
     }
