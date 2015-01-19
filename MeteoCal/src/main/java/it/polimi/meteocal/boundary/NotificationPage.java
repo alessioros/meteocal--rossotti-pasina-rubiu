@@ -59,20 +59,18 @@ public class NotificationPage {
      * submits accept notification to ManageNotifications 
      * @param notification 
      */
-    public void accept(Notification notification) {
+    public String accept(Notification notification) {
         mn.acceptInvite(notification);
-        message="Invite accepted!";
-        updateNotifications();
+        return "notifications?faces-redirect=true";
     }
     
     /**
      * submits decline notification to ManageNotifications 
      * @param notification 
      */
-    public void decline(Notification notification) {
+    public String decline(Notification notification) {
         mn.declineInvite(notification);
-        message="Invite declined";
-        updateNotifications();
+        return "notifications?faces-redirect=true";
     }
     
     
