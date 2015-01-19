@@ -1,20 +1,37 @@
 package it.polimi.meteocal.control;
 
+
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.annotation.ManagedBean;
+import javax.annotation.Resource;
+
 import javax.ejb.Stateless;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.SystemException;
 
+
+
+
+/**
+ *
+ * @author Simone
+ */
+//@ManagedBean
+//@RequestScoped
 @Stateless
 public class ManageEvent {
     
     @PersistenceContext
     EntityManager em;
+    
+ //   @Inject
+ //  UserTransaction utx;
     
     @Inject
     RegisterValidation rv;
@@ -22,7 +39,7 @@ public class ManageEvent {
     @Inject
     ManageForecast mf;
     
-  
+      
     public void createEvent(Event event,Location loc) {
         
         Collection<Event> eventi;
@@ -35,6 +52,34 @@ public class ManageEvent {
         eventi.add(event);
         rv.getLoggedUser().setEventCollection(eventi);
         mf.forecast(loc);
+    }
+    
+    public void updateEvent(Event updated,Location l){
+        /**DA SISTEMARE**/
+        try {
+            Event event=em.find(Event.class, updated.getIdEvent());
+            
+         // event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
+            event.setName(updated.getName());
+            event.setDescription(updated.getDescription());
+            event.setStartTime(updated.getStartTime());
+            event.setEndTime(updated.getEndTime());
+            event.setOutDoor(updated.getOutDoor());
+            event.setPublic1(updated.getPublic1());
+            event.setIdLocation(l);   
+            //*/
+            event =em.merge(updated);
+            
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            /*try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }*/
+
+        }//*/
     }
     
     public Event findEvent(int id){
@@ -51,10 +96,7 @@ public class ManageEvent {
     
     public void deleteEvent(){
     }
-    
-    public void updateEvent(){
-    }
-    
+        
     public void updateForecast(){
     }
     

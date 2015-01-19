@@ -51,8 +51,7 @@ public class CalendarBean{
     public CalendarBean() {                            
         this.getSessionDate();
         if(date == null){
-            date=new Date();
-            date.setMinutes(((int)(date.getMinutes()/15)+1)*15);
+            date=new Date();            
             date.setDate(1);
             this.setSessionDate();
         }       
@@ -75,14 +74,12 @@ public class CalendarBean{
         if(date == null){
             date=new Date();
             date.setDate(1);
-            date.setMinutes(((int)(date.getMinutes()/15)+1)*15);
             this.setSessionDate();
         }
         return date;
     }   
     public void today(){        
         date=new Date();  
-        date.setMinutes(((int)(date.getMinutes()/15)+1)*15);
         this.setSessionDate();        
     }
     

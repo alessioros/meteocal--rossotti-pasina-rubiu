@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 import org.json.JSONObject;
 
@@ -21,13 +22,13 @@ public class EventDetails {
     @EJB
     YahooQueries yq;
 
-    @EJB
+    @Inject
     private ManageEvent me;
 
     @EJB
     private CheckFields cf;
 
-    @EJB
+    @Inject
     private RegisterValidation rv;
 
     private Event event;
@@ -42,11 +43,13 @@ public class EventDetails {
     private String city;
     private String address;
     private String query;
-    private int idEvent;
+    private int idEvent=0;
 
     public void dateConverter() {
         this.startDate = new Date(this.startDateLong);
+        this.startDate.setMinutes((((int)(this.startDate.getMinutes()/15)+1)*15));
         this.endDate = new Date(this.endDateLong + 3600000);
+        this.endDate.setMinutes((((int)(this.endDate.getMinutes()/15)+1)*15));
         //this.startDate.setTime(this.startDateLong);
         //this.endDate.setTime(this.endDateLong);               
     }
@@ -95,7 +98,25 @@ public class EventDetails {
         }
 
     }
-
+    public String buttonValue(){
+        if(editing())
+            return "EDIT";
+        else
+            return "CREATE";
+    }
+     public String buttonAction(){
+        if(editing())
+            return this.updateEvent();            
+        else
+            return this.create();
+    }
+    public String updateEvent(){   
+        /**DA SISTEMARE**/
+       event.setIdEvent(this.idEvent);
+       me.updateEvent(event, loc);
+       return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
+    }
+   
     public String getState() {
         return state;
     }
@@ -199,16 +220,29 @@ public class EventDetails {
     }
     
     public void findEvent(){
-        event = me.findEvent(this.idEvent);
+        if(this.idEvent!=0){
+            event = me.findEvent(this.idEvent);
+            this.startDate=event.getStartTime();
+            this.endDate=event.getEndTime();
+            this.address=event.getIdLocation().getAddress();
+            this.city=event.getIdLocation().getCity();
+            this.state=event.getIdLocation().getState();
+        }
+    
     }
     
+    public boolean editing(){
+        return this.idEvent!=0;
+    }
     public boolean canEdit(){
         User u = rv.getLoggedUser();
         this.findEvent();        
         if(u.equals(event.getIdOrganizer()))
             return true;
-        else
+        else{
+            this.event=null;
             return false;
+        }
     }
 
 }

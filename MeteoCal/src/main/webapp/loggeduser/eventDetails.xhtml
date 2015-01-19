@@ -26,13 +26,20 @@
          </ul>
        </div>
         <f:metadata>
-            <f:viewAction action="#{personalProfile.showPersonalData()}"/>
-            <f:viewParam name="id" value="#{eventDetails.idEvent}"/>
+            <f:viewAction action="#{personalProfile.showPersonalData()}"/>           
+            <f:viewParam name="id" value="#{eventDetails.idEvent}"/>            
             <f:viewAction action='#{eventDetails.findEvent()}'/>
+           
         </f:metadata>
         
         <div class="info">
-            <a id="title">#{eventDetails.event.name}</a><br/>
+            <a id="title">#{eventDetails.event.name}</a>            
+            <c:if test='#{eventDetails.canEdit()==true}'>
+                <h:button outcome='createEvent.xhtml?id=#{eventDetails.event.idEvent}' value='EDIT' a:id='button-change'/>
+            </c:if>
+            
+            
+            <br/>
             <a id="stime">Starts: #{eventDetails.event.startTime.toLocaleString()}</a><br/>
             <a id="etime">Ends: #{eventDetails.event.endTime.toLocaleString()}</a><br/>
             <c:if test='#{eventDetails.event.outDoor==true}'>
