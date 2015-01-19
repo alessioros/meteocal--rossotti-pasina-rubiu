@@ -153,10 +153,10 @@ public class EventDetails {
        
        
     }
-    public String deleteEvent(){
-        me.deleteEvent(idEvent);
-        return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
-    }
+    /*public String deleteEvent(){
+       // me.deleteEvent(idEvent);
+      //  return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
+    }*/
     public String getState() {
         return state;
     }

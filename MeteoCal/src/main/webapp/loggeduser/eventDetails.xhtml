@@ -36,7 +36,7 @@
             <a id="title">#{eventDetails.event.name}</a>            
             <c:if test='#{eventDetails.canEdit()==true}'>
                 <h:button outcome='createEvent.xhtml?id=#{eventDetails.event.idEvent}' value='EDIT' a:id='button-change'/>
-                <h:button outcome='#{eventDetails.deleteEvent()}' value='DELETE' a:id='button-change'/>
+                <h:button outcome='' value='DELETE' a:id='button-change'/>
             </c:if>
             
             
