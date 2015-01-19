@@ -135,8 +135,9 @@ public class ManagePersonalData {
      * @return 
      */
     public String showCalendar(String username){
-    
-        return "/loggeduser/calendar.xhtml?faces-redirect=true";
+        
+        System.out.println("PORCO DIO NON VA");
+        return "";
     }
     
     /**

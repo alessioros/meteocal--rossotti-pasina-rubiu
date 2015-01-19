@@ -90,15 +90,19 @@ public class PersonalProfile {
     /**  
      * If user has a private calendar an error message is displayed,
      * If it's public instead is submitted showCalendar
+     * @return user calendar
      */
-    public void submitShowCalendar() {
-
+    public String submitShowCalendar() {
+        
         showUserData();
         if (user.getPublicCalendar()) {
             mpd.showCalendar(user.getUsername());
+            return "/loggeduser/user_calendar?username="+user.getUsername()+"faces-redirect=true";
         } else {
             message = "This user has a private calendar";
         }
+        return "";
+        
     }
 
     /**

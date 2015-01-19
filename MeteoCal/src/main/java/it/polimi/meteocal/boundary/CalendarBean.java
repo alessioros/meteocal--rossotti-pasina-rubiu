@@ -2,6 +2,8 @@ package it.polimi.meteocal.boundary;
 
 import it.polimi.meteocal.control.Day;
 import it.polimi.meteocal.control.ManageCalendar;
+import it.polimi.meteocal.control.ManagePersonalData;
+import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.Week;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
@@ -40,8 +42,16 @@ public class CalendarBean{
     private String tempHome;
     private String condHome;
     
+    private String calusername;
+    
     @Inject 
     ManageCalendar mc;
+    
+    @Inject 
+    ManagePersonalData mpd;
+    
+    @Inject 
+    RegisterValidation rv;
     
     @EJB
     YahooQueries yq;
@@ -56,28 +66,7 @@ public class CalendarBean{
             this.setSessionDate();
         }       
     }
-    private void getSessionDate(){
-        HttpSession session;
-        FacesContext context = FacesContext.getCurrentInstance();    
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        session = request.getSession();        
-        date=(Date)session.getAttribute("cal");
-    }  
-    private void setSessionDate(){
-        HttpSession session;
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
-        session = request.getSession();
-        session.setAttribute("cal", date);                  
-    }
-    public Date getDate() {       
-        if(date == null){
-            date=new Date();
-            date.setDate(1);
-            this.setSessionDate();
-        }
-        return date;
-    }   
+    
     public void today(){        
         date=new Date();  
         this.setSessionDate();        
@@ -130,13 +119,14 @@ public class CalendarBean{
                     return "dayNumbOld";
          }   
     public String eventClass(){
-        if(mc.scheduleEvent(date))
+
+        if(mc.scheduleEvent(date,rv.getLoggedUser()))
             return "event";
         else
             return "empty";
     }
-    public String eventOutcome(){        
-        if(mc.scheduleEvent(date))
+    public String eventOutcome(){
+        if(mc.scheduleEvent(date,rv.getLoggedUser()))
             return "today_events?date="+date.getTime();
         else
             return "createEvent?date="+date.getTime();
@@ -149,6 +139,7 @@ public class CalendarBean{
         else
             return "createEvent";
     }
+    
     public void createCal(){
         //trovo il primo giorno da visualizzare                         
         actual=date.getMonth();
@@ -168,14 +159,69 @@ public class CalendarBean{
             cal.add(w);
         }
         date.setMonth(date.getMonth()-1);
+        date.setDate(1);   
+    }
+    
+    public void createUserCal(){
+        
+        actual=date.getMonth();
         date.setDate(1);
+        if(date.getDay()==1)
+            date.setDate(date.getDate()-7);
+        else
+            date.setDate(date.getDate()-((date.getDay()+6)%7));  
         
-            
-        
+        for(int j=0;j<6;j++){   
+            Week w = new Week();
+            for(int i =1;i<8;i++){
+                Day d = new Day(date,this.eventUserOutcome(calusername),this.eventUserClass(calusername),this.weekDay());
+                w.getWeek().add(d);
+                date.setDate(date.getDate()+1);                 
+            }
+            cal.add(w);
+        }
+        date.setMonth(date.getMonth()-1);
+        date.setDate(1);
+    }
+    
+    public String eventUserClass(String username){
+
+        if(mc.scheduleEvent(date,mpd.getUserData(username)))
+            return "event";
+        else
+            return "";
+    }
+    public String eventUserOutcome(String username){
+        if(mc.scheduleEvent(date,mpd.getUserData(username)))
+            return "today_events?date="+date.getTime();
+        else
+            return "";
     }
     
     // ----- Getters and setters -----
     
+    private void getSessionDate(){
+        HttpSession session;
+        FacesContext context = FacesContext.getCurrentInstance();    
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        session = request.getSession();        
+        date=(Date)session.getAttribute("cal");
+    }  
+    private void setSessionDate(){
+        HttpSession session;
+        FacesContext context = FacesContext.getCurrentInstance();
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        session = request.getSession();
+        session.setAttribute("cal", date);                  
+    }
+    public Date getDate() {       
+        if(date == null){
+            date=new Date();
+            date.setDate(1);
+            this.setSessionDate();
+        }
+        return date;
+    }   
     public String getCityHome() {
         return cityHome;
     }
@@ -258,6 +304,14 @@ public class CalendarBean{
     }    
     public void dayEvents(){
        this.event = mc.dayEvent(new Date(this.viewDate));
+    }
+    
+    public String getCalusername() {
+        return calusername;
+    }
+
+    public void setCalusername(String calusername) {
+        this.calusername = calusername;
     }
     
 }
