@@ -7,14 +7,14 @@ import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.entity.User;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Named
-@RequestScoped
+@ManagedBean
+@ViewScoped
 public class PersonalProfile {
 
     @PersistenceContext
@@ -129,7 +129,7 @@ public class PersonalProfile {
      * @param username
      */
     public void submitDeleteUser(String username) {
-        
+        System.out.println("OOOOOOOOOOOOOOO");
         mpd.deleteUser(username);
 
         contacts = updateContacts();
