@@ -56,9 +56,9 @@ public class ManageInvites {
         notificationInvite.setIdEvent(event);
         em.persist(notificationInvite);
 
-        invitation.setIdNotification(notificationInvite);
+       /* invitation.setIdNotification(notificationInvite);
         invitation.setAccepted(Boolean.FALSE);
-        em.persist(invitation);
+        em.persist(invitation);*/
 
         for (User invite : invited) {
             usernotificationsPK.setIdNotification(notificationInvite.getIdNotification());
@@ -67,6 +67,9 @@ public class ManageInvites {
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);
             em.persist(usernotifications);
+            em.flush();
+            em.merge(usernotifications);
+            em.refresh(usernotifications);
            /* if (event.getPublic1()) {
                 se.generateAndSendEmail(invite.getEmail(), "Invite to event", "You have been invited"
                         + "to event <a href=\"http://localhost:8080/MeteoCal/eventDetails.xhtml?id=" + event.getIdEvent()

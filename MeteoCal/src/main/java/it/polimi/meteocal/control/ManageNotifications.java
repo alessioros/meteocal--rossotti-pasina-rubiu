@@ -54,8 +54,9 @@ public class ManageNotifications {
 
             utx.begin();
 
-            invite = em.createQuery("select i from Invitation i where i.idNotification=:N").setParameter("N", notification).getResultList();
-            invite.get(0).setAccepted(Boolean.TRUE);
+            /*invite = em.createQuery("select i from Invitation i where i.idNotification=:N").setParameter("N", notification).getResultList();
+            invite.get(0).setAccepted(Boolean.TRUE);*/
+            
             //puts the event in the user calendar
             user = rv.getLoggedUser();
             user.getEventCollection().add(notification.getIdEvent());

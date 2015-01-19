@@ -42,7 +42,7 @@ public class NotificationPage {
      */
     public List<Notification> updateNotifications() {
         user = rv.getLoggedUser();
-        
+
         Query query = em.createQuery("SELECT n FROM Usernotification n WHERE n.user=:USER");
         query.setParameter("USER", user);
         List<Usernotification> tmplist = query.getResultList();
