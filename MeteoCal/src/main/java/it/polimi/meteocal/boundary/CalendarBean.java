@@ -7,6 +7,7 @@ import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.Week;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
+import it.polimi.meteocal.entity.User;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -42,7 +43,7 @@ public class CalendarBean{
     private String tempHome;
     private String condHome;
     
-    private String calusername;
+    private String calusername=null;
     
     @Inject 
     ManageCalendar mc;
@@ -193,7 +194,7 @@ public class CalendarBean{
     }
     public String eventUserOutcome(String username){
         if(mc.scheduleEvent(date,mpd.getUserData(username)))
-            return "today_events?date="+date.getTime();
+            return "today_events?usr="+username+"&date="+date.getTime();
         else
             return "";
     }
@@ -303,7 +304,12 @@ public class CalendarBean{
         this.event = event;
     }    
     public void dayEvents(){
-       this.event = mc.dayEvent(new Date(this.viewDate));
+       User usr;
+       if(this.calusername==null)
+           usr=rv.getLoggedUser();
+       else
+           usr = mpd.getUserData(calusername);                
+       this.event = mc.dayEvent(new Date(this.viewDate),usr);
     }
     
     public String getCalusername() {

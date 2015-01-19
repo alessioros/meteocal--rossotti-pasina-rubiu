@@ -83,12 +83,12 @@ public class ManageCalendar {
         return false;
     }
     
-    public List<Event> dayEvent(Date date){
+    public List<Event> dayEvent(Date date,User user){
         try {
             Iterator<Event> event; 
             List<Event> list = new ArrayList();
            
-            user = rv.getLoggedUser();            
+            this.user = user;
             event = user.getEventCollection().iterator();           
             
             while(event.hasNext())
@@ -105,9 +105,7 @@ public class ManageCalendar {
             return list;                                    
         } catch (Exception e) {
             
-            e.printStackTrace();
-            
-            
+            e.printStackTrace();                        
         }
         return null;
     }
