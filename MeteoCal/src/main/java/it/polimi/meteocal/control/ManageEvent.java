@@ -96,7 +96,7 @@ public class ManageEvent {
     }
     
     public void deleteEvent(int id){
-        try {
+       /* try {
             Event event=em.find(Event.class, id);
             
          //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
@@ -108,7 +108,7 @@ public class ManageEvent {
             event.setOutDoor(null);
             event.setPublic1(null);
             event.setIdLocation(null);   
-            //*/
+            //
            // event =em.merge(updated);
             em.persist(event);
             
@@ -116,10 +116,7 @@ public class ManageEvent {
         } catch (Exception e) {
 
             e.printStackTrace();
-            /*try {
-                utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException exception) {
-            }*/
+            
 
         }//*/
     }
