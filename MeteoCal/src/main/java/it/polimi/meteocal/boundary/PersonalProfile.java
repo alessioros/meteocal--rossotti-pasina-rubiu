@@ -126,8 +126,7 @@ public class PersonalProfile {
      */
     public void submitDeleteUser(String username) {
         
-        System.out.println("The username you want to delete is: "+username);
-        //mpd.deleteUser(username);
+        mpd.deleteUser(username);
 
         contacts = updateContacts();
     }
