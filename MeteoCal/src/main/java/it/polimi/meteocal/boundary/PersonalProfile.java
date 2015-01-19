@@ -129,7 +129,6 @@ public class PersonalProfile {
      * @param username
      */
     public void submitDeleteUser(String username) {
-        System.out.println("OOOOOOOOOOOOOOO");
         mpd.deleteUser(username);
 
         contacts = updateContacts();

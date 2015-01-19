@@ -38,12 +38,10 @@ public class InvitePeople {
 
     @Inject
     ManageInvites mi;
-    
-    @Inject
-    PersonalProfile pp;
 
     private Integer event;
     private String contact;
+    private String message;
 
     private Map<Integer, Boolean> selectedIds = new HashMap<>();
     private List<User> invited;
@@ -74,9 +72,19 @@ public class InvitePeople {
     /**
      * calls personalprofile submitAddUser() and updates the contacts
      */
-    public void addUser() {
-        
-        pp.submitAddUser();
+    public void addUser() {        
+        user = rv.getLoggedUser();
+        if (user.getUsername().equals(contact)) {
+            message = "You can't add yourself!";
+        }else if(!mpd.existUser(contact)){
+            message = "User "+contact+" doesn't exist!";
+        }else if(mpd.userInContacts(user.getUsername(), contact)){
+            message = "User already added!";
+        }
+        else{
+            mpd.addUser(contact);
+            message = "User added!";
+        }
         contacts = updateContacts();
     }
     
