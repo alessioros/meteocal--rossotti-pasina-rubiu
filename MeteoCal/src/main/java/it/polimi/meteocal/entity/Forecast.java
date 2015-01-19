@@ -41,12 +41,6 @@ public class Forecast implements Serializable {
     @Column(name = "General")
     private String general;
     @Size(max = 45)
-    @Column(name = "Precipitation")
-    private String precipitation;
-    @Size(max = 45)
-    @Column(name = "Humidity")
-    private String humidity;
-    @Size(max = 45)
     @Column(name = "MaxTemp")
     private String maxTemp;
     @Size(max = 45)
@@ -77,22 +71,6 @@ public class Forecast implements Serializable {
 
     public void setGeneral(String general) {
         this.general = general;
-    }
-
-    public String getPrecipitation() {
-        return precipitation;
-    }
-
-    public void setPrecipitation(String precipitation) {
-        this.precipitation = precipitation;
-    }
-
-    public String getHumidity() {
-        return humidity;
-    }
-
-    public void setHumidity(String humidity) {
-        this.humidity = humidity;
     }
 
     public String getMaxTemp() {

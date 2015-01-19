@@ -5,6 +5,7 @@
  */
 package it.polimi.meteocal.control;
 
+import it.polimi.meteocal.boundary.SendEmailBean;
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Invitation;
 import it.polimi.meteocal.entity.Notification;
@@ -12,7 +13,9 @@ import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Usernotification;
 import it.polimi.meteocal.entity.UsernotificationPK;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -22,6 +25,9 @@ import javax.persistence.PersistenceContext;
  */
 @Stateless
 public class ManageInvites {
+
+    @EJB
+    SendEmailBean se;
 
     @PersistenceContext
     EntityManager em;
@@ -39,13 +45,13 @@ public class ManageInvites {
      * @param invited
      * @param event
      */
-    public void createInvites(List<User> invited, Event event) {
-        
+    public void createInvites(List<User> invited, Event event) throws MessagingException {
+
         notificationInvite = new Notification();
         invitation = new Invitation();
         usernotifications = new Usernotification();
         usernotificationsPK = new UsernotificationPK();
-        
+
         notificationInvite.setDescription("You have been invited to the event " + event.getName());
         notificationInvite.setIdEvent(event);
         em.persist(notificationInvite);
@@ -61,6 +67,14 @@ public class ManageInvites {
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);
             em.persist(usernotifications);
+            if (event.getPublic1()) {
+                se.generateAndSendEmail(invite.getEmail(), "Invite to event", "You have been invited"
+                        + "to event <a href=\"http://localhost:8080/MeteoCal/eventDetails.xhtml?id=" + event.getIdEvent()
+                        + "\">" + event.getName() + "</a>");
+            } else {
+                se.generateAndSendEmail(invite.getEmail(), "Invite to event", "You have been invited"
+                        + "to event "+event.getName());
+            }
         }
     }
 
