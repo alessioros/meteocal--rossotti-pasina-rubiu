@@ -145,7 +145,7 @@ public class EventDetails {
 
             me.updateEvent(event, loc);
 
-            message = "Event Created!";
+            message = "Event Updated!";
 
             return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
 
@@ -279,8 +279,7 @@ public class EventDetails {
         this.findEvent();        
         if(u.equals(event.getIdOrganizer()))
             return true;
-        else{
-            this.event=null;
+        else{            
             return false;
         }
     }
