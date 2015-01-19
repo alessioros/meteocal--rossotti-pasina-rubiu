@@ -342,7 +342,7 @@ input.toggle:checked + label:after {
     font-size:20px;
 }
 
-.polimeteo .Fair{
+.polimeteo .Fair, .polimeteo .Sunny{
     background-image: url("#{resource['css:icons/weather/color/sun.png']}");
 }
 
