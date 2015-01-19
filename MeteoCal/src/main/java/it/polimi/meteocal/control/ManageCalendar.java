@@ -43,17 +43,6 @@ public class ManageCalendar {
     
     private User user;
     
-    public void setUser(User user){
-        this.user=user;
-    }
-    
-    public User getUser(){
-    
-        if(this.user==null){
-            this.user=new User();
-        }
-        return user;
-    }
     public boolean scheduleEvent(Date date,User user){
         
         try {
@@ -64,7 +53,7 @@ public class ManageCalendar {
             
             while(cal.hasNext())
             {
-                Event e= cal.next();
+                Event e = cal.next();
                 if( e.getStartTime().getYear()   <=  date.getYear() &&
                     e.getStartTime().getMonth()  <=  date.getMonth() &&
                     e.getStartTime().getDate()   <=  date.getDate() &&
@@ -83,17 +72,21 @@ public class ManageCalendar {
         return false;
     }
     
+    /* public List<Event> dayEvent(Date date,User user){ 
+    
+    this.user = user;*/
     public List<Event> dayEvent(Date date){
+        
         try {
             Iterator<Event> event; 
             List<Event> list = new ArrayList();
            
-            user = rv.getLoggedUser();            
+            this.user = rv.getLoggedUser();            
             event = user.getEventCollection().iterator();           
             
             while(event.hasNext())
             {
-                Event e= event.next();
+                Event e = event.next();
                 if( e.getStartTime().getYear()   <=  date.getYear() &&
                     e.getStartTime().getMonth()  <=  date.getMonth() &&
                     e.getStartTime().getDate()   <=  date.getDate() &&
@@ -110,5 +103,19 @@ public class ManageCalendar {
             
         }
         return null;
+    }
+    
+    public void setUser(User user){
+        this.user=user;
+    }
+    
+    // ----- Getters and setters -----
+    
+    public User getUser(){
+    
+        if(this.user==null){
+            this.user=new User();
+        }
+        return user;
     }
 }

@@ -125,12 +125,14 @@ public class CalendarBean{
         else
             return "empty";
     }
+    
     public String eventOutcome(){
         if(mc.scheduleEvent(date,rv.getLoggedUser()))
             return "today_events?date="+date.getTime();
         else
             return "createEvent?date="+date.getTime();
     }
+    
     public String eventOutcome(String str){ 
         if(str.equalsIgnoreCase("today")){
             Date tmp = new Date();
@@ -162,6 +164,20 @@ public class CalendarBean{
         date.setDate(1);   
     }
     
+    public void dayEvents(){
+        
+        /*if(!calusername.equals("")){
+            
+            System.out.println("sono entrato!");
+            this.event = mc.dayEvent(new Date(this.viewDate),mpd.getUserData(calusername));
+        }
+        else{
+            System.out.println("Non sono entrato!");
+            this.event = mc.dayEvent(new Date(this.viewDate),rv.getLoggedUser());
+        }*/
+        this.event = mc.dayEvent(new Date(this.viewDate));
+    }
+    
     public void createUserCal(){
         
         actual=date.getMonth();
@@ -191,9 +207,10 @@ public class CalendarBean{
         else
             return "";
     }
+    
     public String eventUserOutcome(String username){
         if(mc.scheduleEvent(date,mpd.getUserData(username)))
-            return "today_events?date="+date.getTime();
+            return "today_events?user="+username+"&date="+date.getTime();
         else
             return "";
     }
@@ -302,9 +319,6 @@ public class CalendarBean{
     public void setEvent(List<Event> event) {
         this.event = event;
     }    
-    public void dayEvents(){
-       this.event = mc.dayEvent(new Date(this.viewDate));
-    }
     
     public String getCalusername() {
         return calusername;
