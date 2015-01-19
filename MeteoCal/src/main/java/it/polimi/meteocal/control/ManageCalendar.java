@@ -54,11 +54,12 @@ public class ManageCalendar {
         }
         return user;
     }
-    public boolean scheduleEvent(Date date){
+    public boolean scheduleEvent(Date date,User user){
+        
         try {
             Iterator<Event> cal;            
            
-            user = rv.getLoggedUser();            
+            this.user=user;
             cal = user.getEventCollection().iterator();           
             
             while(cal.hasNext())
@@ -81,6 +82,7 @@ public class ManageCalendar {
         }
         return false;
     }
+    
     public List<Event> dayEvent(Date date){
         try {
             Iterator<Event> event; 

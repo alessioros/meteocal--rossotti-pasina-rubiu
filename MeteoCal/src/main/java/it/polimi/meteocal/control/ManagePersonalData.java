@@ -104,17 +104,18 @@ public class ManagePersonalData {
      * @param username
      */
     public void deleteUser(String username) {
-
+        
         try {
             List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
-
+            
             if (!checkexist.isEmpty()) {
 
                 utx.begin();
-
+                
                 user = rv.getLoggedUser();
-                user.getUserCollection().remove(checkexist.get(0));
-
+                Collection<User> contacts=user.getUserCollection();
+                contacts.remove(checkexist.get(0));
+                user.setUserCollection(contacts);
                 utx.commit();
             }
         } catch (Exception e) {
@@ -134,8 +135,9 @@ public class ManagePersonalData {
      * @return 
      */
     public String showCalendar(String username){
-    
-        return "/loggeduser/calendar.xhtml?faces-redirect=true";
+        
+        System.out.println("PORCO DIO NON VA");
+        return "";
     }
     
     /**

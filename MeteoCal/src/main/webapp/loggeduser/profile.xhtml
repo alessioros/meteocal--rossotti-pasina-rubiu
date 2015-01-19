@@ -64,16 +64,20 @@
             <a class='addrTitle'>Address List:</a>
             <ul>
                 <li>
-                    <h:panelGrid a:id="textarea">
-                        <ui:repeat value="#{personalProfile.contacts}" var="contact">
-                            <li>
-                                <h:form>
+                    <h:form>
+
+                        <h:panelGrid a:id="textarea">
+                            <ui:repeat value="#{personalProfile.contacts}" var="contact">
+                                <li>
+
                                     <h:link value="#{contact.username}" outcome="user_info?username=#{contact.username}"/>
                                     <h:commandButton type='submit' value=' ' a:id='button-del' action="#{personalProfile.submitDeleteUser(contact.username)}"/>
-                                </h:form>
-                            </li>
-                        </ui:repeat>
-                    </h:panelGrid>
+
+                                </li>
+                            </ui:repeat>
+
+                        </h:panelGrid>
+                    </h:form>
                 </li>
                 <li>
                     <h:form>
