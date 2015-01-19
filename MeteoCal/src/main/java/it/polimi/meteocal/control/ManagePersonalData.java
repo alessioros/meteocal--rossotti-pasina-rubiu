@@ -9,7 +9,6 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
@@ -106,6 +105,7 @@ public class ManagePersonalData {
     public void deleteUser(String username) {
         
         try {
+            System.out.println("OPOPGADGET");
             List<User> checkexist = em.createQuery("select u from User u where u.username=:um").setParameter("um", username).getResultList();
             
             if (!checkexist.isEmpty()) {

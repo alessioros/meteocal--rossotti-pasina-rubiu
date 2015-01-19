@@ -62,6 +62,7 @@ public class NotificationPage {
     public void accept(Notification notification) {
         mn.acceptInvite(notification);
         message="Invite accepted!";
+        updateNotifications();
     }
     
     /**
@@ -71,6 +72,7 @@ public class NotificationPage {
     public void decline(Notification notification) {
         mn.declineInvite(notification);
         message="Invite declined";
+        updateNotifications();
     }
     
     
