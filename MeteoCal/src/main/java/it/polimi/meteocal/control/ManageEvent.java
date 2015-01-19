@@ -59,18 +59,21 @@ public class ManageEvent {
         try {
             Event event=em.find(Event.class, updated.getIdEvent());
             
-         // event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
+         //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
+            em.getTransaction().begin();
             event.setName(updated.getName());
             event.setDescription(updated.getDescription());
             event.setStartTime(updated.getStartTime());
             event.setEndTime(updated.getEndTime());
             event.setOutDoor(updated.getOutDoor());
             event.setPublic1(updated.getPublic1());
-            event.setIdLocation(l);   
+            event.setIdLocation(l); 
+            em.getTransaction().commit();
             //*/
-            event =em.merge(updated);
+           // event =em.merge(updated);
+            em.getTransaction().begin();
             
-
+            
         } catch (Exception e) {
 
             e.printStackTrace();

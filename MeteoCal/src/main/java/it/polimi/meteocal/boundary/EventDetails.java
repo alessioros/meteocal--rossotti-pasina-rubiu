@@ -113,8 +113,46 @@ public class EventDetails {
     public String updateEvent(){   
         /**DA SISTEMARE**/
        event.setIdEvent(this.idEvent);
-       me.updateEvent(event, loc);
-       return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
+       event.setStartTime(startDate);
+       event.setEndTime(endDate);
+       query = "select * from geo.placefinder where text=\"" + address + "," + city + "," + state+"\"";
+        try {
+            JSONObject json = yq.yahooRestQuery(query);
+
+            // Ci faccio quel che devo.
+            // Ad esempio, stampo le previsioni per tutti i giorni:
+            JSONObject jsonQuery = json.getJSONObject("query");
+            JSONObject queryResults = jsonQuery.getJSONObject("results");
+            JSONObject pl = queryResults.getJSONObject("Result");
+            System.out.println(Float.parseFloat(pl.getString("latitude")));
+            loc.setLatitude(Float.parseFloat(pl.getString("latitude")));
+            loc.setLongitude(Float.parseFloat(pl.getString("longitude")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        loc.setAddress(address);
+        loc.setCity(city);
+        loc.setState(state);
+
+        if (!cf.checkDateTimes(event.getStartTime(), event.getEndTime())) {
+
+            message = "Error! Start time must be after End Time";
+            return "";
+        } else if (!cf.checkCoordinates(loc.getLatitude(), loc.getLongitude())) {
+
+            message = "Error! Invalid coordinates";
+            return "";
+        } else {
+
+            me.updateEvent(event, loc);
+
+            message = "Event Created!";
+
+            return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
+
+        }
+       
+       
     }
    
     public String getState() {
