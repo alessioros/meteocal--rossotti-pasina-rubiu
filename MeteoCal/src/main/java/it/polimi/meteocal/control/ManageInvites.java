@@ -6,11 +6,9 @@
 package it.polimi.meteocal.control;
 
 import it.polimi.meteocal.entity.Event;
-import it.polimi.meteocal.entity.Invitation;
 import it.polimi.meteocal.entity.Notification;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Usernotification;
-import it.polimi.meteocal.entity.UsernotificationPK;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJB;
@@ -43,15 +41,9 @@ public class ManageInvites {
     @EJB
     ManageNotifications mn;
     
-    private List<Invitation> invite;
     private User user;
     private List<Usernotification> usernot;
     private List<Event> event;
-
-    private Notification notificationInvite;
-    private Invitation invitation;
-    private Usernotification usernotifications;
-    private UsernotificationPK usernotificationsPK;
 
     /**
      * Takes a list of users and a event and sets all the tables Invitation
