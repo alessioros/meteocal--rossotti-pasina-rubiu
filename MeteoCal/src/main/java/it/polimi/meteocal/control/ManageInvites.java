@@ -41,9 +41,21 @@ public class ManageInvites {
     @EJB
     ManageNotifications mn;
     
+<<<<<<< HEAD
+    private List<Invitation> invite;
     private User user;
     private List<Usernotification> usernot;
     private List<Event> event;
+
+    private Notification notificationInvite;
+    private Invitation invitation;
+    private Usernotification usernotifications;
+    private UsernotificationPK usernotificationsPK;
+=======
+    private User user;
+    private List<Usernotification> usernot;
+    private List<Event> event;
+>>>>>>> 79b1c1ffaaa7ed125d6bae05b95bf8486150aec7
 
     /**
      * Takes a list of users and a event and sets all the tables Invitation

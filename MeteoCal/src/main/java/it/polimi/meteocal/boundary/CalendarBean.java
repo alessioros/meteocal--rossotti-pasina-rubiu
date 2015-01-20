@@ -126,12 +126,14 @@ public class CalendarBean{
         else
             return "empty";
     }
+    
     public String eventOutcome(){
         if(mc.scheduleEvent(date,rv.getLoggedUser()))
             return "today_events?date="+date.getTime();
         else
             return "createEvent?date="+date.getTime();
     }
+    
     public String eventOutcome(String str){ 
         if(str.equalsIgnoreCase("today")){
             Date tmp = new Date();
@@ -163,6 +165,20 @@ public class CalendarBean{
         date.setDate(1);   
     }
     
+    public void dayEvents(){
+        
+        /*if(!calusername.equals("")){
+            
+            System.out.println("sono entrato!");
+            this.event = mc.dayEvent(new Date(this.viewDate),mpd.getUserData(calusername));
+        }
+        else{
+            System.out.println("Non sono entrato!");
+            this.event = mc.dayEvent(new Date(this.viewDate),rv.getLoggedUser());
+        }*/
+        this.event = mc.dayEvent(new Date(this.viewDate));
+    }
+    
     public void createUserCal(){
         
         actual=date.getMonth();
@@ -192,9 +208,14 @@ public class CalendarBean{
         else
             return "";
     }
+    
     public String eventUserOutcome(String username){
         if(mc.scheduleEvent(date,mpd.getUserData(username)))
+<<<<<<< HEAD
+            return "today_events?user="+username+"&date="+date.getTime();
+=======
             return "today_events?usr="+username+"&date="+date.getTime();
+>>>>>>> 79b1c1ffaaa7ed125d6bae05b95bf8486150aec7
         else
             return "";
     }
@@ -303,6 +324,8 @@ public class CalendarBean{
     public void setEvent(List<Event> event) {
         this.event = event;
     }    
+<<<<<<< HEAD
+=======
     public void dayEvents(){
        User usr;
        if(this.calusername==null)
@@ -311,6 +334,7 @@ public class CalendarBean{
            usr = mpd.getUserData(calusername);                
        this.event = mc.dayEvent(new Date(this.viewDate),usr);
     }
+>>>>>>> 79b1c1ffaaa7ed125d6bae05b95bf8486150aec7
     
     public String getCalusername() {
         return calusername;
