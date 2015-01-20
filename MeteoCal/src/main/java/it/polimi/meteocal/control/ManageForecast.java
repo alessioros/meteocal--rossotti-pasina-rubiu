@@ -38,6 +38,9 @@ public class ManageForecast {
     private String condHome;
     private Location place;
     private Forecast forecast;
+    private Date date;
+    private Forecast goodforecast;
+    private String notMessage;
     private List<Event> events;
     private List<Forecast> oldForecasts = new ArrayList();
     private List<Forecast> newForecasts = new ArrayList();
@@ -48,11 +51,14 @@ public class ManageForecast {
     @PersistenceContext
     EntityManager em;
 
+    @EJB
+    ManageNotifications mn;
+
     @Schedule(hour = "*/1", minute = "0", second = "0", persistent = false)
     public void updateForecast() {
         try {
-            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-            Date date = new Date();
+
+            date = new Date();
             events = em.createQuery("select e from Event e where e.outDoor=:true").getResultList();
             for (Event event : events) {
                 if (event.getStartTime().after(date)) {
@@ -87,6 +93,11 @@ public class ManageForecast {
 
                         JSONObject fc = forecasts.getJSONObject(i);
                         forecast = new Forecast();
+                        DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ITALY);
+                        date = format.parse(fc.getString("date"));
+
+                        forecast.setDate(date);
+                        forecast.setCode(Integer.parseInt(fc.getString("code")));
                         forecast.setGeneral(fc.getString("text"));
                         forecast.setMaxTemp(fc.getString("high"));
                         forecast.setMinTemp(fc.getString("low"));
@@ -96,14 +107,40 @@ public class ManageForecast {
                     }
 
                     //checks if the weather has changed
-                    for (Forecast forecast : oldForecasts) {
-                        if (!forecast.getGeneral().equals(newForecasts.get(0).getGeneral())) {
-                            if (newForecasts.get(0).getGeneral() == "Rain") {
+                    for (Forecast oForecast : oldForecasts) {
 
+                        for (Forecast nForecast : newForecasts) {
+
+                            if (oForecast.getDate().equals(nForecast.getDate())) {
+
+                                if (checkWorsenedMeteo(oForecast, nForecast)) {
+
+                                    if (nForecast.getCode() == 0) {
+
+                                        System.out.println("OMG A FUCKING TORNADO!!!");
+
+                                    } else {
+                                        for (Forecast goodForecast : newForecasts) {
+                                            if (goodForecast.getDate().after(nForecast.getDate())) {
+                                                if (goodForecast.getCode() >= 19 && (goodForecast.getCode() < 35 || goodForecast.getCode() == 36)) {
+                                                    goodforecast = goodForecast;
+                                                    notMessage=", nearest good day is " + goodforecast.getDate().toString() + " that is " + goodforecast.getGeneral();
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        mn.sendNotifications((List) event.getIdOrganizer(),
+                                                event,
+                                                "New forecasts of your event " + event.getName() + " are bad"+notMessage,
+                                                "Meteo has changed",
+                                                "New forecasts of your event " + event.getName() + " are bad"+notMessage,
+                                                "New forecasts of your event " + event.getName() + " are bad"+notMessage);
+                                    }
+                                }
                             }
                         }
-                    }
 
+                    }
                 }
             }
         } catch (Exception e) {
@@ -137,21 +174,55 @@ public class ManageForecast {
                 forecast = new Forecast();
 
                 DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ITALY);
-                Date date = format.parse(fc.getString("date"));
+                date = format.parse(fc.getString("date"));
 
                 forecast.setDate(date);
-                forecast.setCode(fc.getString("code"));
+                forecast.setCode(Integer.parseInt(fc.getString("code")));
                 forecast.setGeneral(fc.getString("text"));
                 forecast.setMaxTemp(fc.getString("high"));
                 forecast.setMinTemp(fc.getString("low"));
                 forecast.setIdLocation(location);
-                System.out.println(forecast.getDate().toString()+forecast.getGeneral() + forecast.getIdLocation());
+                System.out.println(forecast.getDate().toString() + forecast.getGeneral() + forecast.getIdLocation());
                 em.persist(forecast);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean checkWorsenedMeteo(Forecast oForecast, Forecast nForecast) {
+        /*checks in order: if old forecast and new forecast code are different
+         if new forecast has a bad weather code
+         if old forecast has a good weather code
+         */
+        if (oForecast.getCode() != nForecast.getCode()
+                && (nForecast.getCode() < 19
+                || (nForecast.getCode() >= 35
+                && nForecast.getCode() != 36))
+                && (oForecast.getCode() >= 19
+                || oForecast.getCode() < 35
+                || oForecast.getCode() == 36)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkBetterMeteo(Forecast oForecast, Forecast nForecast) {
+        /*checks in order: if old forecast and new forecast code are different
+         if old forecast has a bad weather code
+         if new forecast has a good weather code
+         */
+        if (oForecast.getCode() != nForecast.getCode()
+                && (oForecast.getCode() < 19
+                || (oForecast.getCode() >= 35
+                && oForecast.getCode() != 36))
+                && (nForecast.getCode() >= 19
+                || nForecast.getCode() < 35
+                || nForecast.getCode() == 36)) {
+            return true;
+        }
+        return false;
     }
 
     // ----- Getters and setters -----

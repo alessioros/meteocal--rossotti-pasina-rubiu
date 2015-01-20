@@ -42,7 +42,7 @@ public class Forecast implements Serializable {
     private Integer idForecast;
     @Size(max = 10)
     @Column(name = "Code")
-    private String code;
+    private Integer code;
     @Column(name = "Date")
     @Temporal(TemporalType.TIMESTAMP)
     private Date date;
@@ -74,11 +74,11 @@ public class Forecast implements Serializable {
         this.idForecast = idForecast;
     }
 
-    public String getCode() {
+    public Integer getCode() {
         return code;
     }
 
-    public void setCode(String code) {
+    public void setCode(Integer code) {
         this.code = code;
     }
 
