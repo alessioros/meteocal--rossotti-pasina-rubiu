@@ -16,6 +16,8 @@ import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -27,8 +29,8 @@ import org.json.JSONObject;
  *
  * @author Simone
  */
-@Named
-@RequestScoped
+@ManagedBean
+@ViewScoped
 public class CalendarBean{    
     private Date date;
     private List<Week> cal = new ArrayList();    
@@ -212,7 +214,7 @@ public class CalendarBean{
     public String eventUserOutcome(String username){
         if(mc.scheduleEvent(date,mpd.getUserData(username)))
 
-            return "today_events?user="+username+"&date="+date.getTime();
+            return "today_events?username="+username+"&date="+date.getTime();
         else
             return "";
     }
