@@ -5,30 +5,27 @@
  */
 package it.polimi.meteocal.control;
 
+import it.polimi.meteocal.boundary.SendEmailBean;
+import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Invitation;
 import it.polimi.meteocal.entity.Notification;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Usernotification;
+import it.polimi.meteocal.entity.UsernotificationPK;
 import java.util.List;
-import javax.annotation.Resource;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedBean;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.SystemException;
-import javax.transaction.UserTransaction;
 
 /**
  *
  * @author teo
  */
-@ManagedBean
-@RequestScoped
+@Stateless
 public class ManageNotifications {
-
-    @Resource
-    UserTransaction utx;
 
     @PersistenceContext
     EntityManager em;
@@ -36,54 +33,41 @@ public class ManageNotifications {
     @Inject
     RegisterValidation rv;
 
-    private List<Invitation> invite;
-    private User user;
-    private List<Usernotification> usernot;
+    @EJB
+    SendEmailBean se;
 
-    /**
-     * Setta il parametro accepted in invitation come true e mette l'evento nel
-     * calendario dell'utente
-     *
-     * @param notification
-     */
-    public void acceptInvite(Notification notification) {
+    private Notification notification;
+    private Usernotification usernotifications;
+    private UsernotificationPK usernotificationsPK;
 
-        try {
+    
 
-            utx.begin();
+    public void sendNotifications(List<User> users, Event event, String description,String emailSubject,String emailTextP,String emailText) throws MessagingException {
 
-            invite = em.createQuery("select i from Invitation i where i.idNotification=:N").setParameter("N", notification).getResultList();
-            invite.get(0).setAccepted(Boolean.TRUE);
+        notification = new Notification();
+        usernotifications = new Usernotification();
+        usernotificationsPK = new UsernotificationPK();
+       
+     
+        notification.setDescription(description);
+        notification.setIdEvent(event);
+        em.persist(notification);
 
-            user = rv.getLoggedUser();
-            user.getEventCollection().add(notification.getIdEvent());
+        for (User user : users) {
+            usernotificationsPK.setIdNotification(notification.getIdNotification());
+            usernotificationsPK.setIdUser(user.getIdUser());
 
-            usernot = em.createQuery("select un from Usernotification un where un.user=:U").setParameter("U", user).getResultList();
-            for (Usernotification usernotification : usernot) {
-                if (usernotification.getNotification().equals(notification)) {
-                    em.remove(usernotification);
-                }
-            }
-
-            utx.commit();
-
-        } catch (Exception e) {
-
-            e.printStackTrace();
-            try {
-                utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException exception) {
-            }
-
-        }
-    }
-
-    public void declineInvite(Notification notification) {
-        usernot = em.createQuery("select un from Usernotification un where un.user=:U").setParameter("U", user).getResultList();
-        for (Usernotification usernotification : usernot) {
-            if (usernotification.getNotification().equals(notification)) {
-                em.remove(usernotification);
-            }
+            usernotifications.setPending(Boolean.TRUE);
+            usernotifications.setUsernotificationPK(usernotificationsPK);
+            em.persist(usernotifications);
+            em.flush();
+            em.merge(usernotifications);
+            em.refresh(usernotifications);
+            /* if (event.getPublic1()) {
+             se.generateAndSendEmail(user.getEmail(), emailSubject ,emailTextP );
+             } else {
+             se.generateAndSendEmail(user.getEmail(), emailSubject, emailText);
+             }*/
         }
     }
 }

@@ -1,6 +1,6 @@
 package it.polimi.meteocal.boundary;
 
-import it.polimi.meteocal.control.ManageNotifications;
+import it.polimi.meteocal.control.ManageInvites;
 import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.entity.Notification;
 import it.polimi.meteocal.entity.User;
@@ -24,7 +24,7 @@ import javax.persistence.Query;
 public class NotificationPage {
 
     @Inject
-    ManageNotifications mn;
+    ManageInvites mi;
 
     @PersistenceContext
     private EntityManager em;
@@ -42,7 +42,7 @@ public class NotificationPage {
      */
     public List<Notification> updateNotifications() {
         user = rv.getLoggedUser();
-        
+
         Query query = em.createQuery("SELECT n FROM Usernotification n WHERE n.user=:USER");
         query.setParameter("USER", user);
         List<Usernotification> tmplist = query.getResultList();
@@ -59,20 +59,18 @@ public class NotificationPage {
      * submits accept notification to ManageNotifications 
      * @param notification 
      */
-    public void accept(Notification notification) {
-        mn.acceptInvite(notification);
-        message="Invite accepted!";
-        updateNotifications();
+    public String accept(Notification notification) {
+        mi.acceptInvite(notification);
+        return "notifications?faces-redirect=true";
     }
     
     /**
      * submits decline notification to ManageNotifications 
      * @param notification 
      */
-    public void decline(Notification notification) {
-        mn.declineInvite(notification);
-        message="Invite declined";
-        updateNotifications();
+    public String decline(Notification notification) {
+        mi.declineInvite(notification);
+        return "notifications?faces-redirect=true";
     }
     
     
