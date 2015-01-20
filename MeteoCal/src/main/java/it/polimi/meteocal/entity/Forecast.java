@@ -6,6 +6,7 @@
 package it.polimi.meteocal.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,6 +40,12 @@ public class Forecast implements Serializable {
     @GeneratedValue
     @Column(name = "idForecast")
     private Integer idForecast;
+    @Size(max = 10)
+    @Column(name = "Code")
+    private String code;
+    @Column(name = "Date")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date;
     @Size(max = 45)
     @Column(name = "General")
     private String general;
@@ -63,6 +72,22 @@ public class Forecast implements Serializable {
 
     public void setIdForecast(Integer idForecast) {
         this.idForecast = idForecast;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getGeneral() {

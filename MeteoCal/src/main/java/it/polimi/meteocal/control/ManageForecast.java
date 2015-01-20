@@ -15,6 +15,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
 import javax.inject.Singleton;
@@ -38,8 +39,8 @@ public class ManageForecast {
     private Location place;
     private Forecast forecast;
     private List<Event> events;
-    private List<Forecast> oldForecasts=new ArrayList();
-    private List<Forecast> newForecasts=new ArrayList();
+    private List<Forecast> oldForecasts = new ArrayList();
+    private List<Forecast> newForecasts = new ArrayList();
 
     @EJB
     YahooQueries yq;
@@ -67,7 +68,6 @@ public class ManageForecast {
                             return arg0.getIdForecast() - arg1.getIdForecast();
                         }
                     });
-                    
 
                     woeid = yq.woeidOfLocation(place.getAddress() + ", " + place.getCity() + ", " + place.getState());
 
@@ -94,11 +94,13 @@ public class ManageForecast {
                         newForecasts.add(forecast);
                         em.persist(forecast);
                     }
-                    
+
                     //checks if the weather has changed
-                    for(Forecast forecast: oldForecasts){
-                        if(!forecast.getGeneral().equals(newForecasts.get(0).getGeneral())){
-                        
+                    for (Forecast forecast : oldForecasts) {
+                        if (!forecast.getGeneral().equals(newForecasts.get(0).getGeneral())) {
+                            if (newForecasts.get(0).getGeneral() == "Rain") {
+
+                            }
                         }
                     }
 
@@ -133,11 +135,17 @@ public class ManageForecast {
 
                 JSONObject fc = forecasts.getJSONObject(i);
                 forecast = new Forecast();
+
+                DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ITALY);
+                Date date = format.parse(fc.getString("date"));
+
+                forecast.setDate(date);
+                forecast.setCode(fc.getString("code"));
                 forecast.setGeneral(fc.getString("text"));
                 forecast.setMaxTemp(fc.getString("high"));
                 forecast.setMinTemp(fc.getString("low"));
                 forecast.setIdLocation(location);
-                System.out.println(forecast.getGeneral() + forecast.getIdLocation());
+                System.out.println(forecast.getDate().toString()+forecast.getGeneral() + forecast.getIdLocation());
                 em.persist(forecast);
             }
         } catch (Exception e) {
