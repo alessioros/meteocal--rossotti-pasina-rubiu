@@ -5,7 +5,6 @@
  */
 package it.polimi.meteocal.control;
 
-import it.polimi.meteocal.boundary.SendEmailBean;
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Invitation;
 import it.polimi.meteocal.entity.Notification;
@@ -13,24 +12,41 @@ import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Usernotification;
 import it.polimi.meteocal.entity.UsernotificationPK;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.inject.Inject;
 import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 /**
  *
  * @author teo
  */
-@Stateless
+@ManagedBean
+@RequestScoped
 public class ManageInvites {
-
-    @EJB
-    SendEmailBean se;
+    
+    @Resource
+    UserTransaction utx;
 
     @PersistenceContext
     EntityManager em;
+
+    @Inject
+    RegisterValidation rv;
+
+    @EJB
+    ManageNotifications mn;
+    
+    private List<Invitation> invite;
+    private User user;
+    private List<Usernotification> usernot;
+    private List<Event> event;
 
     private Notification notificationInvite;
     private Invitation invitation;
@@ -47,35 +63,79 @@ public class ManageInvites {
      */
     public void createInvites(List<User> invited, Event event) throws MessagingException {
 
-        notificationInvite = new Notification();
-        invitation = new Invitation();
-        usernotifications = new Usernotification();
-        usernotificationsPK = new UsernotificationPK();
+        mn.sendNotifications(invited,
+                event,
+                "You have been invited to event " + event.getName(),
+                "Invite to event ",
+                "You have been invited to event <a href=\"http://localhost:8080/MeteoCal/eventDetails.xhtml?id=" + event.getIdEvent() + "\">" + event.getName() + "</a>",
+                "You have been invited to event " + event.getName());
+    }
 
-        notificationInvite.setDescription("You have been invited to the event " + event.getName());
-        notificationInvite.setIdEvent(event);
-        em.persist(notificationInvite);
+    /**
+     * Setta il parametro accepted in invitation come true e mette l'evento nel
+     * calendario dell'utente
+     *
+     * @param notification
+     */
+    public void acceptInvite(Notification notification) {
 
-        invitation.setIdNotification(notificationInvite);
-        invitation.setAccepted(Boolean.FALSE);
-        em.persist(invitation);
+        try {
 
-        for (User invite : invited) {
-            usernotificationsPK.setIdNotification(notificationInvite.getIdNotification());
-            usernotificationsPK.setIdUser(invite.getIdUser());
+            utx.begin();
 
-            usernotifications.setPending(Boolean.TRUE);
-            usernotifications.setUsernotificationPK(usernotificationsPK);
-            em.persist(usernotifications);
-           /* if (event.getPublic1()) {
-                se.generateAndSendEmail(invite.getEmail(), "Invite to event", "You have been invited"
-                        + "to event <a href=\"http://localhost:8080/MeteoCal/eventDetails.xhtml?id=" + event.getIdEvent()
-                        + "\">" + event.getName() + "</a>");
-            } else {
-                se.generateAndSendEmail(invite.getEmail(), "Invite to event", "You have been invited"
-                        + "to event "+event.getName());
-            }*/
+            /*invite = em.createQuery("select i from Invitation i where i.idNotification=:N").setParameter("N", notification).getResultList();
+             invite.get(0).setAccepted(Boolean.TRUE);*/
+            //puts the event in the user calendar
+            user = rv.getLoggedUser();
+            user.getEventCollection().add(notification.getIdEvent());
+            //puts the user in the invited of the event
+            event = em.createQuery("select e from Event e where e.idEvent=:E").setParameter("E", notification.getIdEvent().getIdEvent()).getResultList();
+            event.get(0).getUserCollection().add(user);
+
+            usernot = em.createQuery("select un from Usernotification un where un.user=:U").setParameter("U", user).getResultList();
+            for (Usernotification usernotification : usernot) {
+                if (usernotification.getNotification().equals(notification)) {
+                    em.remove(usernotification);
+                }
+            }
+
+            utx.commit();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }
+
         }
     }
 
+    public void declineInvite(Notification notification) {
+        try {
+
+            utx.begin();
+
+            user = rv.getLoggedUser();
+
+            usernot = em.createQuery("select un from Usernotification un where un.user=:U").setParameter("U", user).getResultList();
+            for (Usernotification usernotification : usernot) {
+                if (usernotification.getNotification().equals(notification)) {
+                    em.remove(usernotification);
+                }
+            }
+
+            utx.commit();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }
+
+        }
+    }
 }
