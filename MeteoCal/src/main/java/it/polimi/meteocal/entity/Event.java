@@ -49,7 +49,7 @@ public class Event implements Serializable {
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
-    @Size(max = 45)
+    @Size(max = 240)
     @Column(name = "Description")
     private String description;
     @Size(max = 45)
