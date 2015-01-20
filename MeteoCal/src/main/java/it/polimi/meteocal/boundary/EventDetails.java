@@ -11,12 +11,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import org.json.JSONObject;
 
-@Named
-@RequestScoped
+@ManagedBean
+//@RequestScoped
+@ViewScoped
 public class EventDetails {
 
     @EJB
@@ -153,10 +156,11 @@ public class EventDetails {
        
        
     }
-    /*public String deleteEvent(){
-       // me.deleteEvent(idEvent);
-      //  return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
-    }*/
+    public String deleteEvent(){
+       this.findEvent();
+       me.deleteEvent(this.idEvent);
+       return "calendar.xhtml";
+    }
     public String getState() {
         return state;
     }
@@ -277,11 +281,8 @@ public class EventDetails {
     public boolean canEdit(){
         User u = rv.getLoggedUser();
         this.findEvent();        
-        if(u.equals(event.getIdOrganizer()))
-            return true;
-        else{            
-            return false;
-        }
+        return u.equals(event.getIdOrganizer());
+        
     }
 
 }

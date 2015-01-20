@@ -96,27 +96,31 @@ public class ManageEvent {
     }
     
     public void deleteEvent(int id){
-       /* try {
+       try {
             Event event=em.find(Event.class, id);
             
          //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
-            //em.persist(l);
-            event.setName(null);
-            event.setDescription(null);
-            event.setStartTime(null);
-            event.setEndTime(null);
-            event.setOutDoor(null);
-            event.setPublic1(null);
-            event.setIdLocation(null);   
-            //
+         /*  em.persist(l);
+            event.setName(updated.getName());
+            event.setDescription(updated.getDescription());
+            event.setStartTime(updated.getStartTime());
+            event.setEndTime(updated.getEndTime());
+            event.setOutDoor(updated.getOutDoor());
+            event.setPublic1(updated.getPublic1());
+            event.setIdLocation(l);   
+            //*/
            // event =em.merge(updated);
-            em.persist(event);
+         //   em.persist(event);
+            em.remove(event);
             
             
         } catch (Exception e) {
 
             e.printStackTrace();
-            
+            /*try {
+                utx.rollback();
+            } catch (IllegalStateException | SecurityException | SystemException exception) {
+            }*/
 
         }//*/
     }

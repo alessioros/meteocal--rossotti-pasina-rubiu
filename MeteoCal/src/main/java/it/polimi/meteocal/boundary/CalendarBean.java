@@ -211,11 +211,8 @@ public class CalendarBean{
     
     public String eventUserOutcome(String username){
         if(mc.scheduleEvent(date,mpd.getUserData(username)))
-<<<<<<< HEAD
+
             return "today_events?user="+username+"&date="+date.getTime();
-=======
-            return "today_events?usr="+username+"&date="+date.getTime();
->>>>>>> 79b1c1ffaaa7ed125d6bae05b95bf8486150aec7
         else
             return "";
     }
@@ -324,17 +321,6 @@ public class CalendarBean{
     public void setEvent(List<Event> event) {
         this.event = event;
     }    
-<<<<<<< HEAD
-=======
-    public void dayEvents(){
-       User usr;
-       if(this.calusername==null)
-           usr=rv.getLoggedUser();
-       else
-           usr = mpd.getUserData(calusername);                
-       this.event = mc.dayEvent(new Date(this.viewDate),usr);
-    }
->>>>>>> 79b1c1ffaaa7ed125d6bae05b95bf8486150aec7
     
     public String getCalusername() {
         return calusername;

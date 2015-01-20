@@ -45,7 +45,7 @@ public class Notification implements Serializable {
     @Column(name = "Description")
     private String description;
     @JoinColumn(name = "idEvent", referencedColumnName = "idEvent")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.REMOVE)
     private Event idEvent;
     @OneToMany(mappedBy = "idNotification")
     private Collection<Invitation> invitationCollection;

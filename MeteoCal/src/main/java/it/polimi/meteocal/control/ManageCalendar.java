@@ -72,32 +72,24 @@ public class ManageCalendar {
         return false;
     }
     
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
     /* public List<Event> dayEvent(Date date,User user){ 
     
     this.user = user;*/
     public List<Event> dayEvent(Date date){
         
-=======
-    public List<Event> dayEvent(Date date,User user){
->>>>>>> a4e7b1107a7e4f390093f7a234d7fcbfddd3f884
-=======
-    public List<Event> dayEvent(Date date,User user){
->>>>>>> 79b1c1ffaaa7ed125d6bae05b95bf8486150aec7
+
+
         try {
             Iterator<Event> event; 
             List<Event> list = new ArrayList();
            
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
             this.user = rv.getLoggedUser();            
-=======
-            this.user = user;
->>>>>>> a4e7b1107a7e4f390093f7a234d7fcbfddd3f884
-=======
-            this.user = user;
->>>>>>> 79b1c1ffaaa7ed125d6bae05b95bf8486150aec7
+
+
             event = user.getEventCollection().iterator();           
             
             while(event.hasNext())
