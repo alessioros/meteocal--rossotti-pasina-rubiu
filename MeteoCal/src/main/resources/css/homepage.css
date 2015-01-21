@@ -1,33 +1,32 @@
 html{
-	background-image: url("#{resource['css:img/new_york.jpg']}");
-	background-repeat: no-repeat;
-	background-position: center center;
+  background-image: url("#{resource['css:img/new_york.jpg']}");
+  background-repeat: no-repeat;
+  background-position: center center;
         font-family: 'Dosis', Arial, Helvetica, sans-serif;
 }
 
 .title{
-	margin-top:50px;
-	vertical-align:center;
-	text-align:center;
+  margin-top:50px;
+  text-align:center;
 }
 
 .title a{
-	font-size:60px;
-	text-shadow: 1px 1px 1px #FFF;
+  font-size:60px;
+  text-shadow: 1px 1px 1px #FFF;
 }
 
 #a1{
-	color:#8DB9CB;
+  color:#8DB9CB;
 }
 
 #weather{
-	padding:10px;
-	text-align:center;
+  padding:10px;
+  text-align:center;
         height:150px;
-	font-size:50px;
-	color:black;
-	text-shadow:1px 1px 1px white;
-	position:absolute;
+  font-size:50px;
+  color:black;
+  text-shadow:1px 1px 1px white;
+  position:absolute;
         right:5.5%;
         top:140px;
 }
@@ -44,28 +43,58 @@ html{
     display:inline-block;
 }
 
-#weather .Partly{
-    background-image: url("#{resource['css:icons/weather/mixed.png']}");
+// THUNDERSTORM
+#weather #conditions .cond0 .cond1 .cond2 .cond3 .cond4{
+    background-image: url("#{resource['css:icons/weather/thunder.png']}");
 }
 
-#weather .Fair{
-    background-image: url("#{resource['css:icons/weather/sun.png']}");
-}
-
-#weather .Heavy,#weather .Cloudy{
-    background-image: url("#{resource['css:icons/weather/cloud.png']}");
-}
-
-#weather .Rain{
+// RAINY
+#weather #conditions .cond5 .cond6 .cond7 .cond11 .cond12 .cond8 .cond9 .cond10{
     background-image: url("#{resource['css:icons/weather/rain.png']}");
 }
 
-#weather .Snow{
+// SNOWY
+#weather #conditions .cond13 .cond14 .cond15 .cond16 .cond18 .cond25 .cond41 .cond42 .cond46{
     background-image: url("#{resource['css:icons/weather/snow.png']}");
 }
 
+//  HAIL
+#weather #conditions .cond17{
+    background-image: url("#{resource['css:icons/weather/hail.png']}");
+}
+
+// FOGGY
+#weather #conditions .cond20 .cond21 .cond22{
+    background-image: url("#{resource['css:icons/weather/fog.png']}");
+}
+
+// WINDY
+#weather #conditions .cond23 .cond24{
+    background-image: url("#{resource['css:icons/weather/wind.png']}");
+}
+
+// CLOUDY
+#weather #conditions .cond26{
+    background-image: url("#{resource['css:icons/weather/cloud.png']}");
+}
+
+// PARTLY CLOUDY
+#weather #conditions .cond27 .cond28 .cond29 .cond30 .cond44 .cond37 .cond38 .cond39 .cond40 .cond45 .cond47{
+    background-image: url("#{resource['css:icons/weather/mixed.png']}");
+}
+
+// FAIR (NIGHT)
+#weather #conditions .cond31{
+    background-image: url("#{resource['css:icons/weather/moon.png']}");
+}
+
+// FAIR (DAY)
+#weather #conditions .cond32 .cond33 .cond34 .cond36{
+    background-image: url("#{resource['css:icons/weather/sun.png']}");
+}
+
 #weather #temperature{
-    
+
     float:left;
     margin-left:15px;
     margin-top:10px;
@@ -78,22 +107,22 @@ html{
 }
 
 #slogan{
-	font-size:20px;
+  font-size:20px;
 }
 
 .login,.resetPassword{
-	height:50px;
-	width: 340px;
-	margin-top:50px;
-	margin-left: auto;
-	margin-right:auto;
-	font-size:25px;
-	text-align:center;
-	line-height:50px;
-	background-color: #8DB9CB;
-	color:white;
-	border-top-left-radius: 7px;
-	border-top-right-radius: 7px;
+  height:50px;
+  width: 340px;
+  margin-top:50px;
+  margin-left: auto;
+  margin-right:auto;
+  font-size:25px;
+  text-align:center;
+  line-height:50px;
+  background-color: #8DB9CB;
+  color:white;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
 }
 
 .resetPassword{
@@ -101,34 +130,34 @@ html{
 }
 
 .form-div,.form,.formreset {
-	text-align:center;
-	background-color:rgba(72,72,72,0.45);
-	padding-left:20px;
-	padding-right:20px;
-	padding-top:5px;
-	padding-bottom:30px;
-	width: 300px;
-	margin-top:0px;
-	margin-left: auto;
-	margin-right:auto;
-	border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;
+  text-align:center;
+  background-color:rgba(72,72,72,0.45);
+  padding-left:20px;
+  padding-right:20px;
+  padding-top:5px;
+  padding-bottom:30px;
+  width: 300px;
+  margin-top:0px;
+  margin-left: auto;
+  margin-right:auto;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .form,.formreset{
     width:360px;
 }
 .feedback-input {
-	color:#3c3c3c;
+  color:#3c3c3c;
         font-weight:200;
-	font-size: 18px;
-	border-radius: 0;
-	line-height: 22px;
-	background-color: #fbfbfb;
-	padding: 5px 5px 5px 35px;
-	margin-top: 15px;
-	width:100%;
-	box-sizing: border-box;
+  font-size: 18px;
+  border-radius: 0;
+  line-height: 22px;
+  background-color: #fbfbfb;
+  padding: 5px 5px 5px 35px;
+  margin-top: 15px;
+  width:100%;
+  box-sizing: border-box;
         border: 3px solid #FFF;
 }
 
@@ -137,20 +166,20 @@ forgot-input{
 }
 
 .feedback-input:focus{
-	color: #3498db;
+  color: #3498db;
 }
 
-::-webkit-input-placeholder { 
-        font-size:16px; 
-}
-::-moz-placeholder { 
+::-webkit-input-placeholder {
         font-size:16px;
 }
-:-ms-input-placeholder { 
-        font-size:16px; 
+::-moz-placeholder {
+        font-size:16px;
 }
-input:-moz-placeholder { 
-        font-size:16px; 
+:-ms-input-placeholder {
+        font-size:16px;
+}
+input:-moz-placeholder {
+        font-size:16px;
 }
 
 .error{
@@ -164,34 +193,34 @@ input:-moz-placeholder {
 }
 
 #username .feedback-input{
-	background-image: url("#{resource['css:icons/user.png']}");
-	background-size: 20px 20px;
-	background-position: 5px 5px;
-	background-repeat: no-repeat;
+  background-image: url("#{resource['css:icons/user.png']}");
+  background-size: 20px 20px;
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
 }
 
 #password .feedback-input{
-	background-image: url("#{resource['css:icons/password.png']}");
-	background-size: 20px 20px;
-	background-position: 5px 5px;
-	background-repeat: no-repeat;
+  background-image: url("#{resource['css:icons/password.png']}");
+  background-size: 20px 20px;
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
 }
 
 .form .feedback-input{
-	background-image: url("#{resource['css:icons/email.png']}");
-	background-size: 20px 20px;
-	background-position: 5px 5px;
-	background-repeat: no-repeat;
+  background-image: url("#{resource['css:icons/email.png']}");
+  background-size: 20px 20px;
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
 }
 
 .forgot{
-	height:30px;
+  height:30px;
 }
 
 .forgot a,#fieldName{
-	color:white;
-	font-size:18px;
-	text-decoration:none;
+  color:white;
+  font-size:18px;
+  text-decoration:none;
 }
 
 #fieldName{
@@ -200,46 +229,46 @@ input:-moz-placeholder {
 }
 
 .forgot:hover a{
-	text-shadow: 0px 0px 5px #FFF;
+  text-shadow: 0px 0px 5px #FFF;
 }
 
 .submit{
-	width: 100%;
-	margin-top:30px;
+  width: 100%;
+  margin-top:30px;
 }
 
 #button-reg,#button-log,#button-reset{
-	font-family: 'Dosis', Arial, Helvetica, sans-serif;
-	width: 45%;
-	border: #fbfbfb solid 2px;
-	margin-left:auto;
-	margin-right:auto;
-	background-color: #8DB9CB;
-	color:white;
-	font-size:20px;
-	padding-top:10px;
-	padding-bottom:10px;
+  font-family: 'Dosis', Arial, Helvetica, sans-serif;
+  width: 45%;
+  border: #fbfbfb solid 2px;
+  margin-left:auto;
+  margin-right:auto;
+  background-color: #8DB9CB;
+  color:white;
+  font-size:20px;
+  padding-top:10px;
+  padding-bottom:10px;
         font-weight:200;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
 }
 #button-reset{
-    marigin-top:10px;
+    margin-top:10px;
 }
 
 #button-reg{
-	margin-right:5px;
+  margin-right:5px;
 }
 
 #button-log:hover,#button-reg:hover{
-	background-color: white;
-	color: #8DB9CB;
-	border: #8DB9CB solid 2px;
+  background-color: white;
+  color: #8DB9CB;
+  border: #8DB9CB solid 2px;
 }
 
 .message{
-    
+
     display:block;
     margin-top:10px;
     height:30px;

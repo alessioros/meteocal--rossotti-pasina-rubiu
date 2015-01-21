@@ -46,7 +46,7 @@
                 <p class='forgot'><h:link outcome="forgot" value="Forgot your password?"/></p>
                 <div class='submit'>
                     <h:button outcome='registration' value='REGISTER' a:id='button-reg'/>
-                    <h:commandButton type='submit' value='LOG IN' a:id='button-log' action="#{login.login()}"/> 
+                    <h:commandButton type='submit' value='LOG IN' a:id='button-log' action="#{login.login()}"/>
                 </div>
             </h:form>
         </div>
@@ -54,7 +54,7 @@
 
         <div id='weather'>
             <div id='city'>#{home.cityHome}</div>
-            <div id='conditions' class='#{home.condHome}'></div>
+            <div id='conditions' class='cond#{home.codeHome}'></div>
             <div id='temperature'>#{home.tempHome} °C</div>
         </div>
     </h:body>
