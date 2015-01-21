@@ -44,52 +44,52 @@ html{
 }
 
 // THUNDERSTORM
-#weather #conditions .cond0 .cond1 .cond2 .cond3 .cond4{
+#weather .cond0, #weather .cond1, #weather .cond2, #weather .cond3, #weather .cond4{
     background-image: url("#{resource['css:icons/weather/thunder.png']}");
 }
 
 // RAINY
-#weather #conditions .cond5 .cond6 .cond7 .cond11 .cond12 .cond8 .cond9 .cond10{
+#weather .cond5, #weather .cond6, #weather .cond7, #weather .cond11, #weather .cond12, #weather .cond8, #weather .cond9, #weather .cond10{
     background-image: url("#{resource['css:icons/weather/rain.png']}");
 }
 
 // SNOWY
-#weather #conditions .cond13 .cond14 .cond15 .cond16 .cond18 .cond25 .cond41 .cond42 .cond46{
+#weather .cond13, #weather .cond14, #weather .cond15, #weather .cond16, #weather .cond18, #weather .cond25, #weather .cond41, #weather .cond42, #weather .cond46{
     background-image: url("#{resource['css:icons/weather/snow.png']}");
 }
 
 //  HAIL
-#weather #conditions .cond17{
+#weather .cond17{
     background-image: url("#{resource['css:icons/weather/hail.png']}");
 }
 
 // FOGGY
-#weather #conditions .cond20 .cond21 .cond22{
+#weather .cond20, #weather .cond21, #weather .cond22{
     background-image: url("#{resource['css:icons/weather/fog.png']}");
 }
 
 // WINDY
-#weather #conditions .cond23 .cond24{
+#weather .cond23, #weather .cond24{
     background-image: url("#{resource['css:icons/weather/wind.png']}");
 }
 
 // CLOUDY
-#weather #conditions .cond26{
+#weather .cond26{
     background-image: url("#{resource['css:icons/weather/cloud.png']}");
 }
 
 // PARTLY CLOUDY
-#weather #conditions .cond27 .cond28 .cond29 .cond30 .cond44 .cond37 .cond38 .cond39 .cond40 .cond45 .cond47{
+#weather .cond27, #weather .cond28, #weather .cond29, #weather .cond30, #weather .cond44, #weather .cond37, #weather .cond38, #weather .cond39, #weather .cond40, #weather .cond45, #weather .cond47{
     background-image: url("#{resource['css:icons/weather/mixed.png']}");
 }
 
 // FAIR (NIGHT)
-#weather #conditions .cond31{
+#weather .cond31{
     background-image: url("#{resource['css:icons/weather/moon.png']}");
 }
 
 // FAIR (DAY)
-#weather #conditions .cond32 .cond33 .cond34 .cond36{
+#weather .cond32, #weather .cond33, #weather .cond34, #weather .cond36{
     background-image: url("#{resource['css:icons/weather/sun.png']}");
 }
 

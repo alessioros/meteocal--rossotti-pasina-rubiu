@@ -40,6 +40,7 @@ public class CalendarBean{
     private String urlQuery;
     private String woeid;
     private String tempHome;
+    private String codeHome;
     private String condHome;
     
     private String calusername=null;
@@ -92,6 +93,7 @@ public class CalendarBean{
             JSONObject condition = resItem.getJSONObject("condition");
 
             tempHome = condition.getString("temp");
+            codeHome = condition.getString("code");
             condHome = condition.getString("text");
 
         } catch (Exception e) {
@@ -224,6 +226,14 @@ public class CalendarBean{
   }
     
     // ----- Getters and setters -----
+
+    public String getCondHome() {
+        return condHome;
+    }
+
+    public void setCondHome(String condHome) {
+        this.condHome = condHome;
+    }
     
     public String getMessage() {
       return message;
@@ -287,12 +297,12 @@ public class CalendarBean{
         this.tempHome = tempHome;
     }
 
-    public String getCondHome() {
-        return condHome;
+    public String getCodeHome() {
+        return codeHome;
     }
 
-    public void setCondHome(String condHome) {
-        this.condHome = condHome;
+    public void setCodeHome(String codeHome) {
+        this.codeHome = codeHome;
     }
     
     public String getDayNum(){

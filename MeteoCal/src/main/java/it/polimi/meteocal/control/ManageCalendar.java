@@ -84,11 +84,6 @@ public class ManageCalendar {
         return false;
     }
     
-
-
-    /* public List<Event> dayEvent(Date date,User user){ 
-    
-    this.user = user;*/
     public List<Event> dayEvent(Date date){
         
 

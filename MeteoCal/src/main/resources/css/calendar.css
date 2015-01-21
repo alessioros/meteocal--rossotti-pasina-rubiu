@@ -341,24 +341,54 @@ input.toggle:checked + label:after {
     font-size:20px;
 }
 
-.polimeteo .Fair, .polimeteo .Sunny{
-    background-image: url("#{resource['css:icons/weather/color/sun.png']}");
+// THUNDERSTORM
+.polimeteo .cond0, .polimeteo .cond1, .polimeteo .cond2, .polimeteo .cond3, .polimeteo .cond4{
+    background-image: url("#{resource['css:icons/weather/color/thunder.png']}");
 }
 
-.polimeteo .Cloudy{
-    background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
-}
-
-polimeteo .Rain{
+// RAINY
+.polimeteo .cond5, .polimeteo .cond6, .polimeteo .cond7, .polimeteo .cond11, .polimeteo .cond12, .polimeteo .cond8, .polimeteo .cond9, .polimeteo .cond10{
     background-image: url("#{resource['css:icons/weather/color/rain.png']}");
 }
 
-polimeteo .Snow{
+// SNOWY
+.polimeteo .cond13, .cond14, .cond15, .cond16, .cond18, .cond25, .cond41, .cond42, .cond46{
     background-image: url("#{resource['css:icons/weather/color/snow.png']}");
 }
 
-polimeteo .Partly{
-    background-image: url("#{resource['css:icons/weather/mixed.png']}");
+//  HAIL
+.cond17{
+    background-image: url("#{resource['css:icons/weather/color/hail.png']}");
+}
+
+// FOGGY
+.cond20, .cond21, .cond22{
+    background-image: url("#{resource['css:icons/weather/color/fog.png']}");
+}
+
+// WINDY
+.cond23, .cond24{
+    background-image: url("#{resource['css:icons/weather/color/wind.png']}");
+}
+
+// CLOUDY
+.cond26{
+    background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
+}
+
+// PARTLY CLOUDY
+.cond27, .cond28, .cond29, .cond30, .cond44, .cond37, .cond38, .cond39, .cond40, .cond45, .cond47{
+    background-image: url("#{resource['css:icons/weather/color/mixed.png']}");
+}
+
+// FAIR (NIGHT)
+.cond31{
+    background-image: url("#{resource['css:icons/weather/color/moon.png']}");
+}
+
+// FAIR (DAY)
+.cond32, .cond33, .cond34, .cond36{
+    background-image: url("#{resource['css:icons/weather/color/sun.png']}");
 }
 
 .importExport{
