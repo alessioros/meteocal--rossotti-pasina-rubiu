@@ -1,4 +1,4 @@
-package it.polimi.meteocal.entity;
+package it.polimi.meteocal.control;
 
 
 import it.polimi.meteocal.control.ManageForecast;
