@@ -98,13 +98,13 @@ public class User implements Serializable {
     private Collection<User> userCollection;
     
     @ManyToMany(mappedBy = "userCollection")
-    private Collection<User> userCollection1;
+    private Collection<User> userCollectionPassive;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Collection<Usernotification> usernotificationCollection;
     
     @OneToMany(mappedBy = "idOrganizer")
-    private Collection<Event> eventCollection1;
+    private Collection<Event> eventCreated;
 
     public User() {
     }

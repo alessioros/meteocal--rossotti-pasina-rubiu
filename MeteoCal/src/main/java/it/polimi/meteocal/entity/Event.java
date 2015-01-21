@@ -64,7 +64,7 @@ public class Event implements Serializable {
     @Column(name = "OutDoor")
     private Boolean outDoor;
     @Column(name = "Public")
-    private Boolean public1;
+    private Boolean publicEvent;
     @ManyToMany(mappedBy = "eventCollection")
     private Collection<User> userCollection;
     @OneToMany(mappedBy = "idEvent")
@@ -131,12 +131,12 @@ public class Event implements Serializable {
         this.outDoor = outDoor;
     }
 
-    public Boolean getPublic1() {
-        return public1;
+    public Boolean getPublicEvent() {
+        return publicEvent;
     }
 
-    public void setPublic1(Boolean public1) {
-        this.public1 = public1;
+    public void setPublicEvent(Boolean publicEvent) {
+        this.publicEvent = publicEvent;
     }
 
     @XmlTransient

@@ -65,7 +65,7 @@ public class ManageEvent {
             event.setStartTime(updated.getStartTime());
             event.setEndTime(updated.getEndTime());
             event.setOutDoor(updated.getOutDoor());
-            event.setPublic1(updated.getPublic1());
+            event.setPublicEvent(updated.getPublicEvent());
             event.setIdLocation(l);   
             //*/
            // event =em.merge(updated);
