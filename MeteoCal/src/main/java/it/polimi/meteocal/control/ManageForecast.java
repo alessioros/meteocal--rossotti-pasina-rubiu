@@ -11,13 +11,10 @@ import it.polimi.meteocal.entity.Location;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
-import javax.ejb.Schedule;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,6 +25,7 @@ import org.json.JSONObject;
  *
  * @author teo
  */
+
 @Singleton
 public class ManageForecast {
 
@@ -40,10 +38,11 @@ public class ManageForecast {
     private Forecast forecast;
     private Date date;
     private Forecast goodforecast;
-    private String notMessage;
+    private String messageGoodDay;
     private List<Event> events;
     private List<Forecast> oldForecasts = new ArrayList();
     private List<Forecast> newForecasts = new ArrayList();
+    private List<Forecast> cancForecasts = new ArrayList();
 
     @EJB
     YahooQueries yq;
@@ -54,93 +53,102 @@ public class ManageForecast {
     @EJB
     ManageNotifications mn;
 
-    @Schedule(hour = "*/1", minute = "0", second = "0", persistent = false)
     public void updateForecast() {
         try {
-
+            System.out.println("Check the weather");
             date = new Date();
-            events = em.createQuery("select e from Event e where e.outDoor=:true").getResultList();
+            //takes all the outdoor events
+            events = em.createQuery("select e from Event e where e.outDoor=true").getResultList();
+            
             for (Event event : events) {
-                if (event.getStartTime().after(date)) {
+                System.out.println(event.getName()+"\n");
+                //if event starts after the current date
+                //if (event.getStartTime().after(date)) {
 
                     place = event.getIdLocation();
 
                     oldForecasts = (List) place.getForecastCollection();
-                    Collections.sort(oldForecasts, new Comparator<Forecast>() {
-
-                        @Override
-                        public int compare(Forecast arg0, Forecast arg1) {
-
-                            return arg0.getIdForecast() - arg1.getIdForecast();
-                        }
-                    });
 
                     woeid = yq.woeidOfLocation(place.getAddress() + ", " + place.getCity() + ", " + place.getState());
+                    System.out.println(woeid+"\n");
+                    //if place exists
+                    if (!woeid.equals("null")) {
+                       
+                        //deletes old forecasts for that location
+                        cancForecasts=em.createQuery("select f from Forecast f where f.idLocation=:ID").setParameter("ID", place).getResultList();
+                        for(Forecast cancforecast: cancForecasts){
+                            em.remove(cancforecast);
+                        }
+                        
+                        // Query da eseguire su Yahoo Weather
+                        urlQuery = "select * from weather.forecast where woeid=" + woeid;
 
-                    // Query da eseguire su Yahoo Weather
-                    urlQuery = "select * from weather.forecast where woeid=" + woeid;
+                        // Costruisco il JSON
+                        JSONObject json = yq.yahooRestQuery(urlQuery);
 
-                    // Costruisco il JSON
-                    JSONObject json = yq.yahooRestQuery(urlQuery);
+                        JSONObject jsonQuery = json.getJSONObject("query");
+                        JSONObject queryResults = jsonQuery.getJSONObject("results");
+                        JSONObject channel = queryResults.getJSONObject("channel");
+                        JSONObject resItem = channel.getJSONObject("item");
+                        JSONArray forecasts = resItem.getJSONArray("forecast");
+                        for (int i = 0; i < forecasts.length(); i++) {
 
-                    // stampo le previsioni per tutti i giorni:
-                    JSONObject jsonQuery = json.getJSONObject("query");
-                    JSONObject queryResults = jsonQuery.getJSONObject("results");
-                    JSONObject channel = queryResults.getJSONObject("channel");
-                    JSONObject resItem = channel.getJSONObject("item");
-                    JSONArray forecasts = resItem.getJSONArray("forecast");
-                    for (int i = 0; i < forecasts.length(); i++) {
+                            JSONObject fc = forecasts.getJSONObject(i);
+                            forecast = new Forecast();
+                            DateFormat format = new SimpleDateFormat("dd MMM yyyy",Locale.ENGLISH);
+                            date = format.parse(fc.getString("date"));
 
-                        JSONObject fc = forecasts.getJSONObject(i);
-                        forecast = new Forecast();
-                        DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ITALY);
-                        date = format.parse(fc.getString("date"));
+                            forecast.setDate(date);
+                            forecast.setCode(Integer.parseInt(fc.getString("code")));
+                            forecast.setGeneral(fc.getString("text"));
+                            forecast.setMaxTemp(fc.getString("high"));
+                            forecast.setMinTemp(fc.getString("low"));
+                            forecast.setIdLocation(place);
+                            newForecasts.add(forecast);
+                            System.out.println(forecast.getGeneral()+"\n");
+                            em.persist(forecast);
+                            em.flush();
+                            em.merge(forecast);
+                            em.refresh(forecast);
+                        }
 
-                        forecast.setDate(date);
-                        forecast.setCode(Integer.parseInt(fc.getString("code")));
-                        forecast.setGeneral(fc.getString("text"));
-                        forecast.setMaxTemp(fc.getString("high"));
-                        forecast.setMinTemp(fc.getString("low"));
-                        forecast.setIdLocation(place);
-                        newForecasts.add(forecast);
-                        em.persist(forecast);
-                    }
+                        //checks if the weather has changed
+                        for (Forecast oForecast : oldForecasts) {
 
-                    //checks if the weather has changed
-                    for (Forecast oForecast : oldForecasts) {
+                            for (Forecast nForecast : newForecasts) {
 
-                        for (Forecast nForecast : newForecasts) {
+                                if (oForecast.getDate().equals(nForecast.getDate())) {
 
-                            if (oForecast.getDate().equals(nForecast.getDate())) {
+                                    if (checkWorsenedMeteo(oForecast, nForecast)) {
 
-                                if (checkWorsenedMeteo(oForecast, nForecast)) {
+                                        if (nForecast.getCode() == 0) {
 
-                                    if (nForecast.getCode() == 0) {
+                                            System.out.println("OMG A FUCKING TORNADO!!!");
 
-                                        System.out.println("OMG A FUCKING TORNADO!!!");
-
-                                    } else {
-                                        for (Forecast goodForecast : newForecasts) {
-                                            if (goodForecast.getDate().after(nForecast.getDate())) {
-                                                if (goodForecast.getCode() >= 19 && (goodForecast.getCode() < 35 || goodForecast.getCode() == 36)) {
-                                                    goodforecast = goodForecast;
-                                                    notMessage=", nearest good day is " + goodforecast.getDate().toString() + " that is " + goodforecast.getGeneral();
-                                                    break;
+                                        } else {
+                                            for (Forecast goodForecast : newForecasts) {
+                                                if (goodForecast.getDate().after(nForecast.getDate())) {
+                                                    if (goodForecast.getCode() >= 19 && (goodForecast.getCode() < 35 || goodForecast.getCode() == 36)) {
+                                                        goodforecast = goodForecast;
+                                                        messageGoodDay = ", nearest good day is " + goodforecast.getDate().toString() + " that is " + goodforecast.getGeneral();
+                                                        break;
+                                                    }
                                                 }
                                             }
+                                            mn.sendNotifications((List) event.getIdOrganizer(),
+                                                    event,
+                                                    "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay,
+                                                    "Meteo has changed",
+                                                    "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay,
+                                                    "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay);
+                                            break;
                                         }
-                                        mn.sendNotifications((List) event.getIdOrganizer(),
-                                                event,
-                                                "New forecasts of your event " + event.getName() + " are bad"+notMessage,
-                                                "Meteo has changed",
-                                                "New forecasts of your event " + event.getName() + " are bad"+notMessage,
-                                                "New forecasts of your event " + event.getName() + " are bad"+notMessage);
                                     }
                                 }
                             }
-                        }
 
-                    }
+                        }
+                    //}
                 }
             }
         } catch (Exception e) {

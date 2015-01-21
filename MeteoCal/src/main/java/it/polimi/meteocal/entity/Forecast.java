@@ -40,7 +40,6 @@ public class Forecast implements Serializable {
     @GeneratedValue
     @Column(name = "idForecast")
     private Integer idForecast;
-    @Size(max = 10)
     @Column(name = "Code")
     private Integer code;
     @Column(name = "Date")

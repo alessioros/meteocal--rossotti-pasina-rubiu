@@ -84,9 +84,10 @@ public class YahooQueries {
             // Ad esempio, stampo le previsioni per tutti i giorni:
             JSONObject jsonQuery = json.getJSONObject("query");
             JSONObject queryResults = jsonQuery.getJSONObject("results");
-            JSONObject pl = queryResults.getJSONObject("Result");
-
-            return pl.getString("woeid");
+            if(!queryResults.equals("null")){
+                JSONObject pl = queryResults.getJSONObject("Result");
+                return pl.getString("woeid");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
