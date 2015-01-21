@@ -1,228 +1,228 @@
 @charset "UTF-8";
 
 html{
-	background-image:url("#{resource['css:img/bg_pattern.png']}");
+  background-image:url("#{resource['css:img/bg_pattern.png']}");
         background-repeat: repeat;
 }
 
 .title{
         font-family: 'Dosis', sans-serif;
-	font-size:45px;
-	margin-top:25px;
-	margin-left:100px;
-	display:block;
+  font-size:45px;
+  margin-top:25px;
+  margin-left:100px;
+  display:block;
 }
 
 /*------------- TOGGLE ------------- */
 
 .switch{
-	margin-left:100px;
-	margin-top:20px;
+  margin-left:100px;
+  margin-top:20px;
 }
 
 .toggle {
-	position: absolute;
+  position: absolute;
         margin-left: -9999px;
-	visibility: hidden;
+  visibility: hidden;
 }
 .toggle + label {
-	display: block;
-	position: relative;
-	cursor: pointer;
-	outline: none;
+  display: block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
 }
 
 input.toggle + label {
-	padding: 2px;
-	width: 40px;
-	height: 25px;
-	background-color: #dddddd;
-	border-radius: 25px;
+  padding: 2px;
+  width: 40px;
+  height: 25px;
+  background-color: #dddddd;
+  border-radius: 25px;
 }
 
 input.toggle + label:before,
 input.toggle + label:after {
-	display: block;
-	position: absolute;
-	top: 1px;
-	left: 1px;
-	bottom: 1px;
-	content: "";
+  display: block;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  bottom: 1px;
+  content: "";
 }
 input.toggle + label:before {
-	right: 1px;
-	background-color: #f1f1f1;
-	border-radius: 25px;
-	transition: background 0.4s;
+  right: 1px;
+  background-color: #f1f1f1;
+  border-radius: 25px;
+  transition: background 0.4s;
 }
 input.toggle + label:after {
-	width: 25px;
-	background-color: #fff;
-	border-radius: 100%;
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-	transition: margin 0.4s;
+  width: 25px;
+  background-color: #fff;
+  border-radius: 100%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: margin 0.4s;
 }
 input.toggle:checked + label:before {
-	background-color: #8ce196;
+  background-color: #8ce196;
 }
 input.toggle:checked + label:after {
-	margin-left: 20px;
+  margin-left: 20px;
 }
 
 #publiclabel{
-	font-size:22px;
-	font-family: 'Dosis', sans-serif;
-	display:inline-block;
-	margin-left:55px;
-	line-height:22px;
+  font-size:22px;
+  font-family: 'Dosis', sans-serif;
+  display:inline-block;
+  margin-left:55px;
+  line-height:22px;
 }
 /*------------- TOGGLE ------------- */
 .calendar{
-	width:auto;
-	height:auto;
-	margin-top:15px;
+  width:auto;
+  height:auto;
+  margin-top:15px;
         margin-bottom: 50px;
-	margin-left:100px;
-	text-align:left;
-	border-collapse:collapse;
-	display:inline-table;
+  margin-left:100px;
+  text-align:left;
+  border-collapse:collapse;
+  display:inline-table;
 }
 
 .calendar tr{
-	padding:0;
-	margin:0;
+  padding:0;
+  margin:0;
 }
 .calendar td{
-	border:1px solid black;
-	margin:0;
-	height:80px;
-	width:80px;
+  border:1px solid black;
+  margin:0;
+  height:80px;
+  width:80px;
 }
 
 .mask {
-	width:80px;
-	height:80px;
-	box-sizing:border-box;
+  width:80px;
+  height:80px;
+  box-sizing:border-box;
 }
 
 .mask:hover{
-	background-image: -webkit-gradient(radial, center top, 0, center top, 554, color-stop(0, #FFFAFB), color-stop(1, #C8E6EB));
-	background-image: -webkit-radial-gradient(center top, ellipse farthest-corner, #FFFAFB 0%, #C8E6EB 100%);
-	background-image: -moz-radial-gradient(center top, ellipse farthest-corner, #FFFAFB 0%, #C8E6EB 100%);
-	opacity:0.7;
+  background-image: -webkit-gradient(radial, center top, 0, center top, 554, color-stop(0, #FFFAFB), color-stop(1, #C8E6EB));
+  background-image: -webkit-radial-gradient(center top, ellipse farthest-corner, #FFFAFB 0%, #C8E6EB 100%);
+  background-image: -moz-radial-gradient(center top, ellipse farthest-corner, #FFFAFB 0%, #C8E6EB 100%);
+  opacity:0.7;
 
 }
 
 .mask:hover #dayNumbHoly{
-	opacity:0;
+  opacity:0;
 }
 
 #dayNumbHoly{
-	font-size:20px;
-	color :#ff0000;
+  font-size:20px;
+  color :#ff0000;
         //color:#f62b46;
-	text-shadow:1px 1px 1px #FFF;
-	font-family: 'Roboto Condensed', sans-serif;
-	padding-top:10px;
-	padding-left:10px;
-	display:block;
+  text-shadow:1px 1px 1px #FFF;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding-top:10px;
+  padding-left:10px;
+  display:block;
 }
 .mask:hover #dayNumbHoly{
-	opacity:0;
+  opacity:0;
 }
 
 #dayNumbOldHoly{
-	font-size:20px;
-	color:#ff8370;
-	text-shadow:1px 1px 1px #FFF;
-	font-family: 'Roboto Condensed', sans-serif;
-	padding-top:10px;
-	padding-left:10px;
-	display:block;
+  font-size:20px;
+  color:#ff8370;
+  text-shadow:1px 1px 1px #FFF;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding-top:10px;
+  padding-left:10px;
+  display:block;
 }
 .mask:hover #dayNumbWeek{
-	opacity:0;
+  opacity:0;
 }
 #dayNumbWeek{
-	font-size:20px;
-	color:#000000;
-	text-shadow:1px 1px 1px #FFF;
-	font-family: 'Roboto Condensed', sans-serif;
-	padding-top:10px;
-	padding-left:10px;
-	display:block;
+  font-size:20px;
+  color:#000000;
+  text-shadow:1px 1px 1px #FFF;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding-top:10px;
+  padding-left:10px;
+  display:block;
 }
 .mask:hover #dayNumbOld{
-	opacity:0;
+  opacity:0;
 }
 #dayNumbOld{
-	font-size:20px;
-	color:#b6b4b4;
-	text-shadow:1px 1px 1px #FFF;
-	font-family: 'Roboto Condensed', sans-serif;
-	padding-top:10px;
-	padding-left:10px;
-	display:block;
+  font-size:20px;
+  color:#b6b4b4;
+  text-shadow:1px 1px 1px #FFF;
+  font-family: 'Roboto Condensed', sans-serif;
+  padding-top:10px;
+  padding-left:10px;
+  display:block;
 }
 .empty,.event{
-	margin-left:auto;
-	margin-right:auto;
-	height:40px;
-	width:40px;
-	background-size:40px 40px;
-	opacity:0;
-	transition: opacity 0.3s ease-in;
+  margin-left:auto;
+  margin-right:auto;
+  height:40px;
+  width:40px;
+  background-size:40px 40px;
+  opacity:0;
+  transition: opacity 0.3s ease-in;
 }
 
 .empty{
-	background-image:url("#{resource['css:icons/plus.png']}");
+  background-image:url("#{resource['css:icons/plus.png']}");
 }
 
 .event{
         opacity:1;
       //  transition: opacity 0.3s ease-in;
       //  height:35px;
-	// width:35px;
-	// background-size:35px 35px;
-	 background-image:url("#{resource['css:icons/pin.png']}");
+  // width:35px;
+  // background-size:35px 35px;
+   background-image:url("#{resource['css:icons/pin.png']}");
 }
 .mask:hover .event{
         height:40px;
-	width:40px;
-	background-size:40px 40px;
+  width:40px;
+  background-size:40px 40px;
         background-image:url("#{resource['css:icons/search.png']}");
 }
 .mask:hover .empty{
-	opacity:1;
+  opacity:1;
 }
 
 #daycont{
-	background-color: #8DB9CB;
-	color:white;
-	width:80px;
-	height:30px;
-	font-size:20px;
-	padding:0px;
+  background-color: #8DB9CB;
+  color:white;
+  width:80px;
+  height:30px;
+  font-size:20px;
+  padding:0px;
         line-height:30px;
         text-align:center;
         font-family: 'Dosis', sans-serif;
 }
 
 #monthcont{
-	background-color: #8DB9CB;
-	color:white;
-	width:560px;
-	height:50px;
-	font-size:30px;
-	padding:0px;
+  background-color: #8DB9CB;
+  color:white;
+  width:560px;
+  height:50px;
+  font-size:30px;
+  padding:0px;
         line-height:50px;
 }
 
 #prev{
         background-image: url("#{resource['css:icons/prev.png']}");
-	background-size: 40px 40px;
-	background-position: 17px 5px;
-	background-repeat: no-repeat;
+  background-size: 40px 40px;
+  background-position: 17px 5px;
+  background-repeat: no-repeat;
         border-right:0px;
         height:50px;
         width:80px;
@@ -232,21 +232,21 @@ input.toggle:checked + label:after {
 }
 
 #month{
-	width:420px;
+  width:420px;
         margin-left:auto;
         margin-right:auto;
-	display:block;
-	text-shadow:none;
-	font-family: 'Dosis', sans-serif;
+  display:block;
+  text-shadow:none;
+  font-family: 'Dosis', sans-serif;
         float:left;
 }
 
 #next{
         background-image: url("#{resource['css:icons/next.png']}");
         background-size: 40px 40px;
-	background-position: 17px 5px;
-	background-repeat: no-repeat;
-        border-left:0px;  
+  background-position: 17px 5px;
+  background-repeat: no-repeat;
+        border-left:0px;
         height:50px;
         width:80px;
         background-color: #8DB9CB;
@@ -259,44 +259,43 @@ input.toggle:checked + label:after {
 }
 
 .submit{
-	width: 250px;
-	margin-right:120px;
-	margin-top:15px;
-	text-align:center;
-	float:right;
+  width: 250px;
+  margin-right:120px;
+  margin-top:15px;
+  text-align:center;
+  float:right;
 }
 
-#button-create{
-	width: auto;
-	border: #fbfbfb solid 2px;
+#button-create,#button-import,#button-export{
+  border: #fbfbfb solid 2px;
         border-radius: 8px;
         box-shadow: 2px 2px 3px #888;
-	background-color: #8DB9CB;
-	color:white;
-	font-size:18px;
-	padding:10px;
-	-webkit-transition: all 0.5s;
-	-moz-transition: all 0.5s;
-	transition: all 0.5s;
-        
+  background-color: #8DB9CB;
+  color:white;
+  font-size:18px;
+  padding:10px;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  transition: all 0.5s;
+
 }
 
 #button-create:hover{
-	background-color: white;
-	color: #8DB9CB;
-	border: #8DB9CB solid 2px;
+  background-color: white;
+  color: #8DB9CB;
+  border: #8DB9CB solid 2px;
 }
 
 .polimeteo{
-	border:1px solid black;
+  border:1px solid black;
         border-radius: 5px;
-	padding:15px;
+  padding:15px;
         padding-bottom: 30px;
-	text-align:center;
-	font-size:40px;
+  text-align:center;
+  font-size:40px;
         font-family: 'Dosis', sans-serif;
-	color:black;
-	text-shadow:1px 1px 1px white;
+  color:black;
+  text-shadow:1px 1px 1px white;
         float: right;
         margin-right:70px;
         display: inline-block;
@@ -322,7 +321,7 @@ input.toggle:checked + label:after {
 }
 
 .polimeteo #temperature{
-    
+
     float:left;
     margin-left:20px;
     margin-top:25px;
@@ -362,11 +361,53 @@ polimeteo .Partly{
     background-image: url("#{resource['css:icons/weather/mixed.png']}");
 }
 
-.error{
-    margin-top:5px;
-    font-size: 16px;
-    padding-left:10px;
-    width:50%;
-    color: red;
+.importExport{
+    float: right;
+    position:relative;
+    top:-150px;
+    left:350px;
 }
+
+#button-import,#button-export{
+    background-color:#4E9ACE;
+    padding-top:8px;
+    padding-bottom: 8px;
+    padding-left:40px;
+    font-size:17px;
+    background-size: 20px 20px;
+    background-position: 10px 8px;
+    background-repeat: no-repeat;
+}
+
+#button-import:hover,#button-export:hover{
+  background-color: white;
+  color: #4E9ACE;
+  border: #4E9ACE solid 2px;
+}
+
+#button-import:hover{
+    background-image: url("#{resource['css:icons/importhover.png']}");
+}
+
+#button-export:hover{
+    background-image: url("#{resource['css:icons/exporthover.png']}");
+}
+
+#button-import{
+    margin-right:50px;
+    background-image: url("#{resource['css:icons/import.png']}");
+}
+
+#button-export{
+    background-image: url("#{resource['css:icons/export.png']}");
+}
+
+.message{
+    margin-top:15px;
+    margin-left:40px;
+    font-size: 18px;
+    color:#58BC6C;
+    display:block;
+}
+
 

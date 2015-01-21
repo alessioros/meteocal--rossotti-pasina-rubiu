@@ -7,7 +7,6 @@ import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.Week;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
-import it.polimi.meteocal.entity.User;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -15,12 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
@@ -46,6 +43,8 @@ public class CalendarBean{
     private String condHome;
     
     private String calusername=null;
+    
+    private String message;
     
     @Inject 
     ManageCalendar mc;
@@ -169,15 +168,6 @@ public class CalendarBean{
     
     public void dayEvents(){
         
-        /*if(!calusername.equals("")){
-            
-            System.out.println("sono entrato!");
-            this.event = mc.dayEvent(new Date(this.viewDate),mpd.getUserData(calusername));
-        }
-        else{
-            System.out.println("Non sono entrato!");
-            this.event = mc.dayEvent(new Date(this.viewDate),rv.getLoggedUser());
-        }*/
         this.event = mc.dayEvent(new Date(this.viewDate));
     }
     
@@ -219,8 +209,30 @@ public class CalendarBean{
             return "";
     }
     
+    public String submitImportCalendar(){
+
+    message=mc.importCalendar();
+
+    return "calendar";
+  }
+
+  public String submitExportCalendar(){
+
+    message=mc.exportCalendar();
+
+    return "calendar";
+  }
+    
     // ----- Getters and setters -----
     
+    public String getMessage() {
+      return message;
+    }
+
+    public void setMessage(String message) {
+      this.message = message;
+    }
+  
     private void getSessionDate(){
         HttpSession session;
         FacesContext context = FacesContext.getCurrentInstance();    
