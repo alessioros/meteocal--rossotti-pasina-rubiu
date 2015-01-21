@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.SocketException;
+import java.net.URISyntaxException;
 import java.security.Principal;
 import java.util.ArrayList;
 
@@ -36,6 +37,9 @@ import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.CalScale;
+import net.fortuna.ical4j.model.property.Description;
+import net.fortuna.ical4j.model.property.Location;
+import net.fortuna.ical4j.model.property.Organizer;
 import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Uid;
 import net.fortuna.ical4j.model.property.Version;
@@ -126,7 +130,7 @@ public class ManageCalendar {
             return "Calendar has been imported!";
     }
 
-    public String exportCalendar() throws IOException {
+    public String exportCalendar() throws IOException, URISyntaxException {
         
         user = rv.getLoggedUser();
         Iterator<Event> events;
@@ -189,7 +193,10 @@ public class ManageCalendar {
                 start = new DateTime(startDate.getTime());
                 end = new DateTime(endDate.getTime());
                 calevent = new VEvent(start, end, event.getName());
-
+                calevent.getProperties().add(new Description(event.getDescription()));
+                calevent.getProperties().add(new Organizer(""+event.getIdOrganizer().getIdUser()));
+                calevent.getProperties().add(new Location(""+event.getIdLocation().getIdLocation()));
+                
                 // Add the event to calendar
                 calendar.getComponents().add(calevent);
 
