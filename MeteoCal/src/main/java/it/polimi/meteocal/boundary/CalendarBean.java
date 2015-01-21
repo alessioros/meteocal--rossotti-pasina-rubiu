@@ -24,10 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
-/**
- *
- * @author Simone
- */
 @ManagedBean
 @ViewScoped
 public class CalendarBean{    

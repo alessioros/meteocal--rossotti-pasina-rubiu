@@ -347,27 +347,27 @@ input.toggle:checked + label:after {
 }
 
 // RAINY
-.polimeteo .cond5, .polimeteo .cond6, .polimeteo .cond7, .polimeteo .cond11, .polimeteo .cond12, .polimeteo .cond8, .polimeteo .cond9, .polimeteo .cond10{
+.cond5, .cond6, .cond7, .cond11, .cond12, .cond8, .cond9, .cond10{
     background-image: url("#{resource['css:icons/weather/color/rain.png']}");
 }
 
 // SNOWY
-.polimeteo .cond13, .cond14, .cond15, .cond16, .cond18, .cond25, .cond41, .cond42, .cond46{
+.cond13, .cond14, .cond15, .cond16, .cond18, .cond25, .cond41, .cond42, .cond46{
     background-image: url("#{resource['css:icons/weather/color/snow.png']}");
 }
 
 //  HAIL
-.cond17{
+.polimeteo .cond17{
     background-image: url("#{resource['css:icons/weather/color/hail.png']}");
 }
 
 // FOGGY
-.cond20, .cond21, .cond22{
+.polimeteo .cond20, .polimeteo .cond21, .polimeteo .cond22{
     background-image: url("#{resource['css:icons/weather/color/fog.png']}");
 }
 
 // WINDY
-.cond23, .cond24{
+.polimeteo .cond23, .polimeteo .cond24{
     background-image: url("#{resource['css:icons/weather/color/wind.png']}");
 }
 
