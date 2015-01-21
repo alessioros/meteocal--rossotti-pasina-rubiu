@@ -6,6 +6,7 @@ import it.polimi.meteocal.entity.Event;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.SocketException;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -123,14 +126,14 @@ public class ManageCalendar {
             return "Calendar has been imported!";
     }
 
-    public String exportCalendar() {
-
+    public String exportCalendar() throws IOException {
+        
         user = rv.getLoggedUser();
         Iterator<Event> events;
         Event event;
         DateTime start,end;
         GregorianCalendar startDate,endDate;
-
+        String fileName="calendar.ics";
         // Create a TimeZone
         TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
         TimeZone timezone = registry.getTimeZone("Europe/Amsterdam");
@@ -154,17 +157,10 @@ public class ManageCalendar {
 
             // Create the file and the calendar
 
-            FileOutputStream fout = null;
             Calendar calendar = new Calendar();
             calendar.getProperties().add(new ProdId("-//Ben Fortuna//iCal4j 1.0//EN"));
             calendar.getProperties().add(Version.VERSION_2_0);
             calendar.getProperties().add(CalScale.GREGORIAN);
-
-            try {
-                fout = new FileOutputStream("calendar.ics");
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
             while(events.hasNext()){
 
@@ -201,17 +197,30 @@ public class ManageCalendar {
                 uid =  ug.generateUid();
                 calevent.getProperties().add(uid);
             }
+            
+            /*----------- DOWLOAD ---------------*/
+            FacesContext fc = FacesContext.getCurrentInstance();
+            ExternalContext ec = fc.getExternalContext();
 
+            ec.responseReset();
+            ec.setResponseContentType("application/calendar+xml"); 
+            ec.setResponseHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\""); 
+
+            OutputStream output = ec.getResponseOutputStream();
+            
+            fc.responseComplete();
+    
             CalendarOutputter outputter = new CalendarOutputter();
             try {
-                outputter.output(calendar, fout);
+                outputter.output(calendar, output);
+                
             } catch (net.fortuna.ical4j.model.ValidationException ex) {
                 Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
                 Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
 
             }
-
+            
             return "Calendar has been exported!";
         }
 

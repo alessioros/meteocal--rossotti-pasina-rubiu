@@ -7,6 +7,7 @@ import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.Week;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
+import java.io.IOException;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -218,7 +219,7 @@ public class CalendarBean{
     return "calendar";
   }
 
-  public String submitExportCalendar(){
+  public String submitExportCalendar() throws IOException{
 
     message=mc.exportCalendar();
 
