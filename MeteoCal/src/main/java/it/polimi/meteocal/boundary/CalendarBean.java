@@ -212,15 +212,15 @@ public class CalendarBean{
     public String submitImportCalendar(){
 
     message=mc.importCalendar();
-
-    return "calendar";
+    
+    return "calendar?faces-redirect=true";
   }
 
   public String submitExportCalendar() throws IOException, URISyntaxException{
 
     message=mc.exportCalendar();
-
-    return "calendar";
+    
+    return "calendar?faces-redirect=true";
   }
     
     // ----- Getters and setters -----
