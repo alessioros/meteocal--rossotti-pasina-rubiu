@@ -44,7 +44,7 @@ html{
     display:inline-block;
 }
 
-// THUNDERSTORM
+/* THUNDERSTORM
 #weather .cond0, #weather .cond1, #weather .cond2, #weather .cond3, #weather .cond4{
     background-image: url("#{resource['css:icons/weather/thunder.png']}");
 }
@@ -92,6 +92,47 @@ html{
 // FAIR (DAY)
 #weather .cond32, #weather .cond33, #weather .cond34, #weather .cond36{
     background-image: url("#{resource['css:icons/weather/sun.png']}");
+} */
+
+.Tornado, .Hurricane, .Storm, .Thunderstorms,.Thundershowers{
+    background-image: url("#{resource['css:icons/weather/thunder.png']}");
+}
+
+
+.Rainy, .Showers, .Drizzle{
+    background-image: url("#{resource['css:icons/weather/rain.png']}");
+}
+
+.Cloudy{
+    background-image: url("#{resource['css:icons/weather/cloud.png']}");
+}
+
+.Snow,.Dust,.Cold,.Sleet{
+    background-image: url("#{resource['css:icons/weather/snow.png']}");
+}
+
+.Sunny,.Fair,.Hot{
+    background-image: url("#{resource['css:icons/weather/sun.png']}");
+}
+
+.Clear{
+    background-image: url("#{resource['css:icons/weather/moon.png']}");
+}
+
+.Mixed{
+    background-image: url("#{resource['css:icons/weather/mixed.png']}");
+}
+
+.Hail{
+    background-image: url("#{resource['css:icons/weather/hail.png']}");
+}
+
+.Windy,.Blustery{
+    background-image: url("#{resource['css:icons/weather/wind.png']}");
+}
+
+.Foggy,.Haze,.Fog{
+    background-image: url("#{resource['css:icons/weather/fog.png']}");
 }
 
 #weather #temperature{

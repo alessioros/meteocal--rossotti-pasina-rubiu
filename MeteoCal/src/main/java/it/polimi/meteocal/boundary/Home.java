@@ -48,7 +48,7 @@ public class Home {
             JSONObject condition = resItem.getJSONObject("condition");
 
             tempHome = condition.getString("temp");
-            codeHome = condition.getString("code");
+            codeHome = condition.getString("text");
 
         } catch (Exception e) {
             e.printStackTrace();

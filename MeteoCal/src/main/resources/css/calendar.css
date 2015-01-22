@@ -288,19 +288,19 @@ input.toggle:checked + label:after {
 
 .polimeteo{
   border:1px solid black;
-        border-radius: 5px;
+  border-radius: 5px;
   padding:15px;
-        padding-bottom: 30px;
+  padding-bottom: 30px;
   text-align:center;
   font-size:40px;
-        font-family: 'Dosis', sans-serif;
+  font-family: 'Dosis', sans-serif;
   color:black;
   text-shadow:1px 1px 1px white;
-        float: right;
-        margin-right:70px;
-        display: inline-block;
-        position:relative;
-        top:-500px;
+  float: right;
+  margin-right:70px;
+  display: inline-block;
+  position:relative;
+  top:-500px;
 }
 
 .polimeteo #city{
@@ -341,7 +341,7 @@ input.toggle:checked + label:after {
     font-size:20px;
 }
 
-// THUNDERSTORM
+/* THUNDERSTORM
 .polimeteo .cond0, .polimeteo .cond1, .polimeteo .cond2, .polimeteo .cond3, .polimeteo .cond4{
     background-image: url("#{resource['css:icons/weather/color/thunder.png']}");
 }
@@ -389,6 +389,47 @@ input.toggle:checked + label:after {
 // FAIR (DAY)
 .cond32, .cond33, .cond34, .cond36{
     background-image: url("#{resource['css:icons/weather/color/sun.png']}");
+}*/
+
+.Tornado, .Hurricane, .Storm, .Thunderstorms,.Thundershowers{
+    background-image: url("#{resource['css:icons/weather/color/thunder.png']}");
+}
+
+
+.Rainy, .Showers, .Drizzle{
+    background-image: url("#{resource['css:icons/weather/color/rain.png']}");
+}
+
+.Cloudy{
+    background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
+}
+
+.Snow,.Dust,.Cold,.Sleet{
+    background-image: url("#{resource['css:icons/weather/color/snow.png']}");
+}
+
+.Sunny,.Fair,.Hot{
+    background-image: url("#{resource['css:icons/weather/color/sun.png']}");
+}
+
+.Clear{
+    background-image: url("#{resource['css:icons/weather/color/moon.png']}");
+}
+
+.Mixed{
+    background-image: url("#{resource['css:icons/weather/color/mixed.png']}");
+}
+
+.Hail{
+    background-image: url("#{resource['css:icons/weather/color/hail.png']}");
+}
+
+.Windy,.Blustery{
+    background-image: url("#{resource['css:icons/weather/color/wind.png']}");
+}
+
+.Foggy,.Haze,.Fog{
+    background-image: url("#{resource['css:icons/weather/color/fog.png']}");
 }
 
 .importExport{

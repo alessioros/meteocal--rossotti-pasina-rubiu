@@ -5,20 +5,20 @@ import it.polimi.meteocal.control.ManageEvent;
 import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
+import it.polimi.meteocal.entity.Forecast;
 import it.polimi.meteocal.entity.Location;
 import it.polimi.meteocal.entity.User;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
 import org.json.JSONObject;
 
 @ManagedBean
-//@RequestScoped
 @ViewScoped
 public class EventDetails {
 
@@ -46,6 +46,11 @@ public class EventDetails {
     private String city;
     private String address;
     private String query;
+    private String minTemp;
+    private String maxTemp;
+    private String condEvent;
+    private String codeEvent;
+    
     private int idEvent=0;
 
     public void dateConverter() {
@@ -67,12 +72,10 @@ public class EventDetails {
         try {
             JSONObject json = yq.yahooRestQuery(query);
 
-            // Ci faccio quel che devo.
-            // Ad esempio, stampo le previsioni per tutti i giorni:
             JSONObject jsonQuery = json.getJSONObject("query");
             JSONObject queryResults = jsonQuery.getJSONObject("results");
             JSONObject pl = queryResults.getJSONObject("Result");
-            System.out.println(Float.parseFloat(pl.getString("latitude")));
+            
             loc.setLatitude(Float.parseFloat(pl.getString("latitude")));
             loc.setLongitude(Float.parseFloat(pl.getString("longitude")));
         } catch (Exception e) {
@@ -101,6 +104,20 @@ public class EventDetails {
         }
 
     }
+    
+    public void eventWeather(){
+            
+            List<Forecast> forecasts;
+            forecasts = (List) event.getIdLocation().getForecastCollection();
+            
+            if(!forecasts.isEmpty()){
+                minTemp = forecasts.get(0).getMinTemp();
+                maxTemp = forecasts.get(0).getMaxTemp();
+                condEvent = forecasts.get(0).getGeneral();
+                codeEvent = forecasts.get(0).getMaxTemp();
+            }   
+    }
+    
     public String buttonValue(){
         if(editing())
             return "EDIT";
@@ -156,12 +173,71 @@ public class EventDetails {
        
        
     }
+    
     public String deleteEvent(){
        this.findEvent();
        me.deleteEvent(this.idEvent);
        
        return "calendar.xhtml?faces-redirect=true";
     }
+    
+    public void findEvent(){
+        if(this.idEvent!=0){
+            event = me.findEvent(this.idEvent);
+            this.startDate=event.getStartTime();
+            this.endDate=event.getEndTime();
+            this.address=event.getIdLocation().getAddress();
+            this.city=event.getIdLocation().getCity();
+            this.state=event.getIdLocation().getState();
+            
+        }
+    
+    }
+    
+    public boolean editing(){
+        return this.idEvent!=0;
+    }
+    public boolean canEdit(){
+        User u = rv.getLoggedUser();
+        this.findEvent();        
+        return u.equals(event.getIdOrganizer());
+        
+    }
+    
+    // ----- Getters and setters -----
+
+    public String getMinTemp() {
+        return minTemp;
+    }
+
+    public void setMinTemp(String minTemp) {
+        this.minTemp = minTemp;
+    }
+
+    public String getMaxTemp() {
+        return maxTemp;
+    }
+
+    public void setMaxTemp(String maxTemp) {
+        this.maxTemp = maxTemp;
+    }
+
+    public String getCondEvent() {
+        return condEvent;
+    }
+
+    public void setCondEvent(String condEvent) {
+        this.condEvent = condEvent;
+    }
+
+    public String getCodeEvent() {
+        return codeEvent;
+    }
+
+    public void setCodeEvent(String codeEvent) {
+        this.codeEvent = codeEvent;
+    }
+    
     public String getState() {
         return state;
     }
@@ -262,28 +338,6 @@ public class EventDetails {
 
     public void setIdEvent(int idEvent) {
         this.idEvent = idEvent;
-    }
-    
-    public void findEvent(){
-        if(this.idEvent!=0){
-            event = me.findEvent(this.idEvent);
-            this.startDate=event.getStartTime();
-            this.endDate=event.getEndTime();
-            this.address=event.getIdLocation().getAddress();
-            this.city=event.getIdLocation().getCity();
-            this.state=event.getIdLocation().getState();
-        }
-    
-    }
-    
-    public boolean editing(){
-        return this.idEvent!=0;
-    }
-    public boolean canEdit(){
-        User u = rv.getLoggedUser();
-        this.findEvent();        
-        return u.equals(event.getIdOrganizer());
-        
     }
 
 }

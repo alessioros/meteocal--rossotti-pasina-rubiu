@@ -26,51 +26,61 @@
                 <li id='logout'><h:form><h:commandLink action="#{loginBean.logout()}" value="logout"/></h:form></li>
             </ul>
         </div>
-        <f:metadata>
-            <f:viewAction action="#{personalProfile.showPersonalData()}"/>           
+        <f:metadata>          
             <f:viewParam name="id" value="#{eventDetails.idEvent}"/>            
             <f:viewAction action='#{eventDetails.findEvent()}'/>
-
+            <f:viewAction action='#{eventDetails.eventWeather()}'/>
         </f:metadata>
-
+        
+        <div class="image"></div>
+        <div class="googleMap">
+            <h:form>
+                <m:map width="350px" height="250px" latitude="#{eventDetails.event.idLocation.latitude}" longitude="#{eventDetails.event.idLocation.longitude}" />
+            </h:form>
+        </div><br/>
         <div class="info">
             <a id="title">#{eventDetails.event.name}</a>            
             <!--<c:if test='#{eventDetails.canEdit()==true}'>-->
-                <h:form rendered="#{eventDetails.canEdit()}">
-                    <h:link outcome='createEvent.xhtml?id=#{eventDetails.event.idEvent}' value='Edit' a:id='button-change'/>
-                    <h:link outcome='invitePeople.xhtml?id=#{eventDetails.event.idEvent}' value='Invite' a:id='button-change'/>
-                    <h:commandButton value='Delete'  action="#{eventDetails.deleteEvent()}" />   
-                </h:form>
-                <!--
-                <p:menuButton value="Options">
-                    <p:menuitem value="Invite" outcome="/loggeduser/invitePeople.xhtml?faces-redirect=true&amp;event="  icon="ui-icon-person"/>
-                    <p:menuitem value="Edit"   outcome="/loggeduser/createEvent.xhtml?faces-redirect=true&amp;id=" icon="ui-icon-wrench" />
-                    <p:menuitem value="Delete" outcome="" ajax="false" icon="ui-icon-trash" >                            
-                    </p:menuitem>
-                </p:menuButton>
-                -->
-           <!-- </c:if>-->
 
-
-            <br/>
-            <a id="stime">Starts: #{eventDetails.event.startTime.toLocaleString()}</a><br/>
-            <a id="etime">Ends: #{eventDetails.event.endTime.toLocaleString()}</a><br/>
+            <!--
+            <p:menuButton value="Options">
+                <p:menuitem value="Invite" outcome="/loggeduser/invitePeople.xhtml?faces-redirect=true&amp;event="  icon="ui-icon-person"/>
+                <p:menuitem value="Edit"   outcome="/loggeduser/createEvent.xhtml?faces-redirect=true&amp;id=" icon="ui-icon-wrench" />
+                <p:menuitem value="Delete" outcome="" ajax="false" icon="ui-icon-trash" >                            
+                </p:menuitem>
+            </p:menuButton>
+            -->
+            <!-- </c:if>-->
+            
+            <a id="stime">Starts:   #{eventDetails.event.startTime.toLocaleString()}</a><br/>
+            <a id="etime">Ends:     #{eventDetails.event.endTime.toLocaleString()}</a><br/>
             <c:if test='#{eventDetails.event.outDoor==true}'>
                 <a id="outd" >Oudoor Event</a>
             </c:if>
             <c:if test='#{eventDetails.event.outDoor==false}'>
                 <a id="outd" >Indoor Event</a>
             </c:if>
+            <a class="desctitle">Description:</a>
+            <a class="description">#{eventDetails.event.description}</a>
         </div>
-        <div class="image"></div><br/>
-        <div class="googleMap">
-            <h:form>
-                <a id="loc">#{eventDetails.event.idLocation.address}, #{eventDetails.event.idLocation.city} </a>
-                <m:map width="350px" height="250px" latitude="#{eventDetails.event.idLocation.latitude}" longitude="#{eventDetails.event.idLocation.longitude}" />
+        <div class="evweather">
+            <div id='city'>#{eventDetails.event.idLocation.city}</div>
+            <div id='address'>#{eventDetails.event.idLocation.address}</div>
+            <div id='conditions' class='#{eventDetails.condEvent}'></div>
+            <div id='conddesc'>#{eventDetails.condEvent}</div>
+            <div id='temperature'>
+                <a class="min">Min Temp: #{eventDetails.minTemp} °C </a>
+                <a class="max">Max Temp: #{eventDetails.maxTemp} °C </a>
+            </div>
+        </div>
+        <br/>
+
+        <div class="buttons">
+            <h:form rendered="#{eventDetails.canEdit()}">
+                <h:link outcome='createEvent.xhtml?id=#{eventDetails.event.idEvent}' value='EDIT' a:id='button-edit'/>
+                <h:link outcome='invitePeople.xhtml?id=#{eventDetails.event.idEvent}' value='INVITE' a:id='button-invite'/>
+                <h:commandButton action="#{eventDetails.deleteEvent()}" value='DELETE' a:id='button-delete'/>   
             </h:form>
-        </div>
-        <div class="description">
-            #{eventDetails.event.description}         
         </div>
     </h:body>
 </html>
