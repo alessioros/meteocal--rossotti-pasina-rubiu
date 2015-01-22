@@ -29,7 +29,7 @@ public class InvitePeople {
 
     @PersistenceContext
     EntityManager em;
-    
+
     @Inject
     ManagePersonalData mpd;
 
@@ -40,18 +40,20 @@ public class InvitePeople {
     ManageInvites mi;
 
     private int event;
+    private Event pEvent;
     private String contact;
     private String message;
 
     private Map<Integer, Boolean> selectedIds = new HashMap<>();
     private List<User> invited;
+    private List<User> alreadyInvited;
 
     /**
      * updates contacts then calls ManageInvites method createInvites
      */
     public String invite() throws MessagingException {
 
-        contacts = updateContacts();
+        contacts = updateInvitable();
 
         invited = new ArrayList<>();
         for (User contact : contacts) {
@@ -62,44 +64,69 @@ public class InvitePeople {
             }
         }
         List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
-
+        alreadyInvited = (List) tmplist.get(0).getUserCollection();
+        for (User user : alreadyInvited) {
+            if (invited.contains(user)) {
+                invited.remove(user);
+            }
+        }
+        
         mi.createInvites(invited, tmplist.get(0));
-
         return "calendar?faces-redirect=true";
 
     }
-    
+
     /**
      * calls personalprofile submitAddUser() and updates the contacts
      */
-    public void addUser() {        
+    public void addUser() {
         user = rv.getLoggedUser();
         if (user.getUsername().equals(contact)) {
             message = "You can't add yourself!";
-        }else if(!mpd.existUser(contact)){
-            message = "User "+contact+" doesn't exist!";
-        }else if(mpd.userInContacts(user.getUsername(), contact)){
+        } else if (!mpd.existUser(contact)) {
+            message = "User " + contact + " doesn't exist!";
+        } else if (mpd.userInContacts(user.getUsername(), contact)) {
             message = "User already added!";
-        }
-        else{
+        } else {
             mpd.addUser(contact);
             message = "User added!";
         }
         contacts = updateContacts();
     }
-    
+
     /**
      * updates contacts from user's userCollection
+     *
+     * @return
      */
     public List<User> updateContacts() {
 
         user = rv.getLoggedUser();
+        contacts = (List) user.getUserCollection();
+        return contacts;
+    }
+
+    /**
+     * updates list of contacts deleting the contacts already invited
+     * @return list of users that can be invited
+     */
+    public List<User> updateInvitable() {
+        
+        contacts=new ArrayList();
+        List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
+        pEvent = tmplist.get(0);
+
+        for (User user : pEvent.getUserCollection()) {
+            if (contacts.contains(user)) {
+                contacts.remove(user);
+            }
+        }
+        user = rv.getLoggedUser();
         contacts = (List<User>) user.getUserCollection();
         return contacts;
     }
-    
+
     // ----- Getters and setters -----
-    
     public User getUser() {
         return user;
     }

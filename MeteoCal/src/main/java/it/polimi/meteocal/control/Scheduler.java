@@ -23,7 +23,7 @@ public class Scheduler {
     @Inject
     ManageForecast mf;
     
-    @Schedule(second="*/30",minute="*",hour="*",persistent=false)
+  //  @Schedule(second="*/30",minute="*",hour="*",persistent=false)
     public void prova(){
         mf.updateForecast();
     }

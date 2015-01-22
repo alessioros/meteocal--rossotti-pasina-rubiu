@@ -7,7 +7,6 @@ package it.polimi.meteocal.control;
 
 import it.polimi.meteocal.boundary.SendEmailBean;
 import it.polimi.meteocal.entity.Event;
-
 import it.polimi.meteocal.entity.Notification;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Usernotification;
@@ -40,33 +39,29 @@ public class ManageNotifications {
     private Usernotification usernotifications;
     private UsernotificationPK usernotificationsPK;
 
-    public void sendNotifications(List<User> users, Event event, boolean isInvite,String description, String emailSubject, String emailTextP, String emailText) throws MessagingException {
-            
+    public void sendNotifications(List<User> users, Event event, boolean isInvite, String description, String emailSubject, String emailTextP, String emailText) throws MessagingException {
+        
         notification = new Notification();
-
 
         notification.setDescription(description);
         notification.setIdEvent(event);
         notification.setInvite(isInvite);
         em.persist(notification);
-        
 
         for (User user : users) {
-            
+
             usernotifications = new Usernotification();
             usernotificationsPK = new UsernotificationPK();
-            
 
             usernotificationsPK.setIdNotification(notification.getIdNotification());
             usernotificationsPK.setIdUser(user.getIdUser());
-            
+
             usernotifications.setAccepted(Boolean.FALSE);
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);
             em.persist(usernotifications);
-
-            em.flush();
             
+            em.flush();
             em.refresh(em.merge(usernotifications));
             /* if (event.getPublic1()) {
              se.generateAndSendEmail(user.getEmail(), emailSubject ,emailTextP );
