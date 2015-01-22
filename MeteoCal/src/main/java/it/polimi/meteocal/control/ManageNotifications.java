@@ -41,7 +41,7 @@ public class ManageNotifications {
     private UsernotificationPK usernotificationsPK;
 
     public void sendNotifications(List<User> users, Event event, String description, String emailSubject, String emailTextP, String emailText) throws MessagingException {
-
+            
         notification = new Notification();
 
 
@@ -58,7 +58,7 @@ public class ManageNotifications {
 
             usernotificationsPK.setIdNotification(notification.getIdNotification());
             usernotificationsPK.setIdUser(user.getIdUser());
-            em.persist(usernotificationsPK);
+            
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);
             em.persist(usernotifications);
