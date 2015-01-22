@@ -8,12 +8,14 @@ package it.polimi.meteocal.control;
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Forecast;
 import it.polimi.meteocal.entity.Location;
+import it.polimi.meteocal.entity.User;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import javax.ejb.EJB;
 import javax.inject.Singleton;
 import javax.persistence.EntityManager;
@@ -25,7 +27,6 @@ import org.json.JSONObject;
  *
  * @author teo
  */
-
 @Singleton
 public class ManageForecast {
 
@@ -40,9 +41,10 @@ public class ManageForecast {
     private Forecast goodforecast;
     private String messageGoodDay;
     private List<Event> events;
-    private List<Forecast> oldForecasts = new ArrayList();
-    private List<Forecast> newForecasts = new ArrayList();
-    private List<Forecast> cancForecasts = new ArrayList();
+    private List<Forecast> oldForecasts;
+    private List<Forecast> newForecasts;
+    private List<Forecast> cancForecasts;
+    private List<User> organizer;
 
     @EJB
     YahooQueries yq;
@@ -59,27 +61,29 @@ public class ManageForecast {
             date = new Date();
             //takes all the outdoor events
             events = em.createQuery("select e from Event e where e.outDoor=true").getResultList();
-            
+
             for (Event event : events) {
-                System.out.println(event.getName()+"\n");
+                System.out.println(event.getName() + "\n");
                 //if event starts after the current date
-                //if (event.getStartTime().after(date)) {
+                if (event.getStartTime().after(date)) {
 
                     place = event.getIdLocation();
 
+                    oldForecasts = new ArrayList();
                     oldForecasts = (List) place.getForecastCollection();
 
                     woeid = yq.woeidOfLocation(place.getAddress() + ", " + place.getCity() + ", " + place.getState());
-                    System.out.println(woeid+"\n");
+                    System.out.println(woeid + "\n");
                     //if place exists
                     if (!woeid.equals("null")) {
-                       
+
                         //deletes old forecasts for that location
-                        cancForecasts=em.createQuery("select f from Forecast f where f.idLocation=:ID").setParameter("ID", place).getResultList();
-                        for(Forecast cancforecast: cancForecasts){
+                        cancForecasts = new ArrayList();
+                        cancForecasts = em.createQuery("select f from Forecast f where f.idLocation=:ID").setParameter("ID", place).getResultList();
+                        for (Forecast cancforecast : cancForecasts) {
                             em.remove(cancforecast);
                         }
-                        
+
                         // Query da eseguire su Yahoo Weather
                         urlQuery = "select * from weather.forecast where woeid=" + woeid;
 
@@ -95,7 +99,7 @@ public class ManageForecast {
 
                             JSONObject fc = forecasts.getJSONObject(i);
                             forecast = new Forecast();
-                            DateFormat format = new SimpleDateFormat("dd MMM yyyy",Locale.ENGLISH);
+                            DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
                             date = format.parse(fc.getString("date"));
 
                             forecast.setDate(date);
@@ -104,8 +108,12 @@ public class ManageForecast {
                             forecast.setMaxTemp(fc.getString("high"));
                             forecast.setMinTemp(fc.getString("low"));
                             forecast.setIdLocation(place);
+
+                            newForecasts = new ArrayList();
                             newForecasts.add(forecast);
-                            System.out.println(forecast.getGeneral()+"\n");
+
+                            System.out.println(forecast.getGeneral() + "\n");
+
                             em.persist(forecast);
                             em.flush();
                             em.merge(forecast);
@@ -130,25 +138,32 @@ public class ManageForecast {
                                                 if (goodForecast.getDate().after(nForecast.getDate())) {
                                                     if (goodForecast.getCode() >= 19 && (goodForecast.getCode() < 35 || goodForecast.getCode() == 36)) {
                                                         goodforecast = goodForecast;
-                                                        messageGoodDay = ", nearest good day is " + goodforecast.getDate().toString() + " that is " + goodforecast.getGeneral();
+                                                        messageGoodDay = ", nearest good day is " + goodforecast.getDate().getDay() + " "
+                                                                + goodforecast.getDate().getMonth() + " "
+                                                                + goodforecast.getDate().getYear()
+                                                                + " that is " + goodforecast.getGeneral();
                                                         break;
                                                     }
                                                 }
                                             }
-                                            mn.sendNotifications((List) event.getIdOrganizer(),
+                                            organizer = new ArrayList();
+                                            organizer.add(event.getIdOrganizer());
+                                            System.out.println(organizer.get(0).getName() + " " + organizer.size());
+                                            mn.sendNotifications(organizer,
                                                     event,
+                                                    false,
                                                     "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay,
                                                     "Meteo has changed",
                                                     "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay,
                                                     "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay);
-                                            break;
+                                            return;
                                         }
                                     }
                                 }
                             }
 
                         }
-                    //}
+                    }
                 }
             }
         } catch (Exception e) {
@@ -204,16 +219,13 @@ public class ManageForecast {
          if new forecast has a bad weather code
          if old forecast has a good weather code
          */
-        if (oForecast.getCode() != nForecast.getCode()
+        return !Objects.equals(oForecast.getCode(), nForecast.getCode())
                 && (nForecast.getCode() < 19
                 || (nForecast.getCode() >= 35
                 && nForecast.getCode() != 36))
                 && (oForecast.getCode() >= 19
-                || oForecast.getCode() < 35
-                || oForecast.getCode() == 36)) {
-            return true;
-        }
-        return false;
+                && oForecast.getCode() < 35
+                || oForecast.getCode() == 36);
     }
 
     public boolean checkBetterMeteo(Forecast oForecast, Forecast nForecast) {
@@ -226,7 +238,7 @@ public class ManageForecast {
                 || (oForecast.getCode() >= 35
                 && oForecast.getCode() != 36))
                 && (nForecast.getCode() >= 19
-                || nForecast.getCode() < 35
+                && nForecast.getCode() < 35
                 || nForecast.getCode() == 36)) {
             return true;
         }

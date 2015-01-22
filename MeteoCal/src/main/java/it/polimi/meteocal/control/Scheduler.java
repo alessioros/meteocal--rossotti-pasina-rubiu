@@ -1,7 +1,6 @@
 package it.polimi.meteocal.control;
 
 
-import it.polimi.meteocal.control.ManageForecast;
 import javax.ejb.Schedule;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -24,7 +23,7 @@ public class Scheduler {
     @Inject
     ManageForecast mf;
     
-    @Schedule(second="0",minute="0",hour="*/2",persistent=false)
+    @Schedule(second="*/30",minute="*",hour="*",persistent=false)
     public void prova(){
         mf.updateForecast();
     }

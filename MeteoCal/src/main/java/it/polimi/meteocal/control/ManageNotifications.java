@@ -40,17 +40,22 @@ public class ManageNotifications {
     private Usernotification usernotifications;
     private UsernotificationPK usernotificationsPK;
 
-    public void sendNotifications(List<User> users, Event event, String description, String emailSubject, String emailTextP, String emailText) throws MessagingException {
+    public void sendNotifications(List<User> users, Event event, boolean isInvite,String description, String emailSubject, String emailTextP, String emailText) throws MessagingException {
             
         notification = new Notification();
 
 
         notification.setDescription(description);
         notification.setIdEvent(event);
+        notification.setInvite(isInvite);
         em.persist(notification);
+        
 
         for (User user : users) {
+            
+            if(isInvite){
 
+            }
             
             usernotifications = new Usernotification();
             usernotificationsPK = new UsernotificationPK();

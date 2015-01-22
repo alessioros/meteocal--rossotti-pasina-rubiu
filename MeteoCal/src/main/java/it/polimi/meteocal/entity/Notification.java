@@ -41,14 +41,16 @@ public class Notification implements Serializable {
     @NotNull
     @Column(name = "idNotification")
     private Integer idNotification;
-    @Size(max = 45)
+    @Size(max = 450)
     @Column(name = "Description")
     private String description;
+    @Column(name = "Invite")
+    private Boolean invite;
+    @Column(name = "InviteAccepted")
+    private Boolean accepted;
     @JoinColumn(name = "idEvent", referencedColumnName = "idEvent")
     @ManyToOne(cascade = CascadeType.ALL)
     private Event idEvent;
-    @OneToMany(mappedBy = "idNotification",cascade = CascadeType.ALL)
-    private Collection<Invitation> invitationCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notification")
     private Collection<Usernotification> usernotificationCollection;
 
@@ -75,21 +77,28 @@ public class Notification implements Serializable {
         this.description = description;
     }
 
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public Boolean getInvite() {
+        return invite;
+    }
+
+    public void setInvite(Boolean invite) {
+        this.invite = invite;
+    }
+
     public Event getIdEvent() {
         return idEvent;
     }
 
     public void setIdEvent(Event idEvent) {
         this.idEvent = idEvent;
-    }
-
-    @XmlTransient
-    public Collection<Invitation> getInvitationCollection() {
-        return invitationCollection;
-    }
-
-    public void setInvitationCollection(Collection<Invitation> invitationCollection) {
-        this.invitationCollection = invitationCollection;
     }
 
     @XmlTransient

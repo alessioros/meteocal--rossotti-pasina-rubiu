@@ -55,9 +55,9 @@ public class ManageInvites {
      * @param event
      */
     public void createInvites(List<User> invited, Event event) throws MessagingException {
-
         mn.sendNotifications(invited,
                 event,
+                true,
                 "You have been invited to event " + event.getName(),
                 "Invite to event ",
                 "You have been invited to event <a href=\"http://localhost:8080/MeteoCal/eventDetails.xhtml?id=" + event.getIdEvent() + "\">" + event.getName() + "</a>",
@@ -75,20 +75,21 @@ public class ManageInvites {
         try {
 
             utx.begin();
-
-            /*invite = em.createQuery("select i from Invitation i where i.idNotification=:N").setParameter("N", notification).getResultList();
-             invite.get(0).setAccepted(Boolean.TRUE);*/
+             
             //puts the event in the user calendar
             user = rv.getLoggedUser();
             user.getEventCollection().add(notification.getIdEvent());
+            
             //puts the user in the invited of the event
             event = em.createQuery("select e from Event e where e.idEvent=:E").setParameter("E", notification.getIdEvent().getIdEvent()).getResultList();
             event.get(0).getUserCollection().add(user);
 
+            
             usernot = em.createQuery("select un from Usernotification un where un.user=:U").setParameter("U", user).getResultList();
             for (Usernotification usernotification : usernot) {
                 if (usernotification.getNotification().equals(notification)) {
-                    em.remove(usernotification);
+                    usernotification.setPending(Boolean.FALSE);
+                    
                 }
             }
 
