@@ -49,7 +49,6 @@ public class EventDetails {
     private String minTemp;
     private String maxTemp;
     private String condEvent;
-    private String codeEvent;
     
     private int idEvent=0;
 
@@ -119,8 +118,9 @@ public class EventDetails {
                 minTemp = forecasts.get(0).getMinTemp();
                 maxTemp = forecasts.get(0).getMaxTemp();
                 condEvent = forecasts.get(0).getGeneral();
-                codeEvent = forecasts.get(0).getMaxTemp();
-            }   
+            }else{
+                condEvent="Data Not Found";
+            }
     }
     
     public String buttonValue(){
@@ -240,14 +240,6 @@ public class EventDetails {
         this.condEvent = condEvent;
     }
 
-    public String getCodeEvent() {
-        return codeEvent;
-    }
-
-    public void setCodeEvent(String codeEvent) {
-        this.codeEvent = codeEvent;
-    }
-    
     public String getState() {
         return state;
     }

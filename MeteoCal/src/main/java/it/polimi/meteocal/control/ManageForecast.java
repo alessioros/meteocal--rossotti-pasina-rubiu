@@ -85,7 +85,7 @@ public class ManageForecast {
                         }
 
                         // Query da eseguire su Yahoo Weather
-                        urlQuery = "select * from weather.forecast where woeid=" + woeid;
+                        urlQuery = "select * from weather.forecast where u=\"c\" and woeid=" + woeid;
 
                         // Costruisco il JSON
                         JSONObject json = yq.yahooRestQuery(urlQuery);
@@ -101,23 +101,26 @@ public class ManageForecast {
                             forecast = new Forecast();
                             DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
                             date = format.parse(fc.getString("date"));
+                            System.out.println(date.getTime()+"\n"+event.getStartTime().getTime()+"\n"+event.getEndTime().getTime());
+                            if (date.getTime() >= event.getStartTime().getTime()
+                                    && date.getTime() <= event.getEndTime().getTime()) {
+                                forecast.setDate(date);
+                                forecast.setCode(Integer.parseInt(fc.getString("code")));
+                                forecast.setGeneral(fc.getString("text"));
+                                forecast.setMaxTemp(fc.getString("high"));
+                                forecast.setMinTemp(fc.getString("low"));
+                                forecast.setIdLocation(place);
 
-                            forecast.setDate(date);
-                            forecast.setCode(Integer.parseInt(fc.getString("code")));
-                            forecast.setGeneral(fc.getString("text"));
-                            forecast.setMaxTemp(fc.getString("high"));
-                            forecast.setMinTemp(fc.getString("low"));
-                            forecast.setIdLocation(place);
+                                newForecasts = new ArrayList();
+                                newForecasts.add(forecast);
 
-                            newForecasts = new ArrayList();
-                            newForecasts.add(forecast);
+                                System.out.println(forecast.getGeneral() + "\n");
 
-                            System.out.println(forecast.getGeneral() + "\n");
-
-                            em.persist(forecast);
-                            em.flush();
-                            em.merge(forecast);
-                            em.refresh(forecast);
+                                em.persist(forecast);
+                                em.flush();
+                                em.merge(forecast);
+                                em.refresh(forecast);
+                            }
                         }
 
                         //checks if the weather has changed
@@ -180,7 +183,7 @@ public class ManageForecast {
                     + location.getState());
 
             // Query da eseguire su Yahoo Weather
-            urlQuery = "select * from weather.forecast where woeid=" + woeid;
+            urlQuery = "select * from weather.forecast where u=\"c\" and woeid=" + woeid;
 
             // Costruisco il JSON
             JSONObject json = yq.yahooRestQuery(urlQuery);
@@ -196,7 +199,7 @@ public class ManageForecast {
                 JSONObject fc = forecasts.getJSONObject(i);
                 forecast = new Forecast();
 
-                DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ITALY);
+                DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
                 date = format.parse(fc.getString("date"));
 
                 forecast.setDate(date);
@@ -205,9 +208,11 @@ public class ManageForecast {
                 forecast.setMaxTemp(fc.getString("high"));
                 forecast.setMinTemp(fc.getString("low"));
                 forecast.setIdLocation(location);
-                System.out.println(forecast.getDate().toString() + forecast.getGeneral() + forecast.getIdLocation());
                 em.persist(forecast);
+                em.flush();
+                em.refresh(em.merge(forecast));
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }

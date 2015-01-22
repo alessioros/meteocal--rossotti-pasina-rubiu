@@ -53,10 +53,6 @@ public class ManageNotifications {
 
         for (User user : users) {
             
-            if(isInvite){
-
-            }
-            
             usernotifications = new Usernotification();
             usernotificationsPK = new UsernotificationPK();
             
@@ -64,6 +60,7 @@ public class ManageNotifications {
             usernotificationsPK.setIdNotification(notification.getIdNotification());
             usernotificationsPK.setIdUser(user.getIdUser());
             
+            usernotifications.setAccepted(Boolean.FALSE);
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);
             em.persist(usernotifications);

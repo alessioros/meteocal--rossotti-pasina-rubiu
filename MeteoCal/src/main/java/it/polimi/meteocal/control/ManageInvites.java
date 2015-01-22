@@ -89,7 +89,7 @@ public class ManageInvites {
             for (Usernotification usernotification : usernot) {
                 if (usernotification.getNotification().equals(notification)) {
                     usernotification.setPending(Boolean.FALSE);
-                    
+                    usernotification.setAccepted(Boolean.TRUE);
                 }
             }
 
