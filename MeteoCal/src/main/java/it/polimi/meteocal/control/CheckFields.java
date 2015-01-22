@@ -70,9 +70,13 @@ public class CheckFields {
     
     public boolean checkDateTimes(Date start, Date end){
         
-        if(start.compareTo(end)<0){
-        return true;
-        }
-        else return false;
+        return  start.compareTo(end)<0;
+    }
+    
+    public boolean checkAfterToday(Date start){
+        
+        Date date = new Date();
+        
+        return start.compareTo(date)>0;
     }
 }

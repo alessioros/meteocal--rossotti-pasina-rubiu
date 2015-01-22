@@ -4,15 +4,12 @@ import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
 import java.util.Collection;
 import java.util.List;
-import javax.annotation.ManagedBean;
-import javax.annotation.Resource;
 
 import javax.ejb.Stateless;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.SystemException;
 
 /**
  *
@@ -75,12 +72,8 @@ public class ManageEvent {
         } catch (Exception e) {
 
             e.printStackTrace();
-            /*try {
-             utx.rollback();
-             } catch (IllegalStateException | SecurityException | SystemException exception) {
-             }*/
 
-        }//*/
+        }
     }
 
     public Event findEvent(int id) {

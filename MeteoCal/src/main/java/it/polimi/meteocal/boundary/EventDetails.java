@@ -89,7 +89,12 @@ public class EventDetails {
 
             message = "Error! Start time must be after End Time";
             return "";
-        } else if (!cf.checkCoordinates(loc.getLatitude(), loc.getLongitude())) {
+        } else if(!cf.checkAfterToday(event.getStartTime())){
+            
+            message = "Error! Start time must be after today";
+            return "";
+        
+        }else if (!cf.checkCoordinates(loc.getLatitude(), loc.getLongitude())) {
 
             message = "Error! Invalid coordinates";
             return "";
