@@ -396,7 +396,7 @@ input.toggle:checked + label:after {
 }
 
 
-.Rainy, .Showers, .Drizzle{
+.Rainy, .Showers, .Drizzle,.Rain{
     background-image: url("#{resource['css:icons/weather/color/rain.png']}");
 }
 
