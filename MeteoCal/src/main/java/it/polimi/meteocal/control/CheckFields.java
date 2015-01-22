@@ -5,8 +5,10 @@
  */
 package it.polimi.meteocal.control;
 
+import it.polimi.meteocal.entity.Event;
 import java.util.Date;
 import it.polimi.meteocal.entity.User;
+import java.util.Iterator;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -78,5 +80,14 @@ public class CheckFields {
         Date date = new Date();
         
         return start.compareTo(date)>0;
+    }
+   
+    public boolean checkOtherEvent(Date startTime, Date endTime, User user) {
+      
+      for (Event e : user.getEventCollection() )
+          if(   (startTime.getTime()<=e.getStartTime().getTime()&& endTime.getTime()>e.getStartTime().getTime()) || //se l'evento inizia prima e finisce dopo l'inizio di un altro evento
+                 (startTime.getTime()>=e.getStartTime().getTime() && startTime.getTime()<=e.getEndTime().getTime()) ) //se l'evento inizia durante un altro evento
+              return false;
+      return true;
     }
 }
