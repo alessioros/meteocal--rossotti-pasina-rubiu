@@ -209,6 +209,11 @@ public class EventDetails {
         
     }
     
+    
+    public Date today(){
+        return new Date();
+    }
+           
     // ----- Getters and setters -----
 
     public String getMinTemp() {

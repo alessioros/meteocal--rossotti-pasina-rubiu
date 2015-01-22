@@ -56,12 +56,12 @@
                 </div>
                 <div class="field">
                     <h:outputLabel a:id='fieldName' for="starttime">Start Time:</h:outputLabel>                    
-                    <p:calendar id='starttime' value="#{eventDetails.startDate}" pattern="dd/MM/yyyy   HH:mm" stepMinute="15" required="true" requiredMessage="Start Time is required"/>                                     
+                    <p:calendar id='starttime' value="#{eventDetails.startDate}" mindate="#{eventDetails.today()}" pattern="dd/MM/yyyy   HH:mm" stepMinute="15" required="true" requiredMessage="Start Time is required"/>                                     
                     <br/><div class="error"><h:message for="starttime" /></div>
                 </div>                
                 <div class="field">
                     <h:outputLabel a:id='fieldName' for="endtime">End Time:</h:outputLabel>                    
-                    <p:calendar id="endtime"  value="#{eventDetails.endDate}" pattern="dd/MM/yyyy   HH:mm" stepMinute="15" required="true" requiredMessage="End Time is required"/>                                      
+                    <p:calendar id="endtime"  value="#{eventDetails.endDate}" mindate="#{eventDetails.today()}" pattern="dd/MM/yyyy   HH:mm" stepMinute="15" required="true" requiredMessage="End Time is required"/>                                      
                     <br/><div class="error"><h:message for="endtime" /></div>
                 </div>
                 <div class='field'>
