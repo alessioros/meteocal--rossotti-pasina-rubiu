@@ -35,8 +35,8 @@
 
         <div class="info">
             <a id="title">#{eventDetails.event.name}</a>            
-            <c:if test='#{eventDetails.canEdit()==true}'>
-                <h:form>
+            <!--<c:if test='#{eventDetails.canEdit()==true}'>-->
+                <h:form rendered="#{eventDetails.canEdit()}">
                     <h:link outcome='createEvent.xhtml?id=#{eventDetails.event.idEvent}' value='Edit' a:id='button-change'/>
                     <h:link outcome='invitePeople.xhtml?id=#{eventDetails.event.idEvent}' value='Invite' a:id='button-change'/>
                     <h:commandButton value='Delete'  action="#{eventDetails.deleteEvent()}" />   
@@ -49,7 +49,7 @@
                     </p:menuitem>
                 </p:menuButton>
                 -->
-            </c:if>
+           <!-- </c:if>-->
 
 
             <br/>

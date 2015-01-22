@@ -1,6 +1,5 @@
 package it.polimi.meteocal.control;
 
-
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
 import java.util.Collection;
@@ -15,9 +14,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.SystemException;
 
-
-
-
 /**
  *
  * @author Simone
@@ -26,39 +22,41 @@ import javax.transaction.SystemException;
 //@RequestScoped
 @Stateless
 public class ManageEvent {
-    
+
     @PersistenceContext
     EntityManager em;
-    
- //   @Inject
- //  UserTransaction utx;
-    
+
+    //   @Inject
+    //  UserTransaction utx;
     @Inject
     RegisterValidation rv;
-    
+
     @Inject
     ManageForecast mf;
-    
-      
-    public void createEvent(Event event,Location loc) {
-        
+
+    public void createEvent(Event event, Location loc) {
+
         Collection<Event> eventi;
-        
+
         em.persist(loc);
         event.setIdLocation(loc);
         event.setIdOrganizer(rv.getLoggedUser());
         em.persist(event);
-        eventi=rv.getLoggedUser().getEventCollection();
+        eventi = rv.getLoggedUser().getEventCollection();
         eventi.add(event);
         rv.getLoggedUser().setEventCollection(eventi);
         mf.forecast(loc);
+        em.flush();
+        //em.merge(event);
+        em.refresh(em.merge(event));
+        
     }
-    
-    public void updateEvent(Event updated,Location l){
+
+    public void updateEvent(Event updated, Location l) {
         try {
-            Event event=em.find(Event.class, updated.getIdEvent());
-            
-         //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
+            Event event = em.find(Event.class, updated.getIdEvent());
+
+            //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
             em.persist(l);
             event.setName(updated.getName());
             event.setDescription(updated.getDescription());
@@ -66,70 +64,61 @@ public class ManageEvent {
             event.setEndTime(updated.getEndTime());
             event.setOutDoor(updated.getOutDoor());
             event.setPublicEvent(updated.getPublicEvent());
-            event.setIdLocation(l);   
+            event.setIdLocation(l);
             //*/
-           // event =em.merge(updated);
+            // event =em.merge(updated);
             em.persist(event);
-            
-            
+            em.flush();
+            //em.merge(event);
+            em.refresh(em.merge(event));
+
         } catch (Exception e) {
 
             e.printStackTrace();
             /*try {
-                utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException exception) {
-            }*/
+             utx.rollback();
+             } catch (IllegalStateException | SecurityException | SystemException exception) {
+             }*/
 
         }//*/
     }
-    
-    public Event findEvent(int id){
-         try {
+
+    public Event findEvent(int id) {
+        try {
             List<Event> event;
             event = em.createQuery("Select e from Event e where e.idEvent=:ID").setParameter("ID", id).getResultList();
-            return event.get(0);                                       
+            return event.get(0);
         } catch (Exception e) {
-            
-            e.printStackTrace();                        
+
+            e.printStackTrace();
         }
         return null;
     }
-    
-    public void deleteEvent(int id){
-       try {
-            Event event=em.find(Event.class, id);
-            
-         //event = (Event)em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", updated.getIdEvent()).getResultList().get(0);
-         /*  em.persist(l);
-            event.setName(updated.getName());
-            event.setDescription(updated.getDescription());
-            event.setStartTime(updated.getStartTime());
-            event.setEndTime(updated.getEndTime());
-            event.setOutDoor(updated.getOutDoor());
-            event.setPublic1(updated.getPublic1());
-            event.setIdLocation(l);   
-            //*/
-           // event =em.merge(updated);
-         //   em.persist(event);
-            em.remove(event);
-            
-            
+
+    public void deleteEvent(int id) {
+        try {
+            Event event = em.find(Event.class, id);
+
+            //event = (Event) em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", id).getResultList().get(0);                  
+            ;
+            em.remove(em.merge(event));
+            //em.flush();             
+
         } catch (Exception e) {
 
             e.printStackTrace();
             /*try {
-                utx.rollback();
-            } catch (IllegalStateException | SecurityException | SystemException exception) {
-            }*/
+             utx.rollback();
+             } catch (IllegalStateException | SecurityException | SystemException exception) {
+             }*/
 
         }//*/
     }
-           
-    public void updateForecast(){
+
+    public void updateForecast() {
     }
-    
-    public void sendNotification(){
+
+    public void sendNotification() {
     }
-    
-    
+
 }

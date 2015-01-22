@@ -58,14 +58,14 @@ public class ManageNotifications {
 
             usernotificationsPK.setIdNotification(notification.getIdNotification());
             usernotificationsPK.setIdUser(user.getIdUser());
-
+            em.persist(usernotificationsPK);
             usernotifications.setPending(Boolean.TRUE);
             usernotifications.setUsernotificationPK(usernotificationsPK);
             em.persist(usernotifications);
 
             em.flush();
-            em.merge(usernotifications);
-            em.refresh(usernotifications);
+            
+            em.refresh(em.merge(usernotifications));
             /* if (event.getPublic1()) {
              se.generateAndSendEmail(user.getEmail(), emailSubject ,emailTextP );
              } else {

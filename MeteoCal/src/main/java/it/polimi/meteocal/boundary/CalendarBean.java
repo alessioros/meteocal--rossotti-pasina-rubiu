@@ -126,15 +126,13 @@ public class CalendarBean{
             return "event";
         else
             return "empty";
-    }
-    
+    }   
     public String eventOutcome(){
         if(mc.scheduleEvent(date,rv.getLoggedUser()))
             return "today_events?date="+date.getTime();
         else
             return "createEvent?date="+date.getTime();
-    }
-    
+    }    
     public String eventOutcome(String str){ 
         if(str.equalsIgnoreCase("today")){
             Date tmp = new Date();
@@ -142,8 +140,7 @@ public class CalendarBean{
         }
         else
             return "createEvent";
-    }
-    
+    }    
     public void createCal(){
         //trovo il primo giorno da visualizzare                         
         actual=date.getMonth();
@@ -168,7 +165,7 @@ public class CalendarBean{
     
     public void dayEvents(){
         
-        this.event = mc.dayEvent(new Date(this.viewDate));
+        this.event = mc.dayEvent(new Date(this.viewDate),calusername);
     }
     
     public void createUserCal(){
@@ -191,23 +188,21 @@ public class CalendarBean{
         }
         date.setMonth(date.getMonth()-1);
         date.setDate(1);
-    }
-    
+    }    
     public String eventUserClass(String username){
 
         if(mc.scheduleEvent(date,mpd.getUserData(username)))
             return "event";
         else
             return "";
-    }
-    
+    }    
     public String eventUserOutcome(String username){
         if(mc.scheduleEvent(date,mpd.getUserData(username)))
 
             return "today_events?username="+username+"&date="+date.getTime();
         else
             return "";
-    }
+    }    
     
     public String submitImportCalendar(){
 
@@ -215,13 +210,17 @@ public class CalendarBean{
     
     return "calendar?faces-redirect=true";
   }
-
-  public String submitExportCalendar() throws IOException, URISyntaxException{
+    public String submitExportCalendar() throws IOException, URISyntaxException{
 
     message=mc.exportCalendar();
     
     return "calendar?faces-redirect=true";
   }
+    
+    public boolean canView(Event event){
+       // this.dayEvents();
+        return event.getUserCollection().contains(rv.getLoggedUser());
+    }
     
     // ----- Getters and setters -----
 

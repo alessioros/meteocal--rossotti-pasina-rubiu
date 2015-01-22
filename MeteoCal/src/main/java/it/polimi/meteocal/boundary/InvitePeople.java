@@ -39,7 +39,7 @@ public class InvitePeople {
     @Inject
     ManageInvites mi;
 
-    private Integer event;
+    private int event;
     private String contact;
     private String message;
 
@@ -116,11 +116,11 @@ public class InvitePeople {
         this.contacts = contacts;
     }
 
-    public Integer getEvent() {
+    public int getEvent() {
         return event;
     }
 
-    public void setEvent(Integer event) {
+    public void setEvent(int event) {
         this.event = event;
     }
 

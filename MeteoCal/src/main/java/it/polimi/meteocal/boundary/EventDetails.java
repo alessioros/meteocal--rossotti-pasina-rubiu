@@ -96,7 +96,7 @@ public class EventDetails {
 
             message = "Event Created!";
 
-            return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
+            return "/loggeduser/eventDetails.xhtml?faces-redirect=true&id=" + event.getIdEvent();
 
         }
 
@@ -150,7 +150,7 @@ public class EventDetails {
 
             message = "Event Updated!";
 
-            return "/loggeduser/invitePeople.xhtml?faces-redirect=true&event=" + event.getIdEvent();
+            return "/loggeduser/eventDetails?faces-redirect=true&id=" + event.getIdEvent();
 
         }
        
@@ -159,7 +159,8 @@ public class EventDetails {
     public String deleteEvent(){
        this.findEvent();
        me.deleteEvent(this.idEvent);
-       return "calendar.xhtml";
+       
+       return "calendar.xhtml?faces-redirect=true";
     }
     public String getState() {
         return state;

@@ -8,6 +8,7 @@ package it.polimi.meteocal.entity;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -51,7 +52,7 @@ public class Location implements Serializable {
     @Size(max = 45)
     @Column(name = "Address")
     private String address;
-    @OneToMany(mappedBy = "idLocation")
+    @OneToMany(mappedBy = "idLocation",cascade = CascadeType.ALL)
     private Collection<Forecast> forecastCollection;
     @OneToMany(mappedBy = "idLocation")
     private Collection<Event> eventCollection;

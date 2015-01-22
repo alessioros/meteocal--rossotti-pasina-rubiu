@@ -54,6 +54,9 @@ public class ManageCalendar {
     @Inject
     Principal principal;
     
+    @Inject 
+    ManagePersonalData mpd;
+    
     @Inject
     RegisterValidation rv;
     
@@ -66,10 +69,17 @@ public class ManageCalendar {
         
         try {
             Iterator<Event> cal;            
-           
-            this.user=user;
-            cal = user.getEventCollection().iterator();           
             
+            this.user=user;
+            utx.begin();
+            em.refresh(em.merge(this.user));
+            utx.commit();
+            
+            
+            cal = this.user.getEventCollection().iterator();           
+           
+            
+              
             while(cal.hasNext())
             {
                 Event e = cal.next();
@@ -91,19 +101,18 @@ public class ManageCalendar {
         return false;
     }
     
-    public List<Event> dayEvent(Date date){
+    public List<Event> dayEvent(Date date,String username){
         
 
-
+         
         try {
             Iterator<Event> event; 
             List<Event> list = new ArrayList();
-           
-
-
-            this.user = rv.getLoggedUser();            
-
-
+            
+            if(username==null)
+                this.user = rv.getLoggedUser();            
+            else
+                this.user =mpd.getUserData(username);          
             event = user.getEventCollection().iterator();           
             
             while(event.hasNext())
@@ -124,7 +133,7 @@ public class ManageCalendar {
         }
         return null;
     }
-    
+     
     public String importCalendar() {
 
             return "Calendar has been imported!";
@@ -245,5 +254,5 @@ public class ManageCalendar {
             this.user=new User();
         }
         return user;
-    }
+    }   
 }

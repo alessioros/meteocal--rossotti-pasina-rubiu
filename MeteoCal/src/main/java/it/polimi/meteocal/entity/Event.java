@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Date;
 import javax.inject.Named;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -64,16 +65,16 @@ public class Event implements Serializable {
     @Column(name = "OutDoor")
     private Boolean outDoor;
     @Column(name = "Public")
-    private Boolean publicEvent;
+    private Boolean publicEvent;   
     @ManyToMany(mappedBy = "eventCollection")
     private Collection<User> userCollection;
-    @OneToMany(mappedBy = "idEvent")
+    @OneToMany(mappedBy = "idEvent", cascade = CascadeType.ALL)
     private Collection<Notification> notificationCollection;
     @JoinColumn(name = "idOrganizer", referencedColumnName = "idUser")
     @ManyToOne
     private User idOrganizer;
     @JoinColumn(name = "idLocation", referencedColumnName = "idLocation")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Location idLocation;
 
     public Event() {
