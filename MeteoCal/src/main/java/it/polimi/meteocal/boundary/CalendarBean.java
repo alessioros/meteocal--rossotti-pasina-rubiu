@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
@@ -25,7 +26,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 
 @ManagedBean
-@ViewScoped
+@RequestScoped
 public class CalendarBean{    
     private Date date;
     private List<Week> cal = new ArrayList();    
