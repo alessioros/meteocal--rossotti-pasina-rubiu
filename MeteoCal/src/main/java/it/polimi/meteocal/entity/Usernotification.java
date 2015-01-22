@@ -32,6 +32,8 @@ public class Usernotification implements Serializable {
     protected UsernotificationPK usernotificationPK;
     @Column(name = "Pending")
     private Boolean pending;
+    @Column(name = "InviteAccepted")
+    private Boolean accepted;
     @JoinColumn(name = "idUser", referencedColumnName = "idUser", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private User user;
@@ -56,6 +58,14 @@ public class Usernotification implements Serializable {
 
     public void setUsernotificationPK(UsernotificationPK usernotificationPK) {
         this.usernotificationPK = usernotificationPK;
+    }
+
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
     }
 
     public Boolean getPending() {

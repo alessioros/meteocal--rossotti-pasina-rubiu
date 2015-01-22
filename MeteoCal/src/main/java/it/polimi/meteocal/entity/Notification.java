@@ -46,8 +46,6 @@ public class Notification implements Serializable {
     private String description;
     @Column(name = "Invite")
     private Boolean invite;
-    @Column(name = "InviteAccepted")
-    private Boolean accepted;
     @JoinColumn(name = "idEvent", referencedColumnName = "idEvent")
     @ManyToOne(cascade = CascadeType.ALL)
     private Event idEvent;
@@ -75,14 +73,6 @@ public class Notification implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Boolean getAccepted() {
-        return accepted;
-    }
-
-    public void setAccepted(Boolean accepted) {
-        this.accepted = accepted;
     }
 
     public Boolean getInvite() {
