@@ -220,7 +220,7 @@ public class CalendarBean{
     
     public boolean canView(Event event){
        // this.dayEvents();
-        return event.getUserCollection().contains(rv.getLoggedUser());
+        return event.getPublicEvent() || event.getUserCollection().contains(rv.getLoggedUser());
     }
     
     // ----- Getters and setters -----
