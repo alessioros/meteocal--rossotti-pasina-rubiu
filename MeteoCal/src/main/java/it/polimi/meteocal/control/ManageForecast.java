@@ -65,7 +65,7 @@ public class ManageForecast {
             for (Event event : events) {
                 System.out.println(event.getName() + "\n");
                 //if event starts after the current date
-                if (event.getStartTime().after(date)) {
+                if (event.getStartTime().after(date)||event.getStartTime().equals(date)) {
 
                     place = event.getIdLocation();
 
@@ -101,9 +101,8 @@ public class ManageForecast {
                             forecast = new Forecast();
                             DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
                             date = format.parse(fc.getString("date"));
-                            System.out.println(date.getTime()+"\n"+event.getStartTime().getTime()+"\n"+event.getEndTime().getTime());
-                            if (date.getTime() >= event.getStartTime().getTime()
-                                    && date.getTime() <= event.getEndTime().getTime()) {
+                            
+                            if (checkDate(date,event.getStartTime(),event.getEndTime())) {
                                 forecast.setDate(date);
                                 forecast.setCode(Integer.parseInt(fc.getString("code")));
                                 forecast.setGeneral(fc.getString("text"));
@@ -235,21 +234,28 @@ public class ManageForecast {
 
     public boolean checkBetterMeteo(Forecast oForecast, Forecast nForecast) {
         /*checks in order: if old forecast and new forecast code are different
-         if old forecast has a bad weather code
-         if new forecast has a good weather code
-         */
-        if (oForecast.getCode() != nForecast.getCode()
+        if old forecast has a bad weather code
+        if new forecast has a good weather code
+         */ 
+        return !Objects.equals(oForecast.getCode(), nForecast.getCode())
                 && (oForecast.getCode() < 19
-                || (oForecast.getCode() >= 35
-                && oForecast.getCode() != 36))
+                   || (oForecast.getCode() >= 35
+                   && oForecast.getCode() != 36))
                 && (nForecast.getCode() >= 19
-                && nForecast.getCode() < 35
-                || nForecast.getCode() == 36)) {
-            return true;
-        }
-        return false;
+                   && nForecast.getCode() < 35
+                   || nForecast.getCode() == 36);
     }
-
+    
+    
+    public boolean checkDate(Date date, Date sDate, Date eDate){
+        return date.getDay()>=sDate.getDay()
+                && date.getMonth() >= sDate.getMonth()
+                && date.getYear() >= sDate.getYear()
+                && date.getDay()<=eDate.getDay()
+                && date.getMonth() <= eDate.getMonth()
+                && date.getYear() <= eDate.getYear();
+    }
+           
     // ----- Getters and setters -----
     public String getUrlQuery() {
         return urlQuery;
