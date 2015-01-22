@@ -93,6 +93,9 @@ public class EventDetails {
             message = "Error! Start time must be after today";
             return "";
         
+        }else if(!cf.checkOtherEvent(event.getStartTime(), event.getEndTime(),rv.getLoggedUser())){
+            message = "Error! You have an other event at this time";
+            return "";
         }else if (!cf.checkCoordinates(loc.getLatitude(), loc.getLongitude())) {
 
             message = "Error! Invalid coordinates";
