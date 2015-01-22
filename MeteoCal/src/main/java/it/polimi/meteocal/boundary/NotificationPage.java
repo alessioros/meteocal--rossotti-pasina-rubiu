@@ -7,6 +7,7 @@ import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Usernotification;
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.Resource;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -14,6 +15,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -41,17 +43,19 @@ public class NotificationPage {
      * @return 
      */
     public List<Notification> updateNotifications() {
+
         user = rv.getLoggedUser();
 
-        Query query = em.createQuery("SELECT n FROM Usernotification n WHERE n.user=:USER");
+        Query query = em.createQuery("SELECT n FROM Usernotification n WHERE n.user=:USER and n.pending=true");
         query.setParameter("USER", user);
         List<Usernotification> tmplist = query.getResultList();
-   
+        
         for (Usernotification notification : tmplist) {
             if (notification != null) {
                 notifications.add(notification.getNotification());
             }
         }
+
         return notifications;
     }
     

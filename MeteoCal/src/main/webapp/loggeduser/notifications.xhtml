@@ -4,7 +4,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
         <title>Notifications</title>
@@ -34,23 +35,25 @@
         </f:metadata>
 
         <a class='title'>Notifications:</a>
-        <h:form>
-            <h:dataTable value="#{notificationPage.notifications}" var="notification">
+        <c:if test="#{notificationPage.notifications.size()!=0}">
+            <h:form>
+                <h:dataTable value="#{notificationPage.notifications}" var="notification">
 
-                <h:column a:class="description">
-                    <div id="image"></div>
-                    <div id="desc">#{notification.description}</div>
-                </h:column>
+                    <h:column a:class="description">
+                        <div id="image"></div>
+                        <div id="desc">#{notification.description}</div>
+                    </h:column>
+                    <c:if test="#{notification.invite}">
+                    <h:column>
+                        <h:commandButton value='ACCEPT' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
+                    </h:column>
 
-                <h:column>
-                    <h:commandButton value='ACCEPT' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
-                </h:column>
-
-                <h:column>
-                    <h:commandButton value='DECLINE' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
-                </h:column>
-                
-            </h:dataTable>
-        </h:form>
+                    <h:column>
+                        <h:commandButton value='DECLINE' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
+                    </h:column>
+                    </c:if>
+                </h:dataTable>
+            </h:form>
+        </c:if>
     </h:body>
 </html>
