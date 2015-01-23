@@ -7,6 +7,7 @@ import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.Week;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.Date;
@@ -15,14 +16,18 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import org.json.JSONObject;
 
 @ManagedBean
@@ -42,10 +47,13 @@ public class CalendarBean {
     private String tempHome;
     private String codeHome;
     private String condHome;
+    private String fileContent;
 
     private String calusername = null;
 
     private String message;
+
+    private Part file;
 
     @Inject
     ManageCalendar mc;
@@ -227,9 +235,35 @@ public class CalendarBean {
         }
     }
 
+    public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
+
+        List<FacesMessage> msgs = new ArrayList<FacesMessage>();
+        
+        Part filevalid = (Part) value;
+        if (filevalid.getSize() > 10000) {
+            msgs.add(new FacesMessage("file too big"));
+        }
+        if (!filevalid.getName().contains(".ics")) {
+
+            msgs.add(new FacesMessage("not a calendar file"));
+        }
+        if (!msgs.isEmpty()) {
+            throw new ValidatorException(msgs);
+        }
+
+    }
+
     public String submitImportCalendar() {
 
-        message = mc.importCalendar();
+        try {
+            fileContent = new Scanner(file.getInputStream()).useDelimiter("\\A").next();
+
+        } catch (IOException e) {
+            message = "This file can't be uploaded!";
+            return "calendar?faces-redirect=true";
+        }
+
+        message = mc.importCalendar(fileContent);
 
         return "calendar?faces-redirect=true";
     }
@@ -247,6 +281,14 @@ public class CalendarBean {
     }
 
     // ----- Getters and setters -----
+    public Part getFile() {
+        return file;
+    }
+
+    public void setFile(Part file) {
+        this.file = file;
+    }
+
     public String getCondHome() {
         return condHome;
     }

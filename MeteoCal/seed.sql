@@ -84,7 +84,7 @@ INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
 VALUES (227,'Campo Pequeno','Lisbona',38.741605, -9.144474,'Portugal');
 
 INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
-VALUES (227,'Carrer de Verdi','Barcelona',41.410764, 2.150232,'Spain');
+VALUES (228,'Carrer de Verdi','Barcelona',41.410764, 2.150232,'Spain');
 
 # ---------- EVENTS ----------
 
@@ -106,7 +106,7 @@ VALUES (316,'A tour bus service is a bus service that takes visitors sightseeing
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (317,'24 hours beach party in Barcelona',
-          '2015-07-04 15:00:00','beachparty.png','Beach Party',0,1,'2015-07-03 15:00:00',227,109);
+          '2015-07-04 15:00:00','beachparty.png','Beach Party',0,1,'2015-07-03 15:00:00',228,109);
 
 # ---------- CALENDAR ----------
 

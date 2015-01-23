@@ -47,11 +47,22 @@ public class Login {
 
         Query query;
         try {
+            
+            query = em.createQuery("select u from User u where u.username=:un");
+            query.setParameter("un", username);
+            List check = query.getResultList();
 
+            if (check.isEmpty()) {
+
+                message = "Incorrect username or password";
+                return "";
+
+            }
+            
             query = em.createQuery("select u from User u where u.username=:un and u.verified like :v");
             query.setParameter("un", username);
             query.setParameter("v", true);
-            List check = query.getResultList();
+            check = query.getResultList();
 
             if (check.isEmpty()) {
 
@@ -59,6 +70,7 @@ public class Login {
                 return "";
 
             }
+            
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -73,7 +85,7 @@ public class Login {
 
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Login Failed", "Login Failed"));
             //logger.log(Level.SEVERE,"Login Failed");
-            message = "Login Failed!";
+            message = "Incorrect username or password";
             return "";
         }
 
