@@ -41,7 +41,7 @@
                         <div class="evImage"></div>
                         <div class="evDesc">
                             <h:link class="evTitle" outcome='eventDetails?id=#{e.idEvent}' value="#{e.name}"/>
-                            #{e.description}
+                            <h:inputTextarea readonly="true" style="overflow:hidden; border:none; resize: none;width: 500px" value="#{e.description}" rows="5"  />
                         </div>
                         <div class="evInfo">
                             <a id="time">From: #{e.startTime.toLocaleString()} -  To: #{e.endTime.toLocaleString()}</a><br/>
