@@ -18,6 +18,7 @@ import java.util.Locale;
 import java.util.Objects;
 import javax.ejb.EJB;
 import javax.inject.Singleton;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.json.JSONArray;
@@ -63,9 +64,11 @@ public class ManageForecast {
             events = em.createQuery("select e from Event e where e.outDoor=true").getResultList();
 
             for (Event event : events) {
+                date = new Date();
                 System.out.println(event.getName() + "\n");
+                
                 //if event starts after the current date
-                if (event.getStartTime().after(date)||event.getStartTime().equals(date)) {
+                if ((event.getStartTime().getTime()-date.getTime())>60000) {
 
                     place = event.getIdLocation();
 
@@ -101,8 +104,11 @@ public class ManageForecast {
                             forecast = new Forecast();
                             DateFormat format = new SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH);
                             date = format.parse(fc.getString("date"));
+                            date.setHours(12);
                             
-                            if (checkDate(date,event.getStartTime(),event.getEndTime())) {
+                            System.out.println("checkDate");
+                            
+                            if (checkDate(date, event.getStartTime(), event.getEndTime())) {
                                 forecast.setDate(date);
                                 forecast.setCode(Integer.parseInt(fc.getString("code")));
                                 forecast.setGeneral(fc.getString("text"));
@@ -136,28 +142,13 @@ public class ManageForecast {
                                             System.out.println("OMG A FUCKING TORNADO!!!");
 
                                         } else {
-                                            for (Forecast goodForecast : newForecasts) {
-                                                if (goodForecast.getDate().after(nForecast.getDate())) {
-                                                    if (goodForecast.getCode() >= 19 && (goodForecast.getCode() < 35 || goodForecast.getCode() == 36)) {
-                                                        goodforecast = goodForecast;
-                                                        messageGoodDay = ", nearest good day is " + goodforecast.getDate().getDay() + " "
-                                                                + goodforecast.getDate().getMonth() + " "
-                                                                + goodforecast.getDate().getYear()
-                                                                + " that is " + goodforecast.getGeneral();
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            organizer = new ArrayList();
-                                            organizer.add(event.getIdOrganizer());
-                                            System.out.println(organizer.get(0).getName() + " " + organizer.size());
-                                            mn.sendNotifications(organizer,
+                                            mn.sendNotifications((List) event.getUserCollection(),
                                                     event,
                                                     false,
-                                                    "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay,
+                                                    "New forecasts of event " + event.getName() + " are bad",
                                                     "Meteo has changed",
-                                                    "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay,
-                                                    "New forecasts of your event " + event.getName() + " are bad" + messageGoodDay);
+                                                    "New forecasts of event " + event.getName() + " are bad",
+                                                    "New forecasts of event " + event.getName() + " are bad");
                                             return;
                                         }
                                     }
@@ -234,28 +225,81 @@ public class ManageForecast {
 
     public boolean checkBetterMeteo(Forecast oForecast, Forecast nForecast) {
         /*checks in order: if old forecast and new forecast code are different
-        if old forecast has a bad weather code
-        if new forecast has a good weather code
-         */ 
+         if old forecast has a bad weather code
+         if new forecast has a good weather code
+         */
         return !Objects.equals(oForecast.getCode(), nForecast.getCode())
                 && (oForecast.getCode() < 19
-                   || (oForecast.getCode() >= 35
-                   && oForecast.getCode() != 36))
+                || (oForecast.getCode() >= 35
+                && oForecast.getCode() != 36))
                 && (nForecast.getCode() >= 19
-                   && nForecast.getCode() < 35
-                   || nForecast.getCode() == 36);
+                && nForecast.getCode() < 35
+                || nForecast.getCode() == 36);
     }
-    
-    
-    public boolean checkDate(Date date, Date sDate, Date eDate){
-        return date.getDay()>=sDate.getDay()
+
+    /**
+     * checks if the date passed is between the sDate and the eDate
+     * @param date
+     * @param sDate
+     * @param eDate
+     * @return 
+     */
+    public boolean checkDate(Date date, Date sDate, Date eDate) {
+        return  date.getDate() >= sDate.getDate()
                 && date.getMonth() >= sDate.getMonth()
                 && date.getYear() >= sDate.getYear()
-                && date.getDay()<=eDate.getDay()
+                && date.getDate() <= eDate.getDate()
                 && date.getMonth() <= eDate.getMonth()
                 && date.getYear() <= eDate.getYear();
     }
-           
+
+    /**
+     * checks if we are in the day 3 days before the event start time
+     * @param date
+     * @param sDate
+     * @return 
+     */
+    public boolean checkThreeDays(Date date, Date sDate) {
+        return (date.getTime() - sDate.getTime()) <= 302400001
+                && (date.getTime() - sDate.getTime()) >= 215999999;
+    }
+
+    public void notifyBadConditions() throws MessagingException {
+
+        events = em.createQuery("select e from Event e where e.outDoor=true").getResultList();
+
+        for (Event event : events) {
+            if (checkThreeDays(date, event.getStartTime())) {
+                newForecasts = (List) event.getIdLocation().getForecastCollection();
+                if (newForecasts.get(0).getCode() < 19 || (newForecasts.get(0).getCode() >= 35 && newForecasts.get(0).getCode() == 36)) {
+
+                    for (Forecast goodForecast : newForecasts) {
+                        if (goodForecast.getCode() >= 19 && (goodForecast.getCode() < 35 || goodForecast.getCode() == 36)) {
+                            goodforecast = goodForecast;
+                            messageGoodDay = ", nearest good day is " + goodforecast.getDate().getDay() + " "
+                                    + goodforecast.getDate().getMonth() + " "
+                                    + goodforecast.getDate().getYear()
+                                    + " that is " + goodforecast.getGeneral();
+                            organizer = new ArrayList();
+                            organizer.add(event.getIdOrganizer());
+                            mn.sendNotifications(organizer,
+                                    event,
+                                    false,
+                                    "New forecasts of event " + event.getName() + " are bad" + messageGoodDay,
+                                    "Meteo has changed",
+                                    "New forecasts of event " + event.getName() + " are bad" + messageGoodDay,
+                                    "New forecasts of event " + event.getName() + " are bad" + messageGoodDay);
+
+                            break;
+                        }
+
+                    }
+
+                }
+            }
+        }
+    }
+
     // ----- Getters and setters -----
     public String getUrlQuery() {
         return urlQuery;
