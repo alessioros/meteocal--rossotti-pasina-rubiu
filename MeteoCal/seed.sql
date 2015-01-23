@@ -19,13 +19,13 @@ INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Use
 VALUES (106,'giovannimuchacho@mailinator.com','USERS','Giovanni','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Muchacho','giomuchacho',null,1);
 
 INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Username,Verificationkey,Verified)
-VALUES (107,'aidayespica@mailinator.com','USERS','Aida','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Yespica','yespica69',null,1);
+VALUES (107,'aidayespica@mailinator.com','USERS','Aida','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Yespica','yespica',null,1);
 
 INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Username,Verificationkey,Verified)
 VALUES (108,'fedebuffa@mailinator.com','USERS','Federico','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Buffa','fedebuffon',null,1);
 
 INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Username,Verificationkey,Verified)
-VALUES (109,'fedenargi@mailinator.com','USERS','Federica','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Nargi','nargi90',null,1);
+VALUES (109,'fedenargi@mailinator.com','USERS','Federica','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Nargi','nargi',null,1);
 
 INSERT INTO USER(idUser,Email,Groupname,Name,Password,PublicCalendar,Surname,Username,Verificationkey,Verified)
 VALUES (110,'stevej@mailinator.com','USERS','Steve','5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8',1,'Jobs','stevejobs',null,1);
@@ -36,16 +36,82 @@ VALUES (111,'kasparov@mailinator.com','USERS','Garri','5e884898da28047151d0e56f8
 # ---------- LOCATIONS ----------
 
 INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
-VALUES (112,'Viale Romagna','Milan',45.474297, 9.223977,'Italy');
+VALUES (212,'Viale Romagna','Milan',45.474297, 9.223977,'Italy');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (213,'Westside Ave','Los Angeles',34.016206, -118.327051,'United States');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (214,'Infinite Loop','Cupertino',37.334095, -122.027508,'United States');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (215,'Charleston Rd','Mountain View',37.420692, -118.327051,'United States');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (216,'Park Ave','New York',40.741416, -73.985256,'United States');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (217,'Valley Ave','Challis',44.503563, -114.227003,'United States');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (218,'Rue de Rivoli','Paris',48.860645, 2.341733,'France');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (219,'Stadhouderskade','Amsterdam',52.361403, 4.882401,'Netherlands');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (220,'Strelitzer Straße','Berlin',52.536931, 13.393703,'Germany');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (221,'Via dei Fori Imperiali','Rome',41.892478, 12.488579,'Italy');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (222,'Via Guglielmo Oberdan','Bari',41.117610, 16.883618,'Italy');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (223,'Takadanobaba','Tokyo',35.713375, 139.710019,'Japan');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (224,'Chancery Ln','London',51.516318, -0.112175,'United Kingdom');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (225,'W2 Norte','Brasilia',-15.747466, -47.895532,'Brasil');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (226,'Paseo de la Castellana','Madrid',40.449785, -3.690919,'Spain');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (227,'Campo Pequeno','Lisbona',38.741605, -9.144474,'Portugal');
+
+INSERT INTO LOCATION(idLocation,Address,City,Latitude,Longitude,State)
+VALUES (227,'Carrer de Verdi','Barcelona',41.410764, 2.150232,'Spain');
 
 # ---------- EVENTS ----------
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
-VALUES (113,'A chess tournament is a series of chess games',
-        '2015-01-18 18:00:00','chess.png','Chess Tournament',0,1,'2015-01-16 12:00:00',112,111);
+VALUES (313,'A chess tournament is a series of chess games',
+        '2015-04-18 18:00:00','chess.png','Chess Tournament',0,1,'2015-04-16 12:00:00',220,111);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
-VALUES (114,'gg','2015-01-18 18:00:00','chess.png','asd',0,1,'2015-01-16 12:00:00',112,111);
+VALUES (314,'Football refers to a number of sports that involve, to varying degrees, kicking a ball with the foot to score a goal',
+       '2015-05-01 16:00:00','soccer.png','Football Match',1,1,'2015-05-01 13:00:00',225,106);
 
-INSERT INTO CALENDAR(idEvent,idUser) VALUES (113,111);
-INSERT INTO CALENDAR(idEvent,idUser) VALUES (114,111);
+INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
+VALUES (315,'A silent disco is an event where people dance to music listened to on wireless headphones. Rather than using a speaker system',
+      '2015-02-21 06:00:00','silentdisco.png','Silent Disco',0,1,'2015-02-20 23:00:00',218,102);
+
+INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
+VALUES (316,'A tour bus service is a bus service that takes visitors sightseeing, with routes around tourist attractions.',
+        '2015-03-14 18:00:00','citytour.png','City Tour',0,1,'2015-03-14 15:00:00',224,107);
+
+INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
+VALUES (317,'24 hours beach party in Barcelona',
+          '2015-07-04 15:00:00','beachparty.png','Beach Party',0,1,'2015-07-03 15:00:00',227,109);
+
+# ---------- CALENDAR ----------
+
+INSERT INTO CALENDAR(idEvent,idUser) VALUES (313,111);
+INSERT INTO CALENDAR(idEvent,idUser) VALUES (314,106);
+INSERT INTO CALENDAR(idEvent,idUser) VALUES (315,102);
+INSERT INTO CALENDAR(idEvent,idUser) VALUES (316,107);
+INSERT INTO CALENDAR(idEvent,idUser) VALUES (317,109);
