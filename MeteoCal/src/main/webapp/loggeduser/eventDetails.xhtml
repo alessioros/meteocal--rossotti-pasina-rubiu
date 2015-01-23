@@ -40,19 +40,10 @@
             </h:form>
         </div><br/>
         <div class="info">
-            <a id="title">#{eventDetails.event.name}</a>            
-            <!--<c:if test=''>-->
-
-            <!--
-            <p:menuButton value="Options">
-                <p:menuitem value="Invite" outcome="/loggeduser/invitePeople.xhtml?faces-redirect=true&amp;event="  icon="ui-icon-person"/>
-                <p:menuitem value="Edit"   outcome="/loggeduser/createEvent.xhtml?faces-redirect=true&amp;id=" icon="ui-icon-wrench" />
-                <p:menuitem value="Delete" outcome="" ajax="false" icon="ui-icon-trash" >                            
-                </p:menuitem>
-            </p:menuButton>
-            -->
-            <!-- </c:if>-->
-
+            <a id="title">#{eventDetails.event.name}                            
+                <h:commandButton  value="PARTICIPANTS" onclick="PF('dlg2').show();
+                        return false;" a:id='button-participants'/>                    
+            </a> 
             <a id="stime">Starts:   #{eventDetails.event.startTime.toLocaleString()}</a><br/>
             <a id="etime">Ends:     #{eventDetails.event.endTime.toLocaleString()}</a><br/>
             <c:if test='#{eventDetails.event.outDoor==true}'>
@@ -73,39 +64,31 @@
                 <a class="min">Min Temp: #{eventDetails.minTemp} °C </a>
                 <a class="max">Max Temp: #{eventDetails.maxTemp} °C </a>
             </div>
-        </div>
-        <br/>
-
+        </div>                                                      
         <div class="buttons">
-            <h:form>
-                <h:commandButton value="Participants" onclick="PF('dlg2').show();" a:id='button-participants'/>    
-                <p:dialog header="#{eventDetails.event.name}" widgetVar="dlg2" modal="true" height="100" width="500" dynamic="true"  closeOnEscape="true" draggable="false" resizable="false" >
-                    <table class="participants" >
-                        <tr>
-                            <td id="headerTable">Nickname</td>
-                            <td id="headerTable">Name</td>
-                            <td id="headerTable">Surname</td>
-                        </tr>
-                        <ui:repeat var="u" value="#{eventDetails.event.userCollection}">
-                            <tr>
-                                <td><h:link value="#{u.username}" outcome="user_info?username=#{u.username}" class="usernamelink"/></td>
-                                <td>#{u.name}</td>
-                                <td>#{u.surname}</td>
-                            </tr>
-                        </ui:repeat>
-                    </table>
-                </p:dialog>
-            </h:form>
-            <br/>
             <h:form rendered="#{eventDetails.canEdit()}">
                 <h:link outcome='createEvent.xhtml?id=#{eventDetails.event.idEvent}' value='EDIT' a:id='button-edit'/>
                 <h:link outcome='invitePeople.xhtml?id=#{eventDetails.event.idEvent}' value='INVITE' a:id='button-invite'/>
                 <h:commandButton action="#{eventDetails.deleteEvent()}" value='DELETE' a:id='button-delete'/>
             </h:form>
-
         </div>
     </h:body>
-
+    <p:dialog header="#{eventDetails.event.name}'s Participants" widgetVar="dlg2" modal="true" height="500" width="500" closeOnEscape="true" draggable="false" resizable="false" >                    
+        <p:dataTable class="participantsTable" value="#{eventDetails.event.userCollection}" var="result" paginator="true" rows="10" >
+            <p:column a:id='fieldName'>
+                <f:facet name="header">Username</f:facet>
+                <h:link value="#{result.username}" outcome="user_info?username=#{result.username}" style="color: #3498db;"/>
+            </p:column>
+            <p:column a:id='fieldName'>
+                <f:facet name="header">Name</f:facet>
+                    #{result.name}
+            </p:column>
+            <p:column a:id='fieldName'>
+                <f:facet name="header">Surname</f:facet>
+                    #{result.surname}
+            </p:column>                            
+        </p:dataTable>                    
+    </p:dialog>
 
 </html>
 

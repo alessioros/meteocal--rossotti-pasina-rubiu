@@ -4,26 +4,20 @@ html{
         font-family: 'Dosis', sans-serif;
 }
 
-.participants{
-  width:auto;
-  height:auto;
+.participantsTable{
+  width:500;
+  height:500;
+    background-color:rgba(141,185,203,0.2);
   alignment-adjust: auto;
   text-align:center;
+  //  text-align: left;
   border-collapse:collapse;
-  display:inline-table;
+    border: 1px solid #FFF;
+    border-radius:5px;
+  //display:inline-table;        
+    display:inline-block;        
 }
-.participants tr{
-  padding:0;
-  margin:0;
-}
-.participants td{
-  border:1px solid black;
-  margin:0;
-  height:auto;
-  width:150px;
-  text-align:center;
-       font-family: 'Dosis', sans-serif;
-}
+
 #headerTable{
   background-color: #8DB9CB;
   color:white;
@@ -201,12 +195,12 @@ html{
 
 .buttons{
     text-align:center;
-    margin-top:25px;
+    margin-top:5px;
     width:500px;
     height:60px;
     width:100%;
     position:relative;
-    top:50px;
+    top:30px;
     margin-bottom:50px;
     display:inline-block;
 }
@@ -222,14 +216,21 @@ html{
   padding-top:5px;
   padding-bottom:5px;
   width:100px;
+  font-family:  'Dosis', sans-serif;
  
   -webkit-transition: all 0.5s;
   -moz-transition: all 0.5s;
   transition: all 0.5s;
   display: inline-block;
 }
+#button-participants{
+    background-color:#8DB9CB;
+    width:150px;
+    float: right;
+    margin-right:0px;
+}
 
-#button-edit,#button-invite,#button-participants{
+#button-edit,#button-invite{
     background-color:#8DB9CB;
     margin-right:35px;
 }
