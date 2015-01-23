@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -47,7 +49,6 @@ public class CalendarBean {
     private String tempHome;
     private String codeHome;
     private String condHome;
-    private String fileContent;
 
     private String calusername = null;
 
@@ -256,14 +257,10 @@ public class CalendarBean {
     public String submitImportCalendar() {
 
         try {
-            fileContent = new Scanner(file.getInputStream()).useDelimiter("\\A").next();
-
-        } catch (IOException e) {
-            message = "This file can't be uploaded!";
-            return "calendar?faces-redirect=true";
+            message = mc.importCalendar(file);
+        } catch (IOException ex) {
+            Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        message = mc.importCalendar(fileContent);
 
         return "calendar?faces-redirect=true";
     }
