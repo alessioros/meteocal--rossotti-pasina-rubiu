@@ -15,8 +15,7 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css' />
     </h:head>
     <f:metadata>
-        <f:viewAction action="#{calendarBean.today()}"/>
-        <f:viewAction action="#{calendarBean.weatherCal()}"/>
+        <f:viewAction action="#{calendarBean.today()}"/>       
     </f:metadata>
     <h:body>
         <div id='menuBar'>
@@ -60,6 +59,7 @@
                 <td id='daycont'>Sat</td>
                 <td id='daycont'>Sun</td>
             </tr>
+            #{calendarBean.weatherCal()}
             #{calendarBean.createCal()}
             <ui:repeat var="w" value="#{calendarBean.cal}" >
                 <tr>
