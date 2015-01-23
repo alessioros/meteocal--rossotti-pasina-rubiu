@@ -50,7 +50,6 @@ public class Login {
             
             query = em.createQuery("select u from User u where u.username=:un");
             query.setParameter("un", username);
-            query.setParameter("v", true);
             List check = query.getResultList();
 
             if (check.isEmpty()) {

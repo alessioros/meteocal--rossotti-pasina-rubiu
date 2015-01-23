@@ -86,8 +86,11 @@
             <div id='conddesc'>#{calendarBean.condHome}</div>
         </div>
         <div  class='importExport'>
-            <h:form>
+            <h:form enctype="multipart/form-data">
+                <h:inputFile id="file" class="selectFile" value="#{calendarBean.file}"/>
                 <h:commandButton type='submit' action='#{calendarBean.submitImportCalendar()}' value='IMPORT' a:id='button-import'/>
+            </h:form>
+            <h:form>
                 <h:commandButton type='submit' action='#{calendarBean.submitExportCalendar()}' value='EXPORT' a:id='button-export'/>
             </h:form>
             <a class='message'>#{calendarBean.message}</a>

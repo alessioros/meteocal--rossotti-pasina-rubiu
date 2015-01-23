@@ -3,9 +3,9 @@ package it.polimi.meteocal.control;
 import it.polimi.meteocal.boundary.CalendarBean;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Event;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.SocketException;
 import java.net.URISyntaxException;
@@ -27,6 +27,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.servlet.http.Part;
 import javax.transaction.UserTransaction;
 import net.fortuna.ical4j.data.CalendarOutputter;
 import net.fortuna.ical4j.model.Calendar;
@@ -134,7 +135,9 @@ public class ManageCalendar {
         return null;
     }
      
-    public String importCalendar() {
+    public String importCalendar(String fileContent) {
+        
+            System.out.println(fileContent);
 
             return "Calendar has been imported!";
     }
