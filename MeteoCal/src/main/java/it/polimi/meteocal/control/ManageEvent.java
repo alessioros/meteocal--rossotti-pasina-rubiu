@@ -2,6 +2,8 @@ package it.polimi.meteocal.control;
 
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
+import it.polimi.meteocal.entity.User;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -34,14 +36,21 @@ public class ManageEvent {
     public void createEvent(Event event, Location loc) {
 
         Collection<Event> eventi;
-
-        em.persist(loc);
+        Collection<User> participants;
+        //em.persist(loc);
         event.setIdLocation(loc);
         event.setIdOrganizer(rv.getLoggedUser());
+                       
         em.persist(event);
+        
+        participants=new ArrayList<>();//event.getUserCollection();
+        participants.add(rv.getLoggedUser());
+        event.setUserCollection(participants);
+        
         eventi = rv.getLoggedUser().getEventCollection();
-        eventi.add(event);
+        eventi.add(event);        
         rv.getLoggedUser().setEventCollection(eventi);
+        
         mf.forecast(loc);
         em.flush();
         //em.merge(event);

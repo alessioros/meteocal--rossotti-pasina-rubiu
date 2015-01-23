@@ -6,7 +6,8 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:m="http://code.google.com/p/gmaps4jsf/"
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
     <h:head>
         <title>Profile</title>
@@ -31,7 +32,7 @@
             <f:viewAction action='#{eventDetails.findEvent()}'/>
             <f:viewAction action='#{eventDetails.eventWeather()}'/>
         </f:metadata>
-        
+
         <div class="image"></div>
         <div class="googleMap">
             <h:form>
@@ -40,7 +41,7 @@
         </div><br/>
         <div class="info">
             <a id="title">#{eventDetails.event.name}</a>            
-            <!--<c:if test='#{eventDetails.canEdit()==true}'>-->
+            <!--<c:if test=''>-->
 
             <!--
             <p:menuButton value="Options">
@@ -51,7 +52,7 @@
             </p:menuButton>
             -->
             <!-- </c:if>-->
-            
+
             <a id="stime">Starts:   #{eventDetails.event.startTime.toLocaleString()}</a><br/>
             <a id="etime">Ends:     #{eventDetails.event.endTime.toLocaleString()}</a><br/>
             <c:if test='#{eventDetails.event.outDoor==true}'>
@@ -76,11 +77,35 @@
         <br/>
 
         <div class="buttons">
+            <h:form>
+                <h:commandButton value="Participants" onclick="PF('dlg2').show();" a:id='button-participants'/>    
+                <p:dialog header="#{eventDetails.event.name}" widgetVar="dlg2" modal="true" height="100" width="500" dynamic="true"  closeOnEscape="true" draggable="false" resizable="false" >
+                    <table class="participants" >
+                        <tr>
+                            <td id="headerTable">Nickname</td>
+                            <td id="headerTable">Name</td>
+                            <td id="headerTable">Surname</td>
+                        </tr>
+                        <ui:repeat var="u" value="#{eventDetails.event.userCollection}">
+                            <tr>
+                                <td><h:link value="#{u.username}" outcome="user_info?username=#{u.username}" class="usernamelink"/></td>
+                                <td>#{u.name}</td>
+                                <td>#{u.surname}</td>
+                            </tr>
+                        </ui:repeat>
+                    </table>
+                </p:dialog>
+            </h:form>
+            <br/>
             <h:form rendered="#{eventDetails.canEdit()}">
                 <h:link outcome='createEvent.xhtml?id=#{eventDetails.event.idEvent}' value='EDIT' a:id='button-edit'/>
                 <h:link outcome='invitePeople.xhtml?id=#{eventDetails.event.idEvent}' value='INVITE' a:id='button-invite'/>
-                <h:commandButton action="#{eventDetails.deleteEvent()}" value='DELETE' a:id='button-delete'/>   
+                <h:commandButton action="#{eventDetails.deleteEvent()}" value='DELETE' a:id='button-delete'/>
             </h:form>
+
         </div>
     </h:body>
+
+
 </html>
+

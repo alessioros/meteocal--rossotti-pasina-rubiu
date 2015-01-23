@@ -4,6 +4,37 @@ html{
         font-family: 'Dosis', sans-serif;
 }
 
+.participants{
+  width:auto;
+  height:auto;
+  alignment-adjust: auto;
+  text-align:center;
+  border-collapse:collapse;
+  display:inline-table;
+}
+.participants tr{
+  padding:0;
+  margin:0;
+}
+.participants td{
+  border:1px solid black;
+  margin:0;
+  height:auto;
+  width:150px;
+  text-align:center;
+       font-family: 'Dosis', sans-serif;
+}
+#headerTable{
+  background-color: #8DB9CB;
+  color:white;
+  width:150px;
+  height:auto;
+  font-size:20px;
+  padding:0px;
+        line-height:30px;
+        text-align:center;
+        font-family: 'Dosis', sans-serif;
+}
 .image{
     height:283px;
     width:500px;
@@ -179,7 +210,7 @@ html{
     margin-bottom:50px;
     display:inline-block;
 }
-#button-edit,#button-invite,#button-delete{
+#button-edit,#button-invite,#button-delete,#button-participants{
 
   border: #fbfbfb solid 2px;
   border-radius: 8px;
@@ -198,7 +229,7 @@ html{
   display: inline-block;
 }
 
-#button-edit,#button-invite{
+#button-edit,#button-invite,#button-participants{
     background-color:#8DB9CB;
     margin-right:35px;
 }
@@ -207,7 +238,7 @@ html{
     background-color:#F66448;
 }
 
-#button-edit:hover,button-invite:hover{
+#button-edit:hover,#button-invite:hover,#button-participants:hover{
   background-color: white;
   color: #8DB9CB;
   border: #8DB9CB solid 2px;
