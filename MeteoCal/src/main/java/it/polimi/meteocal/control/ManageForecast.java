@@ -152,6 +152,24 @@ public class ManageForecast {
                                             return;
                                         }
                                     }
+                                    
+                                    if (checkBetterMeteo(oForecast, nForecast)) {
+
+                                        if (nForecast.getCode() == 0) {
+
+                                            System.out.println("OMG A FUCKING TORNADO!!!");
+
+                                        } else {
+                                            mn.sendNotifications((List) event.getUserCollection(),
+                                                    event,
+                                                    false,
+                                                    "New forecasts of event " + event.getName() + " are now good!",
+                                                    "Meteo has changed",
+                                                    "New forecasts of event " + event.getName() + " are now good!",
+                                                    "New forecasts of event " + event.getName() + " are now good!");
+                                            return;
+                                        }
+                                    }
                                 }
                             }
 
@@ -260,6 +278,7 @@ public class ManageForecast {
      * @return 
      */
     public boolean checkThreeDays(Date date, Date sDate) {
+        System.out.println(date.getTime()-sDate.getTime());
         return (date.getTime() - sDate.getTime()) <= 302400001
                 && (date.getTime() - sDate.getTime()) >= 215999999;
     }
@@ -267,7 +286,7 @@ public class ManageForecast {
     public void notifyBadConditions() throws MessagingException {
 
         events = em.createQuery("select e from Event e where e.outDoor=true").getResultList();
-
+        date=new Date();
         for (Event event : events) {
             if (checkThreeDays(date, event.getStartTime())) {
                 newForecasts = (List) event.getIdLocation().getForecastCollection();
@@ -276,10 +295,10 @@ public class ManageForecast {
                     for (Forecast goodForecast : newForecasts) {
                         if (goodForecast.getCode() >= 19 && (goodForecast.getCode() < 35 || goodForecast.getCode() == 36)) {
                             goodforecast = goodForecast;
-                            messageGoodDay = ", nearest good day is " + goodforecast.getDate().getDay() + " "
-                                    + goodforecast.getDate().getMonth() + " "
-                                    + goodforecast.getDate().getYear()
-                                    + " that is " + goodforecast.getGeneral();
+                            messageGoodDay = ", nearest good day is " + goodforecast.getDate().getDate()+ " "
+                                    + (goodforecast.getDate().getMonth()+1) + " "
+                                    + (goodforecast.getDate().getYear()+1900)
+                                    + " in which the weather is " + goodforecast.getGeneral();
                             organizer = new ArrayList();
                             organizer.add(event.getIdOrganizer());
                             mn.sendNotifications(organizer,

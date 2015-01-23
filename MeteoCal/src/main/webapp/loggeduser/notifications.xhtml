@@ -40,17 +40,26 @@
                 <h:dataTable value="#{notificationPage.notifications}" var="notification">
 
                     <h:column a:class="description">
-                        <div id="image"></div>
-                        <div id="desc">#{notification.description}</div>
+                        <h:column>
+                            <div id="image"></div>
+                        </h:column>
+                        <h:column>
+                            <div id="desc">#{notification.description}</div>
+                        </h:column>
                     </h:column>
                     <c:if test="#{notification.invite}">
-                    <h:column>
-                        <h:commandButton value='ACCEPT' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
-                    </h:column>
+                        <h:column>
+                            <h:commandButton value='ACCEPT' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
+                        </h:column>
 
-                    <h:column>
-                        <h:commandButton value='DECLINE' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
-                    </h:column>
+                        <h:column>
+                            <h:commandButton value='DECLINE' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
+                        </h:column>
+                    </c:if>
+                    <c:if test="#{!notification.invite}">
+                        <h:column>
+                            <h:commandButton value='OK' a:id='button-ok' action="#{notificationPage.ok(notification)}"/>
+                        </h:column>
                     </c:if>
                 </h:dataTable>
             </h:form>

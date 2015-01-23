@@ -77,6 +77,11 @@ public class NotificationPage {
         return "notifications?faces-redirect=true";
     }
     
+    public String ok(Notification notification) {
+        mi.declineInvite(notification);
+        return "notifications?faces-redirect=true";
+    }
+    
     
     // ----- Getters and setters -----
     
