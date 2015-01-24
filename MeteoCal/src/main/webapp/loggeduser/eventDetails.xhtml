@@ -60,10 +60,13 @@
             <div id='address'>#{eventDetails.event.idLocation.address}</div>
             <div id='conditions' class='#{eventDetails.condEvent}'></div>
             <div id='conddesc'>#{eventDetails.condEvent}</div>
-            <div id='temperature'>
-                <a class="min">Min Temp: #{eventDetails.minTemp} °C </a>
-                <a class="max">Max Temp: #{eventDetails.maxTemp} °C </a>
-            </div>
+            
+            <c:if test='#{eventDetails.availableData==true}'>
+                <div id='temperature'>
+                    <a class="min">Min Temp: #{eventDetails.minTemp} °C </a>
+                    <a class="max">Max Temp: #{eventDetails.maxTemp} °C </a>
+                </div>
+            </c:if>
         </div>                                                      
         <div class="buttons">
             <h:form rendered="#{eventDetails.canEdit()}">
