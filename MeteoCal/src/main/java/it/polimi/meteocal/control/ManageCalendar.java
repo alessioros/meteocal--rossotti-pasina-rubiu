@@ -1,6 +1,5 @@
 package it.polimi.meteocal.control;
 
-import it.polimi.meteocal.boundary.CalendarBean;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
@@ -72,7 +71,7 @@ public class ManageCalendar {
     UserTransaction utx;
 
     private User user;
-    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy   HH:mm");
+    private final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy   HH:mm");
 
     public boolean scheduleEvent(Date date, User user) {
 
@@ -179,9 +178,11 @@ public class ManageCalendar {
                 if (!events.isEmpty()) {
 
                     event = events.get(0);
+                    System.out.println("evento trovato!!");
                     
                 } else {
-
+                    
+                    System.out.println("evento NON trovato!!");
                     List<User> users = em.createQuery("select u from User u where u.idUser=:id").setParameter("id", idOrganizer).getResultList();
 
                     if (!users.isEmpty()) {
@@ -218,8 +219,11 @@ public class ManageCalendar {
                 utx.begin();
 
                 user = rv.getLoggedUser();
-                user.setEventCollection(eventsCol);
-
+                
+                if(!eventsCol.isEmpty()){
+                    
+                    user.setEventCollection(eventsCol);
+                }
                 utx.commit();
 
             } catch (Exception e) {
