@@ -74,3 +74,9 @@ html{
     );
     width:90%;
 }
+.descriptionArea{
+    overflow:hidden; 
+    border:none; 
+    resize: none;
+    width: 500px
+}
