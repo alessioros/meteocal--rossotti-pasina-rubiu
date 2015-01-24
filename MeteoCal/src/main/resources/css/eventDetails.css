@@ -251,3 +251,9 @@ html{
   color: #F66448;
   border: #F66448 solid 2px;  
 }
+.descriptionArea{
+    overflow:hidden; 
+    border:none; 
+    resize: none;
+    width: 470px
+}
