@@ -1,0 +1,26 @@
+----------------------------------------------------------------
+Sat Jan 24 12:51:43 CET 2015:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): istanza a816c00e-014b-1bc8-8e39-000009a517e0
+sulla directory di database /tmp/gfembed7689667992052916891tmp/lib/databases/embedded_default con caricatore classi sun.misc.Launcher$AppClassLoader@6bc7c054 
+Caricato da file:/home/teo/.m2/repository/org/glassfish/main/extras/glassfish-embedded-all/4.1/glassfish-embedded-all-4.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_31-b13
+user.dir=/home/teo/NetBeansProjects/meteocal--rossotti-pasina-rubiu/MeteoCal
+os.name=Linux
+os.arch=amd64
+os.version=3.16.0-29-generic
+derby.system.home=null
+Programma di caricamento classe database avviato - derby.database.classpath=''
+----------------------------------------------------------------
+Sat Jan 24 12:51:54 CET 2015:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): istanza c0a0c103-014b-1bc8-8e39-000009a517e0
+sulla directory di database /tmp/gfembed7689667992052916891tmp/lib/databases/ejbtimer con caricatore classi sun.misc.Launcher$AppClassLoader@6bc7c054 
+Caricato da file:/home/teo/.m2/repository/org/glassfish/main/extras/glassfish-embedded-all/4.1/glassfish-embedded-all-4.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_31-b13
+user.dir=/home/teo/NetBeansProjects/meteocal--rossotti-pasina-rubiu/MeteoCal
+os.name=Linux
+os.arch=amd64
+os.version=3.16.0-29-generic
+derby.system.home=null
+Programma di caricamento classe database avviato - derby.database.classpath=''

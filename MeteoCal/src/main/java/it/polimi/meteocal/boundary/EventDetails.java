@@ -9,7 +9,6 @@ import it.polimi.meteocal.entity.Forecast;
 import it.polimi.meteocal.entity.Location;
 import it.polimi.meteocal.entity.User;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
@@ -49,6 +48,7 @@ public class EventDetails {
     private String minTemp;
     private String maxTemp;
     private String condEvent;
+    private Boolean availableData;
 
     private int idEvent = 0;
 
@@ -129,14 +129,17 @@ public class EventDetails {
     public void eventWeather() {
 
         List<Forecast> forecasts;
+        this.availableData=true;
         forecasts = (List) event.getIdLocation().getForecastCollection();
 
         if (!forecasts.isEmpty()) {
             minTemp = forecasts.get(0).getMinTemp();
             maxTemp = forecasts.get(0).getMaxTemp();
             condEvent = forecasts.get(0).getGeneral();
+            
         } else {
-            condEvent = "Data Not Found";
+            this.availableData=false;
+            condEvent = "Data not available yet";
         }
     }
 
@@ -235,6 +238,15 @@ public class EventDetails {
     }
 
     // ----- Getters and setters -----
+
+    public Boolean getAvailableData() {
+        return availableData;
+    }
+
+    public void setAvailableData(Boolean availableData) {
+        this.availableData = availableData;
+    }
+    
     public String getMinTemp() {
         return minTemp;
     }

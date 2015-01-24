@@ -30,7 +30,7 @@ public class RegisterValidation {
     Principal principal;
     
     @EJB
-    private SendEmailBean sm;
+    SendEmailBean sm;
     
     /**
      * Persist the user that want to register and sends an email
@@ -50,9 +50,9 @@ public class RegisterValidation {
            
            sm.generateAndSendEmail(user.getEmail(),
                    "Confirm MeteoCal Account",
-                   "Welcome to MeteoCal "+user.getName()+
-                    ",<br>Click on the link to confirm your account:"
-                   + "<a href=\"http://localhost:8080/MeteoCal/activation.xhtml?key="+user.getVerificationkey()
+                   "Welcome to MeteoCal "+user.getName()
+                    +",<br>Click on the link to confirm your account:"
+                    +"<a href=\"http://localhost:8080/MeteoCal/activation.xhtml?key="+user.getVerificationkey()
                     +"\">Confirm</a>");
            
        }catch(AddressException e){

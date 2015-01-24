@@ -6,11 +6,11 @@ html{
 }
 
 .title{
-        font-family: 'Dosis', sans-serif;
-  font-size:45px;
-  margin-top:25px;
-  margin-left:100px;
-  display:block;
+    font-family: 'Dosis', sans-serif;
+    font-size:45px;
+    margin-top:25px;
+    margin-left:100px;
+    display:block;
 }
 
 /*------------- TOGGLE ------------- */
@@ -78,14 +78,14 @@ input.toggle:checked + label:after {
 }
 /*------------- TOGGLE ------------- */
 .calendar{
-  width:auto;
-  height:auto;
-  margin-top:15px;
-        margin-bottom: 50px;
-  margin-left:100px;
-  text-align:left;
-  border-collapse:collapse;
-  display:inline-table;
+    width:auto;
+    height:auto;
+    margin-top:15px;
+    margin-bottom: 50px;
+    margin-left:100px;
+    text-align:left;
+    border-collapse:collapse;
+    display:inline-table;
 }
 
 .calendar tr{
@@ -120,7 +120,6 @@ input.toggle:checked + label:after {
 #dayNumbHoly{
   font-size:20px;
   color :#ff0000;
-        //color:#f62b46;
   text-shadow:1px 1px 1px #FFF;
   font-family: 'Roboto Condensed', sans-serif;
   padding-top:10px;
@@ -179,33 +178,29 @@ input.toggle:checked + label:after {
 }
 
 .event{
-        opacity:1;
-      //  transition: opacity 0.3s ease-in;
-      //  height:35px;
-  // width:35px;
-  // background-size:35px 35px;
-   background-image:url("#{resource['css:icons/pin.png']}");
+    opacity:1;
+    background-image:url("#{resource['css:icons/pin.png']}");
 }
 .mask:hover .event{
-        height:40px;
-  width:40px;
-  background-size:40px 40px;
-        background-image:url("#{resource['css:icons/search.png']}");
+    height:40px;
+    width:40px;
+    background-size:40px 40px;
+    background-image:url("#{resource['css:icons/search.png']}");
 }
 .mask:hover .empty{
   opacity:1;
 }
 
 #daycont{
-  background-color: #8DB9CB;
-  color:white;
-  width:80px;
-  height:30px;
-  font-size:20px;
-  padding:0px;
-        line-height:30px;
-        text-align:center;
-        font-family: 'Dosis', sans-serif;
+    background-color: #8DB9CB;
+    color:white;
+    width:80px;
+    height:30px;
+    font-size:20px;
+    padding:0px;
+    line-height:30px;
+    text-align:center;
+    font-family: 'Dosis', sans-serif;
 }
 
 #monthcont{
@@ -219,64 +214,64 @@ input.toggle:checked + label:after {
 }
 
 #prev{
-        background-image: url("#{resource['css:icons/prev.png']}");
-  background-size: 40px 40px;
-  background-position: 17px 5px;
-  background-repeat: no-repeat;
-        border-right:0px;
-        height:50px;
-        width:80px;
-        background-color: #8DB9CB;
-        display:block;
-        float:left;
+    background-image: url("#{resource['css:icons/prev.png']}");
+    background-size: 40px 40px;
+    background-position: 17px 5px;
+    background-repeat: no-repeat;
+    border-right:0px;
+    height:50px;
+    width:80px;
+    background-color: #8DB9CB;
+    display:block;
+    float:left;
 }
 
 #month{
-  width:420px;
-        margin-left:auto;
-        margin-right:auto;
-  display:block;
-  text-shadow:none;
-  font-family: 'Dosis', sans-serif;
-        float:left;
+    width:420px;
+    margin-left:auto;
+    margin-right:auto;
+    display:block;
+    text-shadow:none;
+    font-family: 'Dosis', sans-serif;
+    float:left;
 }
 
 #next{
-        background-image: url("#{resource['css:icons/next.png']}");
-        background-size: 40px 40px;
-  background-position: 17px 5px;
-  background-repeat: no-repeat;
-        border-left:0px;
-        height:50px;
-        width:80px;
-        background-color: #8DB9CB;
-        display:block;
-        float:left;
+    background-image: url("#{resource['css:icons/next.png']}");
+    background-size: 40px 40px;
+    background-position: 17px 5px;
+    background-repeat: no-repeat;
+    border-left:0px;
+    height:50px;
+    width:80px;
+    background-color: #8DB9CB;
+    display:block;
+    float:left;
 }
 
 #monthcont br{
-        clear:left;
+    clear:left;
 }
 
 .submit{
-  width: 250px;
-  margin-right:120px;
-  margin-top:15px;
-  text-align:center;
-  float:right;
+    width: 250px;
+    margin-right:120px;
+    margin-top:15px;
+    text-align:center;
+    float:right;
 }
 
 #button-create,#button-import,#button-export{
-  border: #fbfbfb solid 2px;
-        border-radius: 8px;
-        box-shadow: 2px 2px 3px #888;
-  background-color: #8DB9CB;
-  color:white;
-  font-size:18px;
-  padding:10px;
-  -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  transition: all 0.5s;
+    border: #fbfbfb solid 2px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 3px #888;
+    background-color: #8DB9CB;
+    color:white;
+    font-size:18px;
+    padding:10px;
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    transition: all 0.5s;
 
 }
 
@@ -341,56 +336,6 @@ input.toggle:checked + label:after {
     font-size:20px;
 }
 
-/* THUNDERSTORM
-.polimeteo .cond0, .polimeteo .cond1, .polimeteo .cond2, .polimeteo .cond3, .polimeteo .cond4{
-    background-image: url("#{resource['css:icons/weather/color/thunder.png']}");
-}
-
-// RAINY
-.cond5, .cond6, .cond7, .cond11, .cond12, .cond8, .cond9, .cond10{
-    background-image: url("#{resource['css:icons/weather/color/rain.png']}");
-}
-
-// SNOWY
-.cond13, .cond14, .cond15, .cond16, .cond18, .cond25, .cond41, .cond42, .cond46{
-    background-image: url("#{resource['css:icons/weather/color/snow.png']}");
-}
-
-//  HAIL
-.polimeteo .cond17{
-    background-image: url("#{resource['css:icons/weather/color/hail.png']}");
-}
-
-// FOGGY
-.polimeteo .cond20, .polimeteo .cond21, .polimeteo .cond22{
-    background-image: url("#{resource['css:icons/weather/color/fog.png']}");
-}
-
-// WINDY
-.polimeteo .cond23, .polimeteo .cond24{
-    background-image: url("#{resource['css:icons/weather/color/wind.png']}");
-}
-
-// CLOUDY
-.cond26{
-    background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
-}
-
-// PARTLY CLOUDY
-.cond27, .cond28, .cond29, .cond30, .cond44, .cond37, .cond38, .cond39, .cond40, .cond45, .cond47{
-    background-image: url("#{resource['css:icons/weather/color/mixed.png']}");
-}
-
-// FAIR (NIGHT)
-.cond31{
-    background-image: url("#{resource['css:icons/weather/color/moon.png']}");
-}
-
-// FAIR (DAY)
-.cond32, .cond33, .cond34, .cond36{
-    background-image: url("#{resource['css:icons/weather/color/sun.png']}");
-}*/
-
 .Tornado, .Hurricane, .Storm, .Thunderstorms,.Thundershowers{
     background-image: url("#{resource['css:icons/weather/color/thunder.png']}");
 }
@@ -404,7 +349,7 @@ input.toggle:checked + label:after {
     background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
 }
 
-.Snow,.Dust,.Cold,.Sleet{
+.Snow,.Dust,.Cold,.Sleet,.Wintry{
     background-image: url("#{resource['css:icons/weather/color/snow.png']}");
 }
 
@@ -416,7 +361,7 @@ input.toggle:checked + label:after {
     background-image: url("#{resource['css:icons/weather/color/moon.png']}");
 }
 
-.Mixed{
+.Mixed,.Mix{
     background-image: url("#{resource['css:icons/weather/color/mixed.png']}");
 }
 
@@ -435,7 +380,7 @@ input.toggle:checked + label:after {
 .importExport{
     float: right;
     position:relative;
-    top:-180px;
+    top:-200px;
     left:410px;
 }
 
@@ -485,8 +430,8 @@ input.toggle:checked + label:after {
 }
 
 .message{
-    margin-top:15px;
-    margin-left:40px;
+    margin-top:10px;
+    margin-left:50px;
     font-size: 18px;
     color:#58BC6C;
     display:block;
