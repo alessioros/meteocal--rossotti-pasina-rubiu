@@ -234,40 +234,25 @@ public class CalendarBean {
         }
     }
 
-    public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
+    public void submitImportCalendar() {
 
-        List<FacesMessage> msgs = new ArrayList<FacesMessage>();
-        
-        Part filevalid = (Part) value;
-        if (filevalid.getSize() > 10000) {
-            msgs.add(new FacesMessage("file too big"));
-        }
-        if (!filevalid.getName().contains(".ics")) {
+        if (file == null) {
 
-            msgs.add(new FacesMessage("not a calendar file"));
-        }
-        if (!msgs.isEmpty()) {
-            throw new ValidatorException(msgs);
-        }
+            message = "please select an .ics file";
 
+        } else {
+            try {
+                message = mc.importCalendar(file);
+            } catch (IOException ex) {
+                Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
-    public String submitImportCalendar() {
-
-        try {
-            message = mc.importCalendar(file);
-        } catch (IOException ex) {
-            Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return "calendar?faces-redirect=true";
-    }
-
-    public String submitExportCalendar() throws IOException, URISyntaxException {
+    public void submitExportCalendar() throws IOException, URISyntaxException {
 
         message = mc.exportCalendar();
 
-        return "calendar?faces-redirect=true";
     }
 
     public boolean canView(Event event) {

@@ -41,6 +41,7 @@ import net.fortuna.ical4j.model.DateTime;
 import net.fortuna.ical4j.model.TimeZone;
 import net.fortuna.ical4j.model.TimeZoneRegistry;
 import net.fortuna.ical4j.model.TimeZoneRegistryFactory;
+import net.fortuna.ical4j.model.ValidationException;
 import net.fortuna.ical4j.model.component.VEvent;
 import net.fortuna.ical4j.model.component.VTimeZone;
 import net.fortuna.ical4j.model.property.CalScale;
@@ -147,7 +148,7 @@ public class ManageCalendar {
         String idOrganizer, idLocation;
 
         Calendar calendar = new Calendar();
-
+        
         // put the file into calendar
         FileInputStream fin = (FileInputStream) file.getInputStream();
         CalendarBuilder builder = new CalendarBuilder();
@@ -156,7 +157,11 @@ public class ManageCalendar {
         } catch (ParserException ex) {
             Logger.getLogger(ManageCalendar.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        if(calendar.getComponents().isEmpty()){
+            return "The calendar imported is empty";
+        }
+        
         // For every event
         for (Object o : calendar.getComponents("VEVENT")) {
             Component c = (Component) o;
@@ -199,6 +204,7 @@ public class ManageCalendar {
                     event.setIdOrganizer(organizer);
                     event.setIdLocation(location);
                     event.setPublicEvent(Boolean.TRUE);
+                    event.setName("EVENTO IMPORTATO");
                     em.persist(event);
 
                 }
@@ -319,14 +325,11 @@ public class ManageCalendar {
             fc.responseComplete();
 
             CalendarOutputter outputter = new CalendarOutputter();
+            
             try {
                 outputter.output(calendar, output);
-
-            } catch (net.fortuna.ical4j.model.ValidationException ex) {
-                Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(CalendarBean.class.getName()).log(Level.SEVERE, null, ex);
-
+            } catch (ValidationException ex) {
+                Logger.getLogger(ManageCalendar.class.getName()).log(Level.SEVERE, null, ex);
             }
 
             return "Calendar has been exported!";
