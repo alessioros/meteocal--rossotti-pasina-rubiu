@@ -29,7 +29,7 @@ public class Scheduler {
         mf.updateForecast();
     }
     
-    @Schedule(second="*/30",minute="*",hour="*",persistent=false)
+    @Schedule(second="0",minute="0",hour="*/2",persistent=false)
     public void threeDays() throws MessagingException{
         mf.notifyBadConditions();
     }
