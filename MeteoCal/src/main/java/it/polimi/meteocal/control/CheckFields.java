@@ -90,4 +90,8 @@ public class CheckFields {
               return false;
       return true;
     }
+    public boolean checkSize(String str, int l){
+        return str.length()<=l;
+}
+    
 }

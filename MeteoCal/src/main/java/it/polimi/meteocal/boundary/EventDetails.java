@@ -35,7 +35,7 @@ public class EventDetails {
     private RegisterValidation rv;
 
     private Event event;
-    private Location loc=new Location();
+    private Location loc = new Location();
     private String message;
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy   HH:mm");
     private long startDateLong;
@@ -49,14 +49,14 @@ public class EventDetails {
     private String minTemp;
     private String maxTemp;
     private String condEvent;
-    
-    private int idEvent=0;
+
+    private int idEvent = 0;
 
     public void dateConverter() {
         this.startDate = new Date(this.startDateLong);
-        this.startDate.setMinutes((((int)(this.startDate.getMinutes()/15)+1)*15));
+        this.startDate.setMinutes((((int) (this.startDate.getMinutes() / 15) + 1) * 15));
         this.endDate = new Date(this.endDateLong + 3600000);
-        this.endDate.setMinutes((((int)(this.endDate.getMinutes()/15)+1)*15));
+        this.endDate.setMinutes((((int) (this.endDate.getMinutes() / 15) + 1) * 15));
         //this.startDate.setTime(this.startDateLong);
         //this.endDate.setTime(this.endDateLong);               
     }
@@ -67,41 +67,55 @@ public class EventDetails {
         event.setStartTime(startDate);
         event.setEndTime(endDate);
 
-        query = "select * from geo.placefinder where text=\"" + address + "," + city + "," + state+"\"";
+        query = "select * from geo.placefinder where text=\"" + address + "," + city + "," + state + "\"";
         try {
             JSONObject json = yq.yahooRestQuery(query);
 
             JSONObject jsonQuery = json.getJSONObject("query");
             JSONObject queryResults = jsonQuery.getJSONObject("results");
             JSONObject pl = queryResults.getJSONObject("Result");
-            
+
             loc.setLatitude(Float.parseFloat(pl.getString("latitude")));
             loc.setLongitude(Float.parseFloat(pl.getString("longitude")));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        loc.setAddress(address);
-        loc.setCity(city);
-        loc.setState(state);
-
-        if (!cf.checkDateTimes(event.getStartTime(), event.getEndTime())) {
+        
+        if (!cf.checkSize(event.getName(), 45)) {
+            message = "Error! Name is too long (max 45 character)";
+            return "";
+        } else if (!cf.checkSize(event.getDescription(), 250)) {
+            message = "Error! Description is too long (max 250 character)";
+            return "";
+        } else if (!cf.checkSize(state, 45)) {
+            message = "Error! State is too long (max 45 character)";
+            return "";
+        } else if (!cf.checkSize(city,45)) {
+            message = "Error! City is too long (max 45 character)";
+            return "";
+        } else if (!cf.checkSize(address, 45)) {
+            message = "Error! Address is too long (max 45 character)";
+            return "";
+        } else if (!cf.checkDateTimes(event.getStartTime(), event.getEndTime())) {
 
             message = "Error! Start time must be after End Time";
             return "";
-        } else if(!cf.checkAfterToday(event.getStartTime())){
-            
+        } else if (!cf.checkAfterToday(event.getStartTime())) {
+
             message = "Error! Start time must be after today";
             return "";
-        
-        }else if(!cf.checkOtherEvent(event.getStartTime(), event.getEndTime(),rv.getLoggedUser())){
+
+        } else if (!cf.checkOtherEvent(event.getStartTime(), event.getEndTime(), rv.getLoggedUser())) {
             message = "Error! You have an other event at this time";
             return "";
-        }else if (!cf.checkCoordinates(loc.getLatitude(), loc.getLongitude())) {
+        } else if (!cf.checkCoordinates(loc.getLatitude(), loc.getLongitude())) {
 
             message = "Error! Invalid coordinates";
             return "";
         } else {
-
+            loc.setAddress(address);
+            loc.setCity(city);
+            loc.setState(state);
             me.createEvent(event, loc);
 
             message = "Event Created!";
@@ -111,38 +125,42 @@ public class EventDetails {
         }
 
     }
-    
-    public void eventWeather(){
-            
-            List<Forecast> forecasts;
-            forecasts = (List) event.getIdLocation().getForecastCollection();
-            
-            if(!forecasts.isEmpty()){
-                minTemp = forecasts.get(0).getMinTemp();
-                maxTemp = forecasts.get(0).getMaxTemp();
-                condEvent = forecasts.get(0).getGeneral();
-            }else{
-                condEvent="Data Not Found";
-            }
+
+    public void eventWeather() {
+
+        List<Forecast> forecasts;
+        forecasts = (List) event.getIdLocation().getForecastCollection();
+
+        if (!forecasts.isEmpty()) {
+            minTemp = forecasts.get(0).getMinTemp();
+            maxTemp = forecasts.get(0).getMaxTemp();
+            condEvent = forecasts.get(0).getGeneral();
+        } else {
+            condEvent = "Data Not Found";
+        }
     }
-    
-    public String buttonValue(){
-        if(editing())
+
+    public String buttonValue() {
+        if (editing()) {
             return "EDIT";
-        else
+        } else {
             return "CREATE";
+        }
     }
-    public String buttonAction(){
-        if(editing())
-            return this.updateEvent();            
-        else
+
+    public String buttonAction() {
+        if (editing()) {
+            return this.updateEvent();
+        } else {
             return this.create();
+        }
     }
-    public String updateEvent(){   
-       event.setIdEvent(this.idEvent);
-       event.setStartTime(startDate);
-       event.setEndTime(endDate);
-       query = "select * from geo.placefinder where text=\"" + address + "," + city + "," + state+"\"";
+
+    public String updateEvent() {
+        event.setIdEvent(this.idEvent);
+        event.setStartTime(startDate);
+        event.setEndTime(endDate);
+        query = "select * from geo.placefinder where text=\"" + address + "," + city + "," + state + "\"";
         try {
             JSONObject json = yq.yahooRestQuery(query);
 
@@ -178,47 +196,45 @@ public class EventDetails {
             return "/loggeduser/eventDetails?faces-redirect=true&id=" + event.getIdEvent();
 
         }
-       
-       
+
     }
-    
-    public String deleteEvent(){
-       this.findEvent();
-       me.deleteEvent(this.idEvent);
-       
-       return "calendar.xhtml?faces-redirect=true";
+
+    public String deleteEvent() {
+        this.findEvent();
+        me.deleteEvent(this.idEvent);
+
+        return "calendar.xhtml?faces-redirect=true";
     }
-    
-    public void findEvent(){
-        if(this.idEvent!=0){
+
+    public void findEvent() {
+        if (this.idEvent != 0) {
             event = me.findEvent(this.idEvent);
-            this.startDate=event.getStartTime();
-            this.endDate=event.getEndTime();
-            this.address=event.getIdLocation().getAddress();
-            this.city=event.getIdLocation().getCity();
-            this.state=event.getIdLocation().getState();
-            
+            this.startDate = event.getStartTime();
+            this.endDate = event.getEndTime();
+            this.address = event.getIdLocation().getAddress();
+            this.city = event.getIdLocation().getCity();
+            this.state = event.getIdLocation().getState();
+
         }
-    
+
     }
-    
-    public boolean editing(){
-        return this.idEvent!=0;
+
+    public boolean editing() {
+        return this.idEvent != 0;
     }
-    public boolean canEdit(){
+
+    public boolean canEdit() {
         User u = rv.getLoggedUser();
-        this.findEvent();        
+        this.findEvent();
         return u.equals(event.getIdOrganizer());
-        
+
     }
-    
-    
-    public Date today(){
+
+    public Date today() {
         return new Date();
     }
-           
-    // ----- Getters and setters -----
 
+    // ----- Getters and setters -----
     public String getMinTemp() {
         return minTemp;
     }
