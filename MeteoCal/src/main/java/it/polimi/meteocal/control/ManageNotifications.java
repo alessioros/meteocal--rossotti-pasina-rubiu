@@ -40,34 +40,41 @@ public class ManageNotifications {
     private UsernotificationPK usernotificationsPK;
 
     public void sendNotifications(List<User> users, Event event, boolean isInvite, String description, String emailSubject, String emailTextP, String emailText) throws MessagingException {
-        
-        notification = new Notification();
 
-        notification.setDescription(description);
-        notification.setIdEvent(event);
-        notification.setInvite(isInvite);
-        em.persist(notification);
+        List<Notification> notificationResult = em.createQuery("SELECT n FROM Notification n WHERE n.idEvent=:EVENT and n.invite=:INVITE").setParameter("EVENT", event).setParameter("INVITE", isInvite).getResultList();
+        if (notificationResult.isEmpty()) {
+            notification = new Notification();
+            notification.setDescription(description);
+            notification.setIdEvent(event);
+            notification.setInvite(isInvite);
+            em.persist(notification);
+        } else {
+            notification = em.find(Notification.class, notificationResult.get(0).getIdNotification());
+        }
 
         for (User user : users) {
+            List<Usernotification> userNotificationResult = em.createQuery("SELECT un FROM Usernotification un WHERE un.user=:USER and un.notification=:NOTIFICATION").setParameter("USER", user).setParameter("NOTIFICATION", notification).getResultList();
+            if (userNotificationResult.isEmpty()) {
+                usernotifications = new Usernotification();
+                usernotificationsPK = new UsernotificationPK();
+                usernotificationsPK.setIdNotification(notification.getIdNotification());
+                usernotificationsPK.setIdUser(user.getIdUser());
 
-            usernotifications = new Usernotification();
-            usernotificationsPK = new UsernotificationPK();
+                usernotifications.setAccepted(Boolean.FALSE);
+                usernotifications.setPending(Boolean.TRUE);
+                usernotifications.setUsernotificationPK(usernotificationsPK);
+                usernotifications.setNotification(notification);
+                em.persist(usernotifications);
 
-            usernotificationsPK.setIdNotification(notification.getIdNotification());
-            usernotificationsPK.setIdUser(user.getIdUser());
+                em.flush();
+                em.refresh(em.merge(usernotifications));
+                if (event.getPublicEvent()) {
+                    se.generateAndSendEmail(user.getEmail(), emailSubject, emailTextP);
+                } else {
+                    se.generateAndSendEmail(user.getEmail(), emailSubject, emailText);
+                }  
+            }
 
-            usernotifications.setAccepted(Boolean.FALSE);
-            usernotifications.setPending(Boolean.TRUE);
-            usernotifications.setUsernotificationPK(usernotificationsPK);
-            em.persist(usernotifications);
-            
-            em.flush();
-            em.refresh(em.merge(usernotifications));
-            /* if (event.getPublic1()) {
-             se.generateAndSendEmail(user.getEmail(), emailSubject ,emailTextP );
-             } else {
-             se.generateAndSendEmail(user.getEmail(), emailSubject, emailText);
-             }*/
         }
     }
 }

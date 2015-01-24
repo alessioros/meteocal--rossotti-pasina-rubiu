@@ -39,8 +39,8 @@ public class InvitePeople {
     @Inject
     ManageInvites mi;
 
-    private int event;
-    private Event pEvent;
+    private int idevent;
+    private Event event;
     private String contact;
     private String message;
 
@@ -57,13 +57,12 @@ public class InvitePeople {
 
         invited = new ArrayList<>();
         for (User contact : contacts) {
-
             if (selectedIds.get(contact.getIdUser())) {
                 invited.add(contact);
                 selectedIds.remove(contact.getIdUser());
             }
         }
-        List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
+        List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", idevent).getResultList();
         alreadyInvited = (List) tmplist.get(0).getUserCollection();
         for (User user : alreadyInvited) {
             if (invited.contains(user)) {
@@ -72,8 +71,27 @@ public class InvitePeople {
         }
         
         mi.createInvites(invited, tmplist.get(0));
-        return "calendar?faces-redirect=true";
+        return "/loggeduser/eventDetails.xhtml?faces-redirect=true&id=" + idevent;
 
+    }
+     /**
+     * updates list of contacts deleting the contacts already invited
+     * @return list of users that can be invited
+     */
+    public List<User> updateInvitable() {        
+        contacts=new ArrayList();
+        List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", idevent).getResultList();
+        event = tmplist.get(0);
+        for (User u : rv.getLoggedUser().getUserCollection())
+            contacts.add(u);
+        for (User user : event.getUserCollection()) {
+            if (contacts.contains(user)) {
+                contacts.remove(user);
+            }
+        }
+        //user = rv.getLoggedUser();
+        //contacts = (List<User>) user.getUserCollection();
+        return contacts;
     }
 
     /**
@@ -93,39 +111,18 @@ public class InvitePeople {
         }
         contacts = updateContacts();
     }
-
     /**
      * updates contacts from user's userCollection
      *
      * @return
      */
     public List<User> updateContacts() {
-
         user = rv.getLoggedUser();
         contacts = (List) user.getUserCollection();
         return contacts;
     }
 
-    /**
-     * updates list of contacts deleting the contacts already invited
-     * @return list of users that can be invited
-     */
-    public List<User> updateInvitable() {
-        
-        contacts=new ArrayList();
-        List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", event).getResultList();
-        pEvent = tmplist.get(0);
-
-        for (User user : pEvent.getUserCollection()) {
-            if (contacts.contains(user)) {
-                contacts.remove(user);
-            }
-        }
-        user = rv.getLoggedUser();
-        contacts = (List<User>) user.getUserCollection();
-        return contacts;
-    }
-
+   
     // ----- Getters and setters -----
     public User getUser() {
         return user;
@@ -143,12 +140,12 @@ public class InvitePeople {
         this.contacts = contacts;
     }
 
-    public int getEvent() {
-        return event;
+    public int getIdevent() {
+        return idevent;
     }
 
-    public void setEvent(int event) {
-        this.event = event;
+    public void setIdevent(int idevent) {
+        this.idevent = idevent;
     }
 
     public String getContact() {
