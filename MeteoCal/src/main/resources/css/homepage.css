@@ -44,56 +44,6 @@ html{
     display:inline-block;
 }
 
-/* THUNDERSTORM
-#weather .cond0, #weather .cond1, #weather .cond2, #weather .cond3, #weather .cond4{
-    background-image: url("#{resource['css:icons/weather/thunder.png']}");
-}
-
-// RAINY
-#weather .cond5, #weather .cond6, #weather .cond7, #weather .cond11, #weather .cond12, #weather .cond8, #weather .cond9, #weather .cond10{
-    background-image: url("#{resource['css:icons/weather/rain.png']}");
-}
-
-// SNOWY
-#weather .cond13, #weather .cond14, #weather .cond15, #weather .cond16, #weather .cond18, #weather .cond25, #weather .cond41, #weather .cond42, #weather .cond46{
-    background-image: url("#{resource['css:icons/weather/snow.png']}");
-}
-
-//  HAIL
-#weather .cond17{
-    background-image: url("#{resource['css:icons/weather/hail.png']}");
-}
-
-// FOGGY
-#weather .cond20, #weather .cond21, #weather .cond22{
-    background-image: url("#{resource['css:icons/weather/fog.png']}");
-}
-
-// WINDY
-#weather .cond23, #weather .cond24{
-    background-image: url("#{resource['css:icons/weather/wind.png']}");
-}
-
-// CLOUDY
-#weather .cond26{
-    background-image: url("#{resource['css:icons/weather/cloud.png']}");
-}
-
-// PARTLY CLOUDY
-#weather .cond27, #weather .cond28, #weather .cond29, #weather .cond30, #weather .cond44, #weather .cond37, #weather .cond38, #weather .cond39, #weather .cond40, #weather .cond45, #weather .cond47{
-    background-image: url("#{resource['css:icons/weather/mixed.png']}");
-}
-
-// FAIR (NIGHT)
-#weather .cond31{
-    background-image: url("#{resource['css:icons/weather/moon.png']}");
-}
-
-// FAIR (DAY)
-#weather .cond32, #weather .cond33, #weather .cond34, #weather .cond36{
-    background-image: url("#{resource['css:icons/weather/sun.png']}");
-} */
-
 .Tornado, .Hurricane, .Storm, .Thunderstorms,.Thundershowers{
     background-image: url("#{resource['css:icons/weather/thunder.png']}");
 }
@@ -107,7 +57,7 @@ html{
     background-image: url("#{resource['css:icons/weather/cloud.png']}");
 }
 
-.Snow,.Dust,.Cold,.Sleet{
+.Snow,.Dust,.Cold,.Sleet,.Wintry{
     background-image: url("#{resource['css:icons/weather/snow.png']}");
 }
 
@@ -119,7 +69,7 @@ html{
     background-image: url("#{resource['css:icons/weather/moon.png']}");
 }
 
-.Mixed{
+.Mixed,.Mix{
     background-image: url("#{resource['css:icons/weather/mixed.png']}");
 }
 

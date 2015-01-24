@@ -136,7 +136,7 @@ html{
     background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
 }
 
-.Snow,.Dust,.Cold,.Sleet{
+.Snow,.Dust,.Cold,.Sleet,.Wintry{
     background-image: url("#{resource['css:icons/weather/color/snow.png']}");
 }
 
@@ -148,7 +148,7 @@ html{
     background-image: url("#{resource['css:icons/weather/color/moon.png']}");
 }
 
-.Mixed{
+.Mixed,.Mix{
     background-image: url("#{resource['css:icons/weather/color/mixed.png']}");
 }
 

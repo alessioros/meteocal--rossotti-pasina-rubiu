@@ -4,10 +4,8 @@ import it.polimi.meteocal.boundary.CalendarBean;
 import it.polimi.meteocal.entity.User;
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.SocketException;
 import java.net.URISyntaxException;
@@ -163,6 +161,7 @@ public class ManageCalendar {
         for (Object o : calendar.getComponents("VEVENT")) {
             Component c = (Component) o;
             try {
+
                 event.setStartTime(formatter.parse(c.getProperty("DTSTART").getValue()));
                 event.setEndTime(formatter.parse(c.getProperty("DTEND").getValue()));
                 event.setDescription(c.getProperty("DESCRIPTION").getValue());
@@ -170,28 +169,39 @@ public class ManageCalendar {
                 idLocation = c.getProperty("LOCATION").getValue();
                 idOrganizer = c.getProperty("ORGANIZER").getValue();
 
-                List<User> users = em.createQuery("select u from User u where u.idUser=:id").setParameter("id", idOrganizer).getResultList();
+                List<Event> events = em.createQuery("select e from Event e where e.Name=:name and e.Description=:desc").setParameter("name", event.getName()).setParameter("desc", event.getDescription()).getResultList();
 
-                if (!users.isEmpty()) {
+                if (!events.isEmpty()) {
 
-                    organizer = users.get(0);
+                    event = events.get(0);
+                    
                 } else {
-                    organizer = rv.getLoggedUser();
+
+                    List<User> users = em.createQuery("select u from User u where u.idUser=:id").setParameter("id", idOrganizer).getResultList();
+
+                    if (!users.isEmpty()) {
+
+                        organizer = users.get(0);
+                    } else {
+                        organizer = rv.getLoggedUser();
+                    }
+
+                    List<Location> locations = em.createQuery("select l from Location l where l.idLocation=:id").setParameter("id", idLocation).getResultList();
+
+                    if (!locations.isEmpty()) {
+
+                        location = locations.get(0);
+                    } else {
+                        locations = em.createQuery("select l from Location l").getResultList();
+                        location = locations.get(0);
+                    }
+
+                    event.setIdOrganizer(organizer);
+                    event.setIdLocation(location);
+                    event.setPublicEvent(Boolean.TRUE);
+                    em.persist(event);
+
                 }
-
-                List<Location> locations = em.createQuery("select l from Location l where l.idLocation=:id").setParameter("id", idLocation).getResultList();
-
-                if (!locations.isEmpty()) {
-
-                    location = locations.get(0);
-                } else {
-                    locations = em.createQuery("select l from Location l").getResultList();
-                    location = locations.get(0);
-                }
-
-                event.setIdOrganizer(organizer);
-                event.setIdLocation(location);
-                event.setPublicEvent(Boolean.TRUE);
                 eventsCol.add(event);
 
             } catch (ParseException ex) {
@@ -199,13 +209,13 @@ public class ManageCalendar {
             }
             //insert new user calendar
             try {
-                    utx.begin();
+                utx.begin();
 
-                    user = rv.getLoggedUser();
-                    user.setEventCollection(eventsCol);
+                user = rv.getLoggedUser();
+                user.setEventCollection(eventsCol);
 
-                    utx.commit();
-                    
+                utx.commit();
+
             } catch (Exception e) {
 
                 e.printStackTrace();
@@ -229,7 +239,8 @@ public class ManageCalendar {
         Event event;
         DateTime start, end;
         GregorianCalendar startDate, endDate;
-        String fileName = "calendar.ics";
+        String fileName = user.getUsername() + "calendar.ics";
+
         // Create a TimeZone
         TimeZoneRegistry registry = TimeZoneRegistryFactory.getInstance().createRegistry();
         TimeZone timezone = registry.getTimeZone("Europe/Amsterdam");
@@ -285,12 +296,12 @@ public class ManageCalendar {
                 calevent = new VEvent(start, end, event.getName());
                 calevent.getProperties().add(new Description(event.getDescription()));
                 calevent.getProperties().add(new Organizer("" + event.getIdOrganizer().getIdUser()));
-                calevent.getProperties().add(new net.fortuna.ical4j.model.property.Location(event.getIdLocation().getIdLocation()+""));
-
+                calevent.getProperties().add(new net.fortuna.ical4j.model.property.Location(event.getIdLocation().getIdLocation() + ""));
+                
                 // Add the event to calendar
                 calendar.getComponents().add(calevent);
 
-                //aggiungo ID
+                //aggiungo UID
                 uid = ug.generateUid();
                 calevent.getProperties().add(uid);
             }

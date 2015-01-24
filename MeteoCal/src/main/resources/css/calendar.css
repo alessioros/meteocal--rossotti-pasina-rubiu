@@ -341,56 +341,6 @@ input.toggle:checked + label:after {
     font-size:20px;
 }
 
-/* THUNDERSTORM
-.polimeteo .cond0, .polimeteo .cond1, .polimeteo .cond2, .polimeteo .cond3, .polimeteo .cond4{
-    background-image: url("#{resource['css:icons/weather/color/thunder.png']}");
-}
-
-// RAINY
-.cond5, .cond6, .cond7, .cond11, .cond12, .cond8, .cond9, .cond10{
-    background-image: url("#{resource['css:icons/weather/color/rain.png']}");
-}
-
-// SNOWY
-.cond13, .cond14, .cond15, .cond16, .cond18, .cond25, .cond41, .cond42, .cond46{
-    background-image: url("#{resource['css:icons/weather/color/snow.png']}");
-}
-
-//  HAIL
-.polimeteo .cond17{
-    background-image: url("#{resource['css:icons/weather/color/hail.png']}");
-}
-
-// FOGGY
-.polimeteo .cond20, .polimeteo .cond21, .polimeteo .cond22{
-    background-image: url("#{resource['css:icons/weather/color/fog.png']}");
-}
-
-// WINDY
-.polimeteo .cond23, .polimeteo .cond24{
-    background-image: url("#{resource['css:icons/weather/color/wind.png']}");
-}
-
-// CLOUDY
-.cond26{
-    background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
-}
-
-// PARTLY CLOUDY
-.cond27, .cond28, .cond29, .cond30, .cond44, .cond37, .cond38, .cond39, .cond40, .cond45, .cond47{
-    background-image: url("#{resource['css:icons/weather/color/mixed.png']}");
-}
-
-// FAIR (NIGHT)
-.cond31{
-    background-image: url("#{resource['css:icons/weather/color/moon.png']}");
-}
-
-// FAIR (DAY)
-.cond32, .cond33, .cond34, .cond36{
-    background-image: url("#{resource['css:icons/weather/color/sun.png']}");
-}*/
-
 .Tornado, .Hurricane, .Storm, .Thunderstorms,.Thundershowers{
     background-image: url("#{resource['css:icons/weather/color/thunder.png']}");
 }
@@ -404,7 +354,7 @@ input.toggle:checked + label:after {
     background-image: url("#{resource['css:icons/weather/color/cloud.png']}");
 }
 
-.Snow,.Dust,.Cold,.Sleet{
+.Snow,.Dust,.Cold,.Sleet,.Wintry{
     background-image: url("#{resource['css:icons/weather/color/snow.png']}");
 }
 
@@ -416,7 +366,7 @@ input.toggle:checked + label:after {
     background-image: url("#{resource['css:icons/weather/color/moon.png']}");
 }
 
-.Mixed{
+.Mixed,.Mix{
     background-image: url("#{resource['css:icons/weather/color/mixed.png']}");
 }
 
