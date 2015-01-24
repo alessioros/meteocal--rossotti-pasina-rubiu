@@ -77,7 +77,9 @@
             <artifactId>arquillian-glassfish-embedded-3.1</artifactId>
             <version>1.0.0.CR4</version>
             <scope>test</scope>
-        </dependency>        
+        </dependency>   
+        
+                  
     </dependencies>
     
     <dependencyManagement>
