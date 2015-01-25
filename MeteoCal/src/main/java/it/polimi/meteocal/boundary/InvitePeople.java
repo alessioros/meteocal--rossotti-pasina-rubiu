@@ -24,8 +24,7 @@ import javax.persistence.PersistenceContext;
 @ViewScoped
 public class InvitePeople {
 
-    private User user;
-    private List<User> contacts;
+    
 
     @PersistenceContext
     EntityManager em;
@@ -38,7 +37,9 @@ public class InvitePeople {
 
     @Inject
     ManageInvites mi;
-
+    
+    private User user;
+    private List<User> contacts;
     private int idevent;
     private Event event;
     private String contact;
@@ -78,8 +79,7 @@ public class InvitePeople {
      * updates list of contacts deleting the contacts already invited
      * @return list of users that can be invited
      */
-    public List<User> updateInvitable() { 
-        this.updateContacts();
+    public List<User> updateInvitable() {       
         contacts=new ArrayList();
         List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", idevent).getResultList();
         event = tmplist.get(0);
@@ -98,7 +98,7 @@ public class InvitePeople {
     /**
      * calls personalprofile submitAddUser() and updates the contacts
      */
-    public void addUser() {
+    public String addUser() {
         user = rv.getLoggedUser();
         if (user.getUsername().equals(contact)) {
             message = "You can't add yourself!";
@@ -111,6 +111,7 @@ public class InvitePeople {
             message = "User added!";
         }
         contacts = updateContacts();
+        return "/loggeduser/invitePeople.xhtml?faces-redirect=true&id="+event.getIdEvent().toString();
     }
     /**
      * updates contacts from user's userCollection
@@ -119,7 +120,7 @@ public class InvitePeople {
      */
     public List<User> updateContacts() {
         user = rv.getLoggedUser();
-        contacts = (List) user.getUserCollection();
+        contacts = (List<User>) user.getUserCollection();
         return contacts;
     }
 
@@ -173,4 +174,13 @@ public class InvitePeople {
         this.invited = invited;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
+    
 }

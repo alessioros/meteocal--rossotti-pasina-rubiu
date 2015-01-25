@@ -85,7 +85,7 @@ public class Event implements Serializable {
     private User idOrganizer;
     
     @JoinColumn(name = "idLocation", referencedColumnName = "idLocation")
-    @ManyToOne
+    @ManyToOne(cascade =CascadeType.ALL)
     private Location idLocation;
     
 
