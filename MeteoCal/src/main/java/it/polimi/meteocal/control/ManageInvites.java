@@ -70,7 +70,7 @@ public class ManageInvites {
      *
      * @param notification
      */
-    public void acceptInvite(Notification notification) {
+    public void acceptInvite(Usernotification un) {
 
         try {
 
@@ -78,16 +78,16 @@ public class ManageInvites {
              
             //puts the event in the user calendar
             user = rv.getLoggedUser();
-            user.getEventCollection().add(notification.getIdEvent());
+            user.getEventCollection().add(un.getNotification().getIdEvent());
             
             //puts the user in the invited of the event
-            event = em.createQuery("select e from Event e where e.idEvent=:E").setParameter("E", notification.getIdEvent().getIdEvent()).getResultList();
+            event = em.createQuery("select e from Event e where e.idEvent=:E").setParameter("E", un.getNotification().getIdEvent().getIdEvent()).getResultList();
             event.get(0).getUserCollection().add(user);
 
             
             usernot = em.createQuery("select un from Usernotification un where un.user=:U").setParameter("U", user).getResultList();
-            for (Usernotification usernotification : usernot) {
-                if (usernotification.getNotification().equals(notification)) {
+           for (Usernotification usernotification : usernot) {
+                if (usernotification.equals(un)) {
                     usernotification.setPending(Boolean.FALSE);
                     usernotification.setAccepted(Boolean.TRUE);
                 }
@@ -106,7 +106,7 @@ public class ManageInvites {
         }
     }
 
-    public void declineInvite(Notification notification) {
+    public void declineInvite(Usernotification un) {
         try {
 
             utx.begin();
@@ -115,8 +115,8 @@ public class ManageInvites {
 
             usernot = em.createQuery("select un from Usernotification un where un.user=:U").setParameter("U", user).getResultList();
             for (Usernotification usernotification : usernot) {
-                if (usernotification.getNotification().equals(notification)) {
-                    em.remove(usernotification);
+                if (usernotification.equals(un)) {
+                    em.remove(usernotification);                    
                 }
             }
 

@@ -35,32 +35,27 @@
         </f:metadata>
 
         <a class='title'>Notifications:</a>
-        <c:if test="#{notificationPage.notifications.size()!=0}">
+        <c:if test="#{notificationPage.userNotifications.size()!=0}">
             <h:form>
-                <h:dataTable value="#{notificationPage.notifications}" var="notification">
+                <h:dataTable value="#{notificationPage.userNotifications}" var="un">
 
                     <h:column a:class="description">
                         <h:column>
                             <div id="image"></div>
                         </h:column>
                         <h:column>
-                            <div id="desc">#{notification.description}</div>
+                            <div id="desc">#{un.notification.description}</div>
                         </h:column>
-                    </h:column>
-                    <c:if test="#{notification.invite}">
+                    </h:column>                  
+                    <h:column>
                         <h:column>
-                            <h:commandButton value='ACCEPT' a:id='button-accept' action="#{notificationPage.accept(notification)}"/>
+                            <h:commandButton rendered="#{un.notification.invite}" value='ACCEPT' a:id='button-accept' action="#{notificationPage.accept(un)}"/>
+                            <h:commandButton rendered="#{not un.notification.invite}" value='OK' a:id='button-ok' action="#{notificationPage.ok(un)}"/>
                         </h:column>
-
-                        <h:column>
-                            <h:commandButton value='DECLINE' a:id='button-decline' action="#{notificationPage.decline(notification)}"/>
-                        </h:column>
-                    </c:if>
-                    <c:if test="#{!notification.invite}">
-                        <h:column>
-                            <h:commandButton value='OK' a:id='button-ok' action="#{notificationPage.ok(notification)}"/>
-                        </h:column>
-                    </c:if>
+                        <h:column>                    
+                            <h:commandButton rendered="#{un.notification.invite}" value='DECLINE' a:id='button-decline' action="#{notificationPage.decline(un)}"/>
+                        </h:column>   
+                    </h:column> 
                 </h:dataTable>
             </h:form>
         </c:if>

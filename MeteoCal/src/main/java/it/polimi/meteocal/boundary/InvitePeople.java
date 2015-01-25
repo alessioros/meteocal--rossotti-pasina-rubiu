@@ -53,7 +53,7 @@ public class InvitePeople {
      */
     public String invite() throws MessagingException {
 
-        contacts = updateInvitable();
+         contacts = updateInvitable();
 
         invited = new ArrayList<>();
         for (User contact : contacts) {
@@ -78,7 +78,8 @@ public class InvitePeople {
      * updates list of contacts deleting the contacts already invited
      * @return list of users that can be invited
      */
-    public List<User> updateInvitable() {        
+    public List<User> updateInvitable() { 
+        this.updateContacts();
         contacts=new ArrayList();
         List<Event> tmplist = em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:ID").setParameter("ID", idevent).getResultList();
         event = tmplist.get(0);

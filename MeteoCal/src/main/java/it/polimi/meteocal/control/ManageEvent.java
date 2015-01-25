@@ -2,16 +2,22 @@ package it.polimi.meteocal.control;
 
 import it.polimi.meteocal.entity.Event;
 import it.polimi.meteocal.entity.Location;
+import it.polimi.meteocal.entity.Notification;
 import it.polimi.meteocal.entity.User;
+import it.polimi.meteocal.entity.Usernotification;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import javax.ejb.EJB;
 
 import javax.ejb.Stateless;
 
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -24,38 +30,38 @@ public class ManageEvent {
 
     @PersistenceContext
     EntityManager em;
-
-    //   @Inject
-    //  UserTransaction utx;
+       
     @Inject
     RegisterValidation rv;
 
     @Inject
     ManageForecast mf;
 
-    public void createEvent(Event event, Location loc) {
+    @EJB
+    ManageNotifications mn;
 
+    public void createEvent(Event event, Location loc) {
         Collection<Event> eventi;
         Collection<User> participants;
         //em.persist(loc);
         event.setIdLocation(loc);
         event.setIdOrganizer(rv.getLoggedUser());
-                       
+
         em.persist(event);
-        
-        participants=new ArrayList<>();//event.getUserCollection();
+
+        participants = new ArrayList<>();//event.getUserCollection();
         participants.add(rv.getLoggedUser());
         event.setUserCollection(participants);
-        
+
         eventi = rv.getLoggedUser().getEventCollection();
-        eventi.add(event);        
+        eventi.add(event);
         rv.getLoggedUser().setEventCollection(eventi);
-        
+
         mf.forecast(loc);
         em.flush();
         //em.merge(event);
         em.refresh(em.merge(event));
-        
+
     }
 
     public void updateEvent(Event updated, Location l) {
@@ -77,7 +83,16 @@ public class ManageEvent {
             em.flush();
             //em.merge(event);
             em.refresh(em.merge(event));
-
+            List<User> invited = new ArrayList();
+            for (User u : event.getUserCollection()) {
+                invited.add(u);
+            }
+            invited.remove(rv.getLoggedUser());
+            mn.sendNotifications(invited, event, false,
+                    "The event " + event.getName() + " has been updated",
+                    "Event updated",
+                    "The event <a href=\"http://localhost:8080/MeteoCal/eventDetails.xhtml?id=" + event.getIdEvent() + "\">" + event.getName() + "</a> has been updated.",
+                    "The event " + event.getName() + " has been updated.");
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -98,13 +113,30 @@ public class ManageEvent {
     }
 
     public void deleteEvent(int id) {
-        try {
+        try {                       
             Event event = em.find(Event.class, id);
-
-            //event = (Event) em.createQuery("SELECT e FROM Event e WHERE e.idEvent=:id").setParameter("id", id).getResultList().get(0);                  
-            ;
-            em.remove(em.merge(event));
-            //em.flush();             
+            
+            //sends mail to participans except the owner
+            //remove the event from participant cal
+            //remove users from the event participants
+            List<User> invited = new ArrayList();
+            for (User u : event.getUserCollection()){ 
+                invited.add(u);   
+                
+                Collection<Event> cal = u.getEventCollection();
+                cal.remove(event);
+                u.setEventCollection(cal);
+                
+                Collection <User> participants = event.getUserCollection();
+                participants.remove(u);
+                event.setUserCollection(participants);
+            }
+            invited.remove(rv.getLoggedUser());                        
+            mn.sendNotifications(invited, event, false,
+                    "The event " + event.getName() + " has been canceled",
+                    "Event canceled",
+                    "The event <a href=\"http://localhost:8080/MeteoCal/eventDetails.xhtml?id=" + event.getIdEvent() + "\">" + event.getName() + "</a> has been canceled.",
+                    "The event " + event.getName() + " has been canceled.");   
 
         } catch (Exception e) {
 
@@ -117,10 +149,8 @@ public class ManageEvent {
         }//*/
     }
 
-    public void updateForecast() {
-    }
+    public void removeEvent(User u, int e) {
 
-    public void sendNotification() {
     }
 
 }

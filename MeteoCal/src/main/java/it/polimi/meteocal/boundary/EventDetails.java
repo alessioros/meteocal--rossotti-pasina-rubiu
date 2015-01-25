@@ -2,6 +2,7 @@ package it.polimi.meteocal.boundary;
 
 import it.polimi.meteocal.control.CheckFields;
 import it.polimi.meteocal.control.ManageEvent;
+import it.polimi.meteocal.control.ManageNotifications;
 import it.polimi.meteocal.control.RegisterValidation;
 import it.polimi.meteocal.control.YahooQueries;
 import it.polimi.meteocal.entity.Event;
@@ -15,6 +16,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
+import javax.mail.MessagingException;
 import org.json.JSONObject;
 
 @ManagedBean
@@ -32,7 +34,7 @@ public class EventDetails {
 
     @Inject
     private RegisterValidation rv;
-
+       
     private Event event;
     private Location loc = new Location();
     private String message;
@@ -151,7 +153,7 @@ public class EventDetails {
         }
     }
 
-    public String buttonAction() {
+    public String buttonAction(){
         if (editing()) {
             return this.updateEvent();
         } else {
@@ -195,7 +197,7 @@ public class EventDetails {
             me.updateEvent(event, loc);
 
             message = "Event Updated!";
-
+                      
             return "/loggeduser/eventDetails?faces-redirect=true&id=" + event.getIdEvent();
 
         }

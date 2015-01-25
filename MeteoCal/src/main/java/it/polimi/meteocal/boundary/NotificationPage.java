@@ -36,13 +36,13 @@ public class NotificationPage {
 
     private User user;
     private String message;
-    private List<Notification> notifications = new ArrayList();
+    private List<Usernotification> userNotifications = new ArrayList();
     
     /**
-     * Returns all the logged user's notifications
+     * Returns all the logged user's userNotifications
      * @return 
      */
-    public List<Notification> updateNotifications() {
+    public List<Usernotification> updateNotifications() {
 
         user = rv.getLoggedUser();
 
@@ -50,39 +50,40 @@ public class NotificationPage {
         query.setParameter("USER", user);
         List<Usernotification> tmplist = query.getResultList();
         
-        for (Usernotification notification : tmplist) {
-            if (notification != null) {
-                notifications.add(notification.getNotification());
+        for (Usernotification un : tmplist) {
+            if (un != null) {
+                userNotifications.add(un);
             }
         }
-
-        return notifications;
+      
+      
+        return userNotifications;
     }
     
     /**
      * submits accept notification to ManageNotifications 
      * @param notification 
      */
-    public String accept(Notification notification) {
-        mi.acceptInvite(notification);
-        return "notifications?faces-redirect=true";
+    public String accept(Usernotification un) {
+         mi.acceptInvite(un);
+        return "/loggeduser/eventDetails.xhtml?faces-redirect=true&id=" + un.getNotification().getIdEvent().getIdEvent();
     }
     
     /**
      * submits decline notification to ManageNotifications 
-     * @param notification 
+     * @param un 
      */
-    public String decline(Notification notification) {
-        mi.declineInvite(notification);
+    public String decline(Usernotification un) {
+        mi.declineInvite(un);
         return "notifications?faces-redirect=true";
     }
     
-    public String ok(Notification notification) {
-        mi.declineInvite(notification);
-        return "notifications?faces-redirect=true";
+    public String ok(Usernotification un) {
+        mi.declineInvite(un);
+        return "/loggeduser/eventDetails.xhtml?faces-redirect=true&id=" + un.getNotification().getIdEvent().getIdEvent();
     }
     
-    
+
     // ----- Getters and setters -----
     
     public User getUser() {
@@ -93,12 +94,12 @@ public class NotificationPage {
         this.user = user;
     }
 
-    public List<Notification> getNotifications() {
-        return notifications;
+    public List<Usernotification> getUserNotifications() {
+        return userNotifications;
     }
 
-    public void setNotifications(List<Notification> notifications) {
-        this.notifications = notifications;
+    public void setUserNotifications(List<Usernotification> userNotifications) {
+        this.userNotifications = userNotifications;
     }
 
     public String getMessage() {

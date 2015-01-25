@@ -44,7 +44,7 @@
             </h:form>
             <h:form>
                 <h:inputText id='contact' value="#{personalProfile.contact}" required="true" requiredMessage="Insert a valid username"/>
-                <h:commandButton type='submit' value='Add New User' a:id='button-add' action="#{invitePeople.addUser()}"/>
+                <h:commandButton type='submit' value='Add New User' a:id='button-add' action="#{personalProfile.submitAddUser()}"/>
                 <br/><div class="error">#{personalProfile.message}<h:message for="contact"/></div>   
             </h:form>    
         </div> 

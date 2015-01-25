@@ -47,35 +47,47 @@ public class Event implements Serializable {
     @GeneratedValue
     @Column(name = "idEvent")
     private Integer idEvent;
+    
     @Size(max = 45)
     @Column(name = "Name")
     private String name;
+    
     @Size(max = 250)
     @Column(name = "Description")
     private String description;
+    
     @Size(max = 45)
     @Column(name = "Image")
     private String image;
+    
     @Column(name = "StartTime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date startTime;
+    
     @Column(name = "EndTime")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
+    
     @Column(name = "OutDoor")
     private Boolean outDoor;
+    
     @Column(name = "Public")
-    private Boolean publicEvent;   
+    private Boolean publicEvent;
+    
     @ManyToMany(mappedBy = "eventCollection")
     private Collection<User> userCollection;
-    @OneToMany(mappedBy = "idEvent", cascade = CascadeType.ALL)
+    
+    @OneToMany(mappedBy = "idEvent")
     private Collection<Notification> notificationCollection;
+    
     @JoinColumn(name = "idOrganizer", referencedColumnName = "idUser")
     @ManyToOne
     private User idOrganizer;
+    
     @JoinColumn(name = "idLocation", referencedColumnName = "idLocation")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Location idLocation;
+    
 
     public Event() {
     }
