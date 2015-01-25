@@ -96,6 +96,14 @@ public class Event implements Serializable {
         this.idEvent = idEvent;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+    
     public Integer getIdEvent() {
         return idEvent;
     }

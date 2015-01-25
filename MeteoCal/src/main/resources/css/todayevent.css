@@ -16,13 +16,17 @@ html{
     padding-right:50px;
     width:100%;
 }
+
 .evImage{
-    background-image: url("#{resource['css:img/default_event.jpg']}");
-    width: 353px;
+    width: 350px;
     height:200px;
-    background-size: 353px 200px;
     display:inline-block;
     border-radius: 3px;
+}
+
+.evImage img{
+    width: 350px;
+    height:200px;
 }
 
 .evDesc{

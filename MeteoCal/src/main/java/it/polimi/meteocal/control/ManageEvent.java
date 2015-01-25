@@ -46,6 +46,7 @@ public class ManageEvent {
         //em.persist(loc);
         event.setIdLocation(loc);
         event.setIdOrganizer(rv.getLoggedUser());
+        event.setImage("default.jpg");
 
         em.persist(event);
 
