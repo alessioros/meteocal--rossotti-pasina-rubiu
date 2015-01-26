@@ -24,13 +24,9 @@ public class Scheduler {
     @Inject
     ManageForecast mf;
     
-    @Schedule(second="*/30",minute="*",hour="*",persistent=false)
-    public void prova(){
+    @Schedule(second="0",minute="0",hour="*/12",persistent=false)
+    public void prova() throws MessagingException{
         mf.updateForecast();
-    }
-    
-    @Schedule(second="0",minute="0",hour="*/2",persistent=false)
-    public void threeDays() throws MessagingException{
         mf.notifyBadConditions();
     }
 }

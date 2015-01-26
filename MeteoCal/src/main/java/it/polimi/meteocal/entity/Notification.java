@@ -50,7 +50,7 @@ public class Notification implements Serializable {
     private Boolean invite;
     
     @JoinColumn(name = "idEvent", referencedColumnName = "idEvent")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Event idEvent;
     
     @OneToMany(mappedBy = "notification",orphanRemoval = true)
