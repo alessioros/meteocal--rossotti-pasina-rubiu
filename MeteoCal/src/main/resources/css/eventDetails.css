@@ -30,14 +30,16 @@ html{
         font-family: 'Dosis', sans-serif;
 }
 .image{
-    height:283px;
+    height:286px;
     width:500px;
     margin-top:50px;
     margin-left:50px;
-    background-image: url("#{resource['css:img/default_event.jpg']}");
-    background-repeat: no-repeat;
-    background-position: center center;
     display: inline-block;
+}
+
+.image img{
+    height:286px;
+    width:500px;
 }
 
 .googleMap{

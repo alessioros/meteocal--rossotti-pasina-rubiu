@@ -32,7 +32,7 @@
             <f:viewAction action='#{eventDetails.eventWeather()}'/>
         </f:metadata>
 
-        <div class="image"></div>
+        <div class="image"><h:graphicImage library="css/img/events" name="#{eventDetails.event.image}" /></div>
         <div class="googleMap">
             <h:form>
                 <m:map width="350px" height="250px" latitude="#{eventDetails.event.idLocation.latitude}" longitude="#{eventDetails.event.idLocation.longitude}" />

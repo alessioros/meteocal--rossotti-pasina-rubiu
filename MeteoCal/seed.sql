@@ -90,55 +90,55 @@ VALUES (228,'Carrer de Verdi','Barcelona',41.410764, 2.150232,'Spain');
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (313,'A chess tournament is a series of chess games',
-       '2015-04-18 18:00:00','chess.png','Chess Tournament',0,1,'2015-04-16 12:00:00',220,111);
+       '2015-04-18 18:00:00','chess.jpg','Chess Tournament',0,1,'2015-04-16 12:00:00',220,111);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (314,'Football refers to a number of sports that involve, to varying degrees, kicking a ball with the foot to score a goal',
-       '2015-05-01 16:00:00','soccer.png','Football Match',1,1,'2015-05-01 13:00:00',225,106);
+       '2015-05-01 16:00:00','soccer.jpg','Football Match',1,1,'2015-05-01 13:00:00',225,106);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (315,'A silent disco is an event where people dance to music listened to on wireless headphones. Rather than using a speaker system',
-       '2015-02-21 06:00:00','silentdisco.png','Silent Disco',0,1,'2015-02-20 23:00:00',218,102);
+       '2015-02-21 06:00:00','silentdisco.jpg','Silent Disco',0,1,'2015-02-20 23:00:00',218,102);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (316,'A tour bus service is a bus service that takes visitors sightseeing, with routes around tourist attractions.',
-       '2015-03-14 18:00:00','citytour.png','City Tour',1,1,'2015-03-14 15:00:00',224,107);
+       '2015-03-14 18:00:00','citytour.jpg','City Tour',1,1,'2015-03-14 15:00:00',224,107);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (317,'24 hours beach party in Barcelona',
-       '2015-07-04 15:00:00','beachparty.png','Beach Party',1,1,'2015-07-03 15:00:00',228,109);
+       '2015-07-04 15:00:00','beachparty.jpg','Beach Party',1,1,'2015-07-03 15:00:00',228,109);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (318,'Happy hour, coktail and buffet',
-       '2015-02-03 20:30:00','happyhour.png','Happy Hour',1,1,'2015-02-03 18:00:00',227,104);
+       '2015-02-03 20:30:00','happyhour.jpg','Happy Hour',1,1,'2015-02-03 18:00:00',227,104);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (319,'A dinner with friends, with a fantastic Paella!',
-       '2015-02-08 22:00:00','paella.png','Paella Party',0,1,'2015-02-08 20:30:00',226,101);
+       '2015-02-08 22:00:00','paella.jpg','Paella Party',0,1,'2015-02-08 20:30:00',226,101);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (320,'A dinner with coworkers',
-       '2015-01-30 21:30:00','businessdinner.png','Business Dinner',0,0,'2015-01-30 20:00:00',213,104);
+       '2015-01-30 21:30:00','businessdinner.jpg','Business Dinner',0,0,'2015-01-30 20:00:00',213,104);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (321,'A meeting to decide the future of the company',
-       '2015-01-28 11:30:00','applemeeting.png','Apple Meeting',0,0,'2015-01-28 8:30:00',214,110);
+       '2015-01-28 11:30:00','applemeeting.jpg','Apple Meeting',0,0,'2015-01-28 8:30:00',214,110);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (322,'Vidal meets Google for testing a new prototype',
-       '2015-01-27 17:30:00','vidgoogle.png','Vidal meets Google',1,1,'2015-01-27 15:00:00',215,103);
+       '2015-01-27 17:30:00','vidgoogle.jpg','Vidal meets Google',1,1,'2015-01-27 15:00:00',215,103);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (323,'A trip for viewing the beautiful New York',
-       '2015-01-31 18:30:00','newtrip.png','City Tour',1,1,'2015-01-31 13:00:00',216,105);
+       '2015-01-31 18:30:00','newtrip.jpg','City Tour',1,1,'2015-01-31 13:00:00',216,105);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (324,'Special guest Federico Buffa, talks @ la casa dello studente, Politecnico',
-       '2015-02-01 12:30:00','buffacasa.png','Buffa at Casa Dello Studente',0,1,'2015-02-01 10:30:00',212,108);
+       '2015-02-01 12:30:00','buffacasa.jpg','Buffa at Casa Dello Studente',0,1,'2015-02-01 10:30:00',212,108);
 
 INSERT INTO EVENT(idEvent,Description,EndTime,Image,Name,Outdoor,Public,StartTime,idLocation,idOrganizer)
 VALUES (325,'As every year, the two day reunion, with all family members',
-         '2015-02-05 23:00:00','familyreunion.png','Annual Reunion',1,1,'2015-02-04 12:00:00',217,101);
+         '2015-02-05 23:00:00','familyreunion.jpg','Annual Reunion',1,1,'2015-02-04 12:00:00',217,101);
 
 # ---------- CALENDAR ----------
 

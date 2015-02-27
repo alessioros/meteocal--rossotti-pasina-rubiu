@@ -38,7 +38,7 @@
             <ui:repeat var="e" value="#{calendarBean.event}" >
                 <h:form rendered="#{calendarBean.canView(e)}">
                     <div class="evSingle">
-                        <div class="evImage"></div>
+                        <div class="evImage"><h:graphicImage library="css/img/events" name="#{e.image}" /></div>
                         <div class="evDesc">
                             <h:link class="evTitle" outcome='eventDetails?id=#{e.idEvent}' value="#{e.name}"/>
                             <h:inputTextarea readonly="true" styleClass="descriptionArea" value="#{e.description}" rows="5"  />
